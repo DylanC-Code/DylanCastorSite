@@ -8,7 +8,7 @@
     },
     "scripts": {
         "build": "astro build",
-        "check": "bun run --parallel fmt:check lint typecheck knip && bun run test && bun run build",
+        "check": "bun run --parallel fmt:check lint typecheck knip && bun run test && bun run build && bun run test:browser",
         "dev": "astro dev --host 0.0.0.0",
         "fmt": "oxfmt . && prettier --write --log-level warn \"src/**/*.astro\"",
         "fmt:check": "oxfmt --check . && prettier --check --log-level warn \"src/**/*.astro\"",
@@ -16,8 +16,9 @@
         "lint": "oxlint .",
         "lint:fix": "oxlint --fix .",
         "preview": "astro preview --host 0.0.0.0",
-        "test": "bun --bun vitest run",
-        "test:watch": "bun --bun vitest",
+        "test": "bun --bun vitest run --project unit",
+        "test:browser": "bun --bun vitest run --project browser",
+        "test:watch": "bun --bun vitest --project unit",
         "typecheck": "astro check"
     },
     "dependencies": {
@@ -34,10 +35,12 @@
         "@commitlint/cli": "21.2.2",
         "@commitlint/config-conventional": "21.2.2",
         "@commitlint/types": "21.2.0",
+        "axe-core": "4.14.0",
         "knip": "6.36.0",
         "oxfmt": "0.68.0",
         "oxlint": "1.83.0",
         "oxlint-tsgolint": "7.0.2001",
+        "playwright": "1.64.1",
         "prettier": "3.9.10",
         "prettier-plugin-astro": "1.1.2",
         "typescript": "6.0.3",

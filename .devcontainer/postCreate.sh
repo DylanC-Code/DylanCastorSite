@@ -11,3 +11,7 @@ done
 mise install
 lefthook install
 bun install --frozen-lockfile
+
+# The browser the browser tests drive (bun run test:browser), with the system
+# libraries it needs.
+bun x playwright install --with-deps chromium-headless-shell

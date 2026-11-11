@@ -24,6 +24,7 @@ jobs:
               with:
                   version: 2026.10.21
             - run: bun install --frozen-lockfile
+            - run: bun x playwright install --with-deps chromium-headless-shell
             - name: commitlint
               run: bun x --bun commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
               env:

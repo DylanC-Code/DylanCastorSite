@@ -17,3 +17,7 @@ coverage/
 .DS_Store
 Thumbs.db
 home_v1_handoff/
+
+# Screenshots the browser tests take, for review.
+browser_tests/screenshots/
+switcher_v1_handoff/
