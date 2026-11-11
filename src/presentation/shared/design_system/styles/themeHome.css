@@ -1,0 +1,54 @@
+/*
+ * Night Lab additions for the home (handoff: Root home V1, 11 Nov 2026): the
+ * paper inside the books, the directory board, the three leathers, the book
+ * shadows and the easings of the title and the books.
+ */
+@theme {
+    --color-paper: #ebe6dc;
+    --color-paper-ink: #1b1a18;
+    --color-paper-copper: #8a4a24;
+    --color-page-edge: #ddd7cb;
+    --color-page-edge-dark: #b9b2a4;
+    --color-board: #0a0c0f;
+
+    /* Cover materials, never accents: light, base and dark stops. */
+    --color-oxblood-light: #5d2a2d;
+    --color-oxblood: #4a1f22;
+    --color-oxblood-dark: #2a1113;
+    --color-bottle-light: #2c4436;
+    --color-bottle: #1f3328;
+    --color-bottle-dark: #111f17;
+    --color-midnight-light: #2a3449;
+    --color-midnight: #1d2638;
+    --color-midnight-dark: #10151f;
+
+    --shadow-cover:
+        inset 0 0 0 1px rgb(255 255 255 / 0.06),
+        inset -14px 0 24px -16px rgb(0 0 0 / 0.6),
+        inset 0 -10px 20px -14px rgb(0 0 0 / 0.5), 0 18px 44px rgb(0 0 0 / 0.5);
+    --shadow-gutter: inset 18px 0 22px -14px rgb(0 0 0 / 0.45);
+
+    --ease-set: cubic-bezier(0.7, 0, 0.2, 1);
+    --ease-mech: cubic-bezier(0.65, 0, 0.35, 1);
+
+    --text-hero: 78px;
+    --text-hero--line-height: 1.04;
+    --text-hero-sm: 46px;
+    --text-hero-sm--line-height: 1.06;
+    --text-section: 52px;
+    --text-section--line-height: 1.08;
+    --text-section-sm: 32px;
+    --text-section-sm--line-height: 1.12;
+    --text-cap: 12px;
+    --text-cap--line-height: 1;
+    --text-cap--letter-spacing: 0.24em;
+    --text-cap-sm: 10px;
+    --text-cap-sm--line-height: 1;
+    --text-cap-sm--letter-spacing: 0.22em;
+}
+
+:root {
+    --duration-set: 1100ms;
+    --duration-book-move: 800ms;
+    --duration-book-open: 1500ms;
+}

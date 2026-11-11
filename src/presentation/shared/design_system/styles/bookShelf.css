@@ -1,0 +1,136 @@
+/*
+ * The shelf of books (handoff: Root home V1, section 3). Sizes follow the
+ * 352 × 520 book, scaled by --u, one design pixel. Phones, here: three books
+ * side by side, the chosen first page opening below the shelf. Wide screens:
+ * booksWide.css.
+ */
+.shelf {
+    container: shelf / inline-size;
+    position: relative;
+}
+
+.books {
+    --w: min(104px, calc((100cqw - 24px) / 3));
+    --u: calc(var(--w) / 352);
+    display: grid;
+    grid-template-columns: repeat(3, var(--w));
+    justify-content: space-between;
+    row-gap: 20px;
+    padding-inline: 4px;
+}
+
+.book {
+    display: contents;
+}
+
+.book-block {
+    position: relative;
+    grid-row: 1;
+    aspect-ratio: 104 / 154;
+    perspective: 900px;
+    transition:
+        opacity 700ms var(--ease-out) calc(var(--i) * 120ms),
+        transform 700ms var(--ease-out) calc(var(--i) * 120ms);
+}
+
+[data-reveal="pending"] .book-block {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.book-edges {
+    position: absolute;
+    top: 3px;
+    right: -4px;
+    bottom: 3px;
+    width: 5px;
+    background: repeating-linear-gradient(
+        180deg,
+        var(--color-page-edge) 0 1px,
+        var(--color-page-edge-dark) 1px 2px
+    );
+    box-shadow: inset 2px 0 3px rgb(0 0 0 / 0.35);
+}
+
+.book-paper {
+    position: absolute;
+    inset: 3px -3px 3px 1px;
+    background: var(--color-paper);
+}
+
+.book-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 1100ms var(--ease-mech);
+}
+
+.is-open .book-cover {
+    transform: rotateY(-78deg);
+}
+
+.book-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+}
+
+.book-back {
+    transform: rotateY(180deg);
+    background: #2a1b17 center / cover no-repeat;
+    box-shadow: inset -20px 0 26px -16px rgb(0 0 0 / 0.6);
+}
+
+.endpaper-ready .book-back {
+    background-image: var(--marble);
+}
+
+.book-leaf {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    padding: 24px 20px 22px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow: var(--shadow-lift);
+    transition:
+        opacity 500ms var(--ease-out) 600ms,
+        transform 600ms var(--ease-out) 600ms,
+        display 600ms allow-discrete;
+}
+
+.book:not(.is-open) .book-leaf {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.is-open .book-leaf {
+    display: flex;
+}
+
+@starting-style {
+    .is-open .book-leaf {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+.book-hint {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    text-align: center;
+}
+
+.has-open .book-hint,
+.back-to-shelf {
+    display: none;
+}

@@ -1,0 +1,69 @@
+/* A book's first page: who it is for, the floors to read, the way in. */
+.book-leaf:focus {
+    outline: none;
+}
+
+.book-pcap {
+    margin: 0;
+    font: 600 9px / 1 var(--font-sans);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.62);
+}
+
+.book-rule {
+    width: 30px;
+    height: 1px;
+    margin: 14px 0 16px;
+    background: var(--color-paper-copper);
+}
+
+.book-sentence {
+    margin: 0;
+    font: 400 19px / 1.55 var(--font-display);
+    color: var(--color-paper-ink);
+}
+
+.book-pnum {
+    font-size: 22px;
+    color: var(--color-paper-copper);
+}
+
+.book-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+    padding: 13px 16px;
+    background: var(--color-paper-ink);
+    color: var(--color-paper);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+@media (min-width: 48rem) {
+    .book-pcap {
+        font-size: max(9px, calc(10 * var(--u)));
+    }
+
+    .book-rule {
+        width: calc(40 * var(--u));
+        margin: calc(18 * var(--u)) 0 calc(22 * var(--u));
+    }
+
+    .book-sentence {
+        font-size: calc(24 * var(--u));
+        line-height: 1.5;
+    }
+
+    .book-pnum {
+        font-size: calc(30 * var(--u));
+    }
+
+    .book-cta {
+        align-self: flex-start;
+        margin-top: auto;
+        padding: calc(12 * var(--u)) calc(16 * var(--u));
+        font-size: max(12px, calc(14 * var(--u)));
+    }
+}

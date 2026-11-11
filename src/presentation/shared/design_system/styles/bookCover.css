@@ -1,0 +1,97 @@
+/*
+ * The front board of a book. Phones first: one gilt frame, the reader and the
+ * cipher. From 768px: bookCoverWide.css.
+ */
+.book-front {
+    --gilt: rgb(227 154 106 / 0.92);
+    box-shadow: var(--shadow-cover);
+    background:
+        radial-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1.3px) 0 0 /
+            5px 5px,
+        radial-gradient(rgb(0 0 0 / 0.18) 1px, transparent 1.3px) 2px 3px / 7px
+            7px,
+        linear-gradient(
+            140deg,
+            var(--light) 0%,
+            var(--base) 46%,
+            var(--dark) 100%
+        );
+}
+
+[data-tone="oxblood"] {
+    --light: var(--color-oxblood-light);
+    --base: var(--color-oxblood);
+    --dark: var(--color-oxblood-dark);
+}
+
+[data-tone="green"] {
+    --light: var(--color-bottle-light);
+    --base: var(--color-bottle);
+    --dark: var(--color-bottle-dark);
+}
+
+[data-tone="midnight"] {
+    --light: var(--color-midnight-light);
+    --base: var(--color-midnight);
+    --dark: var(--color-midnight-dark);
+}
+
+.book-spine {
+    position: absolute;
+    inset: 0 auto 0 calc(16 * var(--u));
+    width: 2px;
+    border-inline: 1px solid rgb(0 0 0 / 0.45);
+    border-right-color: rgb(255 255 255 / 0.07);
+}
+
+.book-tooling {
+    position: absolute;
+    inset: 9px 8px 9px 13px;
+    border: 1px solid rgb(227 154 106 / 0.45);
+}
+
+.book-tooling.inner,
+.book-stud,
+.book-ornament,
+.book-seal > span {
+    display: none;
+}
+
+.book-title,
+.book-seal {
+    position: absolute;
+    inset-inline: 13px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--gilt);
+}
+
+.book-title {
+    top: 26px;
+    gap: 6px;
+}
+
+.book-for {
+    font: italic 400 12px / 1 var(--font-display);
+}
+
+.book-gilt {
+    font: 400 10.5px / 1.2 var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.book-seal {
+    bottom: 16px;
+    gap: calc(12 * var(--u));
+    font: 500 calc(10 * var(--u)) / 1 var(--font-sans);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+}
+
+.book-seal svg {
+    width: 26px;
+    height: 26px;
+}

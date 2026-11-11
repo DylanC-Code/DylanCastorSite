@@ -1,0 +1,47 @@
+---
+/**
+ * The DC cipher, outlined (handoff: assets/cipher.svg): a roman D crossed by
+ * an italic copper C, the D's foot drawn again on top so the letters
+ * interlock. No font needed, so it never shifts or flashes.
+ */
+interface Props {
+    size: number;
+    id: string;
+}
+
+const { size, id } = Astro.props;
+const clip = `cipher-${id}`;
+---
+
+<svg aria-hidden="true" width={size} height={size} viewBox="0 0 200 200">
+    <defs>
+        <clipPath id={clip}>
+            <rect x="0" y="104" width="200" height="96"></rect>
+        </clipPath>
+    </defs>
+    <path class="d" d="lower"></path>
+    <path
+        class="c"
+        d="M34.6 146.55 47.35 143.7V40.8L34.6 37.95V34.5H71.95Q89.8 34.5 100.45 36.98Q111.1 39.45 119.05 45.45Q129.1 53.25 134.65 65.55Q140.2 77.85 140.2 92.55Q140.2 107.85 134.35 120.67Q128.5 133.5 118 141.15Q111.4 145.95 103.75 147.97Q96.1 150 84.85 150H34.6ZM109.15 132.15Q115.15 124.8 118.3 114.07Q121.45 103.35 121.45 90.75Q121.45 78 118.22 68.03Q115 58.05 108.7 51.45Q103 45.45 95.28 42.98Q87.55 40.5 74.95 40.5H63.1V135.3Q63.1 140.4 66.47 142.35Q69.85 144.3 78.7 144.3Q89.65 144.3 96.7 141.53Q103.75 138.75 109.15 132.15Z"
+    ></path>
+    <g clip-path={`url(#${clip})`}>
+        <path class="d" d="lower"></path>
+    </g>
+</svg>
+
+<style>
+    path {
+        stroke: var(--color-ground);
+        stroke-width: 7px;
+        stroke-linejoin: round;
+        paint-order: stroke;
+    }
+
+    .d {
+        fill: var(--color-ink);
+    }
+
+    .c {
+        fill: var(--color-accent);
+    }
+</style>
