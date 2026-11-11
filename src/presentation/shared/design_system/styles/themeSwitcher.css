@@ -1,0 +1,16 @@
+/*
+ * Night Lab additions for the floor switcher (handoff: Floor switcher V1).
+ * The floor leathers live in content/floors.json, beside each floor.
+ */
+@theme {
+    --ease-snap: cubic-bezier(0.3, 1.4, 0.5, 1);
+    --ease-rise: cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+:root {
+    /* The dark spine label the gilt lettering sits on, never the leather. */
+    --spine-label: linear-gradient(90deg, #1c150f, #120d0a);
+    --spine-label-ring: inset 0 0 0 1px rgb(227 154 106 / 0.3);
+    --gilt: rgb(227 154 106 / 0.92);
+    --shelf-plank: linear-gradient(#3a2c22, #1d1510);
+}

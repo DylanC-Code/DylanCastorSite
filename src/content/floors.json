@@ -1,0 +1,136 @@
+{
+    "status": "Design state 11 Nov 2026. Words are final unless marked. hrefs are placeholders.",
+    "panel": {
+        "title": "Floors",
+        "ariaLabel": "Floors of the site",
+        "openerAriaLabel": "Floors of the site",
+        "pathLink": {
+            "label": "Find your path →",
+            "href": "/#paths",
+            "icon": "fingerpost.svg"
+        },
+        "rowAria": {
+            "go": "Go to {area}",
+            "here": "{area}: you are here",
+            "later": "{area}: coming later"
+        }
+    },
+    "floors": [
+        {
+            "id": "storefront",
+            "numeral": "I",
+            "layer": "Storefront",
+            "area": "Shopify & CRO",
+            "spine": "Shopify & CRO",
+            "href": "/shopify-cro",
+            "shelf": {
+                "leather": "tan",
+                "stops": ["#6e4627", "#9a6a40", "#845a35", "#4d2f17"],
+                "height": 248,
+                "width": 46
+            }
+        },
+        {
+            "id": "application",
+            "numeral": "II",
+            "layer": "Application",
+            "area": "Development",
+            "spine": "Development",
+            "href": "/development",
+            "shelf": {
+                "leather": "brown",
+                "stops": ["#5c3a22", "#7f5634", "#6b482b", "#3f2714"],
+                "height": 232,
+                "width": 46
+            }
+        },
+        {
+            "id": "structure",
+            "numeral": "III",
+            "layer": "Structure",
+            "area": "Architecture",
+            "spine": "Architecture",
+            "href": "/architecture",
+            "shelf": {
+                "leather": "umber",
+                "stops": ["#4a2f1d", "#66452b", "#573b25", "#331f12"],
+                "height": 256,
+                "width": 46
+            }
+        },
+        {
+            "id": "ground",
+            "numeral": "IV",
+            "layer": "Ground",
+            "area": "Infrastructure",
+            "spine": "Infrastructure",
+            "href": "/infrastructure",
+            "shelf": {
+                "leather": "dark",
+                "stops": ["#382519", "#4f3624", "#432e1f", "#26180f"],
+                "height": 240,
+                "width": 46
+            }
+        },
+        {
+            "id": "bedrock",
+            "numeral": "V",
+            "layer": "Bedrock",
+            "area": "Low-level",
+            "cardArea": "Low-level, later",
+            "spine": "Low-level",
+            "comingLater": true,
+            "href": "/low-level",
+            "shelf": {
+                "leather": "deep",
+                "stops": ["#271b13", "#38281c", "#2f2218", "#1a120c"],
+                "height": 224,
+                "width": 46
+            }
+        },
+        {
+            "id": "method",
+            "numeral": "All",
+            "numeralItalic": true,
+            "layer": "Method",
+            "area": "How I build software",
+            "spine": "Method",
+            "href": "/how-i-build-software",
+            "shelf": {
+                "leather": "black",
+                "stops": ["#181716", "#2e2b28", "#24211f", "#0e0d0c"],
+                "height": 212,
+                "width": 40
+            }
+        }
+    ],
+    "paths": [
+        {
+            "id": "agencies",
+            "reader": "CRO agencies",
+            "leather": "oxblood",
+            "home": "/agencies",
+            "floors": ["I", "All"]
+        },
+        {
+            "id": "brands",
+            "reader": "Shopify brands",
+            "leather": "green",
+            "home": "/cro",
+            "floors": ["I"]
+        },
+        {
+            "id": "engineers",
+            "reader": "Software engineers",
+            "leather": "midnight",
+            "home": "/engineering",
+            "floors": ["All", "II", "III", "IV"]
+        }
+    ],
+    "pathsNote": "Decided 11 Nov. Not shown in the switcher in V1 (no path marks); used by the home sentences and, later, by topic pages.",
+    "shelfLabel": {
+        "background": "linear-gradient(90deg, #1c150f, #120d0a)",
+        "ring": "inset 0 0 0 1px rgb(227 154 106 / .3)",
+        "lettering": "rgb(227 154 106 / .92)"
+    }
+}
