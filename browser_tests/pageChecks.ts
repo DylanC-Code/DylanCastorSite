@@ -5,9 +5,11 @@ import type { Page } from "playwright";
  * Measures run inside the page. The scripts are strings: they run in the
  * browser, where nothing of this file exists.
  */
-const axeRun = `axe
-    .run(document, { runOnly: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"] })
+function axeRun(context: string): string {
+    return `axe
+    .run(${context}, { runOnly: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"] })
     .then((result) => result.violations.map((v) => v.id + " (" + v.nodes.length + "): " + v.help))`;
+}
 
 const layoutShiftSum = `new Promise((resolve) => {
     new PerformanceObserver((list) => {
@@ -17,9 +19,14 @@ const layoutShiftSum = `new Promise((resolve) => {
 })`;
 
 /** Every WCAG 2.1 A and AA problem axe finds, with best practices. */
-export async function accessibilityProblems(page: Page): Promise<string[]> {
+export async function accessibilityProblems(
+    page: Page,
+    selector?: string,
+): Promise<string[]> {
     await page.addScriptTag({ content: axe.source });
-    return page.evaluate<string[]>(axeRun);
+    const context =
+        selector === undefined ? "document" : JSON.stringify(selector);
+    return page.evaluate<string[]>(axeRun(context));
 }
 
 /** The page's cumulative layout shift so far. */
