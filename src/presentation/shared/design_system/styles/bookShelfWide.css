@@ -4,7 +4,17 @@
  */
 @media (min-width: 48rem) {
     .books {
-        --w: min(352px, calc((100cqw - 144px) / 3));
+        /*
+         * As wide as the row allows, and short enough that after a jump to
+         * #paths the whole stage fits under the heading: the screen, less the
+         * header and gap (116px), the heading block (180px) and the stage's
+         * own 80px and margin (96px), over the book's 520 / 352 ratio.
+         */
+        --w: min(
+            352px,
+            calc((100cqw - 144px) / 3),
+            calc((100svh - 392px) * 352 / 520)
+        );
         --u: calc(var(--w) / 352);
         --step: calc(var(--w) + (100cqw - 3 * var(--w)) / 2);
         display: block;

@@ -63,8 +63,19 @@
 }
 
 @layer base {
+    /*
+     * An anchor lands its target just under the sticky header (60px, 84px
+     * from 768px), with the same breathing room on every jump. Anchors sit on
+     * a section's first line, not on the section and its padding.
+     */
     html {
-        scroll-padding-top: 96px;
+        scroll-padding-top: calc(60px + 24px);
+    }
+
+    @media (min-width: 48rem) {
+        html {
+            scroll-padding-top: calc(84px + 32px);
+        }
     }
 
     @media (prefers-reduced-motion: no-preference) {
