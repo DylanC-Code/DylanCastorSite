@@ -3,6 +3,7 @@ import "#/presentation/shared/design_system/styles/app.css";
 
 import { Font } from "astro:assets";
 
+import DevSwitcherChoice from "#/presentation/shared/document/ui/DevSwitcherChoice.astro";
 import SeoHead from "#/presentation/shared/document/ui/SeoHead.astro";
 
 /** The shell every page renders in: `<html>`, `<head>`, `<body>`. */
@@ -13,19 +14,17 @@ interface Props {
 }
 
 const { title, description, noindex = false } = Astro.props;
-// The switcher design this visit sees: the edge rewrites it per visit; in
-// development `?switcher=card|shelf` forces one.
-const forced = import.meta.env.DEV
-    ? Astro.url.searchParams.get("switcher")
-    : null;
-const switcher = forced === "shelf" ? "shelf" : "card";
+// The switcher design this visit sees: card here, rewritten per visit by the
+// edge. In development only, `?switcher=card|shelf` forces one for the tab.
+const isDev = import.meta.env.DEV;
 ---
 
 <!doctype html>
-<html lang="en" data-switcher={switcher}>
+<html lang="en" data-switcher="card">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {isDev && <DevSwitcherChoice />}
         <SeoHead title={title} description={description} noindex={noindex} />
         <Font cssVariable="--font-caslon" preload />
         <Font cssVariable="--font-hanken" preload />

@@ -1,0 +1,16 @@
+---
+/**
+ * Development only: `?switcher=card|shelf` picks the switcher design for this
+ * browser tab, kept across pages while you click around. Never in a build:
+ * in production the edge decides, and nothing is stored.
+ */
+---
+
+<script is:inline>
+    const asked = new URLSearchParams(location.search).get("switcher");
+    if (asked === "card" || asked === "shelf") {
+        sessionStorage.setItem("switcher", asked);
+    }
+    document.documentElement.dataset.switcher =
+        sessionStorage.getItem("switcher") ?? "card";
+</script>
