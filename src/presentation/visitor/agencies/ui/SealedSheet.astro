@@ -8,6 +8,7 @@ interface Props {
         title: string;
         tag: string;
         code: readonly string[];
+        phoneCode: readonly string[];
         foot: string;
         slip: string;
         seal: string;
@@ -22,7 +23,8 @@ const { sheet } = Astro.props;
         <span class="sealed-title">{sheet.title}</span>
         <span class="sealed-tag">{sheet.tag}</span>
     </p>
-    <pre class="sealed-code"><code>{sheet.code.join("\n")}</code></pre>
+    <pre class="sealed-code is-wide"><code>{sheet.code.join("\n")}</code></pre>
+    <pre class="sealed-code is-phone"><code>{sheet.phoneCode.join("\n")}</code></pre>
     <p class="sealed-foot">{sheet.foot}</p>
     <span aria-hidden="true" class="sealed-slip">
         {sheet.slip}

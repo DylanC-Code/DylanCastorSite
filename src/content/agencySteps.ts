@@ -97,6 +97,7 @@ export const agencySteps: StepsSectionViewModel = {
             title: sealed.title,
             tag: sealed.tag,
             code: need(sealed.code, "theme code"),
+            phoneCode: need(sealed.phoneCode, "phone theme code"),
             foot: sealed.foot,
             slip: need(sealed.slip, "slip"),
             seal: need(sealed.seal, "seal"),

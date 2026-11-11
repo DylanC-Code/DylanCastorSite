@@ -20,7 +20,7 @@ interface Props {
 const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
 ---
 
-<section class="page flex min-h-[calc(100svh-84px)] items-center gap-10 pt-16 pb-21">
+<section class="page flex flex-col gap-12 pt-12 pb-16 md:min-h-[calc(100svh-84px)] md:flex-row md:items-center md:gap-10 md:pt-16 md:pb-21">
     <div class="max-w-150 flex-none">
         <p class="eyebrow">{hero.eyebrow}</p>
         <h1 class="mt-5 font-display text-[40px] leading-[1.06] text-ink md:text-[52px]">
@@ -38,7 +38,7 @@ const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
             </a>
         </div>
     </div>
-    <div class="hero-book max-md:hidden" aria-hidden="true" inert>
+    <div class="hero-book" aria-hidden="true" inert>
         <ReaderBook
             book={book}
             index={0}
@@ -51,13 +51,21 @@ const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
 
 <style>
     /* The book at 0.8, its cover swung open once onto the endpaper. */
+    /* On a phone, under the words: room on its left for the cover to open. */
     .hero-book {
-        --u: 0.8px;
+        --u: 0.48px;
         position: relative;
         flex: none;
         width: calc(352 * var(--u));
         height: calc(520 * var(--u));
-        margin-left: auto;
+        margin-left: calc(352 * var(--u));
+    }
+
+    @media (min-width: 48rem) {
+        .hero-book {
+            --u: 0.8px;
+            margin-left: auto;
+        }
     }
 
     .hero-book :global(.book) {

@@ -55,6 +55,8 @@ export interface StepsSectionViewModel {
             readonly title: string;
             readonly tag: string;
             readonly code: readonly string[];
+            /** The same code, its long lines broken for a phone. */
+            readonly phoneCode: readonly string[];
             readonly foot: string;
             readonly slip: string;
             readonly seal: string;

@@ -30,7 +30,7 @@ const { label, title, ticket, icons, brief, build, qa, launch, winner } =
     <h2 class="mt-4 font-display text-section-sm text-ink md:text-section">
         {title}
     </h2>
-    <div class="max-md:hidden md:contents">
+    <div class="contents">
         <StepTicket {...ticket} />
     </div>
     <ol class="steps-list" data-steps-list>
@@ -63,23 +63,19 @@ const { label, title, ticket, icons, brief, build, qa, launch, winner } =
 </script>
 
 <style>
-    /* The fold closes 80px above the steps: no scroll anchoring fighting it. */
+    /*
+     * The fold closes 80px above the steps: no scroll anchoring fighting it.
+     * The wax seal waits at 2.2x before it is pressed: clip it sideways, so a
+     * phone never scrolls (clip, not hidden, keeps the ticket sticky).
+     */
     .steps {
         overflow-anchor: none;
+        overflow-x: clip;
     }
 
     .steps-list {
         margin: 0;
         padding: 0;
         list-style: none;
-    }
-
-    @media (max-width: 47.99rem) {
-        .steps-list :global(.points),
-        .steps-list :global(.demo-pair),
-        .steps-list :global(.sealed-seal),
-        .steps-list :global(.sealed-slip) {
-            display: none;
-        }
     }
 </style>

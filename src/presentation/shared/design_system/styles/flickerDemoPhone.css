@@ -1,0 +1,27 @@
+/* The flicker demo on a phone: the page that jumps above, the one that does not below. */
+@media (max-width: 47.99rem) {
+    .demo-pair {
+        grid-template-columns: 1fr;
+        gap: 46px;
+    }
+
+    .demo-page {
+        box-sizing: border-box;
+        grid-template-columns: 92px 1fr;
+        height: 150px;
+        padding: 18px 16px;
+    }
+
+    .demo-photo {
+        width: 92px;
+        height: 112px;
+    }
+
+    .demo-foot {
+        gap: 16px;
+    }
+
+    .demo-note {
+        flex-basis: 100%;
+    }
+}

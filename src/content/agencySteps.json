@@ -177,7 +177,17 @@
                 ],
                 "foot": "Clean and permanent.",
                 "slip": "Test code",
-                "seal": "DC"
+                "seal": "DC",
+                "phoneCode": [
+                    "{%- if product.available -%}",
+                    "  <p class=\"stock_line\">",
+                    "    In stock · ships today",
+                    "  </p>",
+                    "{%- endif -%}",
+                    "<button class=\"add\">",
+                    "  Add to cart · Free returns",
+                    "</button>"
+                ]
             }
         }
     ],
