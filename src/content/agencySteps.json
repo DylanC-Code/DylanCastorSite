@@ -1,0 +1,203 @@
+{
+    "hero": {
+        "eyebrow": "For CRO agencies",
+        "title": ["White-label test builds", "for CRO agencies."],
+        "lead": "You run the strategy and the client relationship. I build the tests. Your clients only see your agency.",
+        "button": "Send me a test",
+        "down": "How a test runs ↓",
+        "form": "B: words left, the open oxblood book right (books V2, open on its contents, no link on the page)"
+    },
+    "section": {
+        "label": "Floor I · The tests",
+        "title": "Your first test, step by step."
+    },
+    "ticket": {
+        "title": "Your first test",
+        "route": "Brief to Winner",
+        "stations": ["Brief", "Build", "QA", "Launch", "Winner"],
+        "stub": ["5", "Winner"],
+        "tabLabel": "Back to step 1"
+    },
+    "steps": [
+        {
+            "n": 1,
+            "title": "Brief",
+            "sentence": "I ask my questions at the start, not in the middle of the build.",
+            "emphasis": "at the start",
+            "form": "cards",
+            "cap": "You send",
+            "cards": [
+                {
+                    "word": "Hypothesis",
+                    "icon": "ab",
+                    "text": "The hypothesis, in one sentence."
+                },
+                {
+                    "word": "Page",
+                    "icon": "page",
+                    "text": "The page URL, and the template if several pages share it."
+                },
+                {
+                    "word": "Design",
+                    "icon": "pen",
+                    "text": "The design: Figma, a mockup, or a clear written description."
+                },
+                {
+                    "word": "Metric",
+                    "icon": "rise",
+                    "text": "What counts as success: the main metric, and any secondary ones."
+                },
+                {
+                    "word": "Access",
+                    "icon": "key",
+                    "text": "The testing tool, and collaborator access to the store."
+                },
+                {
+                    "word": "Deadline",
+                    "icon": "clock",
+                    "text": "The deadline, if there is one."
+                }
+            ]
+        },
+        {
+            "n": 2,
+            "title": "Build",
+            "sentence": "I code the variant: no flicker, tracking events in place.",
+            "emphasis": "no flicker",
+            "form": "demo",
+            "demo": {
+                "labels": [
+                    "Changed after the page shows",
+                    "Already changed when the page shows"
+                ],
+                "marks": ["Page shows", "The test changes it"],
+                "note": "A simulation on a made-up page: the test script is slowed down on purpose.",
+                "replay": "Replay",
+                "link": "Flicker-free A/B tests →",
+                "page": {
+                    "name": "Trail Jacket",
+                    "price": "€189",
+                    "badge": "In stock · ships today",
+                    "buttonOriginal": "Add to cart",
+                    "buttonVariant": "Add to cart · Free returns"
+                }
+            }
+        },
+        {
+            "n": 3,
+            "title": "QA on desktop and mobile",
+            "sentence": "I check the variant on both, in the main browsers.",
+            "emphasis": "on both",
+            "form": "handover",
+            "cap": "You get back",
+            "sheet": {
+                "title": "Handover",
+                "tag": "Sample",
+                "rows": [
+                    {
+                        "word": "Changes",
+                        "icon": "diff",
+                        "sample": "Product page template: the button text, a stock line above it."
+                    },
+                    {
+                        "word": "Off switch",
+                        "icon": "switch",
+                        "sample": "Variant on. One switch turns it off.",
+                        "drawing": "a small on/off toggle, on"
+                    },
+                    {
+                        "word": "Events",
+                        "icon": "pulse",
+                        "sample": ["variant_view", "add_to_cart_click"]
+                    },
+                    {
+                        "word": "QA notes",
+                        "icon": "check",
+                        "sample": "Checked on desktop and mobile, in the main browsers. Known limits: none."
+                    }
+                ],
+                "foot": "Before the test goes live, with a preview link for each variant."
+            },
+            "locked": [
+                {
+                    "word": "Preview links",
+                    "icon": "eye",
+                    "text": "Preview links for each variant, to check it yourself."
+                },
+                {
+                    "word": "Changes",
+                    "icon": "diff",
+                    "text": "What changed, and on which templates."
+                },
+                {
+                    "word": "Off switch",
+                    "icon": "switch",
+                    "text": "How the variant is applied, and how to turn it off."
+                },
+                {
+                    "word": "Events",
+                    "icon": "pulse",
+                    "text": "The tracked events, with their names."
+                },
+                {
+                    "word": "QA notes",
+                    "icon": "check",
+                    "text": "QA notes: what was checked, and any known limits."
+                }
+            ],
+            "lockedHeading": "A short handover, before the test goes live:"
+        },
+        {
+            "n": 4,
+            "title": "Launch",
+            "sentence": "The test goes live in your testing tool. I check that the first data comes in correctly.",
+            "emphasis": "goes live",
+            "fix": "If the test breaks while it is live, I fix it immediately.",
+            "form": "points",
+            "points": {
+                "start": "Visitors",
+                "ends": ["Original", "Variant"],
+                "foot": "First data in on both sides."
+            }
+        },
+        {
+            "n": 5,
+            "title": "Winner coded into the theme",
+            "sentence": "When a variant wins, I rewrite it as clean, permanent theme code and remove the test code.",
+            "emphasis": "clean, permanent theme code",
+            "form": "sealed",
+            "sheet": {
+                "title": "Theme code",
+                "tag": "Sample",
+                "code": [
+                    "{%- if product.available -%}",
+                    "  <p class=\"stock_line\">In stock · ships today</p>",
+                    "{%- endif -%}",
+                    "<button class=\"add\">Add to cart · Free returns</button>"
+                ],
+                "foot": "Clean and permanent.",
+                "slip": "Test code",
+                "seal": "DC"
+            }
+        }
+    ],
+    "icons": {
+        "ab": "<path d=\"M3 5h8v14H3zM13 5h8v14h-8z\"/>",
+        "page": "<path d=\"M3 5h18v14H3zM3 9h18\"/>",
+        "pen": "<path d=\"M4 20l4-1L20 7l-3-3L5 16zM14 7l3 3\"/>",
+        "rise": "<path d=\"M3 19h18M5 16l5-5 3 3 6-7\"/>",
+        "key": "<circle cx=\"8\" cy=\"12\" r=\"4\"/><path d=\"M12 12h9M17 12v3M21 12v3\"/>",
+        "clock": "<circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 8v4l3 2\"/>",
+        "eye": "<path d=\"M2 12c3-5 7-7 10-7s7 2 10 7c-3 5-7 7-10 7s-7-2-10-7z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>",
+        "diff": "<path d=\"M4 4h7v16H4zM13 4h7v16h-7zM6 8h3M6 12h3M15 8h3M15 12h3M15 16h3\"/>",
+        "switch": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\"/><circle cx=\"16\" cy=\"12\" r=\"2.5\"/>",
+        "pulse": "<path d=\"M2 12h5l2-6 4 12 2-6h7\"/>",
+        "check": "<path d=\"M4 4h16v16H4zM8 12l3 3 5-6\"/>"
+    },
+    "iconsNote": "Inner SVG of a 24 x 24 viewBox: fill none, stroke-width 1.3, round caps and joins.",
+    "toCorrect": [
+        "The eleven card and row words (Hypothesis, Page, Design, Metric, Access, Deadline, Changes, Off switch, Events, QA notes, Preview links)",
+        "The sample lines of the handover and the sample theme code",
+        "Labels: Visitors, Original, Variant, First data in on both sides., Clean and permanent., Test code"
+    ]
+}
