@@ -1,0 +1,26 @@
+---
+import Cipher from "#/presentation/shared/design_system/marks/ui/Cipher.astro";
+import type { SiteHeaderViewModel } from "#/presentation/visitor/shared/site_frame/viewmodels/SiteHeaderViewModel.ts";
+
+type Props = SiteHeaderViewModel;
+
+const { brand, brandHref, action } = Astro.props;
+---
+
+<header class="sticky top-0 z-30 flex h-15 items-center justify-between border-b border-line bg-ground/74 px-4 backdrop-blur-glass md:h-21 md:px-20">
+    <a
+        href={brandHref}
+        class="flex items-center gap-2.5 text-[15px] font-medium text-ink no-underline md:gap-3 md:text-body"
+    >
+        <span class="md:hidden">
+            <Cipher size={32} id="header-sm" />
+        </span>
+        <span class="max-md:hidden">
+            <Cipher size={40} id="header" />
+        </span>
+        {brand}
+    </a>
+    <a href={action.href} class="link-accent text-[13px] md:text-small">
+        {action.label}
+    </a>
+</header>

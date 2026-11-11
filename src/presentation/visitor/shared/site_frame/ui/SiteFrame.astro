@@ -1,0 +1,16 @@
+---
+import SiteFooter from "#/presentation/visitor/shared/site_frame/ui/SiteFooter.astro";
+import SiteHeader from "#/presentation/visitor/shared/site_frame/ui/SiteHeader.astro";
+import type { SiteFrameViewModel } from "#/presentation/visitor/shared/site_frame/viewmodels/SiteFrameViewModel.ts";
+
+/** What frames every visitor page: the header, the page itself, the footer. */
+type Props = SiteFrameViewModel;
+
+const { header, footer } = Astro.props;
+---
+
+<SiteHeader {...header} />
+<main>
+    <slot />
+</main>
+<SiteFooter {...footer} />
