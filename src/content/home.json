@@ -17,7 +17,10 @@
         "titleLine1": "How I work,",
         "titleLine2Italic": "floor by floor.",
         "lead": "This site shows how I work on every layer, from what shoppers see to the servers underneath.",
-        "primary": { "label": "Find your path ↓", "href": "#paths" },
+        "primary": {
+            "label": "Find your path ↓",
+            "href": "#paths"
+        },
         "secondary": {
             "label": "Email me",
             "href": "mailto:contact@dylancastor.com"
@@ -73,7 +76,6 @@
         "title": "Who are you?",
         "lead": "Three books, one for each kind of visitor. Open yours.",
         "back": "← Back to the three books",
-        "routesStatus": "placeholders: the floors per reader will be confirmed when the path homes are written",
         "books": [
             {
                 "id": "agencies",
@@ -85,10 +87,10 @@
                 "cta": "Start with agencies →",
                 "sentence": [
                     "Start on floor ",
-                    { "numeral": "I" },
-                    ", Shopify & CRO, then floor ",
-                    { "numeral": "III" },
-                    ", Architecture, and finish with how I build software."
+                    {
+                        "numeral": "I"
+                    },
+                    ", Shopify & CRO, and finish with how I build software."
                 ]
             },
             {
@@ -100,11 +102,11 @@
                 "href": "/cro",
                 "cta": "Start with Shopify brands →",
                 "sentence": [
-                    "Start on floor ",
-                    { "numeral": "I" },
-                    ", Shopify & CRO, then floor ",
-                    { "numeral": "IV" },
-                    ", Infrastructure, and finish with how I build software."
+                    "Everything for your store is on floor ",
+                    {
+                        "numeral": "I"
+                    },
+                    ", Shopify & CRO."
                 ]
             },
             {
@@ -116,13 +118,19 @@
                 "href": "/engineering",
                 "cta": "Start with engineering →",
                 "sentence": [
-                    "Start on floor ",
-                    { "numeral": "II" },
-                    ", Development, then floors ",
-                    { "numeral": "III" },
+                    "Start with how I build software, then floors ",
+                    {
+                        "numeral": "II"
+                    },
+                    ", ",
+                    {
+                        "numeral": "III"
+                    },
                     " and ",
-                    { "numeral": "IV" },
-                    ", and finish with how I build software."
+                    {
+                        "numeral": "IV"
+                    },
+                    ": development, architecture and infrastructure."
                 ]
             }
         ],
@@ -138,9 +146,8 @@
                 "text": "Its numeral sits at the top of the page, so you always know where you are."
             },
             {
-                "title": "The mark in the corner opens the floors.",
-                "text": "From any page, one click shows every floor and takes you to it.",
-                "status": "the corner opener is designed in the next round; keep this tip, ship both together"
+                "title": "The corner of every page opens the floors.",
+                "text": "From any page, one click shows every floor and takes you to it."
             },
             {
                 "title": "Find your path brings you back here.",
