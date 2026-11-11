@@ -1,0 +1,66 @@
+/* One run of the flicker demo, 2600ms: both pages show at 20%; the late side changes at 58%. */
+[data-run] .demo-page > * {
+    animation: demo-shows 2600ms step-end both;
+}
+
+[data-run] .demo-run {
+    animation: demo-runs 2600ms linear both;
+}
+
+[data-run] .is-late .demo-stock {
+    animation: demo-stock-late 2600ms step-end both;
+}
+
+[data-run] .is-late .demo-button.is-original {
+    display: block;
+    animation: demo-original-late 2600ms step-end both;
+}
+
+[data-run] .is-late .demo-button.is-variant {
+    animation: demo-variant-late 2600ms step-end both;
+}
+
+@keyframes demo-shows {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+}
+
+@keyframes demo-runs {
+    from {
+        scale: 0 1;
+    }
+}
+
+@keyframes demo-stock-late {
+    0% {
+        display: none;
+    }
+    58%,
+    100% {
+        display: block;
+    }
+}
+
+@keyframes demo-original-late {
+    0% {
+        display: block;
+    }
+    58%,
+    100% {
+        display: none;
+    }
+}
+
+@keyframes demo-variant-late {
+    0% {
+        display: none;
+    }
+    58%,
+    100% {
+        display: block;
+    }
+}

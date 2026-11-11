@@ -1,0 +1,92 @@
+---
+import type { AgencyStepViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyStepViewModel.ts";
+
+/**
+ * One step: a 600px block, its left column (the ghost numeral, "Step n", the
+ * title, the sentence with its emphasis in copper) and its visual in the slot.
+ */
+interface Props {
+    step: AgencyStepViewModel;
+}
+
+const { step } = Astro.props;
+const [before = "", after = ""] = step.sentence.split(step.emphasis);
+---
+
+<li class="step" data-step={step.n - 1} id={`step-${step.n}`}>
+    <div class="step-text">
+        <span aria-hidden="true" class="step-ghost">
+            {step.n}
+        </span>
+        <p class="eyebrow">Step {step.n}</p>
+        <h3 class="mt-4 font-display text-[44px] leading-[1.08] text-ink">
+            {step.title}
+        </h3>
+        <p class="mt-5 font-display text-[24px] leading-[1.36] text-ink">
+            {before}
+            <em class="text-accent italic">{step.emphasis}</em>
+            {after}
+        </p>
+        {step.fix !== undefined && <p class="step-fix">{step.fix}</p>}
+    </div>
+    <div class="step-visual">
+        <slot />
+    </div>
+</li>
+
+<style>
+    .step {
+        position: relative;
+        padding-block: 40px;
+    }
+
+    .step-text {
+        position: relative;
+    }
+
+    .step-ghost {
+        position: absolute;
+        top: -70px;
+        left: -24px;
+        z-index: -1;
+        font: 400 260px / 1 var(--font-display);
+        color: transparent;
+        -webkit-text-stroke: 1px rgb(227 154 106 / 0.22);
+    }
+
+    .step-fix {
+        margin-top: 20px;
+        padding-left: 14px;
+        border-left: 2px solid var(--color-accent);
+        font: italic 400 18px / 1.4 var(--font-display);
+        color: var(--color-ink-muted);
+    }
+
+    .step-visual {
+        margin-top: 32px;
+    }
+
+    @media (min-width: 48rem) {
+        .step {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 50px;
+            box-sizing: border-box;
+            height: 600px;
+            padding: 96px 0 0;
+        }
+
+        .step-visual {
+            margin-top: 0;
+        }
+
+        :global([data-live]) .step {
+            opacity: 0.28;
+            transition: opacity 500ms var(--ease-out);
+        }
+
+        :global([data-live]) .step.is-current {
+            opacity: 1;
+        }
+    }
+</style>

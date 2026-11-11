@@ -1,0 +1,38 @@
+---
+/**
+ * Step 4: visitors split between the original and the variant, dots running
+ * along the two tracks for as long as the step is on screen. Each end gets a
+ * tick once. Hidden from assistive tech: the sentence carries the meaning.
+ */
+interface Props {
+    start: string;
+    ends: readonly [string, string];
+    foot: string;
+}
+
+const { start, ends, foot } = Astro.props;
+const upper = "M20 150 H250 C330 150 330 70 420 70 H650";
+const lower = "M20 150 H250 C330 150 330 230 420 230 H650";
+const dots = [0, 1, 2, 3, 4, 5, 6, 7];
+---
+
+<div class="points" aria-hidden="true">
+    <svg class="points-tracks" viewBox="0 0 780 300" width="780" height="300">
+        <path d={upper}></path>
+        <path d={lower}></path>
+    </svg>
+    <span class="points-label is-start">{start}</span>
+    <span class="points-label is-upper">
+        {ends[0]} <span class="points-tick is-upper">✓</span>
+    </span>
+    <span class="points-label is-lower">
+        {ends[1]} <span class="points-tick is-lower">✓</span>
+    </span>
+    {dots.map((dot) => (
+        <span
+            class="points-dot"
+            style={`--i: ${dot}; offset-path: path("${dot % 2 === 0 ? upper : lower}")`}
+        />
+    ))}
+</div>
+<p class="points-foot">{foot}</p>

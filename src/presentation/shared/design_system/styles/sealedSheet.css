@@ -1,0 +1,112 @@
+/* Step 5 of the agencies home: the sealed sheet, its slip torn off, then the red wax seal. */
+.sealed {
+    position: relative;
+    max-width: 600px;
+    padding: 28px 30px 24px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow: 0 16px 30px rgb(0 0 0 / 0.45);
+}
+
+.sealed-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+}
+.sealed-title {
+    font: italic 400 28px / 1 var(--font-display);
+}
+
+.sealed-tag {
+    padding: 3px 6px;
+    border: 1px solid var(--color-ink-red-deep);
+    color: var(--color-ink-red-deep);
+    font: 600 9px / 1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.sealed-code {
+    margin: 18px 0 0;
+    font: 400 12px / 22px var(--font-mono);
+    white-space: pre-wrap;
+}
+
+.sealed .sealed-foot {
+    color: rgb(27 26 24 / 0.72);
+}
+
+.sealed-slip {
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    padding: 8px 12px;
+    background: #f1ece2;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 0.3);
+    font: 600 10px / 1 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transform-origin: 0 100%;
+    opacity: 0;
+}
+
+[data-live] .step:not([data-seen]) .sealed-slip {
+    opacity: 1;
+}
+[data-live] [data-seen] .sealed-slip {
+    animation: sealed-slip-off 900ms 900ms both;
+}
+
+@keyframes sealed-slip-off {
+    0% {
+        opacity: 1;
+    }
+    38% {
+        transform: rotate(7deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(30px, 160px) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+.sealed-seal {
+    position: absolute;
+    right: 28px;
+    bottom: 18px;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 74px;
+    border-radius: 47% 53% 56% 44% / 52% 45% 55% 48%;
+    background: radial-gradient(
+        circle at 34% 28%,
+        #cf4a41,
+        var(--color-ink-red) 45%,
+        #6f1c1b
+    );
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.35);
+    transition:
+        scale 300ms var(--ease-out) 2000ms,
+        opacity 100ms linear 2000ms;
+}
+
+.sealed-seal > span {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 0 2px rgb(0 0 0 / 0.22),
+        inset 0 2px 4px rgb(0 0 0 / 0.3);
+    font: italic 400 20px / 1 var(--font-display);
+    color: rgb(255 220 210 / 0.75);
+}
+
+[data-live] .step:not([data-seen]) .sealed-seal {
+    scale: 2.2;
+    opacity: 0;
+}

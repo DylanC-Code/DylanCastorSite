@@ -43,7 +43,7 @@ The presentation follows TightStack's: public → screen → role.
   handoff, `identity.ts`), typed against the view models.
 - `presentation/shared/`: what every page uses (`document/`, `design_system/`,
   `reveal/`). `presentation/visitor/`: the visitor's screens (`home/`,
-  `reader_path/`, `floor/`) and `visitor/shared/` (`site_frame/`,
+  `reader_path/`, `floor/`, `agencies/`) and `visitor/shared/` (`site_frame/`,
   `floor_switcher/`).
 - Every file sits in a role folder: `ui/` (components), `viewmodels/` (readonly
   data a component shows, one file per component), `presenters/` (code that

@@ -1,0 +1,26 @@
+---
+import AgencyHero from "#/presentation/visitor/agencies/ui/AgencyHero.astro";
+import StepsSection from "#/presentation/visitor/agencies/ui/StepsSection.astro";
+import type { AgencyHeroViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyHeroViewModel.ts";
+import type { StepsSectionViewModel } from "#/presentation/visitor/agencies/viewmodels/StepsSectionViewModel.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/** The agencies home, part 1: the hero, then the five steps of a first test. */
+interface Props {
+    hero: AgencyHeroViewModel;
+    steps: StepsSectionViewModel;
+    book: BookViewModel;
+    labels: { contents: string; coverFoot: string; openAria: string };
+}
+
+const { hero, steps, book, labels } = Astro.props;
+---
+
+<AgencyHero
+    hero={hero}
+    book={book}
+    contentsLabel={labels.contents}
+    coverFoot={labels.coverFoot}
+    openAria={labels.openAria}
+/>
+<StepsSection {...steps} />

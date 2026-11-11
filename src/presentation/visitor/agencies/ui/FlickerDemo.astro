@@ -1,0 +1,76 @@
+---
+import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
+
+/**
+ * Step 2: the same made-up product page twice. On the left the test changes
+ * it after it shows (the button swaps and the stock line pushes it down); on
+ * the right it is already changed. One run is 2600ms; Replay restarts it.
+ * Hidden from assistive tech: the step's sentence carries the meaning.
+ */
+interface Props {
+    labels: readonly [string, string];
+    marks: readonly [string, string];
+    note: string;
+    replay: string;
+    link: LinkViewModel;
+    page: {
+        name: string;
+        price: string;
+        badge: string;
+        buttonOriginal: string;
+        buttonVariant: string;
+    };
+}
+
+const { labels, marks, note, replay, link, page } = Astro.props;
+const sides = [
+    { label: labels[0], late: true, marks: [marks[0], marks[1]] },
+    { label: labels[1], late: false, marks: [marks[0]] },
+];
+---
+
+<div class="demo" data-flicker-demo>
+    <div class="demo-pair" aria-hidden="true">
+        {sides.map((side) => (
+            <figure class:list={["demo-side", side.late && "is-late"]}>
+                <figcaption class="demo-label">{side.label}</figcaption>
+                <div class="demo-browser">
+                    <span class="demo-bar">
+                        <span />
+                        <span />
+                        <span />
+                    </span>
+                    <div class="demo-page">
+                        <span class="demo-photo" />
+                        <span class="demo-info">
+                            <span class="demo-name">{page.name}</span>
+                            <span class="demo-price">{page.price}</span>
+                            <span class="demo-stock">{page.badge}</span>
+                            <span class="demo-button is-original">
+                                {page.buttonOriginal}
+                            </span>
+                            <span class="demo-button is-variant">
+                                {page.buttonVariant}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <span class="demo-time">
+                    <span class="demo-run" />
+                    {side.marks.map((mark) => (
+                        <span class="demo-mark">{mark}</span>
+                    ))}
+                </span>
+            </figure>
+        ))}
+    </div>
+    <div class="demo-foot">
+        <p class="demo-note">{note}</p>
+        <button type="button" class="demo-replay" data-replay hidden>
+            {replay}
+        </button>
+        <a href={link.href} class="link-accent text-small">
+            {link.label}
+        </a>
+    </div>
+</div>

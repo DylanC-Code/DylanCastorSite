@@ -1,0 +1,33 @@
+---
+/**
+ * Step 5: the winner as clean theme code, a sample sheet. The "Test code"
+ * slip is torn off, then a red wax seal is pressed on the corner.
+ */
+interface Props {
+    sheet: {
+        title: string;
+        tag: string;
+        code: readonly string[];
+        foot: string;
+        slip: string;
+        seal: string;
+    };
+}
+
+const { sheet } = Astro.props;
+---
+
+<div class="sealed">
+    <p class="sealed-head">
+        <span class="sealed-title">{sheet.title}</span>
+        <span class="sealed-tag">{sheet.tag}</span>
+    </p>
+    <pre class="sealed-code"><code>{sheet.code.join("\n")}</code></pre>
+    <p class="sealed-foot">{sheet.foot}</p>
+    <span aria-hidden="true" class="sealed-slip">
+        {sheet.slip}
+    </span>
+    <span aria-hidden="true" class="sealed-seal">
+        <span>{sheet.seal}</span>
+    </span>
+</div>

@@ -1,0 +1,87 @@
+/*
+ * Step 4 of the agencies home: the launch points. The dots run while the
+ * step is on screen; each end gets a tick once.
+ */
+.points {
+    position: relative;
+    width: 780px;
+    height: 300px;
+}
+
+.points-tracks path {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.55);
+    stroke-width: 1.5;
+}
+
+.points-label {
+    position: absolute;
+    font: 500 10px / 1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+}
+
+.points-label.is-start {
+    top: 128px;
+    left: 20px;
+}
+.points-label.is-upper {
+    top: 64px;
+    left: 664px;
+}
+.points-label.is-lower {
+    top: 224px;
+    left: 664px;
+}
+
+.points-tick {
+    color: var(--color-accent);
+    transition: opacity 300ms var(--ease-out);
+}
+
+.points-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    offset-distance: calc(var(--i) * 12.5%);
+    offset-rotate: 0deg;
+}
+
+[data-live] .points-dot {
+    animation: points-run 3200ms linear calc(var(--i) * 400ms) infinite paused;
+}
+
+[data-live] [data-seen][data-on-screen] .points-dot {
+    animation-play-state: running;
+}
+
+@keyframes points-run {
+    from {
+        offset-distance: 0%;
+    }
+    to {
+        offset-distance: 100%;
+    }
+}
+
+[data-live] .step:not([data-seen]) .points-tick {
+    opacity: 0;
+}
+.points-tick.is-upper {
+    transition-delay: 3600ms;
+}
+.points-tick.is-lower {
+    transition-delay: 4000ms;
+}
+
+.points-foot,
+.sealed-foot {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--color-ink-muted);
+}

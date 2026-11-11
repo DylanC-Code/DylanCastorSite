@@ -1,0 +1,107 @@
+/*
+ * The ticket's one-time events, set by the scroll script on the section:
+ * data-torn (true, or back when scrolled above 60px again), data-ended.
+ */
+[data-torn="true"] .ticket-top {
+    animation: ticket-tear-top 950ms both;
+}
+
+[data-torn="true"] .ticket-hold {
+    height: 0;
+    transition-delay: 650ms;
+}
+
+[data-torn="back"] .ticket-top {
+    animation: ticket-top-back 450ms var(--ease-out) both;
+}
+
+@keyframes ticket-tear-top {
+    0% {
+        animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    38% {
+        transform: rotate(3.2deg);
+        animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.4);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-30px, 210px) rotate(-7deg);
+    }
+}
+
+@keyframes ticket-top-back {
+    from {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+}
+
+[data-ended="true"] .ticket-stub {
+    animation: ticket-tear-stub 950ms both;
+}
+
+[data-ended="true"] .ticket-band {
+    translate: 0 -260%;
+    transition-delay: 950ms;
+}
+
+@keyframes ticket-tear-stub {
+    0% {
+        animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    38% {
+        transform: rotate(7deg);
+        animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.4);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(30px, 190px) rotate(26deg);
+    }
+}
+
+.ticket-tab {
+    position: sticky;
+    top: 100px;
+    z-index: 6;
+    float: right;
+    display: flex;
+    gap: 9px;
+    margin-top: -40px;
+    padding: 14px 16px 12px;
+    border: 0;
+    background: var(--color-paper);
+    box-shadow: 0 10px 20px rgb(0 0 0 / 0.5);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    translate: 0 -60px;
+    transition:
+        translate 500ms cubic-bezier(0.3, 1.5, 0.5, 1),
+        opacity 200ms linear;
+}
+
+.ticket-tab > span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-ground);
+}
+
+[data-ended="true"] .ticket-tab {
+    opacity: 1;
+    pointer-events: auto;
+    translate: 0 0;
+    transition-delay: 1500ms;
+}

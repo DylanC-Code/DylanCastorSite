@@ -1,0 +1,146 @@
+/*
+ * The flicker demo (agencies step 2). Without script, or with reduced motion,
+ * both pages show their end: changed. Script sets data-run to play one run.
+ */
+.demo-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 720px;
+}
+
+.demo-side {
+    margin: 0;
+}
+
+.demo-label {
+    font: 500 10px / 1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+}
+
+.demo-side:not(.is-late) .demo-label {
+    color: var(--color-accent);
+}
+
+.demo-browser {
+    margin-top: 8px;
+    background: #f3f2ee;
+    box-shadow: 0 12px 24px rgb(0 0 0 / 0.4);
+}
+
+.demo-bar {
+    display: flex;
+    gap: 5px;
+    padding: 7px 10px;
+    background: #dcd8cf;
+}
+
+.demo-bar > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b5b0a5;
+}
+
+.demo-page {
+    display: grid;
+    grid-template-columns: 118px 1fr;
+    gap: 16px;
+    height: 182px;
+    padding: 18px;
+    color: #1b1a18;
+}
+
+.demo-photo {
+    height: 150px;
+    background: linear-gradient(160deg, #cfc6b9, #a2988a);
+}
+
+.demo-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 11px;
+}
+
+.demo-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.demo-stock {
+    color: #2b5e36;
+    font-weight: 600;
+}
+
+.demo-button {
+    padding: 9px 12px;
+    background: #2f5f3a;
+    color: #fff;
+    font-weight: 600;
+}
+
+.demo-button.is-original {
+    display: none;
+}
+
+/* Marks on the run: the page shows at 20%; the late test changes it at 58%. */
+.demo-mark {
+    position: absolute;
+    top: 10px;
+    left: 20%;
+    translate: -50% 0;
+    white-space: nowrap;
+}
+
+.demo-mark + .demo-mark {
+    left: 58%;
+}
+
+.demo-time {
+    position: relative;
+    display: block;
+    height: 24px;
+    margin-top: 10px;
+    border-top: 1px solid rgb(227 154 106 / 0.4);
+    font-size: 10px;
+    color: var(--color-ink-faint);
+}
+
+.demo-run {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-accent);
+    transform-origin: left;
+}
+
+.demo-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    max-width: 720px;
+    margin-top: 22px;
+}
+
+.demo-note {
+    flex: 1;
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-ink-muted);
+}
+
+.demo-replay {
+    padding: 8px 14px;
+    border: 1px solid var(--color-line-strong);
+    background: none;
+    color: var(--color-ink);
+    font: 500 13px / 1 var(--font-sans);
+    cursor: pointer;
+}

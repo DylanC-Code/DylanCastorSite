@@ -1,30 +1,36 @@
 ---
-import { switcherFor } from "#/content/floors.ts";
+import { agencyHero, agencySteps } from "#/content/agencySteps.ts";
 import { books } from "#/content/books.ts";
+import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import AgenciesPage from "#/presentation/visitor/agencies/ui/AgenciesPage.astro";
 import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
+import { forReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * Placeholder homes for the three reading paths, so the books' links do not
- * 404 in preview. Kept out of search until written.
+ * The reading paths' homes, one per book. The agencies home is being built
+ * (part 1: hero and steps); the others are placeholders. All are kept out of
+ * search until written.
  */
 export function getStaticPaths(): {
     params: { readerPath: string };
-    props: { title: string };
+    props: { book: BookViewModel };
 }[] {
     return books.books.map((book) => ({
         params: { readerPath: book.href.slice(1) },
-        props: { title: `${book.for} ${book.reader}` },
+        props: { book },
     }));
 }
 
 interface Props {
-    title: string;
+    book: BookViewModel;
 }
 
-const { title } = Astro.props;
+const { book } = Astro.props;
+const title = forReader(book);
 ---
 
 <HtmlDocument
@@ -37,6 +43,15 @@ const { title } = Astro.props;
         footer={home.footer}
         switcher={switcherFor(null)}
     >
-        <ReaderPathPage title={title} />
+        {book.id === "agencies" ? (
+            <AgenciesPage
+                hero={agencyHero}
+                steps={agencySteps}
+                book={book}
+                labels={books.labels}
+            />
+        ) : (
+            <ReaderPathPage title={title} />
+        )}
     </SiteFrame>
 </HtmlDocument>

@@ -1,0 +1,5 @@
+/* Night Lab additions for the agencies home: red, only ever as ink or wax on paper. */
+@theme {
+    --color-ink-red: #a12c2a;
+    --color-ink-red-deep: #7a2b2b;
+}

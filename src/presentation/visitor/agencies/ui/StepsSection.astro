@@ -1,0 +1,85 @@
+---
+import BriefCards from "#/presentation/visitor/agencies/ui/BriefCards.astro";
+import FlickerDemo from "#/presentation/visitor/agencies/ui/FlickerDemo.astro";
+import HandoverSheet from "#/presentation/visitor/agencies/ui/HandoverSheet.astro";
+import LaunchPoints from "#/presentation/visitor/agencies/ui/LaunchPoints.astro";
+import SealedSheet from "#/presentation/visitor/agencies/ui/SealedSheet.astro";
+import StepBlock from "#/presentation/visitor/agencies/ui/StepBlock.astro";
+import StepTicket from "#/presentation/visitor/agencies/ui/StepTicket.astro";
+import type { StepsSectionViewModel } from "#/presentation/visitor/agencies/viewmodels/StepsSectionViewModel.ts";
+
+/**
+ * "Your first test, step by step": the floor label, the title, the ticket,
+ * then the five steps in order. All of it reads without script; the scroll
+ * script dims the steps you are not on and plays each one's motion once.
+ */
+type Props = StepsSectionViewModel;
+
+const { label, title, ticket, icons, brief, build, qa, launch, winner } =
+    Astro.props;
+---
+
+<section id="steps" class="steps page pb-24" data-steps>
+    <p class="eyebrow">
+        {label.floor}{" "}
+        <span class="font-display text-[14px] tracking-normal">
+            {label.numeral}
+        </span>{" "}
+        {label.rest}
+    </p>
+    <h2 class="mt-4 font-display text-section-sm text-ink md:text-section">
+        {title}
+    </h2>
+    <div class="max-md:hidden md:contents">
+        <StepTicket {...ticket} />
+    </div>
+    <ol class="steps-list" data-steps-list>
+        <StepBlock step={brief}>
+            <BriefCards cap={brief.cap} cards={brief.cards} icons={icons} />
+        </StepBlock>
+        <StepBlock step={build}>
+            <FlickerDemo {...build} />
+        </StepBlock>
+        <StepBlock step={qa}>
+            <HandoverSheet cap={qa.cap} sheet={qa.sheet} icons={icons} />
+        </StepBlock>
+        <StepBlock step={launch}>
+            <LaunchPoints {...launch.points} />
+        </StepBlock>
+        <StepBlock step={winner}>
+            <SealedSheet sheet={winner.sheet} />
+        </StepBlock>
+    </ol>
+</section>
+
+<script>
+    import { initSteps } from "#/presentation/visitor/agencies/behaviour/stepsSection.ts";
+
+    for (const section of document.querySelectorAll("[data-steps]")) {
+        if (section instanceof HTMLElement) {
+            initSteps(section);
+        }
+    }
+</script>
+
+<style>
+    /* The fold closes 80px above the steps: no scroll anchoring fighting it. */
+    .steps {
+        overflow-anchor: none;
+    }
+
+    .steps-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    @media (max-width: 47.99rem) {
+        .steps-list :global(.points),
+        .steps-list :global(.demo-pair),
+        .steps-list :global(.sealed-seal),
+        .steps-list :global(.sealed-slip) {
+            display: none;
+        }
+    }
+</style>

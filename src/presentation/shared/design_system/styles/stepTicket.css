@@ -1,0 +1,91 @@
+/*
+ * The steps' ticket (agencies steps handoff). Paper on a ground band, stuck
+ * under the header; its width a multiple of 16px so the holes line up.
+ * Perforations are holes cut by masks, both edges scalloped after a tear.
+ */
+.ticket-band {
+    position: sticky;
+    top: 84px;
+    z-index: 5;
+    margin-top: 28px;
+    padding: 16px 0 18px;
+    background: var(--color-ground);
+    transition: translate 650ms var(--ease-mech);
+}
+
+.ticket {
+    width: round(down, 100%, 16px);
+    background: none;
+    color: var(--color-paper-ink);
+    filter: drop-shadow(0 16px 20px rgb(0 0 0 / 0.5));
+}
+
+.ticket-hold {
+    height: 80px;
+    transition: height 450ms var(--ease-mech);
+}
+
+.ticket-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 80px;
+    padding: 26px 56px 0;
+    background: var(--color-paper);
+    transform-origin: 100% 100%;
+    mask: radial-gradient(circle 4px at 8px 100%, transparent 98%, #000) 0 0 /
+        16px 100% repeat-x;
+}
+
+.ticket-title {
+    margin: 0;
+    font: italic 400 24px / 1 var(--font-display);
+}
+
+.ticket-route,
+.ticket-stub-name {
+    margin: 0;
+    font: 600 10px / 1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.72);
+}
+
+.ticket-row {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 144px;
+}
+
+.ticket-strip {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 14px 0 12px;
+    background: var(--color-paper);
+    mask:
+        radial-gradient(circle 4px at 8px 0, transparent 98%, #000) 0 0 / 16px
+            100% repeat-x,
+        radial-gradient(circle 4px at 100% 8px, transparent 98%, #000) 0 0 /
+            100% 16px repeat-y,
+        radial-gradient(circle 14px at 0 50%, transparent 98%, #000);
+    mask-composite: intersect;
+}
+
+.ticket-stub {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 6px;
+    background: var(--color-paper);
+    transform-origin: 0 100%;
+    mask: radial-gradient(circle 4px at 0 8px, transparent 98%, #000) 0 0 / 100%
+        16px repeat-y;
+}
+
+.ticket-stub-number {
+    font: 400 30px / 1 var(--font-display);
+    color: var(--color-paper-copper);
+}

@@ -1,0 +1,56 @@
+---
+import type { StepTicketViewModel } from "#/presentation/visitor/agencies/viewmodels/StepTicketViewModel.ts";
+
+/**
+ * The ticket that follows the steps: its title part tears off once you are
+ * on your way, the stations mark where you are, the stub is cut at the end
+ * and a tab takes you back. Without script it is static and whole.
+ */
+type Props = StepTicketViewModel;
+
+const { title, route, stations, stub, tabLabel, navLabel } = Astro.props;
+---
+
+<div class="ticket-band" data-ticket>
+    <div class="ticket">
+        <div class="ticket-hold">
+            <div class="ticket-top">
+                <p class="ticket-title">{title}</p>
+                <p class="ticket-route">{route}</p>
+            </div>
+        </div>
+        <div class="ticket-row">
+            <nav class="ticket-strip" aria-label={navLabel}>
+                <span aria-hidden="true" class="ticket-line">
+                    <span class="ticket-fill"></span>
+                </span>
+                {stations.map((station, index) => (
+                    <button
+                        type="button"
+                        class="ticket-station"
+                        data-station={index}
+                    >
+                        <span aria-hidden="true" class="ticket-punch" />
+                        <span class="ticket-number">{index + 1}</span>
+                        <span class="ticket-name">{station}</span>
+                    </button>
+                ))}
+            </nav>
+            <div class="ticket-stub" aria-hidden="true">
+                <span class="ticket-stub-number">{stub[0]}</span>
+                <span class="ticket-stub-name">{stub[1]}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<button
+    type="button"
+    class="ticket-tab"
+    data-ticket-tab
+    aria-label={tabLabel}
+    hidden
+>
+    {stations.map(() => (
+        <span aria-hidden="true" />
+    ))}
+</button>

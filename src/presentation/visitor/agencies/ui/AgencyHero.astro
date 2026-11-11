@@ -1,0 +1,79 @@
+---
+import ReaderBook from "#/presentation/visitor/home/ui/ReaderBook.astro";
+import { withReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+import type { AgencyHeroViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyHeroViewModel.ts";
+
+/**
+ * The agencies home's first screen: the words left; right, the agencies book
+ * of the root home, opening once on its contents. The book only shows: it is
+ * inert and hidden from assistive tech, its words being the page's own.
+ */
+interface Props {
+    hero: AgencyHeroViewModel;
+    book: BookViewModel;
+    contentsLabel: string;
+    coverFoot: string;
+    openAria: string;
+}
+
+const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
+---
+
+<section class="page flex min-h-[calc(100svh-84px)] items-center gap-10 py-16">
+    <div class="max-w-150 flex-none">
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1 class="mt-5 font-display text-[40px] leading-[1.06] text-ink md:text-[52px]">
+            {hero.title[0]}
+            <br />
+            <em class="italic">{hero.title[1]}</em>
+        </h1>
+        <p class="mt-6 max-w-130 text-body-lg text-ink-muted">{hero.lead}</p>
+        <div class="mt-9 flex flex-wrap items-center gap-8">
+            <a href={hero.button.href} class="btn">
+                {hero.button.label}
+            </a>
+            <a href={hero.down.href} class="link-accent">
+                {hero.down.label}
+            </a>
+        </div>
+    </div>
+    <div class="hero-book max-md:hidden" aria-hidden="true" inert>
+        <ReaderBook
+            book={book}
+            index={0}
+            contentsLabel={contentsLabel}
+            coverFoot={coverFoot}
+            openLabel={withReader(openAria, book)}
+        />
+    </div>
+</section>
+
+<style>
+    /* The book at 0.8, its cover swung open once onto the endpaper. */
+    .hero-book {
+        --u: 0.8px;
+        position: relative;
+        flex: none;
+        width: calc(352 * var(--u));
+        height: calc(520 * var(--u));
+        margin-left: auto;
+    }
+
+    .hero-book :global(.book) {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .hero-book :global(.book-cover) {
+        animation: hero-book-opens var(--duration-book-open) var(--ease-mech)
+            500ms both;
+    }
+
+    @keyframes hero-book-opens {
+        to {
+            transform: translateZ(0) rotateY(-180deg);
+        }
+    }
+</style>
