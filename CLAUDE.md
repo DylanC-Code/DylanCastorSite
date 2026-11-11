@@ -24,12 +24,32 @@ merges red; the pre-push hook and CI run the same command.
   (`src/pages/cro/[slug].astro`) and its slug comes from the content's data,
   never from a file name.
 - Imports across directories use `#/` with the extension
-  (`#/layouts/BaseLayout.astro`), never `../`.
-- Styles: Tailwind classes from Night Lab's theme (`src/styles/nightLab.css`).
-  Tailwind's own colors, radii and shadows are switched off on purpose.
+  (`#/content/home.ts`), never `../`.
+- Styles: Tailwind classes from Night Lab's theme
+  (`src/presentation/shared/design_system/styles/theme.css`). Tailwind's own
+  colors, radii and shadows are switched off on purpose. All CSS lives in that
+  `styles/` folder, or scoped in a component's `<style>`.
 - Demos are vanilla TypeScript, loaded when they scroll into view. Text paints
   first; `prefers-reduced-motion` is respected.
 - Conventional commits, header at most 72 characters, no scope.
+
+## Layout of `src/`
+
+The presentation follows TightStack's: public → screen → role.
+
+- `pages/`: Astro's router. A route reads `content/` and places components,
+  handing each its view model; it writes no markup.
+- `content/`: the words and facts the pages show (`home.json` from the design
+  handoff, `identity.ts`), typed against the view models.
+- `presentation/shared/`: what every page uses (`document/`, `design_system/`,
+  `reveal/`). `presentation/visitor/`: the visitor's screens (`home/`,
+  `reader_path/`) and `visitor/shared/` (`site_frame/`).
+- Every file sits in a role folder: `ui/` (components), `viewmodels/` (readonly
+  data a component shows, one file per component), `presenters/` (code that
+  turns data into what is shown), `state/` (pure local state), `behaviour/`
+  (vanilla scripts run in the browser). No `components/`, `utils/`, `hooks/`.
+- A component never reads `content/`: its parent passes its view model, whole.
+- Each shared subject has a README: what it accepts and what it refuses.
 
 ## Content rules
 
