@@ -1,0 +1,73 @@
+/* The title page's one-time motion: the frame draws, the lines rise, the words fade up. */
+.title-edge {
+    position: absolute;
+    background: var(--color-line-strong);
+    animation: title-draw-x 1200ms var(--ease-set) both;
+    animation-delay: var(--d, 0ms);
+    transform-origin: left top;
+}
+
+.title-draw-y {
+    animation-name: title-draw-y;
+}
+
+.title-fade {
+    animation: title-fade 900ms var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+}
+
+.title-rise {
+    animation: title-rise 900ms var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+}
+
+/* The mask's padding keeps the italic's overhang from being clipped. */
+.title-line {
+    display: block;
+    overflow: hidden;
+    padding: 0 0.14em 0.14em;
+    margin: 0 -0.14em -0.14em;
+}
+
+.title-line > span {
+    display: inline-block;
+    animation: title-set var(--duration-set) var(--ease-set) both;
+    animation-delay: var(--d, 0ms);
+}
+
+.title-rule {
+    transform-origin: center;
+    animation: title-draw-x 900ms var(--ease-set) both;
+    animation-delay: 1300ms;
+}
+
+@keyframes title-draw-x {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes title-draw-y {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@keyframes title-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes title-rise {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+@keyframes title-set {
+    from {
+        transform: translateY(115%);
+    }
+}
