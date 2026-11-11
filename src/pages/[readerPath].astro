@@ -1,0 +1,38 @@
+---
+import { home } from "#/content/home.ts";
+import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
+import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
+
+/**
+ * Placeholder homes for the three reading paths, so the books' links do not
+ * 404 in preview. Kept out of search until written.
+ */
+export function getStaticPaths(): {
+    params: { readerPath: string };
+    props: { title: string };
+}[] {
+    return home.paths.books.map((book) => ({
+        params: { readerPath: book.href.slice(1) },
+        props: {
+            title: `${home.paths.pageEyebrowPrefix} ${book.titleLine1} ${book.titleLine2}`,
+        },
+    }));
+}
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<HtmlDocument
+    title={`${title} · ${home.header.brand}`}
+    description={title}
+    noindex
+>
+    <SiteFrame header={home.header} footer={home.footer}>
+        <ReaderPathPage title={title} />
+    </SiteFrame>
+</HtmlDocument>

@@ -1,20 +1,18 @@
 ---
-import BaseLayout from "#/layouts/BaseLayout.astro";
+import { home } from "#/content/home.ts";
+import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import HomePage from "#/presentation/visitor/home/ui/HomePage.astro";
+import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 ---
 
-<BaseLayout
-    title="Dylan Castor · Shopify & CRO engineer"
-    description="Shopify A/B tests, built cleanly and shipped fast."
->
-    <main class="mx-auto flex max-w-[1240px] flex-col gap-6 px-10 py-30">
-        <p class="text-label font-medium uppercase text-accent">
-            Shopify &amp; CRO
-        </p>
-        <h1 class="font-display text-display-xl font-medium">
-            Shopify A/B tests, built cleanly.
-        </h1>
-        <p class="text-body-lg text-ink-muted">
-            The project runs. The pages come next.
-        </p>
-    </main>
-</BaseLayout>
+<HtmlDocument title={home.meta.title} description={home.meta.description}>
+    <SiteFrame header={home.header} footer={home.footer}>
+        <HomePage
+            titlePage={home.hero}
+            floorDirectory={home.floors}
+            readerShelf={home.paths}
+            gettingAround={home.tips}
+            contactCard={home.contact}
+        />
+    </SiteFrame>
+</HtmlDocument>

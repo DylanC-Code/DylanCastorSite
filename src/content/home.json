@@ -1,0 +1,169 @@
+{
+    "meta": {
+        "title": "Dylan Castor — Shopify & CRO engineer",
+        "description": "How I work on every layer, from Shopify storefronts and A/B tests to architecture and infrastructure. Three paths: CRO agencies, Shopify brands and software engineers.",
+        "descriptionStatus": "proposal, to confirm with Dylan"
+    },
+    "header": {
+        "brand": "Dylan Castor",
+        "brandHref": "/",
+        "action": {
+            "label": "Email me",
+            "href": "mailto:contact@dylancastor.com"
+        }
+    },
+    "hero": {
+        "eyebrow": "Dylan Castor · Shopify & CRO engineer",
+        "titleLine1": "How I work,",
+        "titleLine2Italic": "floor by floor.",
+        "lead": "This site shows how I work on every layer, from what shoppers see to the servers underneath.",
+        "primary": { "label": "Find your path ↓", "href": "#paths" },
+        "secondary": {
+            "label": "Email me",
+            "href": "mailto:contact@dylancastor.com"
+        },
+        "foot": "Five floors · three paths"
+    },
+    "floors": {
+        "eyebrow": "How I work, layer by layer",
+        "title": "Five floors, one way of working.",
+        "columns": ["Floor", "Department", "How I work"],
+        "rows": [
+            {
+                "numeral": "I",
+                "area": "Shopify & CRO",
+                "layer": "Storefront",
+                "how": "A/B tests that never show the original first, results read with care, winners shipped as theme code."
+            },
+            {
+                "numeral": "II",
+                "area": "Development",
+                "layer": "Application",
+                "how": "Typed, tested code that stays easy to change, in small files with one job each."
+            },
+            {
+                "numeral": "III",
+                "area": "Architecture",
+                "layer": "Structure",
+                "how": "Business rules kept apart from the tools, so changing a tool never breaks the business."
+            },
+            {
+                "numeral": "IV",
+                "area": "Infrastructure",
+                "layer": "Ground",
+                "how": "Pipelines that check every change, and servers that stay fast and up."
+            },
+            {
+                "numeral": "V",
+                "area": "Low-level",
+                "layer": "Bedrock",
+                "how": "Networks, memory and systems. Coming later.",
+                "comingLater": true
+            }
+        ],
+        "method": {
+            "numeralItalic": "All",
+            "area": "How I build software",
+            "how": "Tests first, small files with one job each, and every change checked before it ships.",
+            "status": "wording to confirm with Dylan"
+        }
+    },
+    "paths": {
+        "eyebrow": "Find your path",
+        "title": "Who are you?",
+        "lead": "Three books, one for each kind of visitor. Open yours.",
+        "back": "← Back to the three books",
+        "routesStatus": "placeholders: the floors per reader will be confirmed when the path homes are written",
+        "books": [
+            {
+                "id": "agencies",
+                "for": "for",
+                "titleLine1": "CRO",
+                "titleLine2": "Agencies",
+                "tone": "oxblood",
+                "href": "/agencies",
+                "cta": "Start with agencies →",
+                "sentence": [
+                    "Start on floor ",
+                    { "numeral": "I" },
+                    ", Shopify & CRO, then floor ",
+                    { "numeral": "III" },
+                    ", Architecture, and finish with how I build software."
+                ]
+            },
+            {
+                "id": "brands",
+                "for": "for",
+                "titleLine1": "Shopify",
+                "titleLine2": "Brands",
+                "tone": "green",
+                "href": "/cro",
+                "cta": "Start with Shopify brands →",
+                "sentence": [
+                    "Start on floor ",
+                    { "numeral": "I" },
+                    ", Shopify & CRO, then floor ",
+                    { "numeral": "IV" },
+                    ", Infrastructure, and finish with how I build software."
+                ]
+            },
+            {
+                "id": "engineers",
+                "for": "for",
+                "titleLine1": "Software",
+                "titleLine2": "Engineers",
+                "tone": "midnight",
+                "href": "/engineering",
+                "cta": "Start with engineering →",
+                "sentence": [
+                    "Start on floor ",
+                    { "numeral": "II" },
+                    ", Development, then floors ",
+                    { "numeral": "III" },
+                    " and ",
+                    { "numeral": "IV" },
+                    ", and finish with how I build software."
+                ]
+            }
+        ],
+        "coverFoot": "Dylan Castor",
+        "pageEyebrowPrefix": "For"
+    },
+    "tips": {
+        "eyebrow": "How to get around",
+        "title": "Three things to know.",
+        "items": [
+            {
+                "title": "Every page is a floor.",
+                "text": "Its numeral sits at the top of the page, so you always know where you are."
+            },
+            {
+                "title": "The mark in the corner opens the floors.",
+                "text": "From any page, one click shows every floor and takes you to it.",
+                "status": "the corner opener is designed in the next round; keep this tip, ship both together"
+            },
+            {
+                "title": "Find your path brings you back here.",
+                "text": "When you are not sure where to go next, start again from your path."
+            }
+        ]
+    },
+    "contact": {
+        "eyebrow": "Contact",
+        "titleStart": "Have a project",
+        "titleItalic": "in mind?",
+        "text": "Tell me what you need in a few lines. I reply within one working day.",
+        "button": {
+            "label": "contact@dylancastor.com",
+            "href": "mailto:contact@dylancastor.com"
+        }
+    },
+    "footer": {
+        "left": "Dylan Castor · Legal notice",
+        "legalHref": "/legal",
+        "right": {
+            "label": "Email me",
+            "href": "mailto:contact@dylancastor.com"
+        }
+    }
+}

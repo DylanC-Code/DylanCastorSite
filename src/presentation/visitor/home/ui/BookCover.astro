@@ -1,0 +1,37 @@
+---
+import Cipher from "#/presentation/shared/design_system/marks/ui/Cipher.astro";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/** The front board: hinge groove, tooled gilt frames, the reader, the seal. */
+interface Props {
+    book: BookViewModel;
+    coverFoot: string;
+}
+
+const { book, coverFoot } = Astro.props;
+const corners = ["tl", "tr", "bl", "br"];
+---
+
+<span aria-hidden="true" class="book-spine"></span>
+<span aria-hidden="true" class="book-tooling outer"></span>
+<span aria-hidden="true" class="book-tooling inner"></span>
+{corners.map((corner) => (
+    <span aria-hidden="true" class:list={["book-stud", corner]} />
+))}
+<span class="book-title">
+    <em class="book-for">{book.for}</em>
+    <span class="book-gilt">
+        {book.titleLine1}
+        <br />
+        {book.titleLine2}
+    </span>
+    <span aria-hidden="true" class="book-ornament">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+</span>
+<span aria-hidden="true" class="book-seal">
+    <Cipher size={54} id={`book-${book.id}`} />
+    <span>{coverFoot}</span>
+</span>

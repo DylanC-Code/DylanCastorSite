@@ -1,0 +1,20 @@
+---
+import ContactCard from "#/presentation/visitor/home/ui/ContactCard.astro";
+import FloorDirectory from "#/presentation/visitor/home/ui/FloorDirectory.astro";
+import GettingAround from "#/presentation/visitor/home/ui/GettingAround.astro";
+import ReaderShelf from "#/presentation/visitor/home/ui/ReaderShelf.astro";
+import TitlePage from "#/presentation/visitor/home/ui/TitlePage.astro";
+import type { HomePageViewModel } from "#/presentation/visitor/home/viewmodels/HomePageViewModel.ts";
+
+/** The root home, its five sections in order, each given its own part. */
+type Props = HomePageViewModel;
+
+const { titlePage, floorDirectory, readerShelf, gettingAround, contactCard } =
+    Astro.props;
+---
+
+<TitlePage {...titlePage} />
+<FloorDirectory {...floorDirectory} />
+<ReaderShelf {...readerShelf} />
+<GettingAround {...gettingAround} />
+<ContactCard {...contactCard} />

@@ -1,0 +1,69 @@
+---
+import BookCover from "#/presentation/visitor/home/ui/BookCover.astro";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/**
+ * One reader's book: page edges, the first page, then the cover on top.
+ * Without script the cover is a plain link to the path; the first page is
+ * real HTML from the start, so its words are in the document either way.
+ */
+interface Props {
+    book: BookViewModel;
+    index: number;
+    coverFoot: string;
+    pageEyebrowPrefix: string;
+}
+
+const { book, index, coverFoot, pageEyebrowPrefix } = Astro.props;
+const reader = `${book.titleLine1} ${book.titleLine2}`;
+const leafId = `path-${book.id}`;
+---
+
+<div
+    class="book"
+    data-book={book.id}
+    data-tone={book.tone}
+    data-label={`${pageEyebrowPrefix} ${reader}`}
+    style={`--i: ${index}`}
+>
+    <div class="book-block">
+        <span aria-hidden="true" class="book-edges"></span>
+        <span aria-hidden="true" class="book-paper"></span>
+        <a
+            href={book.href}
+            class="book-cover"
+            data-cover
+            aria-label={`${pageEyebrowPrefix} ${reader}`}
+        >
+            <span class="book-face book-front">
+                <BookCover book={book} coverFoot={coverFoot} />
+            </span>
+            <span class="book-face book-back"></span>
+        </a>
+    </div>
+    <div
+        class="book-leaf"
+        id={leafId}
+        data-leaf
+        role="region"
+        aria-label={reader}
+        tabindex="-1"
+    >
+        <h3 class="book-pcap">
+            {pageEyebrowPrefix} {reader}
+        </h3>
+        <span aria-hidden="true" class="book-rule"></span>
+        <p class="book-sentence">
+            {book.sentence.map((part) =>
+                typeof part === "string" ? (
+                    part
+                ) : (
+                    <span class="book-pnum">{part.numeral}</span>
+                ),
+            )}
+        </p>
+        <a href={book.href} class="book-cta">
+            {book.cta}
+        </a>
+    </div>
+</div>
