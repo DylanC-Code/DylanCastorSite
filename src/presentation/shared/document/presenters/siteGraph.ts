@@ -1,4 +1,4 @@
-import { identity } from "#/seo/identity.ts";
+import { identity } from "#/content/identity.ts";
 
 type Thing = Readonly<Record<string, unknown>>;
 

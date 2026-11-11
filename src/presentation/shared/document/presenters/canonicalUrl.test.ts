@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { canonicalUrl } from "#/seo/canonical.ts";
+import { canonicalUrl } from "#/presentation/shared/document/presenters/canonicalUrl.ts";
 
 const site = new URL("https://dylancastor.com");
 

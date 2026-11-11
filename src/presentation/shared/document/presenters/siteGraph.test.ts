@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { siteGraph, toScriptJson } from "#/seo/jsonLd.ts";
+import {
+    siteGraph,
+    toScriptJson,
+} from "#/presentation/shared/document/presenters/siteGraph.ts";
 
 const site = new URL("https://dylancastor.com");
 

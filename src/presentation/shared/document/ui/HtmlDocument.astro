@@ -1,0 +1,36 @@
+---
+import "#/presentation/shared/design_system/styles/app.css";
+
+import { Font } from "astro:assets";
+
+import SeoHead from "#/presentation/shared/document/ui/SeoHead.astro";
+
+/** The shell every page renders in: `<html>`, `<head>`, `<body>`. */
+interface Props {
+    title: string;
+    description: string;
+    noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <SeoHead title={title} description={description} noindex={noindex} />
+        <Font cssVariable="--font-caslon" preload={[{ style: "normal" }]} />
+        <Font cssVariable="--font-hanken" preload />
+        <Font cssVariable="--font-dm-mono" />
+    </head>
+    <body>
+        <slot />
+        <script>
+            import { initReveal } from "#/presentation/shared/reveal/behaviour/reveal.ts";
+
+            initReveal(document);
+        </script>
+    </body>
+</html>
