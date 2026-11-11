@@ -59,3 +59,10 @@ export function hrefs(
         .locator(selector)
         .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
 }
+
+/** The `href` of the focused element, or "" when it has none. */
+export function focusedHref(page: Page): Promise<string> {
+    return page.evaluate<string>(
+        `document.activeElement?.getAttribute("href") ?? ""`,
+    );
+}

@@ -3,6 +3,7 @@ import {
     type BrowserContextOptions,
     chromium,
     type Page,
+    type Route,
 } from "playwright";
 
 /** Where the built site answers, inside the test browser only. */
@@ -27,26 +28,50 @@ export interface OpenedSite {
     foreign: string[];
 }
 
+interface SiteOptions extends BrowserContextOptions {
+    /** The switcher design, written into each page as the edge will. */
+    switcher?: "card" | "shelf";
+}
+
 /**
  * Opens the built site (dist/) in Chromium, served as production serves it:
  * `/cro` answers `cro.html`. Nothing else is reachable.
  */
-export async function openSite(
-    options: BrowserContextOptions,
-): Promise<OpenedSite> {
+export async function openSite(options: SiteOptions): Promise<OpenedSite> {
+    const { switcher = "card", ...context } = options;
     const browser = await chromium.launch();
-    const context = await browser.newContext(options);
+    const opened = await browser.newContext(context);
     const foreign: string[] = [];
-    await context.route("**/*", async (route) => {
+    await opened.route("**/*", async (route) => {
         const url = new URL(route.request().url());
-        if (url.origin !== siteUrl) {
-            foreign.push(url.href);
-            await route.abort();
+        if (url.origin === siteUrl) {
+            await serve(route, distPath(url.pathname), switcher);
             return;
         }
-        await route.fulfill({ path: distPath(url.pathname) });
+        foreign.push(url.href);
+        await route.abort();
     });
-    return { browser, page: await context.newPage(), foreign };
+    return { browser, page: await opened.newPage(), foreign };
+}
+
+async function serve(
+    route: Route,
+    path: string,
+    switcher: string,
+): Promise<void> {
+    if (!path.endsWith(".html")) {
+        await route.fulfill({ path });
+        return;
+    }
+    const file = await fetch(new URL(`../${path}`, import.meta.url));
+    const html = await file.text();
+    await route.fulfill({
+        contentType: "text/html; charset=utf-8",
+        body: html.replace(
+            'data-switcher="card"',
+            `data-switcher="${switcher}"`,
+        ),
+    });
 }
 
 /** The file in dist/ that answers a path. */
