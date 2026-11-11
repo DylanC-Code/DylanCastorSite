@@ -1,0 +1,13 @@
+# bun install: exact versions and an isolated layout, as in TightStack (D2.2). The
+# devcontainer sets BUN_INSTALL_CACHE_DIR to the volume every project of the machine
+# shares, which wins over this path: a package is downloaded once.
+[install]
+exact = true
+linker = "isolated"
+
+[install.cache]
+dir = "node_modules/.bun-cache"
+
+# bun run: a CLI with a node shebang (astro, vitest, oxlint) runs on Bun (D2.3).
+[run]
+bun = true

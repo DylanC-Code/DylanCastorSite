@@ -1,0 +1,116 @@
+/*
+ * Night Lab, the design system of dylancastor.com, as Tailwind's theme.
+ * Tailwind's own palette, radii, shadows and easings are switched off, so a
+ * class outside the system (bg-blue-500, rounded-xl, shadow-lg) does not exist.
+ */
+@theme {
+    --color-*: initial;
+    --color-ground: #0f1216;
+    --color-ground-raised: #161b22;
+    --color-light-top: #2c3644;
+    --color-surface-glass: rgb(255 255 255 / 0.05);
+    --color-surface-glass-edge: rgb(255 255 255 / 0.12);
+    --color-surface-lift: #171c23;
+    --color-surface-inset: rgb(255 255 255 / 0.04);
+    --color-line: rgb(255 255 255 / 0.1);
+    --color-line-strong: rgb(255 255 255 / 0.18);
+    --color-ink: #edeff2;
+    --color-ink-muted: #9fa6b0;
+    --color-ink-faint: #7d8590;
+    --color-accent: #e39a6a;
+    --color-accent-hover: #f0b48c;
+    --color-accent-ink: #14100c;
+    --color-accent-soft: rgb(227 154 106 / 0.14);
+    --color-good: #8fd3a8;
+    --color-good-soft: rgb(143 211 168 / 0.14);
+    --color-warn: #e8c27a;
+    --color-warn-soft: rgb(232 194 122 / 0.14);
+    --color-critical: #f08a80;
+    --color-critical-soft: rgb(240 138 128 / 0.14);
+    --color-transparent: transparent;
+    --color-current: currentcolor;
+
+    /* Night Lab spaces are multiples of 4 px: p-6 is 24 px, as space-6. */
+    --spacing: 4px;
+
+    --radius-*: initial;
+    --radius-sm: 2px;
+    --radius-md: 3px;
+
+    --shadow-*: initial;
+    --shadow-lift:
+        inset 0 1px 0 rgb(255 255 255 / 0.05), 0 18px 44px rgb(0 0 0 / 0.5);
+    --shadow-float: 0 30px 60px rgb(0 0 0 / 0.45);
+
+    --blur-glass: 14px;
+
+    --ease-*: initial;
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    --text-*: initial;
+    --text-display-xl: 68px;
+    --text-display-xl--line-height: 72px;
+    --text-display: 44px;
+    --text-display--line-height: 48px;
+    --text-title: 32px;
+    --text-title--line-height: 36px;
+    --text-product: 22px;
+    --text-product--line-height: 28px;
+    --text-heading: 19px;
+    --text-heading--line-height: 26px;
+    --text-body-lg: 18px;
+    --text-body-lg--line-height: 29px;
+    --text-body: 16px;
+    --text-body--line-height: 26px;
+    --text-small: 14px;
+    --text-small--line-height: 21px;
+    --text-label: 13px;
+    --text-label--line-height: 18px;
+    --text-label--letter-spacing: 0.16em;
+    --text-code: 13px;
+    --text-code--line-height: 21px;
+}
+
+/* The families come from Astro's Fonts API (astro.config.ts), by variable. */
+@theme inline {
+    --font-*: initial;
+    --font-display: var(--font-bodoni);
+    --font-sans: var(--font-hanken);
+    --font-mono: var(--font-dm-mono);
+}
+
+:root {
+    --duration-fast: 150ms;
+    --duration-base: 300ms;
+    --duration-slow: 700ms;
+    --ground-light: radial-gradient(
+        120% 75% at 50% -12%,
+        var(--color-light-top) 0%,
+        var(--color-ground-raised) 38%,
+        var(--color-ground) 62%
+    );
+}
+
+@layer base {
+    html {
+        color-scheme: dark;
+    }
+
+    body {
+        min-height: 100dvh;
+        background: var(--ground-light) var(--color-ground);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+        font-size: var(--text-body);
+        line-height: var(--text-body--line-height);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            transition-duration: 0ms !important;
+            animation-duration: 0ms !important;
+        }
+    }
+}

@@ -1,0 +1,5 @@
+[tools]
+bun = "1.4.4"
+# Native binaries checked against their release checksums, as in TightStack.
+lefthook = "2.1.14"
+gh = "2.103.3"

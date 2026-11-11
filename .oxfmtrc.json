@@ -1,0 +1,26 @@
+{
+    "printWidth": 80,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "objectWrap": "preserve",
+    "experimentalOperatorPosition": "start",
+    "bracketSameLine": false,
+    "singleAttributePerLine": false,
+    "proseWrap": "preserve",
+    "endOfLine": "lf",
+    "jsdoc": true,
+    "sortImports": {
+        "newlinesBetween": true
+    },
+    "sortPackageJson": {
+        "sortScripts": true
+    },
+    "ignorePatterns": ["**/dist/**", "**/.astro/**", "**/coverage/**"]
+}

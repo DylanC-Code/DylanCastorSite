@@ -1,0 +1,51 @@
+{
+    "name": "dylancastor_site",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "imports": {
+        "#/*": "./src/*"
+    },
+    "scripts": {
+        "build": "astro build",
+        "check": "bun run --parallel fmt:check lint typecheck knip && bun run test && bun run build",
+        "dev": "astro dev --host 0.0.0.0",
+        "fmt": "oxfmt . && prettier --write --log-level warn \"src/**/*.astro\"",
+        "fmt:check": "oxfmt --check . && prettier --check --log-level warn \"src/**/*.astro\"",
+        "knip": "knip",
+        "lint": "oxlint .",
+        "lint:fix": "oxlint --fix .",
+        "preview": "astro preview --host 0.0.0.0",
+        "test": "bun --bun vitest run",
+        "test:watch": "bun --bun vitest",
+        "typecheck": "astro check"
+    },
+    "dependencies": {
+        "@astrojs/sitemap": "3.7.4",
+        "@fontsource-variable/bodoni-moda": "5.3.0",
+        "@fontsource-variable/hanken-grotesk": "5.3.0",
+        "@fontsource/dm-mono": "5.3.0",
+        "@tailwindcss/vite": "4.3.3",
+        "astro": "7.4.8",
+        "tailwindcss": "4.3.3"
+    },
+    "devDependencies": {
+        "@astrojs/check": "0.9.12",
+        "@commitlint/cli": "21.2.2",
+        "@commitlint/config-conventional": "21.2.2",
+        "@commitlint/types": "21.2.0",
+        "knip": "6.36.0",
+        "oxfmt": "0.68.0",
+        "oxlint": "1.83.0",
+        "oxlint-tsgolint": "7.0.2001",
+        "prettier": "3.9.10",
+        "prettier-plugin-astro": "1.1.2",
+        "typescript": "6.0.3",
+        "vitest": "5.0.1"
+    },
+    "engines": {
+        "bun": ">=1.4.4 <1.5"
+    },
+    "packageManager": "bun@1.4.4",
+    "trustedDependencies": []
+}

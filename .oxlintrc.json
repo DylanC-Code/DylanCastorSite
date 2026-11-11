@@ -1,0 +1,115 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": [
+        "eslint",
+        "typescript",
+        "import",
+        "unicorn",
+        "oxc",
+        "promise",
+        "vitest",
+        "node"
+    ],
+    "categories": {
+        "correctness": "error",
+        "suspicious": "error",
+        "perf": "error",
+        "pedantic": "error"
+    },
+    "env": {
+        "builtin": true,
+        "browser": true
+    },
+    "options": {
+        "typeAware": true,
+        "typeCheck": true,
+        "denyWarnings": true,
+        "reportUnusedDisableDirectives": "error"
+    },
+    "rules": {
+        "typescript/no-explicit-any": "error",
+        "typescript/no-non-null-assertion": "error",
+        "typescript/no-non-null-asserted-nullish-coalescing": "error",
+        "typescript/consistent-type-assertions": [
+            "error",
+            { "assertionStyle": "never" }
+        ],
+        "typescript/ban-ts-comment": [
+            "error",
+            {
+                "ts-ignore": true,
+                "ts-nocheck": true,
+                "ts-expect-error": "allow-with-description",
+                "minimumDescriptionLength": 20
+            }
+        ],
+        "unicorn/no-abusive-eslint-disable": "error",
+        "typescript/no-extraneous-class": [
+            "error",
+            { "allowStaticOnly": true }
+        ],
+        "typescript/explicit-module-boundary-types": "error",
+        "typescript/no-confusing-void-expression": [
+            "error",
+            { "ignoreVoidReturningFunctions": true }
+        ],
+        "typescript/use-unknown-in-catch-callback-variable": "error",
+        "typescript/consistent-type-definitions": ["error", "interface"],
+        "typescript/no-empty-object-type": "error",
+        "typescript/no-namespace": "error",
+        "typescript/no-require-imports": "error",
+        "typescript/prefer-literal-enum-member": "error",
+        "oxc/no-const-enum": "error",
+
+        "eslint/no-console": "error",
+        "eslint/no-alert": "error",
+        "eslint/no-var": "error",
+        "eslint/no-param-reassign": ["error", { "props": true }],
+        "eslint/no-empty-function": "error",
+        "eslint/no-sequences": "error",
+        "eslint/complexity": ["error", { "max": 4 }],
+        "eslint/max-statements": ["error", { "max": 10 }],
+        "eslint/max-lines": ["error", { "max": 150 }],
+        "eslint/max-depth": ["error", { "max": 2 }],
+        "eslint/max-params": ["error", { "max": 3 }],
+        "eslint/max-nested-callbacks": ["error", { "max": 2 }],
+        "eslint/no-nested-ternary": "error",
+        "eslint/func-style": [
+            "error",
+            "declaration",
+            {
+                "allowArrowFunctions": false,
+                "allowTypeAnnotation": true,
+                "overrides": { "namedExports": "ignore" }
+            }
+        ],
+
+        "import/no-default-export": "error",
+        "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
+        "import/no-relative-parent-imports": "error",
+        "import/no-cycle": "error",
+        "import/no-commonjs": "error",
+        "import/no-amd": "error",
+        "oxc/no-barrel-file": "error",
+        "unicorn/prefer-node-protocol": "error",
+        "node/no-process-env": "error",
+        "unicorn/prefer-module": "error",
+        "unicorn/no-process-exit": "error",
+        "unicorn/prefer-number-properties": "error",
+        "promise/catch-or-return": "error",
+
+        "typescript/prefer-readonly-parameter-types": "off"
+    },
+    "overrides": [
+        {
+            "files": ["*.config.ts"],
+            "env": { "node": true },
+            "rules": { "import/no-default-export": "off" }
+        },
+        {
+            "files": ["**/*.test.ts"],
+            "env": { "vitest": true }
+        }
+    ],
+    "ignorePatterns": ["**/dist/**", "**/.astro/**", "**/coverage/**"]
+}

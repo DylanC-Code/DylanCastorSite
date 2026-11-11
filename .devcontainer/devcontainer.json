@@ -1,0 +1,74 @@
+{
+    "name": "dylancastor_site",
+    // One container, no services: a static site needs no database (TightStack's
+    // compose.yaml is left out on purpose).
+    "build": { "dockerfile": "Dockerfile", "context": ".." },
+    "workspaceFolder": "/workspaces/dylancastor_site",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/dylancastor_site,type=bind,consistency=cached",
+    "mounts": [
+        // node_modules in its own volume, as in TightStack.
+        "source=dylancastor_site_node_modules,target=/workspaces/dylancastor_site/node_modules,type=volume",
+        // Bun's cache: the volume TightStack's containers already use, so a package
+        // is downloaded once per machine.
+        "source=tightstack_bun_cache,target=/home/vscode/.cache/bun,type=volume"
+    ],
+    "init": true,
+    "remoteUser": "vscode",
+    "containerEnv": {
+        "MISE_TRUSTED_CONFIG_PATHS": "/workspaces",
+        // Claude Code's state lives in the project, ignored by git (TightStack's D2.4).
+        "CLAUDE_CONFIG_DIR": "/workspaces/dylancastor_site/.claude_home",
+        "ANTHROPIC_MODEL": "opus",
+        "BUN_INSTALL_CACHE_DIR": "/home/vscode/.cache/bun",
+        "ASTRO_TELEMETRY_DISABLED": "1"
+    },
+    "forwardPorts": [4321],
+    "portsAttributes": {
+        "4321": { "label": "astro" }
+    },
+    "postCreateCommand": "sh .devcontainer/postCreate.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "astro-build.astro-vscode",
+                "oxc.oxc-vscode",
+                "TypeScriptTeam.native-preview",
+                "bradlc.vscode-tailwindcss",
+                "editorconfig.editorconfig",
+                "vitest.explorer",
+                "tamasfe.even-better-toml",
+                "github.vscode-github-actions"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.formatOnSaveMode": "file",
+                "editor.detectIndentation": false,
+                "editor.tabSize": 4,
+                "editor.codeActionsOnSave": {
+                    "source.fixAll.oxc": "always"
+                },
+                "[typescript][javascript][json][jsonc][css][markdown][yaml]": {
+                    "editor.defaultFormatter": "oxc.oxc-vscode"
+                },
+                // oxfmt does not read .astro files yet: the Astro extension formats
+                // them with the project's Prettier and .prettierrc.json.
+                "[astro]": {
+                    "editor.defaultFormatter": "astro-build.astro-vscode"
+                },
+                "oxc.typeAware": true,
+                // VS Code's own runtime: the container has Bun only.
+                "oxc.useExecPath": true,
+                "files.eol": "\n",
+                // Tailwind's @theme and @utility are not plain CSS.
+                "css.lint.unknownAtRules": "ignore",
+                "remote.autoForwardPorts": true,
+                "vitest.nodeExecutable": "/home/vscode/.local/share/mise/shims/bun",
+                "js/ts.experimental.useTsgo": true,
+                "files.watcherExclude": {
+                    "**/node_modules/**": true,
+                    "**/.claude_home/**": true
+                }
+            }
+        }
+    }
+}
