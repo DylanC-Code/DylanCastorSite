@@ -97,3 +97,10 @@ async function box(
     }
     return found;
 }
+
+/** True when focus sits on a book's contents page. */
+export function onContents(page: Page): Promise<boolean> {
+    return page.evaluate<boolean>(
+        `document.activeElement?.hasAttribute("data-contents") ?? false`,
+    );
+}

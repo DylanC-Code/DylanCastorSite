@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { focused } from "./pageChecks.ts";
+import { onContents } from "./pageChecks.ts";
 import {
     desktop,
     type OpenedSite,
@@ -13,7 +13,7 @@ function cover(id: string): string {
     return `[data-book="${id}"] [data-cover]`;
 }
 
-/** The three books, on a wide screen: open, focus in, close, focus back. */
+/** The books on a wide screen: open on the contents, turn, bookmark, close. */
 describe("the books on desktop", () => {
     let site: OpenedSite;
 
@@ -26,33 +26,28 @@ describe("the books on desktop", () => {
         await site.browser.close();
     });
 
-    it("opens a book and moves focus to its first page", async () => {
-        await site.page.click(cover("agencies"));
+    it("opens on the contents, focus there, the others inert", async () => {
+        await site.page.click(cover("engineers"));
         expect(
-            await site.page.getAttribute(cover("agencies"), "aria-expanded"),
+            await site.page.getAttribute(cover("engineers"), "aria-expanded"),
         ).toBe("true");
-        expect(await focused(site.page)).toBe("path-agencies");
-    });
-
-    it("sets the other books aside, inert", async () => {
+        expect(await onContents(site.page)).toBe(true);
         expect(
-            await site.page.getAttribute('[data-book="brands"]', "inert"),
+            await site.page.getAttribute('[data-book="agencies"]', "inert"),
         ).toBe("");
         await site.page.locator("section:has(#paths)").screenshot({
-            path: "browser_tests/screenshots/books_open_desktop.png",
+            path: "browser_tests/screenshots/books_contents_desktop.png",
         });
     });
 
-    it("closes on Escape and gives focus back to the cover", async () => {
-        await site.page.keyboard.press("Escape");
-        expect(
-            await site.page.getAttribute(cover("agencies"), "aria-expanded"),
-        ).toBe("false");
-        expect(await focused(site.page)).toBe("agencies");
+    it("leads on through its bookmark, a link to the path", async () => {
+        const bookmark = site.page.locator('[data-bookmark="engineers"]');
+        expect(await bookmark.isVisible()).toBe(true);
+        expect(await bookmark.getAttribute("href")).toBe("/engineering");
     });
 });
 
-/** On a phone: tap a book, its page opens below; tap another to switch. */
+/** On a phone: one page at a time, step I included. */
 describe("the books on a phone", () => {
     let site: OpenedSite;
 
@@ -65,17 +60,33 @@ describe("the books on a phone", () => {
         await site.browser.close();
     });
 
-    it("opens the page of the book tapped", async () => {
-        await site.page.tap(cover("brands"));
-        expect(await site.page.isVisible("#path-brands")).toBe(true);
+    it("opens the book tapped on its contents", async () => {
+        await site.page.tap(cover("agencies"));
+        expect(await onContents(site.page)).toBe(true);
+        await site.page.locator("section:has(#paths)").screenshot({
+            path: "browser_tests/screenshots/books_contents_phone.png",
+        });
     });
 
-    it("switches to another book in one tap", async () => {
-        await site.page.tap(cover("engineers"));
-        expect(await site.page.isVisible("#path-engineers")).toBe(true);
-        expect(await site.page.isVisible("#path-brands")).toBe(false);
+    it("turns to step I, then to step All", async () => {
+        await site.page.tap("[data-page-next]");
+        expect(
+            await site.page
+                .locator(
+                    '[data-book="agencies"] .is-single .book-leaf.is-turned',
+                )
+                .count(),
+        ).toBe(1);
         await site.page.locator("section:has(#paths)").screenshot({
-            path: "browser_tests/screenshots/books_open_phone.png",
+            path: "browser_tests/screenshots/books_step_phone.png",
         });
+        await site.page.tap("[data-page-next]");
+        expect(
+            await site.page
+                .locator(
+                    '[data-book="agencies"] .is-single .book-leaf.is-turned',
+                )
+                .count(),
+        ).toBe(2);
     });
 });
