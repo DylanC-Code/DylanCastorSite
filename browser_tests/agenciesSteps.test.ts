@@ -8,7 +8,7 @@ import { desktop, type OpenedSite, openSite, siteUrl } from "./servedSite.ts";
 async function runStepsTo(page: Page, y: number): Promise<void> {
     await page.evaluate<number>(
         `(() => { const list = document.querySelector("[data-steps-list]"); const band = document.querySelector("[data-ticket]");
-        const ran = 84 + band.offsetHeight - list.getBoundingClientRect().top;
+        const ran = document.querySelector("body > header").offsetHeight + band.offsetHeight - list.getBoundingClientRect().top;
         window.scrollBy({ top: ${y} - ran, behavior: "instant" }); return 0; })()`,
     );
     await page.waitForTimeout(250);
