@@ -1,13 +1,11 @@
 /**
- * The steps section's scroll model (agencies steps handoff). `y` is how far the
- * steps have run under the stuck ticket. Each step block is 600px: the current
- * step is the nearest block, progress runs over the four gaps, the ticket's
- * title part tears past 60px and its stub past 2330px.
+ * The steps section's scroll model (agencies steps handoff, desktop and phone).
+ * `y` is how far the steps have run under the stuck ticket. The current step is
+ * the block whose top is nearest; progress runs to the last block; the title
+ * part tears past 60px and the stub is cut a little before the last block
+ * arrives (70px on desktop, the 2330 rule; 80px on a phone).
  */
-export const stepHeight = 600;
 const tearAt = 60;
-const endAt = 2330;
-const lastStep = 4;
 
 export interface StepScroll {
     readonly current: number;
@@ -16,12 +14,20 @@ export interface StepScroll {
     readonly ended: boolean;
 }
 
-export function stepScroll(y: number): StepScroll {
+/** Where each step block starts, measured from the first one (0, 600, …). */
+export type StepTops = readonly number[];
+
+export function stepScroll(
+    y: number,
+    tops: StepTops,
+    endBefore: number,
+): StepScroll {
+    const last = tops.at(-1) ?? 0;
     return {
-        current: clamp(Math.round(y / stepHeight), 0, lastStep),
-        progress: clamp(y / (stepHeight * lastStep), 0, 1),
+        current: nearest(y, tops),
+        progress: last === 0 ? 0 : clamp(y / last, 0, 1),
         torn: y > tearAt,
-        ended: y > endAt,
+        ended: y > last - endBefore,
     };
 }
 
@@ -31,6 +37,16 @@ export function withSeen(
     current: number,
 ): ReadonlySet<number> {
     return seen.has(current) ? seen : new Set([...seen, current]);
+}
+
+function nearest(y: number, tops: StepTops): number {
+    let best = 0;
+    tops.forEach((top, index) => {
+        if (Math.abs(top - y) < Math.abs((tops[best] ?? 0) - y)) {
+            best = index;
+        }
+    });
+    return best;
 }
 
 function clamp(value: number, low: number, high: number): number {
