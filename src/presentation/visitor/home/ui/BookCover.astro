@@ -19,10 +19,9 @@ const corners = ["tl", "tr", "bl", "br"];
     <span aria-hidden="true" class:list={["book-stud", corner]} />
 ))}
 <span class="book-title">
-    <em class="book-for">{book.for}</em>
+    <em class="book-for">{book.for}</em>{" "}
     <span class="book-gilt">
-        {book.titleLine1}
-        <br />
+        {book.titleLine1} <br />
         {book.titleLine2}
     </span>
     <span aria-hidden="true" class="book-ornament">
@@ -33,5 +32,5 @@ const corners = ["tl", "tr", "bl", "br"];
 </span>
 <span aria-hidden="true" class="book-seal">
     <Cipher size={54} id={`book-${book.id}`} />
-    <span>{coverFoot}</span>
+    <span data-foot={coverFoot}></span>
 </span>

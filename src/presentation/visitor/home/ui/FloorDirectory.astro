@@ -37,19 +37,37 @@ const how =
                     row,
                     "border-t border-accent/16",
                     index === 0 && "max-md:border-transparent",
-                    floor.comingLater === true && "opacity-50",
                 ]}
             >
-                <span class="font-display text-[26px] leading-none text-accent md:text-[34px]">
+                <span
+                    class:list={[
+                        "font-display text-[26px] leading-none text-accent md:text-[34px]",
+                        floor.comingLater === true && "opacity-50",
+                    ]}
+                >
                     {floor.numeral}
                 </span>
                 <span class="flex flex-col gap-1.5 md:gap-1.75">
-                    <span class={area}>{floor.area}</span>
+                    <span
+                        class:list={[
+                            area,
+                            floor.comingLater === true && "text-ink-faint",
+                        ]}
+                    >
+                        {floor.area}
+                    </span>
                     <span class="text-[8px] leading-none font-medium tracking-[.22em] text-ink-faint uppercase md:text-cap-sm">
                         {floor.layer}
                     </span>
                 </span>
-                <p class={how}>{floor.how}</p>
+                <p
+                    class:list={[
+                        how,
+                        floor.comingLater === true && "text-ink-faint",
+                    ]}
+                >
+                    {floor.how}
+                </p>
             </div>
         ))}
         <div

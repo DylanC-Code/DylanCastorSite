@@ -21,7 +21,7 @@ const { title, description, noindex = false } = Astro.props;
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <SeoHead title={title} description={description} noindex={noindex} />
-        <Font cssVariable="--font-caslon" preload={[{ style: "normal" }]} />
+        <Font cssVariable="--font-caslon" preload />
         <Font cssVariable="--font-hanken" preload />
         <Font cssVariable="--font-dm-mono" />
     </head>

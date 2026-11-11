@@ -95,3 +95,8 @@
     width: 26px;
     height: 26px;
 }
+
+/* The name stamped at the foot: drawn, not text, so it is no part of the book's name. */
+.book-seal > span::after {
+    content: attr(data-foot);
+}
