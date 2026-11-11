@@ -1,5 +1,6 @@
 ---
 import Cipher from "#/presentation/shared/design_system/marks/ui/Cipher.astro";
+import { coverLines } from "#/presentation/visitor/home/presenters/bookNames.ts";
 import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
 
 /** The front board: hinge groove, tooled gilt frames, the reader, the seal. */
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { book, coverFoot } = Astro.props;
+const [line1, line2] = coverLines(book);
 const corners = ["tl", "tr", "bl", "br"];
 ---
 
@@ -21,8 +23,8 @@ const corners = ["tl", "tr", "bl", "br"];
 <span class="book-title">
     <em class="book-for">{book.for}</em>{" "}
     <span class="book-gilt">
-        {book.titleLine1} <br />
-        {book.titleLine2}
+        {line1} <br />
+        {line2}
     </span>
     <span aria-hidden="true" class="book-ornament">
         <span></span>

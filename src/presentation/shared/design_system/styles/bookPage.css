@@ -1,0 +1,123 @@
+/* A page of a book: the contents or a step, in design pixels (--u). Clean: no button. */
+.page-body {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: calc(44 * var(--u)) calc(34 * var(--u)) calc(30 * var(--u))
+        calc(40 * var(--u));
+    text-align: center;
+}
+
+.page-body:focus {
+    outline: none;
+}
+
+.page-cap {
+    margin: 0;
+    font: 600 calc(10 * var(--u)) / 1 var(--font-sans);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.62);
+}
+
+.page-title {
+    margin: calc(14 * var(--u)) 0 calc(12 * var(--u));
+    font: 400 calc(25 * var(--u)) / 1.15 var(--font-display);
+}
+
+.page-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(8 * var(--u));
+}
+
+.page-ornament > span {
+    width: calc(24 * var(--u));
+    height: 1px;
+    background: var(--color-paper-copper);
+}
+
+.page-ornament > span:nth-child(2) {
+    width: calc(5 * var(--u));
+    height: calc(5 * var(--u));
+    transform: rotate(45deg);
+}
+
+.page-contents {
+    margin: calc(26 * var(--u)) 0 calc(8 * var(--u));
+}
+
+.page-rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.page-rows > li {
+    display: flex;
+    align-items: baseline;
+    gap: calc(10 * var(--u));
+    padding: calc(9 * var(--u)) 0;
+    border-top: 1px solid rgb(27 26 24 / 0.13);
+}
+
+.page-row-numeral {
+    flex: none;
+    width: calc(34 * var(--u));
+    font: 400 calc(20 * var(--u)) / 1 var(--font-display);
+    color: var(--color-paper-copper);
+}
+
+.page-row-floor {
+    font-size: calc(14 * var(--u));
+}
+
+.page-row-leader {
+    flex: 1;
+    border-bottom: 1px dotted rgb(27 26 24 / 0.35);
+    translate: 0 calc(-4 * var(--u));
+}
+
+.page-row-tag {
+    font: italic 400 calc(13 * var(--u)) / 1 var(--font-display);
+    color: rgb(27 26 24 / 0.72);
+}
+
+.page-numeral {
+    margin: 0;
+    font: 400 calc(76 * var(--u)) / 1 var(--font-display);
+    color: var(--color-paper-copper);
+}
+
+.page-numeral.is-italic,
+.page-row-numeral.is-italic {
+    font-style: italic;
+}
+
+.is-step .page-ornament {
+    margin: calc(16 * var(--u)) 0 calc(12 * var(--u));
+}
+
+.page-text {
+    margin: calc(22 * var(--u)) 0 0;
+    font: 400 calc(21 * var(--u)) / 1.42 var(--font-display);
+}
+
+.page-note {
+    margin: calc(16 * var(--u)) 0 0;
+    font-size: calc(12 * var(--u));
+    line-height: 1.5;
+    color: rgb(27 26 24 / 0.72);
+}
+
+.page-folio {
+    position: absolute;
+    inset-inline: 0;
+    bottom: calc(18 * var(--u));
+    text-align: center;
+    font: italic 400 calc(13 * var(--u)) / 1 var(--font-display);
+    color: rgb(27 26 24 / 0.68);
+}

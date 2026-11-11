@@ -1,7 +1,4 @@
-/*
- * The front board of a book. Phones first: one gilt frame, the reader and the
- * cipher. From 768px: bookCoverWide.css.
- */
+/* The front board of a book, in design pixels (--u) of the 352px book. */
 .book-front {
     --gilt: rgb(227 154 106 / 0.92);
     box-shadow: var(--shadow-cover);
@@ -18,24 +15,6 @@
         );
 }
 
-[data-tone="oxblood"] {
-    --light: var(--color-oxblood-light);
-    --base: var(--color-oxblood);
-    --dark: var(--color-oxblood-dark);
-}
-
-[data-tone="green"] {
-    --light: var(--color-bottle-light);
-    --base: var(--color-bottle);
-    --dark: var(--color-bottle-dark);
-}
-
-[data-tone="midnight"] {
-    --light: var(--color-midnight-light);
-    --base: var(--color-midnight);
-    --dark: var(--color-midnight-dark);
-}
-
 .book-spine {
     position: absolute;
     inset: 0 auto 0 calc(16 * var(--u));
@@ -46,21 +25,52 @@
 
 .book-tooling {
     position: absolute;
-    inset: 9px 8px 9px 13px;
-    border: 1px solid rgb(227 154 106 / 0.45);
+    border: 1px solid rgb(227 154 106 / 0.5);
 }
 
-.book-tooling.inner,
-.book-stud,
-.book-ornament,
-.book-seal > span {
-    display: none;
+.book-tooling.outer {
+    inset: calc(28 * var(--u)) calc(24 * var(--u)) calc(28 * var(--u))
+        calc(38 * var(--u));
+}
+
+.book-tooling.inner {
+    inset: calc(34 * var(--u)) calc(30 * var(--u)) calc(34 * var(--u))
+        calc(44 * var(--u));
+    border-color: rgb(227 154 106 / 0.22);
+}
+
+.book-stud {
+    position: absolute;
+    width: calc(7 * var(--u));
+    aspect-ratio: 1;
+    background: var(--gilt);
+    transform: rotate(45deg);
+}
+
+.book-stud.tl,
+.book-stud.tr {
+    top: calc(24.5 * var(--u));
+}
+
+.book-stud.bl,
+.book-stud.br {
+    bottom: calc(24.5 * var(--u));
+}
+
+.book-stud.tl,
+.book-stud.bl {
+    left: calc(34.5 * var(--u));
+}
+
+.book-stud.tr,
+.book-stud.br {
+    right: calc(20.5 * var(--u));
 }
 
 .book-title,
 .book-seal {
     position: absolute;
-    inset-inline: 13px 8px;
+    inset-inline: calc(40 * var(--u)) calc(26 * var(--u));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,22 +79,41 @@
 }
 
 .book-title {
-    top: 26px;
-    gap: 6px;
+    top: calc(92 * var(--u));
+    gap: calc(14 * var(--u));
 }
 
 .book-for {
-    font: italic 400 12px / 1 var(--font-display);
+    font: italic 400 calc(22 * var(--u)) / 1 var(--font-display);
 }
 
 .book-gilt {
-    font: 400 10.5px / 1.2 var(--font-display);
-    letter-spacing: 0.1em;
+    font: 400 calc(28 * var(--u)) / 1.2 var(--font-display);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
 }
 
+.book-ornament {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    margin-top: calc(6 * var(--u));
+}
+
+.book-ornament > span {
+    width: calc(26 * var(--u));
+    height: 1px;
+    background: var(--gilt);
+}
+
+.book-ornament > span:nth-child(2) {
+    width: calc(6 * var(--u));
+    height: calc(6 * var(--u));
+    transform: rotate(45deg);
+}
+
 .book-seal {
-    bottom: 16px;
+    bottom: calc(54 * var(--u));
     gap: calc(12 * var(--u));
     font: 500 calc(10 * var(--u)) / 1 var(--font-sans);
     letter-spacing: 0.34em;
@@ -92,8 +121,8 @@
 }
 
 .book-seal svg {
-    width: 26px;
-    height: 26px;
+    width: calc(54 * var(--u));
+    height: calc(54 * var(--u));
 }
 
 /* The name stamped at the foot: drawn, not text, so it is no part of the book's name. */

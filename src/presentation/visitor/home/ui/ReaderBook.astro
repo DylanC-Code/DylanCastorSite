@@ -1,69 +1,66 @@
 ---
 import BookCover from "#/presentation/visitor/home/ui/BookCover.astro";
+import BookLeaves from "#/presentation/visitor/home/ui/BookLeaves.astro";
+import { forReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
+import {
+    pagesOf,
+    singleLeaves,
+    spreadLeaves,
+} from "#/presentation/visitor/home/presenters/bookPages.ts";
 import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
 
 /**
- * One reader's book: page edges, the first page, then the cover on top.
- * Without script the cover is a plain link to the path; the first page is
- * real HTML from the start, so its words are in the document either way.
+ * One reader's book: page edges, its leaves, then the cover on top, its
+ * inside the endpaper in the book's own leather. Without script the cover is
+ * a plain link to the path; every page is real HTML from the start.
  */
 interface Props {
     book: BookViewModel;
     index: number;
+    contentsLabel: string;
     coverFoot: string;
-    pageEyebrowPrefix: string;
+    openLabel: string;
 }
 
-const { book, index, coverFoot, pageEyebrowPrefix } = Astro.props;
-const reader = `${book.titleLine1} ${book.titleLine2}`;
-const leafId = `path-${book.id}`;
+const { book, index, contentsLabel, coverFoot, openLabel } = Astro.props;
+const pages = pagesOf(book);
+const spread = spreadLeaves(pages);
+const single = singleLeaves(pages);
+const [light, base, dark] = book.leatherStops;
+const coverDepth =
+    (Math.max(spread.leaves.length, single.leaves.length) + 1) * 0.6;
 ---
 
 <div
     class="book"
     data-book={book.id}
-    data-tone={book.tone}
-    data-label={`${pageEyebrowPrefix} ${reader}`}
-    style={`--i: ${index}`}
+    data-label={openLabel}
+    style={`--i: ${index}; --light: ${light}; --base: ${base}; --dark: ${dark}; --cover-depth: ${coverDepth}px`}
 >
     <div class="book-block">
         <span aria-hidden="true" class="book-edges"></span>
-        <span aria-hidden="true" class="book-paper"></span>
+        <BookLeaves
+            variant="spread"
+            {...spread}
+            book={book}
+            contentsLabel={contentsLabel}
+        />
+        <BookLeaves
+            variant="single"
+            {...single}
+            book={book}
+            contentsLabel={contentsLabel}
+        />
         <a
             href={book.href}
             class="book-cover"
             data-cover
-            aria-label={`${pageEyebrowPrefix} ${reader}`}
+            aria-label={forReader(book)}
         >
             <span class="book-face book-front">
                 <BookCover book={book} coverFoot={coverFoot} />
             </span>
-            <span class="book-face book-back"></span>
-        </a>
-    </div>
-    <div
-        class="book-leaf"
-        id={leafId}
-        data-leaf
-        role="region"
-        aria-label={reader}
-        tabindex="-1"
-    >
-        <h3 class="book-pcap">
-            {pageEyebrowPrefix} {reader}
-        </h3>
-        <span aria-hidden="true" class="book-rule"></span>
-        <p class="book-sentence">
-            {book.sentence.map((part) =>
-                typeof part === "string" ? (
-                    part
-                ) : (
-                    <span class="book-pnum">{part.numeral}</span>
-                ),
-            )}
-        </p>
-        <a href={book.href} class="book-cta">
-            {book.cta}
+            <span aria-hidden="true" class="book-face book-endpaper"></span>
         </a>
     </div>
 </div>

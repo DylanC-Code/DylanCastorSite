@@ -1,0 +1,76 @@
+---
+import type { BookPage } from "#/presentation/visitor/home/presenters/bookPages.ts";
+import { forReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/**
+ * One page of a book: the contents (the dedication, the title, one row per
+ * step) or a step (its numeral, the floor, the sentence). Clean: no button.
+ */
+interface Props {
+    page: BookPage;
+    book: BookViewModel;
+    contentsLabel: string;
+}
+
+const { page, book, contentsLabel } = Astro.props;
+function italic(numeral: string): boolean {
+    return numeral === "All";
+}
+---
+
+{page.kind === "contents" ? (
+    <div
+        class="page-body"
+        data-contents
+        role="region"
+        aria-label={forReader(book)}
+        tabindex="-1"
+    >
+        <p class="page-cap">{forReader(book)}</p>
+        <p class="page-title">{book.title}</p>
+        <span aria-hidden="true" class="page-ornament">
+            <span />
+            <span />
+            <span />
+        </span>
+        <p class="page-cap page-contents">{contentsLabel}</p>
+        <ul class="page-rows">
+            {book.contents.map((row) => (
+                <li>
+                    <span
+                        class:list={[
+                            "page-row-numeral",
+                            italic(row.numeral) && "is-italic",
+                        ]}
+                    >
+                        {row.numeral}
+                    </span>
+                    <span class="page-row-floor">{row.floor}</span>
+                    <span aria-hidden="true" class="page-row-leader" />
+                    <em class="page-row-tag">{row.tag}</em>
+                </li>
+            ))}
+        </ul>
+    </div>
+) : (
+    <div class="page-body is-step">
+        <p
+            class:list={[
+                "page-numeral",
+                italic(page.step.numeral) && "is-italic",
+            ]}
+        >
+            {page.step.numeral}
+        </p>
+        <span aria-hidden="true" class="page-ornament">
+            <span />
+            <span />
+            <span />
+        </span>
+        <p class="page-cap">{page.step.floor}</p>
+        <p class="page-text">{page.step.text}</p>
+        {page.step.note !== null && <p class="page-note">{page.step.note}</p>}
+    </div>
+)}
+<em class="page-folio">{page.kind === "contents" ? 1 : page.folio}</em>

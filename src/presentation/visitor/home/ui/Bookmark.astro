@@ -1,0 +1,35 @@
+---
+import { bookmarkLines } from "#/presentation/visitor/home/presenters/bookNames.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/**
+ * The way onward: a leather bookmark standing out of the open book, a real
+ * link to the path's home. Hidden until script opens its book.
+ */
+interface Props {
+    book: BookViewModel;
+}
+
+const { book } = Astro.props;
+const [start, rest] = bookmarkLines(book);
+const [light, base, dark] = book.leatherStops;
+---
+
+<a
+    href={book.href}
+    class="bookmark"
+    data-bookmark={book.id}
+    style={`--light: ${light}; --base: ${base}; --dark: ${dark}`}
+    hidden
+>
+    <span class="bookmark-leather">
+        <em>
+            {start}
+            <br />
+            {rest}
+        </em>{" "}
+        <span aria-hidden="true" class="bookmark-arrow">
+            →
+        </span>
+    </span>
+</a>

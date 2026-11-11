@@ -1,0 +1,143 @@
+/*
+ * The stage of "Who are you?" (books V2 handoff). Every size inside a book is
+ * in the design's pixels times --u. Phones, here: three books on a shelf at
+ * 0.295; the chosen one grows to 0.85 and shows one page at a time, the
+ * turned pages swinging off its left edge. From 768px: bookStageWide.css.
+ */
+@property --u {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 1px;
+}
+
+.shelf {
+    container: shelf / inline-size;
+}
+
+.stage {
+    --u: 1px;
+    position: relative;
+    height: 520px;
+}
+
+.book {
+    --u: 0.295px;
+    position: absolute;
+    top: 0;
+    left: calc(var(--i) * (100cqw - 104px) / 2);
+    width: calc(352 * var(--u));
+    height: calc(520 * var(--u));
+    transition:
+        left 800ms var(--ease-mech) 1300ms,
+        top 800ms var(--ease-mech) 1300ms,
+        --u 800ms var(--ease-mech) 1300ms,
+        opacity 450ms var(--ease-out) 1500ms;
+}
+
+.book.is-open {
+    --u: 0.85px;
+    top: 24px;
+    left: calc(50cqw - 149.6px);
+    z-index: 3;
+    clip-path: inset(-30px -40px -40px 0);
+    transition-delay: 0ms;
+}
+
+.has-open .book:not(.is-open) {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0ms;
+}
+
+.book-hint {
+    position: absolute;
+    inset-inline: 0;
+    top: 178px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-ink-faint);
+    text-align: center;
+    transition: opacity 400ms var(--ease-out) 1500ms;
+}
+
+.has-open .book-hint {
+    opacity: 0;
+    transition-delay: 0ms;
+}
+
+.back-to-shelf {
+    position: absolute;
+    top: 490px;
+    left: 50%;
+    padding: 8px 4px;
+    border: 0;
+    background: none;
+    color: var(--color-ink-muted);
+    font: 500 14px / 1 var(--font-sans);
+    white-space: nowrap;
+    cursor: pointer;
+    translate: -50% 0;
+}
+
+.back-to-shelf:hover {
+    color: var(--color-accent);
+}
+
+/* Controls fade in once the book is open; the first "next" waits longest. */
+.back-to-shelf,
+.page-arrow {
+    opacity: 0;
+    transition: opacity 400ms var(--ease-out);
+}
+
+.back-to-shelf.is-shown {
+    opacity: 1;
+    transition-delay: 2000ms;
+}
+
+.page-arrow.is-shown {
+    opacity: 1;
+    transition-delay: 900ms;
+}
+
+[data-page="0"] .page-arrow.is-next.is-shown {
+    transition-delay: 2100ms;
+}
+
+.page-arrow {
+    position: absolute;
+    top: 420px;
+    z-index: 8;
+    padding: 6px;
+    border: 0;
+    background: none;
+    color: var(--color-paper-copper);
+    cursor: pointer;
+}
+
+.page-arrow:hover {
+    color: var(--color-paper-ink);
+}
+
+.page-arrow svg {
+    display: block;
+}
+
+.page-arrow path {
+    fill: none;
+    stroke: currentcolor;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+}
+
+.page-arrow.is-prev svg {
+    scale: -1 1;
+}
+
+.page-arrow.is-next {
+    left: calc(50cqw + 79.5px);
+}
+
+.page-arrow.is-prev {
+    left: calc(50cqw - 136.5px);
+}

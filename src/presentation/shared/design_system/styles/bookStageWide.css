@@ -1,0 +1,56 @@
+/*
+ * The stage from 768px: 1200 × 610 design pixels, the three books in a row.
+ * --u is as large as the row allows and small enough that, after a jump to
+ * #paths, the whole stage fits under the heading (the screen less 312px).
+ * The chosen book slides so its spine is at the centre, then opens.
+ */
+@media (min-width: 48rem) {
+    .stage {
+        --u: min(
+            1px,
+            calc((100cqw - 144px) / 3 / 352),
+            calc((100svh - 312px) / 610)
+        );
+        --step: calc(352 * var(--u) + (100cqw - 3 * 352 * var(--u)) / 2);
+        height: calc(610 * var(--u));
+    }
+
+    .book,
+    .book.is-open {
+        --u: inherit;
+        top: 0;
+        left: calc(var(--i) * var(--step));
+        clip-path: none;
+    }
+
+    .book {
+        transition:
+            transform var(--duration-book-move) var(--ease-mech) 1300ms,
+            opacity 450ms var(--ease-out) 1500ms;
+    }
+
+    .book.is-open {
+        transform: translateX(calc(50cqw - var(--i) * var(--step)));
+        transition-delay: 0ms;
+    }
+
+    .book-hint {
+        display: none;
+    }
+
+    .back-to-shelf {
+        top: calc(556 * var(--u));
+    }
+
+    .page-arrow {
+        top: calc(478 * var(--u));
+    }
+
+    .page-arrow.is-next {
+        left: calc(50cqw + 280 * var(--u));
+    }
+
+    .page-arrow.is-prev {
+        left: calc(50cqw - 328 * var(--u));
+    }
+}

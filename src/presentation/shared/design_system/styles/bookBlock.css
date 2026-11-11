@@ -1,0 +1,134 @@
+/*
+ * A book in 3D: page edges, the leaves on the spine, the fixed last page, and
+ * the cover whose inside is the endpaper. Each leaf's depth is written before
+ * its turn, so the stack keeps its order while it turns.
+ */
+.book-block {
+    position: absolute;
+    inset: 0;
+    perspective: calc(2200 * var(--u));
+    transform-style: preserve-3d;
+    transition:
+        opacity 700ms var(--ease-out) calc(var(--i) * 120ms),
+        translate 700ms var(--ease-out) calc(var(--i) * 120ms);
+}
+
+[data-reveal="pending"] .book-block {
+    opacity: 0;
+    translate: 0 16px;
+}
+
+.book-edges {
+    position: absolute;
+    top: calc(7 * var(--u));
+    right: calc(-9 * var(--u));
+    bottom: calc(7 * var(--u));
+    width: calc(10 * var(--u));
+    background: repeating-linear-gradient(
+        180deg,
+        var(--color-page-edge) 0 1px,
+        var(--color-page-edge-dark) 1px 3px
+    );
+    box-shadow: inset 2px 0 3px rgb(0 0 0 / 0.35);
+}
+
+.book-sheets {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+}
+
+.book-sheets.is-spread {
+    display: none;
+}
+
+.book-leaf,
+.book-last {
+    position: absolute;
+    inset: calc(6 * var(--u)) calc(-6 * var(--u)) calc(6 * var(--u))
+        calc(2 * var(--u));
+}
+
+.book-leaf {
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transform: translateZ(var(--rest)) rotateY(0deg);
+    transition: transform 1100ms var(--ease-mech);
+}
+
+.book-leaf.is-turned {
+    transform: translateZ(var(--turned)) rotateY(-180deg);
+}
+
+.book-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+}
+
+.book-paper {
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow: inset calc(18 * var(--u)) 0 calc(22 * var(--u))
+        calc(-14 * var(--u)) rgb(0 0 0 / 0.42);
+}
+
+.book-face.is-back {
+    transform: rotateY(180deg);
+    box-shadow: inset calc(-18 * var(--u)) 0 calc(22 * var(--u))
+        calc(-14 * var(--u)) rgb(0 0 0 / 0.42);
+}
+
+.book-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transform: translateZ(var(--cover-depth)) rotateY(0deg);
+    transition: transform var(--duration-book-open) var(--ease-mech);
+}
+
+.is-open .book-cover {
+    transform: translateZ(0) rotateY(-180deg);
+    transition-delay: 700ms;
+}
+
+.book-endpaper {
+    transform: rotateY(180deg);
+    background:
+        repeating-linear-gradient(
+            45deg,
+            rgb(255 255 255 / 0.05) 0 1px,
+            transparent 1px 12px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            rgb(255 255 255 / 0.05) 0 1px,
+            transparent 1px 12px
+        ),
+        linear-gradient(160deg, var(--light), var(--dark));
+    box-shadow: inset calc(-20 * var(--u)) 0 calc(26 * var(--u))
+        calc(-16 * var(--u)) rgb(0 0 0 / 0.6);
+}
+
+@media (min-width: 48rem) {
+    .book-sheets.is-spread {
+        display: block;
+    }
+
+    .book-sheets.is-single {
+        display: none;
+    }
+
+    /* A closed book opens a little under the pointer, when none is open. */
+    .shelf:not(.has-open) .book:hover .book-cover {
+        transform: translateZ(var(--cover-depth)) rotateY(-20deg);
+        transition: transform 650ms cubic-bezier(0.3, 1.4, 0.5, 1);
+    }
+}

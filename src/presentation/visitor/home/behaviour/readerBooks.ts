@@ -1,119 +1,122 @@
 import {
-    type Focus,
+    applyShelf,
+    lastPage,
+    moveFocus,
+    readShelf,
+    type ShelfView,
+} from "#/presentation/visitor/home/behaviour/shelfView.ts";
+import {
     type ShelfEvent,
     step,
 } from "#/presentation/visitor/home/state/readerSteps.ts";
 
-interface Shelf {
-    root: HTMLElement;
-    books: HTMLElement[];
-}
-
 /**
  * The shelf of books. Without this script each cover is a link to its path;
- * here it becomes a button that opens the book. While a book is open on a wide
- * screen the other two are inert; a closed book's first page always is. The
- * marbled endpaper loads on the first open, never with the page.
+ * here it becomes a button that opens the book, the arrows turn its pages,
+ * Escape and the back link close it, ← and → turn too.
  */
 export function initReaderBooks(root: HTMLElement): void {
-    const shelf = {
+    const view = {
         root,
         books: [...root.querySelectorAll<HTMLElement>("[data-book]")],
     };
-    for (const book of shelf.books) {
-        upgradeCover(shelf, book);
+    for (const book of view.books) {
+        upgradeCover(view, book);
     }
-    root.querySelector("[data-shelf-back]")?.addEventListener("click", () => {
-        send(shelf, { type: "close" });
-    });
-    root.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            send(shelf, { type: "close" });
-        }
-    });
-    render(shelf, null);
+    for (const hidden of root.querySelectorAll("[hidden]")) {
+        hidden.removeAttribute("hidden");
+    }
+    bindControls(view);
+    applyShelf(view, { open: null, page: 0 });
 }
 
-function upgradeCover(shelf: Shelf, book: HTMLElement): void {
-    const link = part(book, "cover");
+function upgradeCover(view: ShelfView, book: HTMLElement): void {
+    const link = book.querySelector<HTMLElement>("[data-cover]");
+    if (link === null) {
+        return;
+    }
+    const button = coverButton(link, book.dataset["label"] ?? "");
+    button.addEventListener("click", () => {
+        send(view, { type: "pick", id: book.dataset["book"] ?? "" });
+    });
+}
+
+/** The cover link, rebuilt as a button holding the same board. */
+function coverButton(link: HTMLElement, label: string): HTMLButtonElement {
     const button = document.createElement("button");
     button.type = "button";
     button.className = link.className;
     button.dataset["cover"] = "";
-    button.setAttribute("aria-controls", part(book, "leaf").id);
+    button.setAttribute("aria-label", label);
     button.append(...link.childNodes);
     link.replaceWith(button);
-    button.addEventListener("click", () => {
-        send(shelf, { type: "pick", id: idOf(book) });
+    return button;
+}
+
+function bindControls(view: ShelfView): void {
+    on(view, "[data-page-prev]", { type: "prev" });
+    on(view, "[data-page-next]", { type: "next", lastPage: 0 });
+    on(view, "[data-shelf-back]", { type: "close" });
+    document.addEventListener("keydown", (event) => {
+        keyTurn(view, event);
+    });
+    view.root.addEventListener("click", (event) => {
+        takeBookmark(event);
     });
 }
 
-function send(shelf: Shelf, event: ShelfEvent): void {
-    const next = step(openOf(shelf), event);
-    if (next.open !== null) {
-        shelf.root.classList.add("endpaper-ready");
+function on(view: ShelfView, selector: string, event: ShelfEvent): void {
+    view.root.querySelector(selector)?.addEventListener("click", () => {
+        send(view, event);
+    });
+}
+
+const keys: Record<string, ShelfEvent> = {
+    Escape: { type: "close" },
+    ArrowLeft: { type: "prev" },
+    ArrowRight: { type: "next", lastPage: 0 },
+};
+
+function keyTurn(view: ShelfView, event: KeyboardEvent): void {
+    const action = keys[event.key];
+    if (action !== undefined && readShelf(view.root).open !== null) {
+        send(view, action);
     }
-    render(shelf, next.open);
-    moveFocus(shelf, next.focus);
 }
 
-function render(shelf: Shelf, open: string | null): void {
-    const { dataset } = shelf.root;
-    dataset["open"] = open ?? "";
-    shelf.root.classList.toggle("has-open", open !== null);
-    const lockOthers = othersLocked(open);
-    for (const book of shelf.books) {
-        renderBook(book, idOf(book) === open, lockOthers);
+function send(view: ShelfView, event: ShelfEvent): void {
+    const sized =
+        event.type === "next" ? { ...event, lastPage: lastPage(view) } : event;
+    const next = step(readShelf(view.root), sized);
+    applyShelf(view, next.shelf);
+    moveFocus(view, next.focus);
+    if (next.followUp !== null) {
+        const { after, event: following } = next.followUp;
+        window.setTimeout(
+            () => {
+                send(view, following);
+            },
+            reducedMotion() ? 0 : after,
+        );
     }
 }
 
-/** On wide screens the books not chosen step aside and go inert. */
-function othersLocked(open: string | null): boolean {
-    return open !== null && window.matchMedia("(min-width: 48rem)").matches;
-}
-
-function renderBook(
-    book: HTMLElement,
-    isOpen: boolean,
-    lockOthers: boolean,
-): void {
-    book.classList.toggle("is-open", isOpen);
-    book.toggleAttribute("inert", lockOthers && !isOpen);
-    const cover = part(book, "cover");
-    cover.setAttribute("aria-expanded", String(isOpen));
-    const action = isOpen ? "close" : "open";
-    cover.setAttribute(
-        "aria-label",
-        `${book.dataset["label"] ?? ""}: ${action} the book`,
-    );
-    part(book, "leaf").toggleAttribute("inert", !isOpen);
-}
-
-function moveFocus(shelf: Shelf, focus: Focus): void {
-    if (focus === null) {
+/** The bookmark is pulled up out of the book, then the link is followed. */
+function takeBookmark(event: MouseEvent): void {
+    const link =
+        event.target instanceof Element
+            ? event.target.closest("a[data-bookmark]")
+            : null;
+    if (!(link instanceof HTMLAnchorElement) || reducedMotion()) {
         return;
     }
-    const [id, name]: [string, "cover" | "leaf"] =
-        "page" in focus ? [focus.page, "leaf"] : [focus.cover, "cover"];
-    const book = shelf.books.find((candidate) => idOf(candidate) === id);
-    if (book !== undefined) {
-        part(book, name).focus({ preventScroll: true });
-    }
+    event.preventDefault();
+    link.classList.add("is-taken");
+    window.setTimeout(() => {
+        window.location.assign(link.href);
+    }, 650);
 }
 
-function openOf(shelf: Shelf): string | null {
-    const open = shelf.root.dataset["open"];
-    return open === undefined || open === "" ? null : open;
-}
-
-function idOf(book: HTMLElement): string {
-    return book.dataset["book"] ?? "";
-}
-
-function part(book: HTMLElement, name: "cover" | "leaf"): HTMLElement {
-    const element = book.querySelector<HTMLElement>(`[data-${name}]`);
-    if (element === null) {
-        throw new Error(`A book without its ${name}`);
-    }
-    return element;
+function reducedMotion(): boolean {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }

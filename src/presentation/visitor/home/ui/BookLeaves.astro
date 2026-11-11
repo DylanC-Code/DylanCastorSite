@@ -1,0 +1,59 @@
+---
+import BookPageView from "#/presentation/visitor/home/ui/BookPage.astro";
+import type {
+    BookPage,
+    Leaf,
+} from "#/presentation/visitor/home/presenters/bookPages.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+
+/**
+ * A book's pages bound into leaves on the spine, the last right page fixed.
+ * `spread`: two pages a spread (768px and up); `single`: one page at a time.
+ * Each leaf's depth is written before its turn, so the stack stays in order.
+ */
+interface Props {
+    variant: "spread" | "single";
+    leaves: readonly Leaf[];
+    last: BookPage | undefined;
+    book: BookViewModel;
+    contentsLabel: string;
+}
+
+const { variant, leaves, last, book, contentsLabel } = Astro.props;
+---
+
+<div class:list={["book-sheets", `is-${variant}`]} data-sheets={variant}>
+    {last !== undefined && (
+        <div class="book-last book-paper">
+            <BookPageView
+                page={last}
+                book={book}
+                contentsLabel={contentsLabel}
+            />
+        </div>
+    )}
+    {leaves.map((leaf, index) => (
+        <div
+            class="book-leaf"
+            data-leaf={index}
+            style={`--rest: ${(leaves.length - index) * 0.6}px; --turned: ${(index + 1) * 0.6}px`}
+        >
+            <div class="book-face book-paper is-front">
+                <BookPageView
+                    page={leaf.front}
+                    book={book}
+                    contentsLabel={contentsLabel}
+                />
+            </div>
+            <div class="book-face book-paper is-back">
+                {leaf.back !== null && (
+                    <BookPageView
+                        page={leaf.back}
+                        book={book}
+                        contentsLabel={contentsLabel}
+                    />
+                )}
+            </div>
+        </div>
+    ))}
+</div>

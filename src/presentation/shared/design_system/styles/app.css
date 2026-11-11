@@ -3,11 +3,12 @@
 @import "./themeHome.css";
 @import "./themeSwitcher.css";
 @import "./utilities.css";
-@import "./bookShelf.css";
-@import "./bookShelfWide.css";
+@import "./bookStage.css";
+@import "./bookStageWide.css";
+@import "./bookBlock.css";
 @import "./bookCover.css";
-@import "./bookCoverWide.css";
-@import "./bookLeaf.css";
+@import "./bookPage.css";
+@import "./bookmark.css";
 @import "./switcher.css";
 @import "./switcherPlate.css";
 @import "./switcherCard.css";
