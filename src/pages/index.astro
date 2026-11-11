@@ -1,4 +1,5 @@
 ---
+import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import HomePage from "#/presentation/visitor/home/ui/HomePage.astro";
@@ -6,7 +7,11 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 ---
 
 <HtmlDocument title={home.meta.title} description={home.meta.description}>
-    <SiteFrame header={home.header} footer={home.footer}>
+    <SiteFrame
+        header={home.header}
+        footer={home.footer}
+        switcher={switcherFor(null)}
+    >
         <HomePage
             titlePage={home.hero}
             floorDirectory={home.floors}

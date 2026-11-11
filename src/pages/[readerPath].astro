@@ -1,4 +1,5 @@
 ---
+import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
@@ -32,7 +33,11 @@ const { title } = Astro.props;
     description={title}
     noindex
 >
-    <SiteFrame header={home.header} footer={home.footer}>
+    <SiteFrame
+        header={home.header}
+        footer={home.footer}
+        switcher={switcherFor(null)}
+    >
         <ReaderPathPage title={title} />
     </SiteFrame>
 </HtmlDocument>

@@ -1,0 +1,16 @@
+---
+import type { FloorPageViewModel } from "#/presentation/visitor/floor/viewmodels/FloorPageViewModel.ts";
+
+/** A floor's page, until its topics are written (switcher handoff, open item 2). */
+type Props = FloorPageViewModel;
+
+const { layer, area } = Astro.props;
+---
+
+<section class="page py-24">
+    <p class="eyebrow">{layer}</p>
+    <h1 class="mt-4 font-display text-section-sm text-ink md:text-section">
+        {area}
+    </h1>
+    <p class="mt-4 text-body text-ink-muted">This page is being written.</p>
+</section>

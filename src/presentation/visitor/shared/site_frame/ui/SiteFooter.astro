@@ -8,7 +8,7 @@ const { left, legalHref, right } = Astro.props;
 const [name, legal] = left.split(" · ");
 ---
 
-<footer class="flex items-center justify-between gap-6 border-t border-line px-4 pt-5 pb-8 text-[12px] text-ink-faint md:px-30 md:py-6 md:text-label">
+<footer class="flex items-center justify-between gap-6 border-t border-line px-4 pt-5 pb-21 text-[12px] text-ink-faint md:px-30 md:py-6 md:text-label">
     <span>
         {name} ·{" "}
         <a href={legalHref} class="text-ink-faint hover:text-ink">

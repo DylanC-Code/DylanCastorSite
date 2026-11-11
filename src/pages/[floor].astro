@@ -1,0 +1,44 @@
+---
+import { floorsContent, switcherFor } from "#/content/floors.ts";
+import { home } from "#/content/home.ts";
+import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
+
+/**
+ * Placeholder pages for the floors that exist, so the switcher can be used
+ * end to end. Kept out of search until written; floor V has no page yet.
+ */
+export function getStaticPaths(): {
+    params: { floor: string };
+    props: { floor: FloorViewModel };
+}[] {
+    return floorsContent.floors
+        .filter((floor) => floor.comingLater !== true)
+        .map((floor) => ({
+            params: { floor: floor.href.slice(1) },
+            props: { floor },
+        }));
+}
+
+interface Props {
+    floor: FloorViewModel;
+}
+
+const { floor } = Astro.props;
+---
+
+<HtmlDocument
+    title={`${floor.area} · ${home.header.brand}`}
+    description={floor.area}
+    noindex
+>
+    <SiteFrame
+        header={home.header}
+        footer={home.footer}
+        switcher={switcherFor(floor.id)}
+    >
+        <FloorPage layer={floor.layer} area={floor.area} />
+    </SiteFrame>
+</HtmlDocument>

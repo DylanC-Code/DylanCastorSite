@@ -2,6 +2,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 
+import floors from "./src/content/floors.json" with { type: "json" };
 import home from "./src/content/home.json" with { type: "json" };
 
 /**
@@ -11,12 +12,12 @@ import home from "./src/content/home.json" with { type: "json" };
 const fromPackages = fontProviders.npm({ remote: false });
 
 /**
- * The reading paths' pages are placeholders, marked noindex until they are
- * written: the sitemap leaves them out too.
+ * The reading paths' and the floors' pages are placeholders, marked noindex
+ * until they are written: the sitemap leaves them out too.
  */
 const placeholders = new Set(
-    home.paths.books.map(
-        (book) => new URL(book.href, "https://dylancastor.com").href,
+    [...home.paths.books, ...floors.floors].map(
+        (page) => new URL(page.href, "https://dylancastor.com").href,
     ),
 );
 

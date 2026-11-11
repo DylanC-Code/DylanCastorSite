@@ -13,10 +13,16 @@ interface Props {
 }
 
 const { title, description, noindex = false } = Astro.props;
+// The switcher design this visit sees: the edge rewrites it per visit; in
+// development `?switcher=card|shelf` forces one.
+const forced = import.meta.env.DEV
+    ? Astro.url.searchParams.get("switcher")
+    : null;
+const switcher = forced === "shelf" ? "shelf" : "card";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-switcher={switcher}>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
