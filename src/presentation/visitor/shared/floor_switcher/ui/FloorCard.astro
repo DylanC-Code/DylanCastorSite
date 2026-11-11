@@ -1,0 +1,90 @@
+---
+import PanelHeader from "#/presentation/visitor/shared/floor_switcher/ui/PanelHeader.astro";
+import PathLink from "#/presentation/visitor/shared/floor_switcher/ui/PathLink.astro";
+import {
+    areaSuffix,
+    rowName,
+} from "#/presentation/visitor/shared/floor_switcher/presenters/rowName.ts";
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+import type { SwitcherPanelViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/SwitcherPanelViewModel.ts";
+
+/**
+ * Design 1's panel: a card listing the floors. Numerals and layers are drawn
+ * (`data-text`), so each row's visible text is its area, inside its name.
+ */
+interface Props {
+    panel: SwitcherPanelViewModel;
+    floors: readonly FloorViewModel[];
+    current: string | null;
+}
+
+const { panel, floors, current } = Astro.props;
+const corners = ["tl", "tr", "bl", "br"];
+---
+
+<nav
+    class="switcher-panel card-panel"
+    aria-label={panel.ariaLabel}
+    data-switcher-panel
+>
+    <span aria-hidden="true" class="card-frame"></span>
+    {corners.map((corner) => (
+        <span aria-hidden="true" class:list={["card-corner", corner]} />
+    ))}
+    <PanelHeader title={panel.title} />
+    <ul class="card-rows">
+        {floors.map((floor, index) => {
+            const inner = (
+                <Fragment>
+                    <span
+                        aria-hidden="true"
+                        class:list={[
+                            "card-numeral",
+                            floor.numeralItalic === true && "is-italic",
+                        ]}
+                        data-text={floor.numeral}
+                    />
+                    <span
+                        aria-hidden="true"
+                        class="card-layer"
+                        data-text={floor.layer}
+                    />
+                    <span class="card-area">
+                        {floor.area}
+                        <span
+                            aria-hidden="true"
+                            data-text={areaSuffix(floor)}
+                        />
+                    </span>
+                </Fragment>
+            );
+            return (
+                <li style={`--i: ${index}`}>
+                    {floor.comingLater === true ? (
+                        <span
+                            class="card-row is-later"
+                            role="link"
+                            aria-disabled="true"
+                            aria-label={rowName(floor, current, panel.rowAria)}
+                        >
+                            {inner}
+                        </span>
+                    ) : (
+                        <a
+                            class="card-row"
+                            href={floor.href}
+                            data-floor={floor.id}
+                            aria-current={
+                                floor.id === current ? "page" : undefined
+                            }
+                            aria-label={rowName(floor, current, panel.rowAria)}
+                        >
+                            {inner}
+                        </a>
+                    )}
+                </li>
+            );
+        })}
+    </ul>
+    <PathLink {...panel.pathLink} />
+</nav>

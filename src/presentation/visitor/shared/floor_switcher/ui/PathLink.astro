@@ -1,0 +1,16 @@
+---
+import fingerpost from "#/presentation/shared/design_system/marks/fingerpost.svg?raw";
+import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
+
+/** The panel's foot: its one way to the paths, "Find your path →". */
+type Props = LinkViewModel;
+
+const { label, href } = Astro.props;
+---
+
+<div class="switcher-foot">
+    <a href={href} class="switcher-path">
+        <span aria-hidden="true" set:html={fingerpost} />
+        {label}
+    </a>
+</div>

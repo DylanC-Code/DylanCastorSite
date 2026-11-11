@@ -1,0 +1,98 @@
+---
+import FloorCard from "#/presentation/visitor/shared/floor_switcher/ui/FloorCard.astro";
+import BookOpener from "#/presentation/visitor/shared/floor_switcher/ui/BookOpener.astro";
+import FloorShelf from "#/presentation/visitor/shared/floor_switcher/ui/FloorShelf.astro";
+import PlateOpener from "#/presentation/visitor/shared/floor_switcher/ui/PlateOpener.astro";
+import type { FloorSwitcherViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorSwitcherViewModel.ts";
+
+/**
+ * The floor switcher, in both designs under test. `<html data-switcher>`
+ * shows one; the other is never displayed. Each panel waits in a template,
+ * so without script there is no panel and the opener is a plain link.
+ */
+type Props = FloorSwitcherViewModel;
+
+const { panel, floors, current, fallbackHref } = Astro.props;
+const currentFloor = floors.find((floor) => floor.id === current);
+const order = floors.map((floor) => floor.href).join(" ");
+---
+
+<div
+    class="floor-switcher"
+    data-floor-switcher
+    data-design="card"
+    data-current={current ?? ""}
+    data-order={order}
+    data-close-at="600"
+    data-navigate-at="1000"
+>
+    <template>
+        <div class="switcher-scrim" data-switcher-scrim></div>
+        <FloorCard panel={panel} floors={floors} current={current} />
+    </template>
+    <PlateOpener
+        href={fallbackHref}
+        label={panel.openerAriaLabel}
+        current={currentFloor}
+    />
+</div>
+<div
+    class="floor-switcher"
+    data-floor-switcher
+    data-design="shelf"
+    data-current={current ?? ""}
+    data-order={order}
+    data-close-at="450"
+    data-navigate-at="950"
+>
+    <template>
+        <div class="switcher-scrim" data-switcher-scrim></div>
+        <FloorShelf panel={panel} floors={floors} current={current} />
+    </template>
+    <BookOpener
+        href={fallbackHref}
+        label={panel.openerAriaLabel}
+        floors={floors}
+        current={current}
+    />
+</div>
+
+<script>
+    import { initFloorSwitcher } from "#/presentation/visitor/shared/floor_switcher/behaviour/floorSwitcher.ts";
+
+    const design = document.documentElement.dataset["switcher"] ?? "card";
+    for (const root of document.querySelectorAll(
+        `[data-floor-switcher][data-design="${design}"]`,
+    )) {
+        if (root instanceof HTMLElement) {
+            initFloorSwitcher(root);
+        }
+    }
+</script>
+
+<script is:inline>
+    // On arrival through a pick: which way the content settles, from the
+    // floor it came from. Classic and inline, so it is listening in time.
+    function previousUrl() {
+        try {
+            return new URL(window.navigation.activation.from.url).pathname;
+        } catch {
+            return "";
+        }
+    }
+
+    function arrivalDirection(from) {
+        const root = document.querySelector("[data-floor-switcher]");
+        const order = root ? root.dataset.order.split(" ") : [];
+        return order.indexOf(location.pathname) < order.indexOf(from)
+            ? "higher"
+            : "deeper";
+    }
+
+    addEventListener("pagereveal", (event) => {
+        const from = previousUrl();
+        if (event.viewTransition && from) {
+            event.viewTransition.types.add(arrivalDirection(from));
+        }
+    });
+</script>

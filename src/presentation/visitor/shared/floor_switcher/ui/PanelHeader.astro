@@ -1,0 +1,14 @@
+---
+/** The panel's head: "Floors" between two copper rules. */
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<p class="switcher-head">
+    <span aria-hidden="true"></span>
+    {title}
+    <span aria-hidden="true"></span>
+</p>

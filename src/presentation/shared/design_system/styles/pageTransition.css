@@ -1,0 +1,88 @@
+/*
+ * Picking a floor: the content leaves (out), the browser navigates, the new
+ * page's content arrives (in) through a cross-document View Transition. The
+ * card slides up or down by depth; the shelf turns like a page. Without
+ * support, the new page simply appears; with reduced motion, nothing moves.
+ */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    main {
+        view-transition-name: page;
+    }
+
+    main.is-leaving {
+        opacity: 0;
+        transition:
+            opacity 300ms ease,
+            transform 350ms ease;
+    }
+
+    html[data-leaving="deeper"] main.is-leaving {
+        transform: translateY(-28px);
+    }
+
+    html[data-leaving="higher"] main.is-leaving {
+        transform: translateY(28px);
+    }
+
+    html[data-switcher="shelf"] main.is-leaving {
+        transform: perspective(1600px) rotateY(-14deg) translateX(-40px);
+        transform-origin: left center;
+        transition:
+            opacity 350ms ease,
+            transform 450ms ease;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    ::view-transition-old(page) {
+        display: none;
+    }
+
+    ::view-transition-new(page) {
+        animation:
+            page-fade-in 600ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+            page-settle-up 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    html:active-view-transition-type(higher)::view-transition-new(page) {
+        animation-name: page-fade-in, page-settle-down;
+    }
+
+    html[data-switcher="shelf"]::view-transition-new(page) {
+        transform-origin: left center;
+        animation:
+            page-fade-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both,
+            page-turn-back 800ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+}
+
+@keyframes page-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes page-settle-up {
+    from {
+        transform: translateY(28px);
+    }
+}
+
+@keyframes page-settle-down {
+    from {
+        transform: translateY(-28px);
+    }
+}
+
+@keyframes page-turn-back {
+    from {
+        transform: perspective(1600px) rotateY(-14deg) translateX(-40px);
+    }
+}

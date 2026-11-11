@@ -1,0 +1,33 @@
+---
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+
+/**
+ * Design 2's opener: six small spines on a shelf line, the current floor's
+ * standing higher. No words. Without script, a link.
+ */
+interface Props {
+    href: string;
+    label: string;
+    floors: readonly FloorViewModel[];
+    current: string | null;
+}
+
+const { href, label, floors, current } = Astro.props;
+const heights = [40, 43, 39, 42, 37, 35];
+---
+
+<a href={href} class="book-opener" aria-label={label} data-switcher-opener>
+    <span aria-hidden="true" class="opener-spines">
+        {floors.map((floor, index) => (
+            <span
+                class:list={[
+                    "opener-spine",
+                    floor.id === current && "is-current",
+                    floor.comingLater === true && "is-later",
+                ]}
+                style={`--i: ${index}; height: ${heights[index] ?? 38}px; --edge: ${floor.shelf.stops[0]}; --ridge: ${floor.shelf.stops[1]}; --deep: ${floor.shelf.stops[3]}`}
+            />
+        ))}
+    </span>
+    <span aria-hidden="true" class="opener-shelf"></span>
+</a>

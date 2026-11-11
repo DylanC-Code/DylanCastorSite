@@ -1,0 +1,21 @@
+---
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+
+/** What a volume carries: gilt bands, numeral and title labels, the ribbon. */
+interface Props {
+    floor: FloorViewModel;
+    isCurrent: boolean;
+}
+
+const { floor, isCurrent } = Astro.props;
+---
+
+<span aria-hidden="true" class="volume-band top"></span>
+<span
+    aria-hidden="true"
+    class:list={["volume-numeral", floor.numeralItalic === true && "is-italic"]}
+    data-text={floor.numeral}
+></span>
+<span aria-hidden="true" class="volume-title" data-text={floor.spine}></span>
+<span aria-hidden="true" class="volume-band bottom"></span>
+{isCurrent && <span aria-hidden="true" class="volume-ribbon" />}

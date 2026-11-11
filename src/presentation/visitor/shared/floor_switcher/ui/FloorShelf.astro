@@ -1,0 +1,37 @@
+---
+import FloorVolume from "#/presentation/visitor/shared/floor_switcher/ui/FloorVolume.astro";
+import PanelHeader from "#/presentation/visitor/shared/floor_switcher/ui/PanelHeader.astro";
+import PathLink from "#/presentation/visitor/shared/floor_switcher/ui/PathLink.astro";
+import { rowName } from "#/presentation/visitor/shared/floor_switcher/presenters/rowName.ts";
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+import type { SwitcherPanelViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/SwitcherPanelViewModel.ts";
+
+/** Design 2's panel: the floors as volumes standing on a shelf. */
+interface Props {
+    panel: SwitcherPanelViewModel;
+    floors: readonly FloorViewModel[];
+    current: string | null;
+}
+
+const { panel, floors, current } = Astro.props;
+---
+
+<nav
+    class="switcher-panel shelf-panel"
+    aria-label={panel.ariaLabel}
+    data-switcher-panel
+>
+    <PanelHeader title={panel.title} />
+    <div class="shelf-row">
+        {floors.map((floor, index) => (
+            <FloorVolume
+                floor={floor}
+                index={index}
+                isCurrent={floor.id === current}
+                name={rowName(floor, current, panel.rowAria)}
+            />
+        ))}
+    </div>
+    <span aria-hidden="true" class="shelf-plank"></span>
+    <PathLink {...panel.pathLink} />
+</nav>

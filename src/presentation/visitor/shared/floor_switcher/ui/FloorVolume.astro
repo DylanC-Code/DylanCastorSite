@@ -1,0 +1,42 @@
+---
+import VolumeLettering from "#/presentation/visitor/shared/floor_switcher/ui/VolumeLettering.astro";
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+
+/**
+ * One floor as a volume on the shelf. Its lettering is drawn (`data-text`);
+ * its name is in `aria-label`. Floor V is no link.
+ */
+interface Props {
+    floor: FloorViewModel;
+    index: number;
+    isCurrent: boolean;
+    name: string;
+}
+
+const { floor, index, isCurrent, name } = Astro.props;
+const [edge, ridge, body, deep] = floor.shelf.stops;
+const style = `--i: ${index}; --edge: ${edge}; --ridge: ${ridge}; --body: ${body}; --deep: ${deep}; width: ${floor.shelf.width}px; height: ${floor.shelf.height}px`;
+---
+
+{floor.comingLater === true ? (
+    <span
+        class="volume is-later"
+        style={style}
+        role="link"
+        aria-disabled="true"
+        aria-label={name}
+    >
+        <VolumeLettering floor={floor} isCurrent={false} />
+    </span>
+) : (
+    <a
+        class:list={["volume", isCurrent && "is-current"]}
+        style={style}
+        href={floor.href}
+        data-floor={floor.id}
+        aria-current={isCurrent ? "page" : undefined}
+        aria-label={name}
+    >
+        <VolumeLettering floor={floor} isCurrent={isCurrent} />
+    </a>
+)}

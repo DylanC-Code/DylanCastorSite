@@ -1,0 +1,35 @@
+---
+import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
+
+/**
+ * Design 1's opener: a black-glass plate with the current floor's numeral
+ * (a copper diamond on a page that is no floor). Without script, a link.
+ */
+interface Props {
+    href: string;
+    label: string;
+    current: FloorViewModel | undefined;
+}
+
+const { href, label, current } = Astro.props;
+const corners = ["tl", "tr", "bl", "br"];
+---
+
+<a href={href} class="plate-opener" aria-label={label} data-switcher-opener>
+    <span aria-hidden="true" class="plate-frame"></span>
+    {current === undefined ? (
+        <span aria-hidden="true" class="plate-diamond" />
+    ) : (
+        <span
+            aria-hidden="true"
+            class:list={[
+                "plate-numeral",
+                current.numeralItalic === true && "is-italic",
+            ]}
+            data-text={current.numeral}
+        />
+    )}
+    {corners.map((corner) => (
+        <span aria-hidden="true" class:list={["plate-corner", corner]} />
+    ))}
+</a>

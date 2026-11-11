@@ -1,0 +1,106 @@
+/*
+ * The floor switcher's shared parts: where it sits, the scrim, the panel's
+ * head and foot. `<html data-switcher>` shows one design; card by default.
+ */
+html:not([data-switcher="shelf"]) [data-design="shelf"],
+html[data-switcher="shelf"] [data-design="card"] {
+    display: none;
+}
+
+.floor-switcher {
+    --edge: 16px;
+    --gap: 14px;
+}
+
+.plate-opener,
+.book-opener {
+    position: fixed;
+    right: var(--edge);
+    bottom: var(--edge);
+    z-index: 42;
+}
+
+.switcher-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgb(8 10 12 / 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 400ms var(--ease-out);
+}
+
+[data-open="true"] > .switcher-scrim {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.switcher-panel {
+    position: fixed;
+    right: var(--edge);
+    z-index: 41;
+    box-sizing: border-box;
+    width: min(358px, 100vw - 32px);
+}
+
+[data-open="false"] > .switcher-panel {
+    visibility: hidden;
+    transition: visibility 0ms 850ms;
+}
+
+.switcher-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0;
+    font: 500 10px / 1 var(--font-sans);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+}
+
+.switcher-head > span {
+    width: 28px;
+    height: 1px;
+    background: var(--color-accent);
+}
+
+.switcher-foot {
+    margin-top: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-line);
+}
+
+.switcher-path {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--color-ink);
+    text-decoration: none;
+}
+
+.switcher-path svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+/* Drawn lettering: in the page, never in a name. */
+[data-text]::before {
+    content: attr(data-text);
+}
+
+@media (min-width: 48rem) {
+    .floor-switcher {
+        --edge: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floor-switcher * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
