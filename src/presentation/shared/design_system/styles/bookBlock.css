@@ -67,6 +67,7 @@
 }
 
 .book-paper {
+    overflow: hidden;
     background: var(--color-paper);
     color: var(--color-paper-ink);
     box-shadow: inset calc(18 * var(--u)) 0 calc(22 * var(--u))

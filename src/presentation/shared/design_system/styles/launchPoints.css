@@ -19,7 +19,7 @@
     font: 500 10px / 1 var(--font-sans);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-ink-muted);
+    color: var(--color-ink);
 }
 
 .points-label.is-start {
@@ -37,6 +37,7 @@
 
 .points-tick {
     color: var(--color-accent);
+    font-size: 13px;
     transition: opacity 300ms var(--ease-out);
 }
 

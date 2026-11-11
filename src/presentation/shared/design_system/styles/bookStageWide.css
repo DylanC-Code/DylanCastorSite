@@ -1,7 +1,7 @@
 /*
  * The stage from 768px: 1200 × 610 design pixels, the three books in a row.
  * --u is as large as the row allows and small enough that, after a jump to
- * #paths, the whole stage fits under the heading (the screen less 312px).
+ * #paths, the whole stage fits under the heading (the screen less 332px).
  * The chosen book slides so its spine is at the centre, then opens.
  */
 @media (min-width: 48rem) {
@@ -9,7 +9,7 @@
         --u: min(
             1px,
             calc((100cqw - 144px) / 3 / 352),
-            calc((100svh - 312px) / 610)
+            calc((100svh - 332px) / 610)
         );
         --step: calc(352 * var(--u) + (100cqw - 3 * 352 * var(--u)) / 2);
         height: calc(610 * var(--u));

@@ -20,6 +20,10 @@ const dots = [0, 1, 2, 3, 4, 5, 6, 7];
     <svg class="points-tracks" viewBox="0 0 780 300" width="780" height="300">
         <path d={upper}></path>
         <path d={lower}></path>
+        <path
+            class="points-cap"
+            d="M20 144 V156 M650 64 V76 M650 224 V236"
+        ></path>
     </svg>
     <span class="points-label is-start">{start}</span>
     <span class="points-label is-upper">

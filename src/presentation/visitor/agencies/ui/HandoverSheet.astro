@@ -32,9 +32,11 @@ const { cap, sheet, icons } = Astro.props;
                     {row.drawing !== undefined && (
                         <span aria-hidden="true" class="sheet-toggle" />
                     )}
-                    {typeof row.sample === "string"
-                        ? row.sample
-                        : row.sample.map((name) => <code>{name}</code>)}
+                    {typeof row.sample === "string" ? (
+                        row.sample
+                    ) : (
+                        <code>{row.sample.join(" · ")}</code>
+                    )}
                 </span>
             </li>
         ))}
@@ -89,7 +91,7 @@ const { cap, sheet, icons } = Astro.props;
         grid-template-columns: 20px 110px 1fr;
         gap: 14px;
         align-items: center;
-        padding: 12px 0;
+        padding: 18px 0;
         border-top: 1px solid rgb(27 26 24 / 0.13);
         color: var(--color-paper-copper);
         transition:
