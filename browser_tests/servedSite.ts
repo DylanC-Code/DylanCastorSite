@@ -14,6 +14,11 @@ export const desktop = {
     viewport: { width: 1440, height: 900 },
 } as const;
 
+export const laptop = {
+    name: "laptop",
+    viewport: { width: 1280, height: 720 },
+} as const;
+
 export const phone = {
     name: "phone",
     viewport: { width: 390, height: 844 },

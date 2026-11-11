@@ -38,7 +38,7 @@ describe("the books on desktop", () => {
         expect(
             await site.page.getAttribute('[data-book="brands"]', "inert"),
         ).toBe("");
-        await site.page.locator("#paths").screenshot({
+        await site.page.locator("section:has(#paths)").screenshot({
             path: "browser_tests/screenshots/books_open_desktop.png",
         });
     });
@@ -74,7 +74,7 @@ describe("the books on a phone", () => {
         await site.page.tap(cover("engineers"));
         expect(await site.page.isVisible("#path-engineers")).toBe(true);
         expect(await site.page.isVisible("#path-brands")).toBe(false);
-        await site.page.locator("#paths").screenshot({
+        await site.page.locator("section:has(#paths)").screenshot({
             path: "browser_tests/screenshots/books_open_phone.png",
         });
     });

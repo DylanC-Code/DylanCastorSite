@@ -66,3 +66,34 @@ export function focusedHref(page: Page): Promise<string> {
         `document.activeElement?.getAttribute("href") ?? ""`,
     );
 }
+
+/**
+ * Where an anchor's target sits after a jump: its gap under the sticky header,
+ * and how far an element (the books' stage) runs past the bottom of the
+ * screen.
+ */
+export async function landing(
+    page: Page,
+    target: string,
+    mustFit: string,
+): Promise<{ gap: number; cut: number }> {
+    const header = await box(page, "body > header");
+    const top = await box(page, target);
+    const fit = await box(page, mustFit);
+    const height = page.viewportSize()?.height ?? 0;
+    return {
+        gap: Math.round(top.y - header.y - header.height),
+        cut: Math.max(0, Math.round(fit.y + fit.height - height)),
+    };
+}
+
+async function box(
+    page: Page,
+    selector: string,
+): Promise<{ y: number; height: number }> {
+    const found = await page.locator(selector).first().boundingBox();
+    if (found === null) {
+        throw new Error(`Nothing on screen for ${selector}`);
+    }
+    return found;
+}
