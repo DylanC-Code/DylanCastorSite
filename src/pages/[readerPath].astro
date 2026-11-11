@@ -1,5 +1,6 @@
 ---
 import { switcherFor } from "#/content/floors.ts";
+import { books } from "#/content/books.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
@@ -13,11 +14,9 @@ export function getStaticPaths(): {
     params: { readerPath: string };
     props: { title: string };
 }[] {
-    return home.paths.books.map((book) => ({
+    return books.books.map((book) => ({
         params: { readerPath: book.href.slice(1) },
-        props: {
-            title: `${home.paths.pageEyebrowPrefix} ${book.titleLine1} ${book.titleLine2}`,
-        },
+        props: { title: `${book.for} ${book.reader}` },
     }));
 }
 

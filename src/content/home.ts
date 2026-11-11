@@ -2,7 +2,6 @@ import homeJson from "#/content/home.json";
 import type { ContactCardViewModel } from "#/presentation/visitor/home/viewmodels/ContactCardViewModel.ts";
 import type { FloorDirectoryViewModel } from "#/presentation/visitor/home/viewmodels/FloorDirectoryViewModel.ts";
 import type { GettingAroundViewModel } from "#/presentation/visitor/home/viewmodels/GettingAroundViewModel.ts";
-import type { ReaderShelfViewModel } from "#/presentation/visitor/home/viewmodels/ReaderShelfViewModel.ts";
 import type { TitlePageViewModel } from "#/presentation/visitor/home/viewmodels/TitlePageViewModel.ts";
 import type { SiteFooterViewModel } from "#/presentation/visitor/shared/site_frame/viewmodels/SiteFooterViewModel.ts";
 import type { SiteHeaderViewModel } from "#/presentation/visitor/shared/site_frame/viewmodels/SiteHeaderViewModel.ts";
@@ -16,7 +15,6 @@ interface HomeContent {
     readonly header: SiteHeaderViewModel;
     readonly hero: TitlePageViewModel;
     readonly floors: FloorDirectoryViewModel;
-    readonly paths: ReaderShelfViewModel;
     readonly tips: GettingAroundViewModel;
     readonly contact: ContactCardViewModel;
     readonly footer: SiteFooterViewModel;

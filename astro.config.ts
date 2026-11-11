@@ -2,8 +2,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 
+import books from "./src/content/books.json" with { type: "json" };
 import floors from "./src/content/floors.json" with { type: "json" };
-import home from "./src/content/home.json" with { type: "json" };
 
 /**
  * Fonts come from npm packages pinned in bun.lock, never from a CDN: the build
@@ -16,7 +16,7 @@ const fromPackages = fontProviders.npm({ remote: false });
  * until they are written: the sitemap leaves them out too.
  */
 const placeholders = new Set(
-    [...home.paths.books, ...floors.floors].map(
+    [...books.books, ...floors.floors].map(
         (page) => new URL(page.href, "https://dylancastor.com").href,
     ),
 );

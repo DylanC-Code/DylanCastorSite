@@ -1,5 +1,6 @@
 ---
 import { switcherFor } from "#/content/floors.ts";
+import { books } from "#/content/books.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import HomePage from "#/presentation/visitor/home/ui/HomePage.astro";
@@ -15,7 +16,7 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
         <HomePage
             titlePage={home.hero}
             floorDirectory={home.floors}
-            readerShelf={home.paths}
+            readerShelf={books}
             gettingAround={home.tips}
             contactCard={home.contact}
         />

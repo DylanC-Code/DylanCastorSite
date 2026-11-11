@@ -1,0 +1,149 @@
+{
+    "status": "Design state 11 Nov 2026. Step texts and book titles are Dylan's to correct; keep them in this file only.",
+    "head": {
+        "eyebrow": "Find your path",
+        "title": "Who are you?",
+        "lead": "Three books, one for each kind of visitor. Open yours."
+    },
+    "labels": {
+        "contents": "Contents",
+        "back": "← Back to the three books",
+        "phoneHint": "Tap a book to open it.",
+        "coverFoot": "Dylan Castor",
+        "openAria": "For {reader}: open the book",
+        "prevAria": "Previous page",
+        "nextAria": "Next page"
+    },
+    "books": [
+        {
+            "id": "agencies",
+            "for": "for",
+            "reader": "CRO agencies",
+            "leather": "oxblood",
+            "leatherStops": ["#5d2a2d", "#4a1f22", "#2a1113"],
+            "href": "/agencies",
+            "bookmark": "Start with agencies →",
+            "title": "White-label test builds",
+            "contents": [
+                {
+                    "numeral": "I",
+                    "floor": "Shopify & CRO",
+                    "tag": "the tests"
+                },
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "tag": "the method"
+                }
+            ],
+            "steps": [
+                {
+                    "numeral": "I",
+                    "floor": "Shopify & CRO",
+                    "text": "Your tests, built under your name: no flicker, checked on desktop and mobile.",
+                    "note": "On this floor: Flicker-free A/B tests"
+                },
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "text": "Tests first, small files, every change checked: the code your clients inherit stays clean.",
+                    "note": null
+                }
+            ]
+        },
+        {
+            "id": "brands",
+            "for": "for",
+            "reader": "Shopify brands",
+            "leather": "green",
+            "leatherStops": ["#2c4436", "#1f3328", "#111f17"],
+            "href": "/cro",
+            "bookmark": "Start with Shopify brands →",
+            "title": "Tests built and shipped on your store",
+            "contents": [
+                {
+                    "numeral": "I",
+                    "floor": "Shopify & CRO",
+                    "tag": "the tests"
+                },
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "tag": "the method"
+                }
+            ],
+            "steps": [
+                {
+                    "numeral": "I",
+                    "floor": "Shopify & CRO",
+                    "text": "Tests on your store that never flash the original, and winners kept in your theme.",
+                    "note": "On this floor: Flicker-free A/B tests"
+                },
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "text": "Small files, tests first, every change checked: your store stays fast and easy to change.",
+                    "note": null
+                }
+            ]
+        },
+        {
+            "id": "engineers",
+            "for": "for",
+            "reader": "Software engineers",
+            "leather": "midnight",
+            "leatherStops": ["#2a3449", "#1d2638", "#10151f"],
+            "href": "/engineering",
+            "bookmark": "Start with engineering →",
+            "title": "Architecture, tests and pipelines",
+            "contents": [
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "tag": "the method"
+                },
+                {
+                    "numeral": "II",
+                    "floor": "Development",
+                    "tag": "the code"
+                },
+                {
+                    "numeral": "III",
+                    "floor": "Architecture",
+                    "tag": "the structure"
+                },
+                {
+                    "numeral": "IV",
+                    "floor": "Infrastructure",
+                    "tag": "the pipelines"
+                }
+            ],
+            "steps": [
+                {
+                    "numeral": "All",
+                    "floor": "How I build software",
+                    "text": "The method first: tests before code, small files with one job, every change checked.",
+                    "note": null
+                },
+                {
+                    "numeral": "II",
+                    "floor": "Development",
+                    "text": "Typed code with tests that run on every change, in files small enough to read.",
+                    "note": null
+                },
+                {
+                    "numeral": "III",
+                    "floor": "Architecture",
+                    "text": "Business rules kept apart from frameworks and tools, so swapping a tool never breaks them.",
+                    "note": null
+                },
+                {
+                    "numeral": "IV",
+                    "floor": "Infrastructure",
+                    "text": "Pipelines that check every change before it ships, on servers that stay fast and up.",
+                    "note": null
+                }
+            ]
+        }
+    ]
+}
