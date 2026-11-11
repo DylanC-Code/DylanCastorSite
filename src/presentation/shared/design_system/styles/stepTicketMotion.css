@@ -73,7 +73,8 @@
 
 .ticket-tab {
     position: sticky;
-    top: 100px;
+    /* It hangs from the header's bottom edge, where the ticket was stuck. */
+    top: 84px;
     z-index: 6;
     float: right;
     display: flex;

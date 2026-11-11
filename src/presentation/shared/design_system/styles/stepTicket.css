@@ -81,8 +81,13 @@
     gap: 6px;
     background: var(--color-paper);
     transform-origin: 0 100%;
-    mask: radial-gradient(circle 4px at 0 8px, transparent 98%, #000) 0 0 / 100%
-        16px repeat-y;
+    /* Holes on its top edge, in line with the strip's, and on its left edge. */
+    mask:
+        radial-gradient(circle 4px at 8px 0, transparent 98%, #000) 0 0 / 16px
+            100% repeat-x,
+        radial-gradient(circle 4px at 0 8px, transparent 98%, #000) 0 0 / 100%
+            16px repeat-y;
+    mask-composite: intersect;
 }
 
 .ticket-stub-number {
