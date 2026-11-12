@@ -1,0 +1,28 @@
+/* "How we start": the dark enamel plate beside the door ("Then: days per month"). */
+.start-plate {
+    align-self: center;
+    box-sizing: border-box;
+    width: 170px;
+    margin-left: 34px;
+    padding: 18px 20px 16px;
+    background: #0b0d11;
+    box-shadow:
+        inset 0 0 0 1px rgb(227 154 106 / 0.8),
+        inset 0 0 0 5px #0b0d11,
+        inset 0 0 0 6px rgb(227 154 106 / 0.35);
+    text-align: center;
+}
+
+.start-plate-cap {
+    color: var(--color-accent);
+    font: 500 10px / 1 var(--font-sans);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.start-plate-words {
+    display: block;
+    margin-top: 8px;
+    color: var(--color-ink);
+    font: 400 21px / 1.2 var(--font-display);
+}

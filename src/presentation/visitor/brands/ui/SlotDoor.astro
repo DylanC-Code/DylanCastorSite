@@ -1,0 +1,80 @@
+---
+import SlotNote from "#/presentation/visitor/brands/ui/SlotNote.astro";
+import type { LetterSlotViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
+
+/**
+ * The door, 520 × 600: its glass panel carries the note (a real form); the
+ * brass letter plate with its flap sits at 372px. Once a message is really
+ * sent, the note folds into a small letter that goes down into the slot, and
+ * a card rises on the glass. Without script the note is a plain form.
+ */
+type Props = LetterSlotViewModel;
+
+const { fields, flap, letter, sent, again, errors, emailHref, plain } =
+    Astro.props;
+---
+
+<div class="slot-place" data-letter-slot data-state="writing">
+    <div class="slot-door">
+        <span aria-hidden="true" class="slot-frame">
+            <span class="slot-leaf">
+                <span class="slot-glass" />
+                <span class="slot-panel" />
+                <span class="slot-knob" />
+            </span>
+        </span>
+        <span aria-hidden="true" class="slot-plate">
+            <span class="slot-screw is-left" />
+            <span class="slot-screw is-right" />
+            <span class="slot-opening" />
+            <span class="slot-flap">{flap}</span>
+        </span>
+        <span aria-hidden="true" class="slot-clip">
+            <span class="slot-letter">
+                <span class="slot-stamp" />
+                <span class="slot-letter-to">{letter}</span>
+            </span>
+        </span>
+        <SlotNote fields={fields} replyError={errors.replyTo} />
+        <div class="slot-card">
+            <p class="paper-cap">{sent[0]}</p>
+            <p class="slot-card-words">
+                {sent[1]} <em>{sent[2]}</em>
+            </p>
+            <button type="button" class="slot-again" data-letter-again>
+                {again}
+            </button>
+        </div>
+    </div>
+    <span aria-hidden="true" class="slot-step" />
+    <p class="slot-plain">
+        {plain.before}{" "}
+        <a href={emailHref} class="link-accent">
+            {plain.label}
+        </a>
+    </p>
+    <p class="slot-failed" data-letter-failed hidden>
+        {errors.failed}{" "}
+        <a href={emailHref} class="link-accent">
+            {plain.label}
+        </a>
+        .
+    </p>
+    <p
+        class="sr-only"
+        aria-live="polite"
+        data-letter-news
+        data-posted={`${sent[1]} ${sent[2]}`}
+        data-failed={`${errors.failed} ${plain.label}.`}
+    />
+</div>
+
+<script>
+    import { initLetterSlot } from "#/presentation/visitor/brands/behaviour/letterSlot.ts";
+
+    for (const slot of document.querySelectorAll("[data-letter-slot]")) {
+        if (slot instanceof HTMLElement) {
+            initLetterSlot(slot);
+        }
+    }
+</script>

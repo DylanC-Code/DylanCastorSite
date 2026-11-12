@@ -1,0 +1,52 @@
+/*
+ * The belt: one strip from the theme's pulley down to the cellar's, through
+ * the apps level, so it lines up whatever the levels' sizes. It sits where the
+ * scenes draw their pulleys at full size (x 422 to 438 of 440, 14px padding
+ * on the right): two lines 14.3px apart, copper dashes running up. Always
+ * running; paused off screen; still with reduced motion.
+ */
+.house-belt {
+    position: absolute;
+    top: var(--belt-top);
+    right: calc(66px + 14px + 1.8px);
+    box-sizing: border-box;
+    width: 14.3px;
+    height: calc(var(--belt-bottom) - var(--belt-top));
+    border-inline: 1px solid rgb(227 154 106 / 0.5);
+    pointer-events: none;
+    transition:
+        top var(--shift),
+        height var(--shift);
+}
+
+.house-belt::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -1px;
+    width: 1.4px;
+    background: repeating-linear-gradient(
+            to bottom,
+            var(--color-copper) 0 6px,
+            transparent 6px 18px
+        )
+        0 0 / 100% 18px;
+    animation: house-belt 500ms linear infinite;
+    content: "";
+}
+
+@keyframes house-belt {
+    to {
+        background-position: 0 -18px;
+    }
+}
+
+[data-onscreen="false"] .house-belt::before {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .house-belt::before {
+        animation: none;
+    }
+}

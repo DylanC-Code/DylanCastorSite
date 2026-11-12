@@ -1,0 +1,56 @@
+/*
+ * The house's street: a copper line under the storefront, 66px beyond the
+ * walls; earth on each side down to the plinth; the two captions left of the
+ * house. All follow the storefront's height (700ms).
+ */
+.house-street {
+    position: absolute;
+    top: var(--street);
+    right: -66px;
+    left: -66px;
+    border-top: 2px solid rgb(227 154 106 / 0.8);
+    transition: top var(--shift);
+}
+
+.house-earth {
+    position: absolute;
+    top: calc(var(--street) + 2px);
+    bottom: 0;
+    width: 52px;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            transparent 0 9px,
+            rgb(227 154 106 / 0.2) 9px 10px
+        ),
+        radial-gradient(rgb(227 154 106 / 0.35) 0 2px, transparent 3px) 10px
+            18px / 42px 58px;
+    transition: top var(--shift);
+}
+
+.house-earth.is-left {
+    left: -52px;
+}
+
+.house-earth.is-right {
+    right: -52px;
+}
+
+.house-caption {
+    position: absolute;
+    right: calc(100% + 76px);
+    color: var(--color-ink-muted);
+    font: 600 11px / 1 var(--font-sans);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: top var(--shift);
+}
+
+.house-caption.is-above {
+    top: calc(var(--street) - 22px);
+}
+
+.house-caption.is-below {
+    top: calc(var(--street) + 12px);
+}

@@ -1,0 +1,38 @@
+---
+/**
+ * The house's opening front: two dark door halves over the levels and the
+ * shaft, each a shop front above the street and earth below; in the middle a
+ * paper plate and "Open the house". Hidden until the script shows it, so the
+ * house reads open without script or with reduced motion.
+ */
+interface Props {
+    plate: string;
+    open: string;
+}
+
+const { plate, open } = Astro.props;
+const windows = [
+    [44, 28],
+    [158, 28],
+    [44, 122],
+    [158, 122],
+];
+---
+
+<div class="house-front" data-house-front hidden>
+    {["is-left", "is-right"].map((side) => (
+        <span aria-hidden="true" class:list={["house-door", side]}>
+            {windows.map(([left, top]) => (
+                <span
+                    class="house-window"
+                    style={`--x: ${left}px; --y: ${top}px`}
+                />
+            ))}
+            <span class="house-door-earth" />
+        </span>
+    ))}
+    <p class="house-plate">{plate}</p>
+    <button type="button" class="btn house-open" data-house-open>
+        {open}
+    </button>
+</div>

@@ -1,0 +1,39 @@
+---
+import HouseRoof from "#/presentation/visitor/brands/ui/HouseRoof.astro";
+import ScrollLevel from "#/presentation/visitor/brands/ui/ScrollLevel.astro";
+import type { HouseLevelViewModel } from "#/presentation/visitor/brands/viewmodels/StoreHouseViewModel.ts";
+
+/**
+ * The house below 1000px: no tabs, no front; you scroll down through it. Each
+ * level holds its scene and its words; the one crossing a line 380px down the
+ * screen is drawn on paper and plays. No lift on a phone: the levels take
+ * the room.
+ */
+interface Props {
+    levels: readonly HouseLevelViewModel[];
+    below: string;
+}
+
+const { levels, below } = Astro.props;
+---
+
+<div class="scroll-house" data-scroll-house data-onscreen="true">
+    <HouseRoof />
+    <div class="scroll-body">
+        <span aria-hidden="true" class="house-bricks" />
+        <div class="scroll-inside" data-scroll-inside>
+            <ol class="scroll-levels">
+                {levels.map((level, index) => (
+                    <ScrollLevel
+                        level={level}
+                        index={index}
+                        below={index === 0 ? below : undefined}
+                    />
+                ))}
+            </ol>
+            <span aria-hidden="true" class="house-belt scroll-belt" />
+        </div>
+        <span aria-hidden="true" class="house-bricks" />
+    </div>
+    <span aria-hidden="true" class="scroll-plinth" />
+</div>

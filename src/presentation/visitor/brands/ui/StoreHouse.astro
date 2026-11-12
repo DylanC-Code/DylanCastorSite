@@ -1,0 +1,57 @@
+---
+import HouseDrawing from "#/presentation/visitor/brands/ui/HouseDrawing.astro";
+import LevelPanel from "#/presentation/visitor/brands/ui/LevelPanel.astro";
+import ScrollHouse from "#/presentation/visitor/brands/ui/ScrollHouse.astro";
+import type { StoreHouseViewModel } from "#/presentation/visitor/brands/viewmodels/StoreHouseViewModel.ts";
+
+/**
+ * "Your store, front and back": the house left (its four levels are the
+ * tabs), the chosen level's panel right. Below 1000px the house you scroll
+ * through, each level holding its words.
+ */
+type Props = StoreHouseViewModel;
+
+const { title, titleItalic, lead, plate, open, above, below, levels } =
+    Astro.props;
+---
+
+<section
+    id="house"
+    class="page mt-30 overflow-x-clip md:mt-[106px]"
+    aria-labelledby="house-title"
+    data-store-house
+>
+    <h2 id="house-title" class="section-title">
+        {title} <em class="italic">{titleItalic}</em>
+    </h2>
+    <p class="mt-3.5 max-w-155 text-[17px] leading-[27px] text-ink-muted">
+        {lead}
+    </p>
+    <div class="house-grid">
+        <HouseDrawing
+            levels={levels.map((level) => level.name)}
+            plate={plate}
+            open={open}
+            above={above}
+            below={below}
+        />
+        <div class="house-panels">
+            {levels.map((level, index) => (
+                <LevelPanel level={level} index={index} />
+            ))}
+        </div>
+    </div>
+    <ScrollHouse levels={levels} below={below} />
+</section>
+
+<script>
+    import { initScrollHouse } from "#/presentation/visitor/brands/behaviour/scrollHouse.ts";
+    import { initStoreHouse } from "#/presentation/visitor/brands/behaviour/storeHouse.ts";
+
+    for (const house of document.querySelectorAll("[data-store-house]")) {
+        if (house instanceof HTMLElement) {
+            initStoreHouse(house);
+            initScrollHouse(house);
+        }
+    }
+</script>

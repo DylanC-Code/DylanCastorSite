@@ -1,0 +1,99 @@
+/*
+ * "On your store, my rules" (brands home): the guarantee sheet, 796px (its
+ * ring band then holds 48 rings across), turned -0.5deg; the rings are laid
+ * with `space`, so no ring is ever cut, whatever the height. The seal is
+ * pressed 900ms after the sheet has risen in. Side by side from 1360px;
+ * below, under the words. The phone is in guaranteePhone.css.
+ */
+.guarantee-grid {
+    display: grid;
+    gap: 40px;
+}
+
+@media (min-width: 85rem) {
+    .guarantee-grid {
+        grid-template-columns: 1fr 796px;
+        align-items: center;
+        gap: 50px;
+    }
+}
+
+.guarantee {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 796px;
+    padding: 58px 70px 48px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow: 0 22px 46px rgb(0 0 0 / 0.5);
+    rotate: -0.5deg;
+}
+
+.guarantee-rings {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgb(27 26 24 / 0.5);
+    background: radial-gradient(
+            circle at 8px 8px,
+            transparent 6px,
+            rgb(184 105 61 / 0.55) 6.5px 7.5px,
+            transparent 8px
+        )
+        0 0 / 16px 16px space;
+    mask:
+        linear-gradient(#000 0 0) top / 100% 16px no-repeat,
+        linear-gradient(#000 0 0) bottom / 100% 16px no-repeat,
+        linear-gradient(#000 0 0) left / 16px 100% no-repeat,
+        linear-gradient(#000 0 0) right / 16px 100% no-repeat;
+}
+
+.guarantee-frame {
+    position: absolute;
+    inset: 34px;
+    border: 1px solid rgb(27 26 24 / 0.35);
+}
+
+.guarantee-heading {
+    margin: 6px 0 0;
+    font: italic 400 46px / 1 var(--font-display);
+    text-align: center;
+}
+
+.guarantee-letter {
+    position: relative;
+    margin: 28px 0 0;
+    font: 400 23px / 1.75 var(--font-display);
+}
+
+.guarantee-mark {
+    text-decoration: underline 2px var(--color-paper-copper);
+    text-decoration-skip-ink: none;
+    text-underline-offset: 5px;
+}
+
+.guarantee-signed {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin: 26px 0 0;
+}
+
+.guarantee-name {
+    padding: 0 30px 4px 6px;
+    border-bottom: 1px solid rgb(27 26 24 / 0.5);
+    font: italic 400 24px / 1.2 var(--font-display);
+}
+
+.guarantee-seal {
+    position: absolute;
+    right: 70px;
+    bottom: 44px;
+    transition:
+        scale 300ms var(--ease-out) 1600ms,
+        opacity 100ms linear 1600ms;
+}
+
+[data-reveal="pending"] .guarantee-seal {
+    opacity: 0;
+    scale: 2.2;
+}

@@ -1,0 +1,118 @@
+/*
+ * "Your store, front and back" (brands home): the house, 572px wide, 160px in
+ * from its 800px column, the chosen level's panel beside it. Copper lines on
+ * the ground. The script sets the geometry of the chosen level (houseLayout.ts)
+ * as custom properties; these defaults are the storefront's.
+ */
+.house-grid {
+    display: none;
+    margin-top: 36px;
+}
+
+.house {
+    --street: 296px;
+    --cabin: 58px;
+    --needle: -54deg;
+    --belt-top: 254px;
+    --belt-bottom: 431.6px;
+    --line: rgb(227 154 106 / 0.5);
+    --shift: 700ms var(--ease-mech);
+
+    position: relative;
+    width: 572px;
+    margin-left: 160px;
+}
+
+/* From 1000px the house shows; from 1280px the panel sits beside it. */
+@media (min-width: 62.5rem) {
+    .house-grid {
+        display: block;
+    }
+
+    .house-panels {
+        margin-top: 56px;
+    }
+}
+
+@media (min-width: 80rem) {
+    .house-grid {
+        display: grid;
+        grid-template-columns: 800px 1fr;
+        align-items: center;
+        gap: 70px;
+    }
+
+    .house-panels {
+        min-height: 420px;
+        margin-top: 0;
+    }
+}
+
+.house-roof {
+    display: block;
+    fill: none;
+}
+
+.roof-line,
+.roof-tick {
+    stroke: rgb(227 154 106 / 0.7);
+}
+
+.roof-slate {
+    stroke: rgb(227 154 106 / 0.3);
+}
+
+.roof-dial {
+    fill: var(--color-ground);
+    stroke: rgb(227 154 106 / 0.8);
+    stroke-width: 1.5;
+}
+
+.house-needle {
+    stroke: var(--color-paper);
+    stroke-width: 2.5;
+    transform: rotate(var(--needle));
+    transform-origin: 300px 82px;
+    transition: transform 900ms var(--ease-mech);
+}
+
+.roof-pin {
+    fill: var(--color-accent);
+}
+
+.house-body {
+    display: grid;
+    grid-template-columns: 26px 1fr 26px;
+}
+
+.house-bricks {
+    border: 1px solid var(--line);
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 9px,
+            rgb(227 154 106 / 0.38) 9px 10px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 12px,
+            rgb(227 154 106 / 0.2) 12px 13px
+        );
+}
+
+.house-inside {
+    position: relative;
+    perspective: 1700px;
+}
+
+.house-plinth {
+    display: block;
+    height: 18px;
+    margin: 0 -14px;
+    border: 1px solid var(--line);
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 26px,
+        rgb(227 154 106 / 0.3) 26px 27px
+    );
+}

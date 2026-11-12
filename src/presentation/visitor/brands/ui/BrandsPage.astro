@@ -1,0 +1,33 @@
+---
+import GuaranteeLetter from "#/presentation/visitor/brands/ui/GuaranteeLetter.astro";
+import LetterSlot from "#/presentation/visitor/brands/ui/LetterSlot.astro";
+import StartDoor from "#/presentation/visitor/brands/ui/StartDoor.astro";
+import StoreHouse from "#/presentation/visitor/brands/ui/StoreHouse.astro";
+import type { BrandsPageViewModel } from "#/presentation/visitor/brands/viewmodels/BrandsPageViewModel.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+import PathHero from "#/presentation/visitor/shared/path_hero/ui/PathHero.astro";
+
+/**
+ * The brands home (`/cro`): the hero with the green book, the house of the
+ * store, the guarantee, how we start, and the letter slot.
+ */
+interface Props {
+    page: BrandsPageViewModel;
+    book: BookViewModel;
+    labels: { contents: string; coverFoot: string; openAria: string };
+}
+
+const { page, book, labels } = Astro.props;
+---
+
+<PathHero
+    hero={page.hero}
+    book={book}
+    contentsLabel={labels.contents}
+    coverFoot={labels.coverFoot}
+    openAria={labels.openAria}
+/>
+<StoreHouse {...page.house} />
+<GuaranteeLetter {...page.guarantee} />
+<StartDoor {...page.start} />
+<LetterSlot {...page.ask} />

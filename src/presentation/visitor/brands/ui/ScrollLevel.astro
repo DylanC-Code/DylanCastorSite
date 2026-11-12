@@ -1,0 +1,39 @@
+---
+import HouseScene from "#/presentation/visitor/brands/ui/scenes/HouseScene.astro";
+import type { HouseLevelViewModel } from "#/presentation/visitor/brands/viewmodels/StoreHouseViewModel.ts";
+
+/**
+ * One level of the scrolled house: its name, its scene, then its caption,
+ * name, sentence and three points. The storefront carries the street line
+ * and "They never see" under it.
+ */
+interface Props {
+    level: HouseLevelViewModel;
+    index: number;
+    below?: string | undefined;
+}
+
+const { level, index, below } = Astro.props;
+---
+
+<li class="scroll-level" data-scroll-level={index}>
+    <span aria-hidden="true" class="scroll-level-name">
+        {level.name}
+    </span>
+    <span class="scroll-scene">
+        <HouseScene index={index} />
+    </span>
+    <p class="scroll-caption">{level.caption}</p>
+    <h3 class="scroll-title">{level.name}</h3>
+    <p class="scroll-sentence">{level.sentence}</p>
+    <ul class="level-points scroll-points">
+        {level.points.map((point) => (
+            <li>{point}</li>
+        ))}
+    </ul>
+    {below !== undefined && (
+        <span aria-hidden="true" class="scroll-street">
+            <span>{below}</span>
+        </span>
+    )}
+</li>

@@ -1,0 +1,33 @@
+---
+import type { ComponentProps } from "astro/types";
+
+import AgenciesPage from "#/presentation/visitor/agencies/ui/AgenciesPage.astro";
+import BrandsPage from "#/presentation/visitor/brands/ui/BrandsPage.astro";
+import type { BrandsPageViewModel } from "#/presentation/visitor/brands/viewmodels/BrandsPageViewModel.ts";
+import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
+import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
+
+/**
+ * A reading path's home, by its book: the agencies home, the brands home, or
+ * the placeholder of a path not written yet.
+ */
+interface Props {
+    book: BookViewModel;
+    title: string;
+    labels: ComponentProps<typeof AgenciesPage>["labels"];
+    agencies: Omit<ComponentProps<typeof AgenciesPage>, "book" | "labels">;
+    brands: BrandsPageViewModel;
+}
+
+const { book, title, labels, agencies, brands } = Astro.props;
+---
+
+{book.id === "agencies" && (
+    <AgenciesPage {...agencies} book={book} labels={labels} />
+)}
+{book.id === "brands" && (
+    <BrandsPage page={brands} book={book} labels={labels} />
+)}
+{book.id !== "agencies" && book.id !== "brands" && (
+    <ReaderPathPage title={title} />
+)}

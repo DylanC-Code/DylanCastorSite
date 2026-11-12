@@ -1,0 +1,114 @@
+/*
+ * The house's four levels (tabs) beside the lift shaft. The chosen level is
+ * 216px high on paper, its scene drawn 392 × 178; the others 92px on the
+ * ground, scenes 176 × 80 (700ms). The cabin hangs at --cabin (900ms).
+ */
+.house-levels {
+    margin-right: 66px;
+}
+
+.level {
+    position: relative;
+    display: grid;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 92px;
+    padding: 0 14px 0 16px;
+    overflow: hidden;
+    border: 0;
+    border-bottom: 3px double var(--line);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        height var(--shift),
+        background 400ms var(--ease-out);
+}
+
+.level[aria-selected="true"] {
+    height: 216px;
+    background: var(--color-paper);
+}
+
+.level-name {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    color: var(--color-ink-faint);
+    font: 600 11px / 1 var(--font-sans);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    transition:
+        top var(--shift),
+        color 300ms var(--ease-out);
+}
+
+.level[aria-selected="true"] .level-name {
+    top: 26px;
+    color: var(--color-paper-copper);
+}
+
+.level .scene {
+    justify-self: end;
+    width: 176px;
+    height: 80px;
+    transition:
+        width var(--shift),
+        height var(--shift);
+}
+
+.level[aria-selected="true"] .scene {
+    width: 392px;
+    height: 178px;
+}
+
+.level[aria-selected="false"]:hover .scene .ln {
+    stroke: rgb(227 154 106 / 0.85);
+}
+
+.house-shaft {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 66px;
+    border-left: 1px solid var(--line);
+    pointer-events: none;
+}
+
+.house-rope {
+    position: absolute;
+    top: 0;
+    left: 33px;
+    width: 1px;
+    height: var(--cabin);
+    background: rgb(227 154 106 / 0.8);
+    transition: height 900ms var(--ease-mech);
+}
+
+.house-cabin {
+    position: absolute;
+    top: var(--cabin);
+    left: 7px;
+    width: 52px;
+    height: 100px;
+    background: var(--color-paper);
+    box-shadow: 0 8px 14px rgb(0 0 0 / 0.5);
+    transition: top 900ms var(--ease-mech);
+}
+
+.house-cabin > span {
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgb(27 26 24 / 0.4);
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 7px,
+        rgb(27 26 24 / 0.3) 7px 8px
+    );
+}

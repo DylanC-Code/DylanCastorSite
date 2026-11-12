@@ -1,0 +1,75 @@
+---
+import type { NoteFieldsViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
+
+/**
+ * The note on the door's glass: the agencies postcard's fields and rules
+ * ("Your message" on ruled lines, "Reply to" required, "From" optional) and
+ * the ink button. A plain form.
+ */
+interface Props {
+    fields: NoteFieldsViewModel;
+    replyError: string;
+}
+
+const { fields, replyError } = Astro.props;
+---
+
+<form class="slot-note" method="post" data-letter-form>
+    <label for="slot-message" class="paper-label">
+        {fields.messageLabel}
+    </label>
+    <textarea
+        id="slot-message"
+        name="message"
+        rows="3"
+        class="paper-field paper-lines slot-message"
+        placeholder={fields.messagePlaceholder}
+        data-letter-message
+    />
+    <div class="slot-fields">
+        <div>
+            <label for="slot-reply" class="paper-label">
+                {fields.replyLabel}
+            </label>
+            <input
+                id="slot-reply"
+                name="replyTo"
+                type="email"
+                required
+                autocomplete="email"
+                class="paper-field"
+                placeholder={fields.replyPlaceholder}
+                aria-describedby="slot-reply-error"
+                data-letter-reply
+            />
+            <p
+                id="slot-reply-error"
+                class="paper-error"
+                data-letter-reply-error
+                hidden
+            >
+                {replyError}
+            </p>
+        </div>
+        <div>
+            <label for="slot-from" class="paper-label">
+                {fields.fromLabel}
+            </label>
+            <input
+                id="slot-from"
+                name="from"
+                type="text"
+                autocomplete="organization"
+                class="paper-field"
+                placeholder={fields.fromPlaceholder}
+                data-letter-from
+            />
+        </div>
+    </div>
+    <button type="submit" class="paper-post slot-send">
+        {fields.send}{" "}
+        <span aria-hidden="true" class="paper-arrow">
+            →
+        </span>
+    </button>
+</form>

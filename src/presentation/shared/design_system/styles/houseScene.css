@@ -1,0 +1,100 @@
+/*
+ * The house's scenes (brands home): one 440 × 200 SVG per level, drawn in
+ * copper lines on the dark ground; inside the chosen level, in paper ink on
+ * paper. The classes below are the scenes' whole palette. `.an` moves only in
+ * the chosen level, from its start; `.run` (the belt's pulleys) always runs.
+ * Both pause when the house is off screen; with reduced motion, nothing moves.
+ */
+.scene {
+    display: block;
+    overflow: visible;
+}
+
+.scene .ln {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.5);
+    stroke-width: 1.2;
+    transition: stroke 300ms var(--ease-out);
+}
+
+.scene .cu {
+    fill: none;
+    stroke: var(--color-copper);
+    stroke-width: 1.4;
+}
+
+.scene .fi {
+    fill: rgb(227 154 106 / 0.85);
+    stroke: none;
+}
+
+.scene .fc {
+    fill: var(--color-copper);
+    stroke: none;
+}
+
+.scene .bg {
+    fill: var(--color-ground);
+}
+
+.scene .px {
+    fill: var(--color-ground);
+    stroke: none;
+}
+
+.scene .tb {
+    fill: rgb(227 154 106 / 0.9);
+    stroke: none;
+    font: italic 400 24px var(--font-display);
+}
+
+.scene .tx {
+    fill: rgb(227 154 106 / 0.9);
+    stroke: none;
+    font: italic 400 15px var(--font-display);
+}
+
+.scene .an {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .ln {
+    stroke: var(--color-paper-ink);
+}
+
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .fi,
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .tb,
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .tx {
+    fill: var(--color-paper-ink);
+}
+
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .bg,
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .px {
+    fill: var(--color-paper);
+}
+
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .cu {
+    stroke: var(--color-paper-copper);
+}
+
+:is([aria-selected="true"], [data-scroll-level][data-current]) .scene .fc {
+    fill: var(--color-paper-copper);
+}
+
+/* Still (drawn complete) unless chosen; replayed from the start when chosen. */
+:is([aria-selected="false"], [data-scroll-level]:not([data-current]))
+    .scene
+    .an {
+    animation: none;
+}
+
+[data-onscreen="false"] .scene :is(.an, .run) {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scene :is(.an, .run) {
+        animation: none;
+    }
+}

@@ -1,0 +1,16 @@
+---
+import AppsScene from "#/presentation/visitor/brands/ui/scenes/AppsScene.astro";
+import BehindScene from "#/presentation/visitor/brands/ui/scenes/BehindScene.astro";
+import StorefrontScene from "#/presentation/visitor/brands/ui/scenes/StorefrontScene.astro";
+import ThemeScene from "#/presentation/visitor/brands/ui/scenes/ThemeScene.astro";
+
+/** The scene of level `index`, top to bottom: one swappable file each. */
+interface Props {
+    index: number;
+}
+
+const scenes = [StorefrontScene, ThemeScene, AppsScene, BehindScene];
+const Scene = scenes[Astro.props.index] ?? StorefrontScene;
+---
+
+<Scene />

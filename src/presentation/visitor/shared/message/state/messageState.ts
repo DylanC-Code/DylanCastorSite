@@ -18,7 +18,7 @@ export const onFront: MessageState = {
 };
 
 /** Where a form with no front (the letter slot) starts. */
-const onWritingSide: MessageState = {
+export const onWritingSide: MessageState = {
     phase: "writing",
     replyInvalid: false,
 };

@@ -1,0 +1,103 @@
+/*
+ * The house's opening front: two 260px door halves over the levels and the
+ * shaft. "Open the house" swings them outwards (1300ms) and fades the plate
+ * and the button (300ms). It does not close again.
+ */
+.house-front {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    transform-style: preserve-3d;
+}
+
+.house-door {
+    position: absolute;
+    top: 0;
+    width: 260px;
+    height: 492px;
+    box-sizing: border-box;
+    border: 1px solid rgb(227 154 106 / 0.6);
+    background: #11141a;
+    transition: transform 1300ms var(--ease-mech);
+}
+
+.house-door.is-left {
+    left: 0;
+    transform-origin: 0 50%;
+}
+
+.house-door.is-right {
+    right: 0;
+    transform-origin: 100% 50%;
+}
+
+[data-open] .house-door.is-left {
+    transform: rotateY(-97deg);
+}
+
+[data-open] .house-door.is-right {
+    transform: rotateY(97deg);
+}
+
+.house-window {
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    width: 58px;
+    height: 70px;
+    border: 1px solid rgb(227 154 106 / 0.6);
+    background:
+        linear-gradient(rgb(227 154 106 / 0.4), rgb(227 154 106 / 0.4)) 50% 0 /
+            1px 100% no-repeat,
+        linear-gradient(rgb(227 154 106 / 0.4), rgb(227 154 106 / 0.4)) 0 50% /
+            100% 1px no-repeat;
+    box-shadow:
+        inset 0 0 0 5px #11141a,
+        inset 0 0 0 6px rgb(227 154 106 / 0.3);
+}
+
+.house-door-earth {
+    position: absolute;
+    inset: 216px 0 0;
+    border-top: 2px solid rgb(227 154 106 / 0.8);
+    background:
+        repeating-linear-gradient(
+            135deg,
+            transparent 0 9px,
+            rgb(227 154 106 / 0.2) 9px 10px
+        ),
+        radial-gradient(rgb(227 154 106 / 0.35) 0 2px, transparent 3px) 10px
+            18px / 42px 58px;
+}
+
+.house-plate,
+.house-open {
+    position: absolute;
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+    transition: opacity 300ms var(--ease-out);
+}
+
+.house-plate {
+    top: 276px;
+    margin: 0;
+    padding: 11px 20px;
+    background: var(--color-paper);
+    box-shadow: 0 10px 20px rgb(0 0 0 / 0.5);
+    color: var(--color-paper-ink);
+    font: italic 400 20px / 1.2 var(--font-display);
+    white-space: nowrap;
+}
+
+.house-open {
+    top: 342px;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+[data-open] :is(.house-plate, .house-open) {
+    opacity: 0;
+    pointer-events: none;
+}

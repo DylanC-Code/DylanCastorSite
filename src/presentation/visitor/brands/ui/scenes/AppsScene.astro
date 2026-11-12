@@ -1,0 +1,103 @@
+---
+/**
+ * The apps level's scene: a loom, a worker beside it. Warp threads hang from
+ * the frame over the woven cloth; a row of punched cards steps along the top
+ * between two rollers, the copper shuttle runs across, the cloth roller turns;
+ * the small pulley on the right is driven by the house's belt. A sketch to be
+ * redrawn: swap this file only.
+ */
+---
+
+<svg class="scene" viewBox="0 0 440 200" aria-hidden="true" focusable="false">
+    <path class="ln" d="M6 186H434" />
+    <path class="ln" d="M170 186V40H390V186M160 40H400M170 150H390" />
+    <path class="ln an cards" d="M176 28H384" stroke-dasharray="16 5" />
+    <path class="ln" d="M176 21H384M176 35H384" stroke-width="1" />
+    <path class="ln" d="M188 46V124" stroke-width=".8" />
+    <path class="ln" d="M203 46V124" stroke-width=".8" />
+    <path class="ln" d="M218 46V124" stroke-width=".8" />
+    <path class="ln" d="M233 46V124" stroke-width=".8" />
+    <path class="ln" d="M248 46V124" stroke-width=".8" />
+    <path class="ln" d="M263 46V124" stroke-width=".8" />
+    <path class="ln" d="M278 46V124" stroke-width=".8" />
+    <path class="ln" d="M293 46V124" stroke-width=".8" />
+    <path class="ln" d="M308 46V124" stroke-width=".8" />
+    <path class="ln" d="M323 46V124" stroke-width=".8" />
+    <path class="ln" d="M338 46V124" stroke-width=".8" />
+    <path class="ln" d="M353 46V124" stroke-width=".8" />
+    <path class="ln" d="M368 46V124" stroke-width=".8" />
+    <rect class="ln" x="186" y="124" width="184" height="24" />
+    <path class="ln" d="M186 129h184" stroke-width=".8" />
+    <path class="ln" d="M186 134h184" stroke-width=".8" />
+    <path class="ln" d="M186 139h184" stroke-width=".8" />
+    <path class="ln" d="M186 144h184" stroke-width=".8" />
+    <g class="an shuttle">
+        <path class="fc" d="M190 118l10-5h14l10 5-10 5h-14z" />
+    </g>
+    <g class="an wheel" style="--o: 280px 166px; --t: 2600ms">
+        <circle class="ln" cx="280" cy="166" r="11" />
+        <path class="ln" d="M269 166h22" />
+    </g>
+    <circle class="fi" cx="112" cy="150" r="6.5" />
+    <path
+        class="fi"
+        d="M102 145c2-7 16-8 20-1l5 1v2H102zM104 186v-19a8 8 0 0 1 16 0v19z"
+    />
+    <circle class="ln bg" cx="176" cy="28" r="8" />
+    <circle class="ln bg" cx="384" cy="28" r="8" />
+    <path class="ln" d="M392 28H422M186 166H269M291 166H374" />
+    <g class="run wheel" style="--o: 430px 28px; --t: 1100ms">
+        <circle class="ln" cx="430" cy="28" r="8" />
+        <path class="ln" d="M422 28h16M430 20v16" />
+    </g>
+</svg>
+
+<style>
+    /*
+     * Geometry at the scene's weight; the animations under :where(), so the
+     * house's still and reduced-motion rules (houseScene.css) always win.
+     */
+    .scene .cards {
+        stroke-width: 13px;
+    }
+
+    .scene .wheel {
+        transform-box: view-box;
+        transform-origin: var(--o);
+    }
+
+    :where(.cards) {
+        animation: apps-feedx 800ms linear 0ms infinite both;
+    }
+
+    :where(.shuttle) {
+        animation: apps-shuttle 1700ms cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+
+    :where(.wheel) {
+        animation: apps-spin var(--t) linear infinite;
+    }
+
+    @keyframes apps-feedx {
+        to {
+            stroke-dashoffset: -21;
+        }
+    }
+
+    @keyframes apps-shuttle {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        50% {
+            transform: translateX(150px);
+        }
+    }
+
+    @keyframes apps-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>

@@ -1,0 +1,63 @@
+---
+import HouseFront from "#/presentation/visitor/brands/ui/HouseFront.astro";
+import HouseLevel from "#/presentation/visitor/brands/ui/HouseLevel.astro";
+import HouseRoof from "#/presentation/visitor/brands/ui/HouseRoof.astro";
+import HouseScene from "#/presentation/visitor/brands/ui/scenes/HouseScene.astro";
+
+/**
+ * The house: the roof and its dial, brick walls, the four levels (a tablist)
+ * beside the lift shaft, the belt through three of them, the plinth, and the
+ * street with its earth and captions under the storefront. Shown open; the
+ * script closes its front until "Open the house" is pressed.
+ */
+interface Props {
+    levels: readonly string[];
+    plate: string;
+    open: string;
+    above: string;
+    below: string;
+}
+
+const { levels, plate, open, above, below } = Astro.props;
+---
+
+<div class="house" data-house data-onscreen="true">
+    <HouseRoof />
+    <div class="house-body">
+        <span aria-hidden="true" class="house-bricks" />
+        <div class="house-inside">
+            <div
+                class="house-levels"
+                role="tablist"
+                aria-label="Levels of the store"
+                aria-orientation="vertical"
+                data-house-levels
+            >
+                {levels.map((name, index) => (
+                    <HouseLevel name={name} index={index}>
+                        <HouseScene index={index} />
+                    </HouseLevel>
+                ))}
+            </div>
+            <span aria-hidden="true" class="house-shaft">
+                <span class="house-rope" />
+                <span class="house-cabin">
+                    <span />
+                </span>
+            </span>
+            <span aria-hidden="true" class="house-belt" />
+            <HouseFront plate={plate} open={open} />
+        </div>
+        <span aria-hidden="true" class="house-bricks" />
+    </div>
+    <span aria-hidden="true" class="house-plinth" />
+    <span aria-hidden="true" class="house-street" />
+    <span aria-hidden="true" class="house-earth is-left" />
+    <span aria-hidden="true" class="house-earth is-right" />
+    <span aria-hidden="true" class="house-caption is-above">
+        {above}
+    </span>
+    <span aria-hidden="true" class="house-caption is-below">
+        {below}
+    </span>
+</div>

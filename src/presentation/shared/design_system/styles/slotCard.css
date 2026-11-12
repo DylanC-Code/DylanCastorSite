@@ -1,0 +1,83 @@
+/*
+ * The letter slot's card, risen on the glass once the message went through
+ * (1700ms in), with "Write another"; the failure sentence under the door;
+ * and the slot below 600px: the note flat, full width, no door drawn.
+ */
+.slot-card {
+    position: absolute;
+    top: 104px;
+    left: 50%;
+    z-index: 5;
+    box-sizing: border-box;
+    width: 300px;
+    margin-left: -150px;
+    padding: 26px 22px 22px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow:
+        inset 0 0 0 7px var(--color-paper),
+        inset 0 0 0 8px rgb(27 26 24 / 0.2),
+        0 20px 40px rgb(0 0 0 / 0.5);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(18px) rotate(-1.5deg);
+    transition:
+        opacity 150ms var(--ease-out),
+        transform 600ms var(--ease-land),
+        visibility 0ms 150ms;
+}
+
+[data-state="posted"] .slot-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) rotate(-1.5deg);
+    transition:
+        opacity 300ms var(--ease-out) 1700ms,
+        transform 600ms var(--ease-land) 1700ms,
+        visibility 0ms 1700ms;
+}
+
+.slot-card > .paper-cap {
+    margin: 0;
+}
+
+.slot-card-words {
+    margin: 8px 0 0;
+    font: 400 26px / 1.15 var(--font-display);
+}
+
+.slot-again {
+    margin-top: 14px;
+    padding: 0 0 3px;
+    border: 0;
+    border-bottom: 1px solid var(--color-paper-copper);
+    background: none;
+    color: var(--color-paper-copper);
+    font: 600 12px / 1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.slot-failed {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+}
+
+/* The doorstep under the door. */
+.slot-step {
+    display: block;
+    width: 640px;
+    height: 14px;
+    border-top: 2px solid rgb(227 154 106 / 0.8);
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 40px,
+        rgb(227 154 106 / 0.25) 40px 41px
+    );
+}

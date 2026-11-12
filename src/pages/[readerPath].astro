@@ -1,19 +1,19 @@
 ---
 import { agenciesPage } from "#/content/agencySections.ts";
 import { books } from "#/content/books.ts";
+import { brandsPage } from "#/content/brandsHome.ts";
 import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
-import AgenciesPage from "#/presentation/visitor/agencies/ui/AgenciesPage.astro";
-import ReaderPathPage from "#/presentation/visitor/reader_path/ui/ReaderPathPage.astro";
+import ReaderPathHome from "#/presentation/visitor/reader_path/ui/ReaderPathHome.astro";
 import { forReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
 import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * The reading paths' homes, one per book. The agencies home is being built
- * (hero, steps and its four closing sections); the others are
- * placeholders. All are kept out of search until written.
+ * The reading paths' homes, one per book: the agencies home and the brands
+ * home are built, the engineers' is a placeholder. All are kept out of search
+ * until their words are final.
  */
 export function getStaticPaths(): {
     params: { readerPath: string };
@@ -43,10 +43,12 @@ const title = forReader(book);
         footer={home.footer}
         switcher={switcherFor(null)}
     >
-        {book.id === "agencies" ? (
-            <AgenciesPage {...agenciesPage} book={book} labels={books.labels} />
-        ) : (
-            <ReaderPathPage title={title} />
-        )}
+        <ReaderPathHome
+            book={book}
+            title={title}
+            labels={books.labels}
+            agencies={agenciesPage}
+            brands={brandsPage}
+        />
     </SiteFrame>
 </HtmlDocument>

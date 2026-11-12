@@ -1,0 +1,27 @@
+---
+/**
+ * One level of the house: a tab, its name in small caps and its scene. The
+ * storefront is chosen at first; the script moves the choice.
+ */
+interface Props {
+    name: string;
+    index: number;
+}
+
+const { name, index } = Astro.props;
+const chosen = index === 0;
+---
+
+<button
+    type="button"
+    role="tab"
+    id={`house-tab-${index}`}
+    class="level"
+    aria-selected={chosen ? "true" : "false"}
+    aria-controls={`house-panel-${index}`}
+    tabindex={chosen ? 0 : -1}
+    data-level={index}
+>
+    <span class="level-name">{name}</span>
+    <slot />
+</button>

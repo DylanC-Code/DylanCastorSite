@@ -1,0 +1,36 @@
+---
+import SlotDoor from "#/presentation/visitor/brands/ui/SlotDoor.astro";
+import type { LetterSlotViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
+
+/** "Have a task for your store?": the words, then the door and its slot. */
+type Props = LetterSlotViewModel;
+
+const { title, titleItalic, text, plain, emailHref } = Astro.props;
+---
+
+<section
+    class="page mt-30 pb-30 md:mt-[190px] md:pb-[150px]"
+    data-reveal
+    aria-labelledby="slot-title"
+>
+    <div class="slot-grid">
+        <div class="max-w-[400px]">
+            <h2
+                id="slot-title"
+                class="font-display text-[34px] leading-[1.08] text-ink md:text-[46px]"
+            >
+                {title} <em class="italic">{titleItalic}</em>
+            </h2>
+            <p class="mt-4 text-[17px] leading-[27px] text-ink-muted md:text-[18px] md:leading-[29px]">
+                {text}
+            </p>
+            <p class="mt-[22px] text-[13px] text-ink-faint max-md:hidden">
+                {plain.before}{" "}
+                <a href={emailHref} class="link-accent">
+                    {plain.label}
+                </a>
+            </p>
+        </div>
+        <SlotDoor {...Astro.props} />
+    </div>
+</section>

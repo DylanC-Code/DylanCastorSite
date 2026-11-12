@@ -1,0 +1,72 @@
+---
+/**
+ * The behind-the-store level's scene: a line shaft. A big wheel, a worker
+ * beside it, drives by a belt a shaft hung from the ceiling on two brackets; a
+ * second pulley on the shaft drives a machine below. The small pulley on the
+ * right is driven by the house's belt. A sketch to be redrawn: swap this file
+ * only.
+ */
+---
+
+<svg class="scene" viewBox="0 0 440 200" aria-hidden="true" focusable="false">
+    <path class="ln" d="M6 186H434" />
+    <path class="ln shaft" d="M196 64H430" />
+    <circle class="fi" cx="196" cy="64" r="3.5" />
+    <path class="ln" d="M275 -40V56h10V-40" />
+    <circle class="ln bg" cx="280" cy="64" r="6" />
+    <path class="ln" d="M381 -40V56h10V-40" />
+    <circle class="ln bg" cx="386" cy="64" r="6" />
+    <path class="ln" d="M179 130L224 60M250 134L250 68" />
+    <g class="an wheel" style="--o: 214px 138px; --t: 2200ms">
+        <circle class="ln" cx="214" cy="138" r="36" />
+        <circle class="ln" cx="214" cy="138" r="31" />
+        <path class="ln" d="M178 138h72M214 102v72" />
+    </g>
+    <g class="an wheel" style="--o: 237px 64px; --t: 1100ms">
+        <circle class="ln" cx="237" cy="64" r="13" />
+        <circle class="ln" cx="237" cy="64" r="8" />
+        <path class="ln" d="M224 64h26M237 51v26" />
+    </g>
+    <path class="ln" d="M214 174v12M192 186h44" />
+    <path class="ln" d="M317 64V140M343 64V140" />
+    <g class="an wheel" style="--o: 330px 64px; --t: 1100ms">
+        <circle class="ln" cx="330" cy="64" r="13" />
+        <circle class="ln" cx="330" cy="64" r="8" />
+        <path class="ln" d="M317 64h26M330 51v26" />
+    </g>
+    <path class="ln" d="M290 186V150h80v36M302 150v-10h56v10" />
+    <circle class="fi" cx="136" cy="150" r="6.5" />
+    <path
+        class="fi"
+        d="M126 145c2-7 16-8 20-1l5 1v2H126zM128 186v-19a8 8 0 0 1 16 0v19z"
+    />
+    <g class="run wheel" style="--o: 430px 64px; --t: 1100ms">
+        <circle class="ln" cx="430" cy="64" r="8" />
+        <path class="ln" d="M422 64h16M430 56v16" />
+    </g>
+</svg>
+
+<style>
+    /*
+     * Geometry at the scene's weight; the animation under :where(), so the
+     * house's still and reduced-motion rules (houseScene.css) always win.
+     */
+    .scene .shaft {
+        stroke-width: 3px;
+    }
+
+    .scene .wheel {
+        transform-box: view-box;
+        transform-origin: var(--o);
+    }
+
+    :where(.wheel) {
+        animation: behind-spin var(--t) linear infinite;
+    }
+
+    @keyframes behind-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>

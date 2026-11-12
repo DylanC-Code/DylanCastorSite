@@ -1,0 +1,132 @@
+---
+/**
+ * The storefront level's scene: two shops, A plain and B dressed (cornice,
+ * sign, copper-striped awning, a jacket in the window, a small tree).
+ * Visitors in flat caps walk in from the left, one every 840ms; one in five
+ * stops at A, the others go on to B. Under the floor a bar grows under each
+ * shop, B's three times A's, in copper. A sketch to be redrawn: swap this file
+ * only.
+ */
+---
+
+<svg class="scene" viewBox="0 0 440 200" aria-hidden="true" focusable="false">
+    <path class="ln" d="M6 186H434" />
+    <text class="tb" x="206" y="30" text-anchor="middle">
+        A
+    </text>
+    <text class="tb" x="353" y="30" text-anchor="middle">
+        B
+    </text>
+    <path class="ln" d="M150 186V92H262V186M164 104h84" />
+    <rect class="ln" x="162" y="118" width="46" height="46" />
+    <path class="ln" d="M222 186V126H250V186M227 131H245V159H227Z" />
+    <circle class="fi" cx="244" cy="167" r="1.8" />
+    <path
+        class="ln"
+        d="M282 186V66H424V186M276 66H430M280 60H426M292 186V96M414 186V96"
+    />
+    <rect class="ln" x="298" y="72" width="110" height="18" />
+    <path class="ln" d="M316 81h74" />
+    <rect class="ln" x="300" y="124" width="62" height="54" />
+    <path class="ln" d="M318 132c6-8 19-8 24 0l10 7-7 7v26H315V146l-7-7z" />
+    <path class="ln" d="M312 178h38" />
+    <path class="ln" d="M374 186V122H408V186M379 127H403V157H379Z" />
+    <circle class="fi" cx="402" cy="166" r="1.8" />
+    <path class="ln bg" d="M294 96H412L420 118H286Z" />
+    <path class="cu" d="M314 96L308 118" />
+    <path class="cu" d="M333 96L331 118" />
+    <path class="cu" d="M353 96L353 118" />
+    <path class="cu" d="M373 96L375 118" />
+    <path class="cu" d="M392 96L398 118" />
+    <path
+        class="ln"
+        d="M286 118q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0q5 7 10 0"
+    />
+    <path class="ln" d="M432 176v-12M426 186l2-10h8l2 10" />
+    <circle class="ln" cx="432" cy="156" r="8" />
+    <rect class="fi an bar" x="150" y="191" width="34" height="5" />
+    <rect class="fc an bar" x="282" y="191" width="104" height="5" />
+    <g class="an walker" style="--d: 368px; --delay: 0ms">
+        <circle class="fi" cx="22" cy="161" r="5" />
+        <path
+            class="fi"
+            d="M14 157c2-6 12-6 15-1l4 1v2H14zM15 186v-14a7 7 0 0 1 14 0v14z"
+        />
+    </g>
+    <g class="an walker" style="--d: 214px; --delay: 840ms">
+        <circle class="fi" cx="22" cy="161" r="5" />
+        <path
+            class="fi"
+            d="M14 157c2-6 12-6 15-1l4 1v2H14zM15 186v-14a7 7 0 0 1 14 0v14z"
+        />
+    </g>
+    <g class="an walker" style="--d: 368px; --delay: 1680ms">
+        <circle class="fi" cx="22" cy="161" r="5" />
+        <path
+            class="fi"
+            d="M14 157c2-6 12-6 15-1l4 1v2H14zM15 186v-14a7 7 0 0 1 14 0v14z"
+        />
+    </g>
+    <g class="an walker" style="--d: 368px; --delay: 2520ms">
+        <circle class="fi" cx="22" cy="161" r="5" />
+        <path
+            class="fi"
+            d="M14 157c2-6 12-6 15-1l4 1v2H14zM15 186v-14a7 7 0 0 1 14 0v14z"
+        />
+    </g>
+    <g class="an walker" style="--d: 368px; --delay: 3360ms">
+        <circle class="fi" cx="22" cy="161" r="5" />
+        <path
+            class="fi"
+            d="M14 157c2-6 12-6 15-1l4 1v2H14zM15 186v-14a7 7 0 0 1 14 0v14z"
+        />
+    </g>
+</svg>
+
+<style>
+    /*
+     * Geometry at the scene's weight; the animations under :where(), so the
+     * house's still and reduced-motion rules (houseScene.css) always win.
+     */
+    .scene .bar {
+        transform-origin: 0 50%;
+    }
+
+    :where(.bar) {
+        animation: storefront-grow 2600ms linear 900ms both;
+    }
+
+    :where(.walker) {
+        animation: storefront-walk 4200ms linear var(--delay) infinite both;
+    }
+
+    @keyframes storefront-grow {
+        from {
+            transform: scaleX(0);
+        }
+
+        to {
+            transform: scaleX(1);
+        }
+    }
+
+    @keyframes storefront-walk {
+        0% {
+            transform: translateX(0);
+            opacity: 0;
+        }
+
+        10% {
+            opacity: 1;
+        }
+
+        86% {
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateX(var(--d));
+            opacity: 0;
+        }
+    }
+</style>

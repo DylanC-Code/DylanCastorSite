@@ -1,0 +1,145 @@
+{
+    "note": "Every word of the brands home. Corrected with Dylan on 12 Nov 2026 (hero, the house, the guarantee, how we start, the closing ask). Still drafts: the small labels on the objects (listed in toCorrect). Change words only here.",
+    "hero": {
+        "eyebrow": "For Shopify brands",
+        "title": "One developer",
+        "titleItalic": "for your whole store.",
+        "lead": "For Shopify brands that want one developer instead of an agency: tests, theme work, custom apps and the servers behind them.",
+        "button": "Tell me what your store needs",
+        "link": "See the store, front and back ↓",
+        "book": "the Shopify brands book (see \"book\"), open on its contents page, as on /agencies"
+    },
+    "house": {
+        "title": "Your store,",
+        "titleItalic": "front and back.",
+        "lead": "What your customers see, and everything under it.",
+        "plate": "Your store",
+        "open": "Open the house",
+        "above": "Your customers see ↑",
+        "below": "They never see ↓",
+        "levels": [
+            {
+                "name": "The storefront",
+                "caption": "What your customers see",
+                "sentence": "A/B tests that never flash the old page, and results I read with you.",
+                "points": [
+                    "Tests built and checked on desktop and mobile",
+                    "Results read with you",
+                    "Nothing goes live without your OK"
+                ],
+                "scene": "Two shops, A plain and B dressed; visitors walk in, most go to B"
+            },
+            {
+                "name": "The theme",
+                "caption": "The code of your store",
+                "sentence": "Changes, fixes and speed. A winning test is rewritten as clean theme code.",
+                "points": [
+                    "Theme changes and fixes",
+                    "Speed checked before and after",
+                    "Winners kept, test code removed"
+                ],
+                "scene": "The sewing machine"
+            },
+            {
+                "name": "The apps",
+                "caption": "What a theme cannot do",
+                "sentence": "Custom Shopify apps built for your store, when no existing app fits.",
+                "points": [
+                    "Made for one job, yours",
+                    "Tests first, small files",
+                    "The code is yours"
+                ],
+                "scene": "The loom with punched cards"
+            },
+            {
+                "name": "Behind the store",
+                "caption": "Where your apps run",
+                "sentence": "The servers, the databases and the deploys behind those apps.",
+                "points": [
+                    "Servers and databases set up",
+                    "Every change checked before it ships"
+                ],
+                "scene": "The line shaft and its belt"
+            }
+        ],
+        "pointsNote": "A level has two or three points: never pad a level to three."
+    },
+    "guarantee": {
+        "title": "On your store,",
+        "titleItalic": "you keep control.",
+        "lead": "Whatever the job.",
+        "over": "On your store",
+        "heading": "Guarantee",
+        "signedLabel": "Signed",
+        "signed": "Dylan Castor",
+        "seal": "DC",
+        "letter": "On your store, [nothing goes live without your OK]. I work on [a copy of your theme] and I do the work [myself]. I check [the speed before and after], and if a test breaks while it is live, I [fix it at once]. I ask only for [the access the job needs], I sign [an NDA] if you want one, and [the code stays yours].",
+        "letterNote": "The words between [ ] are underlined in copper; the brackets are not shown."
+    },
+    "start": {
+        "title": "How we",
+        "titleItalic": "start.",
+        "sentence": "Pick one task: a test, a fix, a theme change or a small app. I build it at my normal rate. You judge the quality, the speed and the handover.",
+        "emphasis": "one task",
+        "text": "If it works for you, we move to a fixed number of days per month.",
+        "sign": ["Come in with", "one task"],
+        "plate": ["Then", "Days", "per month"]
+    },
+    "ask": {
+        "title": "Have a task",
+        "titleItalic": "for your store?",
+        "text": "Write it on the note and slip it through the door.",
+        "plain": ["Or", "email me directly"],
+        "messageLabel": "Your message",
+        "messagePlaceholder": "Our store needs…",
+        "replyLabel": "Reply to",
+        "replyPlaceholder": "your email",
+        "fromLabel": "From (if you like)",
+        "fromPlaceholder": "your name, your store",
+        "send": "Slip it through the door",
+        "flap": "Letters",
+        "letter": "To Dylan Castor",
+        "sent": ["Through the door", "I will reply", "to your email."],
+        "again": "Write another"
+    },
+    "toCorrect": [
+        "The house: \"Your store\" (plate), \"Open the house\", \"Your customers see ↑\", \"They never see ↓\", the four level captions",
+        "The certificate: \"On your store\", \"Guarantee\", \"Signed\", \"Whatever the job.\"",
+        "The door: \"Come in with one task\", \"Then / Days per month\"",
+        "The note: field labels and placeholders, \"Letters\", \"To Dylan Castor\", \"Write another\"",
+        "The four page sentences of the green book (book.chapters[].page)"
+    ],
+    "book": {
+        "note": "The Shopify brands book (green). Decided 12 Nov: new title and four chapters (was: \"Tests built and shipped on your store\", chapters I and All). This replaces the brands entry of the books V2 data, so the book on the root home changes too. The four page sentences are drafts.",
+        "for": "For Shopify brands",
+        "title": "One developer for your whole store",
+        "cta": "Start with Shopify brands →",
+        "chapters": [
+            {
+                "floor": "I",
+                "area": "Shopify & CRO",
+                "tag": "the store",
+                "page": "Tests on your store that never flash the original, theme work, and winners kept in your theme.",
+                "topic": "On this floor: Flicker-free A/B tests"
+            },
+            {
+                "floor": "II",
+                "area": "Development",
+                "tag": "the apps",
+                "page": "Custom apps for what a theme cannot do: typed code, tests on every change."
+            },
+            {
+                "floor": "IV",
+                "area": "Infrastructure",
+                "tag": "the servers",
+                "page": "The servers and databases behind your apps, with every change checked before it ships."
+            },
+            {
+                "floor": "All",
+                "area": "How I build software",
+                "tag": "the method",
+                "page": "Small files, tests first, every change checked: your store stays fast and easy to change."
+            }
+        ]
+    }
+}

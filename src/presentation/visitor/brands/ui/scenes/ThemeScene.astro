@@ -1,0 +1,97 @@
+---
+/**
+ * The theme level's scene: a sewing machine on a treadle table, a worker at
+ * it. The needle goes up and down, the hand wheel and the treadle wheel turn,
+ * a copper seam advances on the cloth; the small pulley on the right is driven
+ * by the house's belt. A sketch to be redrawn: swap this file only.
+ */
+---
+
+<svg class="scene" viewBox="0 0 440 200" aria-hidden="true" focusable="false">
+    <path class="ln" d="M6 186H434" />
+    <path class="ln" d="M150 132H410M176 132V186M384 132V186M176 164H384" />
+    <path
+        class="ln"
+        d="M214 132v-12h150v12M336 120V66h26v54M336 66H246q-12 0-12 12v12h16v-8h86"
+    />
+    <g class="an needle">
+        <path class="ln" d="M242 90v24" stroke-width="1.8" />
+    </g>
+    <g class="an wheel" style="--o: 376px 80px; --t: 900ms">
+        <circle class="ln" cx="376" cy="80" r="15" />
+        <path class="ln" d="M361 80h30M376 65v30" />
+    </g>
+    <g class="an wheel" style="--o: 280px 164px; --t: 900ms">
+        <circle class="ln" cx="280" cy="164" r="14" />
+        <path class="ln" d="M266 164h28M280 150v28" />
+    </g>
+    <path class="ln" d="M270 154L365 70M291 173L387 90" />
+    <path class="ln cloth" d="M338 119H214C200 119 198 130 182 130H158" />
+    <path
+        class="cu an seam"
+        d="M240 115H214C202 115 198 126 182 126H160"
+        stroke-dasharray="6 5"
+    />
+    <rect class="fc" x="290" y="48" width="12" height="18" />
+    <path class="cu" d="M296 48c-20-14-50 0-54 42" />
+    <circle class="fi" cx="112" cy="150" r="6.5" />
+    <path
+        class="fi"
+        d="M102 145c2-7 16-8 20-1l5 1v2H102zM104 186v-19a8 8 0 0 1 16 0v19z"
+    />
+    <g class="run wheel" style="--o: 430px 80px; --t: 1100ms">
+        <circle class="ln" cx="430" cy="80" r="8" />
+        <path class="ln" d="M422 80h16M430 72v16" />
+    </g>
+    <path class="ln" d="M391 80H422" />
+</svg>
+
+<style>
+    /*
+     * Geometry at the scene's weight; the animations under :where(), so the
+     * house's still and reduced-motion rules (houseScene.css) always win.
+     */
+    .scene .cloth {
+        stroke-width: 2.4px;
+    }
+
+    .scene .wheel {
+        transform-box: view-box;
+        transform-origin: var(--o);
+    }
+
+    :where(.needle) {
+        animation: theme-needle 260ms ease-in-out 0ms infinite both;
+    }
+
+    :where(.wheel) {
+        animation: theme-spin var(--t) linear infinite;
+    }
+
+    :where(.seam) {
+        animation: theme-feed 700ms linear 0ms infinite both;
+    }
+
+    @keyframes theme-needle {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(9px);
+        }
+    }
+
+    @keyframes theme-spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes theme-feed {
+        to {
+            stroke-dashoffset: -22;
+        }
+    }
+</style>

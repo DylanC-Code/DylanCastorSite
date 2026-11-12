@@ -1,0 +1,61 @@
+---
+import type { GuaranteeViewModel } from "#/presentation/visitor/brands/viewmodels/GuaranteeViewModel.ts";
+
+/**
+ * "On your store, my rules": the guarantee, a letter on paper bordered with
+ * copper rings, its key phrases underlined in copper, signed, then sealed in
+ * red wax 900ms after the sheet arrives. The letter is one real paragraph.
+ */
+type Props = GuaranteeViewModel;
+
+const {
+    title,
+    titleItalic,
+    lead,
+    over,
+    heading,
+    letter,
+    signedLabel,
+    signed,
+    seal,
+} = Astro.props;
+---
+
+<section
+    class="page mt-30 md:mt-[190px]"
+    data-reveal
+    aria-labelledby="guarantee-title"
+>
+    <div class="guarantee-grid">
+        <div>
+            <h2 id="guarantee-title" class="section-title">
+                {title} <em class="italic">{titleItalic}</em>
+            </h2>
+            <p class="mt-3.5 text-[17px] leading-[27px] text-ink-muted">
+                {lead}
+            </p>
+        </div>
+        <div class="guarantee" data-rise>
+            <span aria-hidden="true" class="guarantee-rings" />
+            <span aria-hidden="true" class="guarantee-frame" />
+            <p class="paper-cap text-center">{over}</p>
+            <p class="guarantee-heading">{heading}</p>
+            <p class="guarantee-letter">
+                {letter.map((run) =>
+                    run.marked ? (
+                        <span class="guarantee-mark">{run.text}</span>
+                    ) : (
+                        run.text
+                    ),
+                )}
+            </p>
+            <p class="guarantee-signed">
+                <span class="paper-cap">{signedLabel}</span>
+                <span class="guarantee-name">{signed}</span>
+            </p>
+            <span aria-hidden="true" class="wax-seal guarantee-seal">
+                <span>{seal}</span>
+            </span>
+        </div>
+    </div>
+</section>

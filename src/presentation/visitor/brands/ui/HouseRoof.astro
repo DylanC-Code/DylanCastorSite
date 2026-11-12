@@ -1,0 +1,33 @@
+---
+/**
+ * The house's roof: pitched, two faint slate lines, a chimney, a 3px base, and
+ * in its middle a half-round dial whose needle points at the chosen level.
+ */
+const ticks = [-54, -18, 18, 54];
+---
+
+<svg
+    class="house-roof"
+    viewBox="0 0 600 84"
+    width="572"
+    height="80"
+    aria-hidden="true"
+    focusable="false"
+>
+    <path class="roof-line" d="M0 83L300 8l300 75" stroke-width="1.5" />
+    <path class="roof-slate" d="M40 73L300 18l260 55M80 63L300 28l220 35" />
+    <path class="roof-line" d="M462 48V10h44v45M456 10h56" stroke-width="1.5" />
+    <path class="roof-line" d="M0 83h600" stroke-width="3" />
+    <path class="roof-dial" d="M250 82a50 50 0 0 1 100 0z" />
+    {ticks.map((angle) => (
+        <path
+            class="roof-tick"
+            d="M300 42V36"
+            transform={`rotate(${angle} 300 82)`}
+        />
+    ))}
+    <g class="house-needle">
+        <path d="M300 82V46" />
+    </g>
+    <circle class="roof-pin" cx="300" cy="82" r="4" />
+</svg>
