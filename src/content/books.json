@@ -57,35 +57,7 @@
             "reader": "Shopify brands",
             "leather": "green",
             "leatherStops": ["#2c4436", "#1f3328", "#111f17"],
-            "href": "/cro",
-            "bookmark": "Start with Shopify brands →",
-            "title": "Tests built and shipped on your store",
-            "contents": [
-                {
-                    "numeral": "I",
-                    "floor": "Shopify & CRO",
-                    "tag": "the tests"
-                },
-                {
-                    "numeral": "All",
-                    "floor": "How I build software",
-                    "tag": "the method"
-                }
-            ],
-            "steps": [
-                {
-                    "numeral": "I",
-                    "floor": "Shopify & CRO",
-                    "text": "Tests on your store that never flash the original, and winners kept in your theme.",
-                    "note": "On this floor: Flicker-free A/B tests"
-                },
-                {
-                    "numeral": "All",
-                    "floor": "How I build software",
-                    "text": "Small files, tests first, every change checked: your store stays fast and easy to change.",
-                    "note": null
-                }
-            ]
+            "href": "/cro"
         },
         {
             "id": "engineers",
