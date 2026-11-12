@@ -5,7 +5,7 @@
  */
 .ticket-band {
     position: sticky;
-    top: 84px;
+    top: var(--header-height);
     z-index: 5;
     margin-top: 28px;
     padding: 16px 0 18px;

@@ -83,12 +83,18 @@
     --duration-fast: 150ms;
     --duration-base: 300ms;
     --duration-slow: 700ms;
+    /* The sticky header's height: what sticks under it starts here. */
+    --header-height: 60px;
     --ground-light: radial-gradient(
         120% 75% at 50% -12%,
         var(--color-light-top) 0%,
         var(--color-ground-raised) 38%,
         var(--color-ground) 62%
     );
+
+    @media (min-width: 48rem) {
+        --header-height: 84px;
+    }
 }
 
 @layer base {

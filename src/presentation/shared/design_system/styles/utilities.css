@@ -69,12 +69,12 @@
      * a section's first line, not on the section and its padding.
      */
     html {
-        scroll-padding-top: calc(60px + 24px);
+        scroll-padding-top: calc(var(--header-height) + 24px);
     }
 
     @media (min-width: 48rem) {
         html {
-            scroll-padding-top: calc(84px + 32px);
+            scroll-padding-top: calc(var(--header-height) + 32px);
         }
     }
 
