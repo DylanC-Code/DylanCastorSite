@@ -1,0 +1,37 @@
+name: dylancastor_site
+
+services:
+    app:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        command: sleep infinity
+        # A real init as PID 1: `sleep infinity` never reaps the processes the editor
+        # and the tools leave behind, and every zombie counts against a pids limit.
+        init: true
+        # The environment comes from files Docker reads when it starts the container,
+        # never committed, so no code ever loads one (D8.25). The project's own is
+        # `devcontainer.env` (see devcontainer.env.example); the other two are set once
+        # per machine and shared by every project. A file that is missing is skipped,
+        # so a fresh clone still starts.
+        env_file:
+            - path: devcontainer.env
+              required: false
+            - path: ${HOME}/.config/claude/devcontainer.env
+              required: false
+            - path: ${HOME}/.config/gh/devcontainer.env
+              required: false
+        volumes:
+            - ..:/workspaces/dylancastor_site:cached
+            # node_modules keeps its volume, with Bun's cache inside it (bunfig.toml:
+            # Bun links packages from the cache, which must share their filesystem).
+            - dylancastor_site_node_modules:/workspaces/dylancastor_site/node_modules
+            # Bun's cache is kept in a named volume so packages survive rebuilds.
+            - dylancastor_site_bun_cache:/home/vscode/.cache/bun
+            # The host's SSH agent, so git pushes over SSH from inside. Without one
+            # the container still starts (initialize.sh says so), and pushes go over
+            # HTTPS with gh.
+            - ${SSH_AUTH_SOCK:-/dev/null}:/tmp/ssh-agent.sock
+volumes:
+    dylancastor_site_node_modules:
+    dylancastor_site_bun_cache:

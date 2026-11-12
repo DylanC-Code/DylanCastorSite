@@ -1,16 +1,15 @@
 {
     "name": "dylancastor_site",
-    // One container, no services: a static site needs no database (TightStack's
-    // compose.yaml is left out on purpose).
-    "build": { "dockerfile": "Dockerfile", "context": ".." },
+    // One container, no services: a static site needs no database.
+    "dockerComposeFile": ["compose.yml"],
+    "service": "app",
     "workspaceFolder": "/workspaces/dylancastor_site",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/dylancastor_site,type=bind,consistency=cached",
     "mounts": [
         // node_modules in its own volume, as in TightStack.
         "source=dylancastor_site_node_modules,target=/workspaces/dylancastor_site/node_modules,type=volume",
         // Bun's cache: the volume TightStack's containers already use, so a package
         // is downloaded once per machine.
-        "source=tightstack_bun_cache,target=/home/vscode/.cache/bun,type=volume"
+        "source=dylancastor_site_bun_cache,target=/home/vscode/.cache/bun,type=volume"
     ],
     "init": true,
     "remoteUser": "vscode",
@@ -22,9 +21,14 @@
         "BUN_INSTALL_CACHE_DIR": "/home/vscode/.cache/bun",
         "ASTRO_TELEMETRY_DISABLED": "1"
     },
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "/tmp/ssh-agent.sock"
+    },
     "forwardPorts": [4321],
     "portsAttributes": {
-        "4321": { "label": "astro" }
+        "4321": {
+            "label": "astro"
+        }
     },
     "postCreateCommand": "sh .devcontainer/postCreate.sh",
     "customizations": {
