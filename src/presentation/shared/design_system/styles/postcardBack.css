@@ -1,0 +1,67 @@
+/* The postcard's writing side: the message left, a line, the address part right. */
+
+.postcard-back {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+}
+
+.postcard-message {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 30px 28px 26px 34px;
+    border-right: 1px solid rgb(27 26 24 / 0.35);
+}
+
+.postcard-address {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 118px 30px 26px 28px;
+}
+
+.postcard-address:has([aria-invalid="true"]) {
+    padding-top: 100px;
+}
+
+.postcard-name {
+    margin: 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgb(27 26 24 / 0.35);
+    font: italic 400 22px / 1.2 var(--font-display);
+}
+
+.postcard-stamp {
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 74px;
+    background:
+        radial-gradient(circle, var(--color-paper) 3px, transparent 3.5px) -5px
+            -5px / 10px 10px,
+        linear-gradient(
+            160deg,
+            var(--color-copper-light),
+            var(--color-copper-deep)
+        );
+}
+
+.postcard-stamp > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 58px;
+    background: linear-gradient(
+        160deg,
+        var(--color-copper-light),
+        var(--color-copper-deep)
+    );
+    color: var(--color-paper);
+    font: italic 400 20px / 1 var(--font-display);
+}

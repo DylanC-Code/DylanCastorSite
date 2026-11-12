@@ -1,0 +1,30 @@
+---
+import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmodels/PostcardViewModel.ts";
+
+/** The postcard's front: one button, "Write to me", that turns the card. */
+type Props = PostcardViewModel["front"];
+
+const { caption, title, titleItalic, action, description } = Astro.props;
+---
+
+<button
+    type="button"
+    class="postcard-front"
+    aria-description={description}
+    data-postcard-front
+    hidden
+>
+    <span aria-hidden="true" class="postcard-frame" />
+    <span class="paper-cap">{caption}</span>
+    <span class="postcard-write">
+        {title}
+        <br />
+        <em>{titleItalic}</em>
+    </span>
+    <span aria-hidden="true" class="postcard-ornament">
+        <span />
+        <span />
+        <span />
+    </span>
+    <span class="postcard-turn">{action}</span>
+</button>

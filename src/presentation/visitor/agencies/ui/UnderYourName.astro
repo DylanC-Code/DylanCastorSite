@@ -1,0 +1,43 @@
+---
+import NameLabels from "#/presentation/visitor/agencies/ui/NameLabels.astro";
+import TermTile from "#/presentation/visitor/agencies/ui/TermTile.astro";
+import type { UnderYourNameViewModel } from "#/presentation/visitor/agencies/viewmodels/UnderYourNameViewModel.ts";
+
+/**
+ * "Under your name": the two labels, "Delivered by" landing over "Built by",
+ * then the six terms rising in. Played once, when the section comes in view.
+ */
+type Props = UnderYourNameViewModel;
+
+const { title, labelUnder, labelOver, terms, icons } = Astro.props;
+---
+
+<section
+    class="page mt-6 overflow-x-clip md:mt-[54px]"
+    data-reveal
+    aria-labelledby="under-your-name"
+>
+    <h2 id="under-your-name" class="section-title">
+        {title}
+    </h2>
+    <div class="under mt-[26px] flex flex-col items-center gap-10 md:mt-11">
+        <NameLabels under={labelUnder} over={labelOver} />
+        <ul class="under-terms grid w-full grid-cols-2 gap-x-[18px] gap-y-5 md:gap-x-8 md:gap-y-[22px]">
+            {terms.map((term, index) => (
+                <TermTile term={term} icons={icons} index={index} />
+            ))}
+        </ul>
+    </div>
+</section>
+
+<style>
+    /* From 1000px the labels sit left of the terms (400px, 72px apart). */
+    @media (min-width: 62.5rem) {
+        .under {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            align-items: start;
+            gap: 72px;
+        }
+    }
+</style>

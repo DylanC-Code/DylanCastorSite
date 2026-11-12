@@ -1,0 +1,32 @@
+---
+import StepIcon from "#/presentation/visitor/agencies/ui/StepIcon.astro";
+import type { TermViewModel } from "#/presentation/visitor/agencies/viewmodels/UnderYourNameViewModel.ts";
+
+/** One term of the work: a rule, the icon, the title, the line. */
+interface Props {
+    term: TermViewModel;
+    icons: Readonly<Record<string, string>>;
+    index: number;
+}
+
+const { term, icons, index } = Astro.props;
+---
+
+<li class="term" data-rise style={`--i: ${index}`}>
+    <span class="text-accent">
+        <StepIcon name={term.icon} icons={icons} size={26} />
+    </span>
+    <h3 class="mt-2 font-display text-[19px] leading-[1.15] text-ink md:text-[21px]">
+        {term.title}
+    </h3>
+    <p class="mt-[5px] text-[13.5px] leading-5 text-ink-muted">{term.text}</p>
+</li>
+
+<style>
+    /* They rise 120ms apart, from 500ms after the section comes in view. */
+    .term[data-rise] {
+        padding-top: 14px;
+        border-top: 1px solid var(--color-line-strong);
+        transition-delay: calc(500ms + var(--i) * 120ms);
+    }
+</style>

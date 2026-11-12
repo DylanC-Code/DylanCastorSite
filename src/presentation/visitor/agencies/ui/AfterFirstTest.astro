@@ -1,0 +1,48 @@
+---
+import MonthlyPass from "#/presentation/visitor/agencies/ui/MonthlyPass.astro";
+import type { AfterFirstTestViewModel } from "#/presentation/visitor/agencies/viewmodels/AfterFirstTestViewModel.ts";
+
+/** "After the first test": the words left, the monthly pass landing right. */
+type Props = AfterFirstTestViewModel;
+
+const { title, sentence, emphasis, text, pass } = Astro.props;
+const [before = "", after = ""] = sentence.split(emphasis);
+---
+
+<section
+    class="page mt-30 md:mt-[190px]"
+    data-reveal
+    aria-labelledby="after-the-first-test"
+>
+    <div class="after flex flex-col gap-10">
+        <div class="max-w-[460px]">
+            <h2 id="after-the-first-test" class="section-title">
+                {title}
+            </h2>
+            <p class="mt-[22px] font-display text-[21px] leading-[1.36] text-ink md:text-[24px]">
+                {before}
+                <em class="text-accent italic">{emphasis}</em>
+                {after}
+            </p>
+            <p class="mt-3.5 text-[18px] leading-[1.6] text-ink-muted">
+                {text}
+            </p>
+        </div>
+        <MonthlyPass {...pass} />
+    </div>
+</section>
+
+<style>
+    /*
+     * Side by side once the pass fits beside the words (520px, 80px apart):
+     * from 1280px, the words' column giving way first.
+     */
+    @media (min-width: 80rem) {
+        .after {
+            display: grid;
+            grid-template-columns: minmax(0, 460px) auto;
+            align-items: center;
+            gap: 80px;
+        }
+    }
+</style>

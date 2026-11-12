@@ -1,0 +1,83 @@
+---
+import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmodels/PostcardViewModel.ts";
+
+/**
+ * The writing side: the message on ruled lines, then the address part (the
+ * stamp, "To", "Reply to" (required), "From", "Post it"). A plain form.
+ */
+interface Props {
+    back: PostcardViewModel["back"];
+    replyError: string;
+}
+
+const { back, replyError } = Astro.props;
+---
+
+<form class="postcard-back" method="post" data-postcard-form>
+    <div class="postcard-message">
+        <label for="postcard-message" class="paper-label">
+            {back.messageLabel}
+        </label>
+        <textarea
+            id="postcard-message"
+            name="message"
+            rows="6"
+            class="paper-field paper-lines"
+            placeholder={back.messagePlaceholder}
+            data-postcard-message
+        />
+    </div>
+    <div class="postcard-address">
+        <span aria-hidden="true" class="postcard-stamp">
+            <span>{back.stamp}</span>
+        </span>
+        <div class="postcard-to">
+            <p class="paper-label">{back.toLabel}</p>
+            <p class="postcard-name">{back.to}</p>
+        </div>
+        <div>
+            <label for="postcard-reply" class="paper-label">
+                {back.replyLabel}
+            </label>
+            <input
+                id="postcard-reply"
+                name="replyTo"
+                type="email"
+                required
+                autocomplete="email"
+                class="paper-field"
+                placeholder={back.replyPlaceholder}
+                aria-describedby="postcard-reply-error"
+                data-postcard-reply
+            />
+            <p
+                id="postcard-reply-error"
+                class="paper-error"
+                data-postcard-reply-error
+                hidden
+            >
+                {replyError}
+            </p>
+        </div>
+        <div>
+            <label for="postcard-from" class="paper-label">
+                {back.fromLabel}
+            </label>
+            <input
+                id="postcard-from"
+                name="from"
+                type="text"
+                autocomplete="organization"
+                class="paper-field"
+                placeholder={back.fromPlaceholder}
+                data-postcard-from
+            />
+        </div>
+        <button type="submit" class="paper-post">
+            {back.send}{" "}
+            <span aria-hidden="true" class="paper-arrow">
+                →
+            </span>
+        </button>
+    </div>
+</form>

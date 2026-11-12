@@ -1,0 +1,130 @@
+{
+    "note": "Every word of sections 3 to 6 of the agencies home. Words under toCorrect are drafts Dylan may still change: change them only here.",
+    "underYourName": {
+        "title": "Under your name.",
+        "labelUnder": {
+            "caption": "Built by",
+            "name": "Dylan Castor"
+        },
+        "labelOver": {
+            "caption": "Delivered by",
+            "name": "Your agency"
+        },
+        "terms": [
+            {
+                "icon": "tag",
+                "title": "White-label",
+                "text": "I work under your name, inside your process and your tools.",
+                "locked": "White-label. I work under your name, inside your process and your tools."
+            },
+            {
+                "icon": "lock",
+                "title": "Under NDA",
+                "text": "I sign your NDA before I see any client data.",
+                "locked": "Under NDA. I sign your NDA before I see any client data."
+            },
+            {
+                "icon": "mute",
+                "title": "I never contact your clients",
+                "text": "unless you ask me to.",
+                "locked": "I never contact your clients unless you ask me to."
+            },
+            {
+                "icon": "key",
+                "title": "Only the access a test needs",
+                "text": "Collaborator access to the store, removed when you want.",
+                "locked": "Only the access a test needs. Collaborator access to the store, removed when you want."
+            },
+            {
+                "icon": "compass",
+                "title": "You keep the strategy",
+                "text": "The hypothesis, the design and the words come from you. I build the test.",
+                "locked": "You keep the strategy. The hypothesis, the design and the words come from you. I build the test."
+            },
+            {
+                "icon": "clock",
+                "title": "Paris time",
+                "text": "I work from France, on Paris time.",
+                "locked": "Paris time. I work from France, on Paris time."
+            }
+        ]
+    },
+    "afterTheFirstTest": {
+        "title": "After the first test.",
+        "sentence": "If it works for you, we move to a fixed number of days per month.",
+        "emphasis": "a fixed number of days per month",
+        "text": "Your tests stop waiting for a free developer.",
+        "pass": {
+            "band": "Monthly pass",
+            "title": "Days per month",
+            "cells": [
+                ["Holder", "Your agency"],
+                ["Valid", "Every month"]
+            ]
+        }
+    },
+    "method": {
+        "label": "All floors · The method",
+        "labelNumeral": "All",
+        "sentence": "Tests first, small files, every change checked:",
+        "sentenceItalic": "the code your clients inherit stays clean.",
+        "link": "How I build software →",
+        "linkTo": "the \"All\" floor (How I build software)",
+        "card": {
+            "name": "Dylan Castor",
+            "lines": [
+                "Every test is built by me, Dylan Castor: no one else touches your client’s store.",
+                "I build tests for high-ticket Shopify stores in the US and Europe."
+            ]
+        }
+    },
+    "ask": {
+        "title": "Have a test",
+        "titleItalic": "to build?",
+        "text": "Pick one test from your backlog. I build it at my normal rate. You judge the quality, the speed and the handover.",
+        "front": {
+            "caption": "Greetings from the workshop",
+            "title": "Write",
+            "titleItalic": "to me",
+            "action": "Turn the card →",
+            "ariaLabel": "Turn the card over to write"
+        },
+        "back": {
+            "messageLabel": "Your message",
+            "messagePlaceholder": "We have a test to build…",
+            "toLabel": "To",
+            "to": "Dylan Castor",
+            "replyLabel": "Reply to",
+            "replyPlaceholder": "your email",
+            "fromLabel": "From (if you like)",
+            "fromPlaceholder": "your name, your agency",
+            "send": "Post it",
+            "stamp": "DC"
+        },
+        "posted": {
+            "caption": "On its way to Dylan",
+            "again": "Write another"
+        },
+        "plain": ["Or", "email me directly"],
+        "errors": {
+            "replyTo": "I need an email I can reply to.",
+            "failed": "It didn't go through. Your words are still here:"
+        }
+    },
+    "icons": {
+        "tag": "<path d=\"M3 12l9-9h9v9l-9 9z\"/><circle cx=\"16.5\" cy=\"7.5\" r=\"1.5\"/>",
+        "lock": "<rect x=\"5\" y=\"10\" width=\"14\" height=\"10\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/>",
+        "mute": "<path d=\"M4 5h16v11H10l-4 4v-4H4zM3 3l18 18\"/>",
+        "key": "<circle cx=\"8\" cy=\"12\" r=\"4\"/><path d=\"M12 12h9M17 12v3M21 12v3\"/>",
+        "compass": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M15.5 8.5l-2 5-5 2 2-5z\"/>",
+        "clock": "<circle cx=\"12\" cy=\"12\" r=\"8\"/><path d=\"M12 8v4l3 2\"/>"
+    },
+    "iconsNote": "Inner SVG of a 24 x 24 viewBox, stroke 1.5, no fill, as in steps.json.",
+    "toCorrect": [
+        "The six tile titles and texts are locked, their icons are not",
+        "Built by / Delivered by / Your agency",
+        "Monthly pass, Days per month, Holder, Valid, Every month",
+        "Every word of the postcard: Greetings from the workshop, Write to me, Turn the card, Your message, We have a test to build…, Reply to, From (if you like), Post it, On its way to Dylan, Write another, Or email me directly",
+        "The two error sentences of the postcard (ask.errors), picked by Dylan on 11 Nov 2026; the failed one is followed by the plain email link"
+    ]
+}

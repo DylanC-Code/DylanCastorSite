@@ -1,0 +1,89 @@
+/*
+ * A form written on paper (the agencies postcard, the brands letter slot):
+ * small-caps labels; fields in the pen's blue on a dotted underline that turns
+ * solid copper on focus; a field refused is underlined in red ink; the message
+ * on ruled lines; the ink button.
+ */
+.paper-label {
+    display: block;
+    margin: 0;
+    color: rgb(27 26 24 / 0.66);
+    font: 600 10px / 1.4 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.paper-field {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 2px 4px;
+    border: 0;
+    border-bottom: 1px dotted rgb(27 26 24 / 0.5);
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-pen);
+    font: italic 400 18px / 1.5 var(--font-display);
+}
+
+.paper-field::placeholder {
+    color: rgb(27 26 24 / 0.38);
+}
+
+.paper-field:focus {
+    border-bottom: 1px solid var(--color-paper-copper);
+    outline: none;
+    background-color: rgb(184 105 61 / 0.07);
+}
+
+.paper-field[aria-invalid="true"] {
+    border-bottom: 1px solid var(--color-ink-red);
+}
+
+.paper-lines,
+.paper-lines:focus {
+    flex: 1;
+    min-height: 0;
+    border: 0;
+    line-height: 27px;
+    resize: none;
+    background-image: repeating-linear-gradient(
+        transparent 0 26px,
+        rgb(27 26 24 / 0.22) 26px 27px
+    );
+    background-attachment: local;
+}
+
+.paper-error {
+    margin: 4px 0 0;
+    color: var(--color-ink-red);
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.paper-post {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 13px 20px;
+    border: 0;
+    background: var(--color-paper-ink);
+    color: var(--color-paper);
+    font: 600 14px / 1 var(--font-sans);
+    cursor: pointer;
+    transition: background 300ms var(--ease-out);
+}
+
+.paper-post:hover {
+    background: #3a2a22;
+}
+
+.paper-arrow {
+    transition: translate 400ms var(--ease-out);
+}
+
+.paper-post:hover .paper-arrow {
+    translate: 5px 0;
+}

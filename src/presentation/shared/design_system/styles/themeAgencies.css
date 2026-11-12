@@ -1,5 +1,34 @@
-/* Night Lab additions for the agencies home: red, only ever as ink or wax on paper. */
+/*
+ * Night Lab additions for the agencies home: red, only ever as ink or wax on
+ * paper; the darker paper, the copper of the pass and the stamp, the pen's
+ * blue (ink on paper, never interface); the paper objects' landing easing.
+ */
 @theme {
     --color-ink-red: #a12c2a;
     --color-ink-red-deep: #7a2b2b;
+    --color-paper-shade: #d6cebe;
+    --color-copper-light: #c9794a;
+    --color-copper-deep: #9c5530;
+    --color-pen: #2a4a7a;
+    --color-copper: #b8693d;
+
+    --ease-land: cubic-bezier(0.3, 1.25, 0.5, 1);
+}
+
+/* Small capitals printed on paper: labels, captions. */
+@utility paper-cap {
+    font: 600 10px / 1 var(--font-sans);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.66);
+}
+
+/* The agencies home's section titles: Caslon 32px on a phone, 44px from 768px. */
+@utility section-title {
+    font: 400 32px / 1.1 var(--font-display);
+    color: var(--color-ink);
+
+    @media (min-width: 48rem) {
+        font-size: 44px;
+    }
 }

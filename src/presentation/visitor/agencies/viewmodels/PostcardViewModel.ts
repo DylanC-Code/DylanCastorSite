@@ -1,0 +1,32 @@
+/**
+ * The postcard: a front to turn, a writing side (a real form), and the envelope
+ * it becomes once the message is really sent.
+ */
+export interface PostcardViewModel {
+    readonly front: {
+        readonly caption: string;
+        readonly title: string;
+        readonly titleItalic: string;
+        readonly action: string;
+        /** What pressing the front does, for assistive tech. */
+        readonly description: string;
+    };
+    readonly back: {
+        readonly messageLabel: string;
+        readonly messagePlaceholder: string;
+        readonly toLabel: string;
+        readonly to: string;
+        readonly replyLabel: string;
+        readonly replyPlaceholder: string;
+        readonly fromLabel: string;
+        readonly fromPlaceholder: string;
+        readonly send: string;
+        readonly stamp: string;
+    };
+    readonly posted: { readonly caption: string; readonly again: string };
+    readonly errors: { readonly replyTo: string; readonly failed: string };
+    /** Where "email me directly" leads: the header's "Email me". */
+    readonly emailHref: string;
+    /** "email me directly", the link after the failure sentence. */
+    readonly emailLabel: string;
+}

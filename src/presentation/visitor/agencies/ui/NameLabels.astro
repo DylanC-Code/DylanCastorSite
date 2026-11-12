@@ -1,0 +1,23 @@
+---
+import type { NameLabelViewModel } from "#/presentation/visitor/agencies/viewmodels/UnderYourNameViewModel.ts";
+
+/**
+ * The two labels: "Built by" underneath on darker paper, "Delivered by" laid
+ * over it, askew, almost covering it. Both read in order, under first.
+ */
+interface Props {
+    under: NameLabelViewModel;
+    over: NameLabelViewModel;
+}
+
+const { under, over } = Astro.props;
+---
+
+<div class="labels">
+    {[under, over].map((label, index) => (
+        <p class:list={["label", index === 0 ? "is-under" : "is-over"]}>
+            <span class="paper-cap">{label.caption}</span>
+            <span class="label-name">{label.name}</span>
+        </p>
+    ))}
+</div>

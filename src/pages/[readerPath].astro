@@ -1,5 +1,5 @@
 ---
-import { agencyHero, agencySteps } from "#/content/agencySteps.ts";
+import { agenciesPage } from "#/content/agencySections.ts";
 import { books } from "#/content/books.ts";
 import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
@@ -12,8 +12,8 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 
 /**
  * The reading paths' homes, one per book. The agencies home is being built
- * (part 1: hero and steps); the others are placeholders. All are kept out of
- * search until written.
+ * (hero, steps and its four closing sections); the others are
+ * placeholders. All are kept out of search until written.
  */
 export function getStaticPaths(): {
     params: { readerPath: string };
@@ -44,12 +44,7 @@ const title = forReader(book);
         switcher={switcherFor(null)}
     >
         {book.id === "agencies" ? (
-            <AgenciesPage
-                hero={agencyHero}
-                steps={agencySteps}
-                book={book}
-                labels={books.labels}
-            />
+            <AgenciesPage {...agenciesPage} book={book} labels={books.labels} />
         ) : (
             <ReaderPathPage title={title} />
         )}

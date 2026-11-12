@@ -1,7 +1,7 @@
 import stepsJson from "#/content/agencySteps.json";
 import { home } from "#/content/home.ts";
-import type { AgencyHeroViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyHeroViewModel.ts";
 import type { StepsSectionViewModel } from "#/presentation/visitor/agencies/viewmodels/StepsSectionViewModel.ts";
+import type { PathHeroViewModel } from "#/presentation/visitor/shared/path_hero/viewmodels/PathHeroViewModel.ts";
 
 /**
  * The agencies home's hero and steps, from the agencies steps handoff's
@@ -35,12 +35,13 @@ const sheet = need(qa?.sheet, "QA sheet");
 const demo = need(build?.demo, "build demo");
 const sealed = need(winner?.sheet, "winner sheet");
 
-export const agencyHero: AgencyHeroViewModel = {
+export const agencyHero: PathHeroViewModel = {
     eyebrow: stepsJson.hero.eyebrow,
     title: pair(stepsJson.hero.title, "hero title"),
     lead: stepsJson.hero.lead,
     button: { label: stepsJson.hero.button, href: home.header.action.href },
     down: { label: stepsJson.hero.down, href: "#steps" },
+    stackedActions: false,
 };
 
 export const agencySteps: StepsSectionViewModel = {

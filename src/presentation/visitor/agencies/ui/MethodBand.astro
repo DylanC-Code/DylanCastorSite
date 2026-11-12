@@ -1,0 +1,51 @@
+---
+import CallingCard from "#/presentation/visitor/agencies/ui/CallingCard.astro";
+import type { MethodBandViewModel } from "#/presentation/visitor/agencies/viewmodels/MethodBandViewModel.ts";
+
+/**
+ * "All floors · The method": the sentence and its link to the "All" floor,
+ * the calling card landing beside it. The floor label is the heading.
+ */
+type Props = MethodBandViewModel;
+
+const { label, sentence, sentenceItalic, link, card } = Astro.props;
+---
+
+<section
+    class="page mt-30 md:mt-[190px]"
+    data-reveal
+    aria-labelledby="the-method"
+>
+    <h2 id="the-method" class="eyebrow mb-[18px]">
+        <span class="font-display text-[14px] tracking-normal">
+            {label.numeral}
+        </span>{" "}
+        {label.rest}
+    </h2>
+    <div class="method flex flex-col gap-9">
+        <div>
+            <p class="font-display text-[28px] leading-[1.2] text-ink md:text-[42px] md:leading-[1.18]">
+                {sentence} <em class="italic">{sentenceItalic}</em>
+            </p>
+            <p class="mt-[26px]">
+                <a href={link.href} class="link-accent text-[15px]">
+                    {link.label}
+                </a>
+            </p>
+        </div>
+        <CallingCard {...card} />
+    </div>
+</section>
+
+<style>
+    /* The card right of the sentence (440px, 72px apart) once the sentence
+       keeps a fair measure beside it: from 1280px. */
+    @media (min-width: 80rem) {
+        .method {
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            align-items: center;
+            gap: 72px;
+        }
+    }
+</style>

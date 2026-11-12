@@ -1,0 +1,30 @@
+---
+import type { MonthlyPassViewModel } from "#/presentation/visitor/agencies/viewmodels/AfterFirstTestViewModel.ts";
+
+/**
+ * The monthly pass: a copper band set upward, "Days per month", two cells
+ * above a dashed rule, a notch cut in its right edge. No number, no price.
+ */
+type Props = MonthlyPassViewModel;
+
+const { band, title, cells } = Astro.props;
+---
+
+<div class="pass">
+    <div class="pass-paper">
+        <p class="pass-band">
+            <span>{band}</span>
+        </p>
+        <div class="pass-body">
+            <p class="pass-title">{title}</p>
+            <dl class="pass-cells">
+                {cells.map(([caption, value]) => (
+                    <div>
+                        <dt class="paper-cap">{caption}</dt>
+                        <dd>{value}</dd>
+                    </div>
+                ))}
+            </dl>
+        </div>
+    </div>
+</div>

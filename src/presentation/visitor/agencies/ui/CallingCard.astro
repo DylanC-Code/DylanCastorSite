@@ -1,0 +1,16 @@
+---
+import type { CallingCardViewModel } from "#/presentation/visitor/agencies/viewmodels/MethodBandViewModel.ts";
+
+/** The calling card: the name, a short copper rule, two lines. */
+type Props = CallingCardViewModel;
+
+const { name, lines } = Astro.props;
+---
+
+<div class="calling">
+    <p class="calling-name">{name}</p>
+    <span aria-hidden="true" class="calling-rule" />
+    {lines.map((line) => (
+        <p class="calling-line">{line}</p>
+    ))}
+</div>

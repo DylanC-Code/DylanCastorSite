@@ -1,0 +1,56 @@
+---
+import PostcardBack from "#/presentation/visitor/agencies/ui/PostcardBack.astro";
+import PostcardFront from "#/presentation/visitor/agencies/ui/PostcardFront.astro";
+import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmodels/PostcardViewModel.ts";
+
+/**
+ * The postcard: its front turns over to a writing side (a real form), which
+ * shrinks into an envelope once the message is really sent. Without script
+ * only the writing side shows, flat. The script marks the stage `data-live`.
+ */
+type Props = PostcardViewModel;
+
+const { front, back, posted, errors, emailHref, emailLabel } = Astro.props;
+---
+
+<div class="postcard-place" data-rise data-postcard data-state="writing">
+    <div class="postcard">
+        <div class="postcard-envelope" aria-hidden="true">
+            <span class="postcard-seal" />
+            <span class="postcard-caption paper-cap">{posted.caption}</span>
+        </div>
+        <button type="button" class="postcard-again" data-postcard-again hidden>
+            {posted.again}
+        </button>
+        <div class="postcard-card">
+            <div class="postcard-flip">
+                <PostcardFront {...front} />
+                <PostcardBack back={back} replyError={errors.replyTo} />
+            </div>
+        </div>
+        <p
+            class="sr-only"
+            aria-live="polite"
+            data-postcard-news
+            data-posted={posted.caption}
+            data-failed={`${errors.failed} ${emailLabel}.`}
+        />
+    </div>
+    <p class="postcard-failed" data-postcard-failed hidden>
+        {errors.failed}{" "}
+        <a href={emailHref} class="link-accent">
+            {emailLabel}
+        </a>
+        .
+    </p>
+</div>
+
+<script>
+    import { initPostcard } from "#/presentation/visitor/agencies/behaviour/postcard.ts";
+
+    for (const card of document.querySelectorAll("[data-postcard]")) {
+        if (card instanceof HTMLElement) {
+            initPostcard(card);
+        }
+    }
+</script>

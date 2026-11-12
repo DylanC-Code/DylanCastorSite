@@ -1,0 +1,50 @@
+---
+import Postcard from "#/presentation/visitor/agencies/ui/Postcard.astro";
+import type { ClosingAskViewModel } from "#/presentation/visitor/agencies/viewmodels/ClosingAskViewModel.ts";
+
+/** "Have a test to build?": the words, the postcard, the plain email line. */
+type Props = ClosingAskViewModel;
+
+const { title, titleItalic, text, postcard, plain } = Astro.props;
+---
+
+<section
+    class="page mt-30 pb-30 md:mt-[190px] md:pb-[150px]"
+    data-reveal
+    aria-labelledby="have-a-test"
+>
+    <div class="ask flex flex-col gap-[34px]">
+        <div>
+            <h2
+                id="have-a-test"
+                class="font-display text-[34px] leading-[1.08] text-ink md:text-[46px]"
+            >
+                {title} <em class="italic">{titleItalic}</em>
+            </h2>
+            <p class="mt-4 max-w-130 text-[17px] leading-[27px] text-ink-muted md:text-[18px] md:leading-[29px]">
+                {text}
+            </p>
+        </div>
+        <div class="flex flex-col items-center">
+            <Postcard {...postcard} />
+            <p class="mt-[22px] text-center text-[13px] text-ink-faint">
+                {plain.before}{" "}
+                <a href={postcard.emailHref} class="link-accent">
+                    {plain.label}
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Side by side once the 700px card fits beside the words: from 1280px. */
+    @media (min-width: 80rem) {
+        .ask {
+            display: grid;
+            grid-template-columns: minmax(0, 400px) minmax(700px, 1fr);
+            align-items: center;
+            gap: 60px;
+        }
+    }
+</style>

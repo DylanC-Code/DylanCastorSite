@@ -15,7 +15,19 @@
 .points.is-upright {
     width: 358px;
     height: 350px;
-    max-width: 100%;
+}
+
+/* Narrower phones: the whole drawing smaller (its dots run in its own px). */
+@media (max-width: 23.4rem) {
+    .points.is-upright {
+        zoom: 0.9;
+    }
+}
+
+@media (max-width: 21.2rem) {
+    .points.is-upright {
+        zoom: 0.8;
+    }
 }
 
 @media (max-width: 47.99rem) {

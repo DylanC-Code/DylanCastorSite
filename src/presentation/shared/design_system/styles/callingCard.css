@@ -1,0 +1,60 @@
+/*
+ * "The method": the calling card, 440px, turned 3deg. It lands 600ms after
+ * the section comes in view. On a phone 336px, kept off the screen's edge.
+ */
+.calling {
+    box-sizing: border-box;
+    align-self: center;
+    width: 440px;
+    padding: 36px 38px 32px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow:
+        inset 0 0 0 7px var(--color-paper),
+        inset 0 0 0 8px rgb(27 26 24 / 0.22),
+        0 20px 40px rgb(0 0 0 / 0.5);
+    transform: rotate(3deg);
+    transition:
+        transform 800ms var(--ease-land) 600ms,
+        opacity 800ms var(--ease-land) 600ms;
+}
+
+[data-reveal="pending"] .calling {
+    opacity: 0;
+    transform: translateY(24px) rotate(7deg);
+}
+
+.calling-name {
+    margin: 0;
+    font: italic 400 36px / 1 var(--font-display);
+}
+
+.calling-rule {
+    display: block;
+    width: 40px;
+    height: 1px;
+    margin: 18px 0;
+    background: var(--color-paper-copper);
+}
+
+.calling-line {
+    margin: 0;
+    color: rgb(27 26 24 / 0.8);
+    font-size: 15px;
+    line-height: 23px;
+}
+
+.calling-line + .calling-line {
+    margin-top: 8px;
+}
+
+@media (max-width: 47.99rem) {
+    .calling {
+        width: min(336px, 100% - 16px);
+        padding: 28px 26px 24px;
+    }
+
+    .calling-name {
+        font-size: 30px;
+    }
+}

@@ -2,15 +2,15 @@
 import ReaderBook from "#/presentation/visitor/home/ui/ReaderBook.astro";
 import { withReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
 import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
-import type { AgencyHeroViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyHeroViewModel.ts";
+import type { PathHeroViewModel } from "#/presentation/visitor/shared/path_hero/viewmodels/PathHeroViewModel.ts";
 
 /**
- * The agencies home's first screen: the words left; right, the agencies book
- * of the root home, opening once on its contents. The book only shows: it is
+ * A reading path home's first screen (agencies, brands): the words left;
+ * right, that path's book of the root home, opening once on its contents. The book only shows: it is
  * inert and hidden from assistive tech, its words being the page's own.
  */
 interface Props {
-    hero: AgencyHeroViewModel;
+    hero: PathHeroViewModel;
     book: BookViewModel;
     contentsLabel: string;
     coverFoot: string;
@@ -20,20 +20,26 @@ interface Props {
 const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
 ---
 
-<section class="page flex flex-col gap-12 pt-12 pb-16 md:min-h-[calc(100svh-84px)] md:flex-row md:items-center md:gap-10 md:pt-16 md:pb-21">
-    <div class="max-w-150 flex-none">
+<section class="page flex flex-col gap-12 pt-10 pb-16 md:pt-16 md:pb-21 min-[1280px]:min-h-[calc(100svh-var(--header-height))] min-[1280px]:flex-row min-[1280px]:items-center min-[1280px]:gap-0">
+    <div class="max-w-150 min-w-0 flex-1">
         <p class="eyebrow">{hero.eyebrow}</p>
-        <h1 class="mt-5 font-display text-[40px] leading-[1.06] text-ink md:text-[52px]">
+        <h1 class="mt-5 font-display text-[29px] leading-[1.06] text-ink md:text-[52px]">
             {hero.title[0]}
             <br />
             <em class="italic">{hero.title[1]}</em>
         </h1>
         <p class="mt-6 max-w-130 text-body-lg text-ink-muted">{hero.lead}</p>
-        <div class="mt-9 flex flex-wrap items-center gap-8">
-            <a href={hero.button.href} class="btn">
+        <div
+            class:list={[
+                "mt-9 flex items-center gap-6 md:gap-8",
+                hero.stackedActions &&
+                    "max-md:flex-col max-md:items-stretch max-md:gap-5 max-md:text-center",
+            ]}
+        >
+            <a href={hero.button.href} class="btn max-md:flex-1 max-md:px-4">
                 {hero.button.label}
             </a>
-            <a href={hero.down.href} class="link-accent">
+            <a href={hero.down.href} class="link-accent shrink-0">
                 {hero.down.label}
             </a>
         </div>
@@ -50,25 +56,40 @@ const { hero, book, contentsLabel, coverFoot, openAria } = Astro.props;
 </section>
 
 <style>
-    /* The book at 0.8, its cover swung open once onto the endpaper. */
-    /* On a phone, under the words: room on its left for the cover to open. */
+    /* The book at 0.8, its cover swung open once onto the endpaper; below
+       1280px under the words, centred. */
+    /*
+     * On a phone, under the words, the open spread (704 units) as wide as
+     * the column; centred.
+     */
     .hero-book {
-        --u: 0.48px;
+        --u: calc((100vw - 32px) / 704);
         position: relative;
         flex: none;
         width: calc(352 * var(--u));
         height: calc(520 * var(--u));
-        margin-left: calc(352 * var(--u));
+        margin-left: 50%;
     }
 
     @media (min-width: 48rem) {
         .hero-book {
             --u: 0.8px;
-            margin-left: auto;
         }
     }
 
+    /*
+     * From 1280px, beside the words: the book takes its closed width, so its
+     * margin keeps room for the cover swung open on its left, and 40px more.
+     */
+    @media (min-width: 80rem) {
+        .hero-book {
+            margin-left: calc(352 * var(--u) + 40px);
+        }
+    }
+
+    /* The shelf sets its own scale on a phone: here the book takes the hero's. */
     .hero-book :global(.book) {
+        --u: inherit;
         position: relative;
         top: 0;
         left: 0;

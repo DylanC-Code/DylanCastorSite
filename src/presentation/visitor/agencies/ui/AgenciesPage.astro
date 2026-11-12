@@ -1,22 +1,31 @@
 ---
-import AgencyHero from "#/presentation/visitor/agencies/ui/AgencyHero.astro";
+import AfterFirstTest from "#/presentation/visitor/agencies/ui/AfterFirstTest.astro";
+import PathHero from "#/presentation/visitor/shared/path_hero/ui/PathHero.astro";
+import ClosingAsk from "#/presentation/visitor/agencies/ui/ClosingAsk.astro";
+import MethodBand from "#/presentation/visitor/agencies/ui/MethodBand.astro";
 import StepsSection from "#/presentation/visitor/agencies/ui/StepsSection.astro";
-import type { AgencyHeroViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencyHeroViewModel.ts";
+import UnderYourName from "#/presentation/visitor/agencies/ui/UnderYourName.astro";
+import type { PathHeroViewModel } from "#/presentation/visitor/shared/path_hero/viewmodels/PathHeroViewModel.ts";
+import type { AgencySectionsViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencySectionsViewModel.ts";
 import type { StepsSectionViewModel } from "#/presentation/visitor/agencies/viewmodels/StepsSectionViewModel.ts";
 import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookViewModel.ts";
 
-/** The agencies home, part 1: the hero, then the five steps of a first test. */
+/**
+ * The agencies home: the hero, the five steps of a first test, then "Under
+ * your name", "After the first test", the method and the closing ask.
+ */
 interface Props {
-    hero: AgencyHeroViewModel;
+    hero: PathHeroViewModel;
     steps: StepsSectionViewModel;
+    sections: AgencySectionsViewModel;
     book: BookViewModel;
     labels: { contents: string; coverFoot: string; openAria: string };
 }
 
-const { hero, steps, book, labels } = Astro.props;
+const { hero, steps, sections, book, labels } = Astro.props;
 ---
 
-<AgencyHero
+<PathHero
     hero={hero}
     book={book}
     contentsLabel={labels.contents}
@@ -24,3 +33,7 @@ const { hero, steps, book, labels } = Astro.props;
     openAria={labels.openAria}
 />
 <StepsSection {...steps} />
+<UnderYourName {...sections.underYourName} />
+<AfterFirstTest {...sections.afterFirstTest} />
+<MethodBand {...sections.method} />
+<ClosingAsk {...sections.ask} />
