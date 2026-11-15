@@ -1,0 +1,51 @@
+{
+    "signRight": "Opening later",
+    "card": "Coming later",
+    "line": {
+        "desktop": "This floor opens later · take the lift to another floor",
+        "phone": "This floor opens later · the mark in the corner opens the floors"
+    },
+    "liftLabel": "Other floors",
+    "floors": [
+        {
+            "id": "application",
+            "title": ["Development."],
+            "intro": "Typed, tested code that stays easy to change, in small files with one job each.",
+            "sign": { "left": "Floor II", "middle": "The application" },
+            "cardName": "Development"
+        },
+        {
+            "id": "structure",
+            "title": ["Architecture."],
+            "intro": "Business rules kept apart from the tools, so changing a tool never breaks the business.",
+            "sign": { "left": "Floor III", "middle": "The structure" },
+            "cardName": "Architecture"
+        },
+        {
+            "id": "ground",
+            "title": ["Infrastructure."],
+            "intro": "Pipelines that check every change, and servers that stay fast and up.",
+            "sign": { "left": "Floor IV", "middle": "The ground" },
+            "cardName": "Infrastructure"
+        },
+        {
+            "id": "method",
+            "title": ["How I build", "software."],
+            "titleNote": "The second part is set in italic.",
+            "intro": "Tests first, small files with one job each, and every change checked before it ships.",
+            "sign": { "left": "All floors", "middle": "The method" },
+            "cardName": "How I build software"
+        }
+    ],
+    "engineeringHome": {
+        "eyebrow": "For software engineers",
+        "title": ["Architecture, tests", "and pipelines."],
+        "titleNote": "The engineers' book title. The second part is set in italic.",
+        "cardName": "For software engineers"
+    },
+    "notes": [
+        "Each intro is the floor's line on the main home (home.json, floors.rows[].how and floors.method.how): read it from there, do not copy it.",
+        "The sign's middle follows floor I (\"The storefront\"): \"The\" and the floor's layer.",
+        "Only \"Opening later\" and the two lines are new words."
+    ]
+}
