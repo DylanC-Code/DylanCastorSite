@@ -1,6 +1,8 @@
 import type { KnipConfig } from "knip";
 
 export default {
+    // The form Worker: Cloudflare runs its default export (wrangler.jsonc).
+    entry: ["src/interfaces/form_worker/formWorker.ts"],
     include: ["nsExports", "nsTypes"],
     includeEntryExports: true,
     ignoreExportsUsedInFile: false,

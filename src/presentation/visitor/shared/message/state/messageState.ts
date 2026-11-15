@@ -1,3 +1,5 @@
+import { isReplyAddress } from "#/domain/message/incoming.ts";
+
 /**
  * A message written on the page (the agencies postcard, the brands letter
  * slot): an optional front, the writing side, sending, then posted or failed.
@@ -22,11 +24,6 @@ export const onWritingSide: MessageState = {
     phase: "writing",
     replyInvalid: false,
 };
-
-/** Something, an @, something, a dot, something: enough to reply to. */
-export function isReplyAddress(value: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/u.test(value.trim());
-}
 
 /** Pressing the front turns the card over to its writing side. */
 export function turn(state: MessageState): MessageState {

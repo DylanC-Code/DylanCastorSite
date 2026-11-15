@@ -1,3 +1,4 @@
+import { watchForm } from "#/presentation/visitor/shared/message/behaviour/robotSigns.ts";
 import { sendMessage } from "#/presentation/visitor/shared/message/behaviour/sendMessage.ts";
 import {
     type MessageState,
@@ -79,6 +80,7 @@ function render(parts: Parts, state: MessageState): void {
 export function initLetterSlot(root: HTMLElement): void {
     const parts = partsOf(root);
     let state = onWritingSide;
+    const signs = watchForm(parts.form);
     function show(next: MessageState): void {
         state = next;
         render(parts, next);
@@ -94,6 +96,7 @@ export function initLetterSlot(root: HTMLElement): void {
             message: message.value,
             replyTo: reply.value,
             from: from.value,
+            ...signs(),
         });
         show(sent(state, result === "ok"));
     }

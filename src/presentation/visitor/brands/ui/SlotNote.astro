@@ -1,4 +1,5 @@
 ---
+import TrapField from "#/presentation/visitor/shared/message/ui/TrapField.astro";
 import type { NoteFieldsViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
 
 /**
@@ -15,6 +16,7 @@ const { fields, replyError } = Astro.props;
 ---
 
 <form class="slot-note" method="post" data-letter-form>
+    <TrapField />
     <label for="slot-message" class="paper-label">
         {fields.messageLabel}
     </label>

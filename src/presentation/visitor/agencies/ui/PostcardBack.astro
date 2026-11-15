@@ -1,4 +1,5 @@
 ---
+import TrapField from "#/presentation/visitor/shared/message/ui/TrapField.astro";
 import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmodels/PostcardViewModel.ts";
 
 /**
@@ -14,6 +15,7 @@ const { back, replyError } = Astro.props;
 ---
 
 <form class="postcard-back" method="post" data-postcard-form>
+    <TrapField />
     <div class="postcard-message">
         <label for="postcard-message" class="paper-label">
             {back.messageLabel}

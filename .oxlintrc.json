@@ -107,6 +107,10 @@
             "rules": { "import/no-default-export": "off" }
         },
         {
+            "files": ["src/interfaces/form_worker/formWorker.ts"],
+            "rules": { "import/no-default-export": "off" }
+        },
+        {
             "files": ["**/*.test.ts"],
             "env": { "vitest": true }
         }

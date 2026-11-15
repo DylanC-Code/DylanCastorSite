@@ -50,6 +50,12 @@ The presentation follows TightStack's: public → screen → role.
   turns data into what is shown), `state/` (pure local state), `behaviour/`
   (vanilla scripts run in the browser). No `components/`, `utils/`, `hooks/`.
 - A component never reads `content/`: its parent passes its view model, whole.
+- The one piece that runs outside the browser, the form Worker, is layered as
+  TightStack's apps are: `domain/message/` (what a message is, the robot
+  checks: pure), `infrastructure/message/cloudflare_email/` (the mail for
+  Cloudflare's send API), `interfaces/form_worker/` (the Worker's HTTP entry,
+  deployed by `wrangler.jsonc` at the root). The pages may import `domain/`;
+  nothing in `domain/` imports anything else.
 - Each shared subject has a README: what it accepts and what it refuses.
 
 ## Content rules

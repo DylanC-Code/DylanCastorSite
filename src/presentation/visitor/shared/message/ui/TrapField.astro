@@ -1,0 +1,25 @@
+---
+/**
+ * The robot trap: a field named "website" that a person never sees, never
+ * reaches with the keyboard and so never fills. A form that sends it filled
+ * is refused by the form Worker.
+ */
+---
+
+<div class="trap" aria-hidden="true">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" />
+</div>
+
+<style>
+    /* Clipped in place, not moved off-screen: inside the postcard's turned
+       side, an off-screen offset would widen the page. */
+    .trap {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        pointer-events: none;
+    }
+</style>

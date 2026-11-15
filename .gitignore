@@ -31,5 +31,9 @@ legal_notice_v1_handoff/
 page_meta_v1_handoff/
 *_handoff*.zip
 
+# The form Worker's dry-run bundle (bun run worker:bundle) and wrangler's cache.
+dist_worker/
+.wrangler/
+
 # The dev container's own environment: never committed (see compose.yml).
 .devcontainer/devcontainer.env

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import { isReplyAddress } from "#/domain/message/incoming.ts";
 import {
     onFront,
-    isReplyAddress,
     post,
     sent,
     turn,
