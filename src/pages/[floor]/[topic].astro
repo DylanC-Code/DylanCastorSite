@@ -12,8 +12,8 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 /**
  * A floor's topic pages, one per published room: its floor's href and the
  * room's slug (floor I: /shopify-cro/flicker-free-ab-tests). "Flicker-free
- * A/B tests" is written; the others are placeholders. All kept out of search
- * until Dylan says.
+ * A/B tests" is written and open to search; the others are placeholders,
+ * hidden until written (searchListing.json).
  */
 export function getStaticPaths(): {
     params: { floor: string; topic: string };
@@ -56,7 +56,7 @@ const meta = topicMeta[roomId] ?? {
 };
 ---
 
-<HtmlDocument title={meta.title} description={meta.description} noindex>
+<HtmlDocument title={meta.title} description={meta.description}>
     <SiteFrame
         header={home.header}
         footer={home.footer}

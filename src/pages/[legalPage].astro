@@ -11,8 +11,8 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 /**
  * The legal notice, one page per language (/legal, /mentions-legales), each
  * declaring the other as its alternate. The site around it stays English;
- * only the footer's link follows the page's language. Kept out of search
- * until Dylan says the words are final.
+ * only the footer's link follows the page's language. Hidden from search
+ * on purpose (they show Dylan's address and phone): see searchListing.json.
  */
 export function getStaticPaths(): {
     params: { legalPage: string };
@@ -43,7 +43,6 @@ const footer = {
     description={meta.description}
     lang={notice.lang}
     alternates={[{ lang: notice.other.lang, href: notice.other.href }]}
-    noindex
 >
     <SiteFrame
         header={home.header}

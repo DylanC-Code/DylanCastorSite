@@ -2,9 +2,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 
-import books from "./src/content/books.json" with { type: "json" };
-import floors from "./src/content/floors.json" with { type: "json" };
-import legal from "./src/content/legal.json" with { type: "json" };
+import searchListing from "./src/content/searchListing.json" with { type: "json" };
 
 /**
  * Fonts come from npm packages pinned in bun.lock, never from a CDN: the build
@@ -13,28 +11,20 @@ import legal from "./src/content/legal.json" with { type: "json" };
 const fromPackages = fontProviders.npm({ remote: false });
 
 /**
- * The reading paths' and the floors' pages, the topics under a floor and the
- * legal notice are marked noindex until they are final: the sitemap leaves them
- * out too.
+ * The sitemap lists only the pages open to search (searchListing.json, which
+ * the head's noindex reads too): the main home, the agencies and brands homes,
+ * floor I and the flicker page. The legal pages are hidden on purpose (they
+ * show Dylan's address and phone); the pages that only say "This page is being
+ * written" are hidden until written.
  */
-const placeholders = new Set(
-    [
-        ...books.books,
-        ...floors.floors,
-        { href: legal.routes.en },
-        { href: legal.routes.fr },
-    ].map((page) => new URL(page.href, "https://dylancastor.com").href),
+const listed = new Set(
+    searchListing.open.map(
+        (path) => new URL(path, "https://dylancastor.com").href,
+    ),
 );
 
-const topicsUnder = floors.floors.map(
-    (floor) => new URL(`${floor.href}/`, "https://dylancastor.com").href,
-);
-
-function isWritten(page: string): boolean {
-    return (
-        !placeholders.has(page)
-        && !topicsUnder.some((floor) => page.startsWith(floor))
-    );
+function isListed(page: string): boolean {
+    return listed.has(page);
 }
 
 export default defineConfig({
@@ -43,7 +33,7 @@ export default defineConfig({
     // as cro/flicker-free-ab-tests.html, and canonicals and the sitemap agree.
     trailingSlash: "never",
     build: { format: "file" },
-    integrations: [sitemap({ filter: isWritten })],
+    integrations: [sitemap({ filter: isListed })],
     vite: { plugins: [tailwindcss()] },
     fonts: [
         {

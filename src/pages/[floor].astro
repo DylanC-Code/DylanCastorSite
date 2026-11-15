@@ -11,8 +11,9 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 
 /**
  * The floors' pages: a floor with a hall (floor I) shows it; the others keep
- * a placeholder, so the switcher can be used end to end. Kept out of search
- * until written; floor V has no page yet.
+ * a placeholder, so the switcher can be used end to end. Floor I is open to
+ * search; the placeholders are hidden until written (searchListing.json).
+ * Floor V has no page yet.
  */
 export function getStaticPaths(): {
     params: { floor: string };
@@ -38,7 +39,7 @@ const meta = floorMeta[floor.id] ?? {
 };
 ---
 
-<HtmlDocument title={meta.title} description={meta.description} noindex>
+<HtmlDocument title={meta.title} description={meta.description}>
     <SiteFrame
         header={home.header}
         footer={home.footer}

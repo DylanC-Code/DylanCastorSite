@@ -109,6 +109,6 @@
     "routes": {
         "en": "/legal",
         "fr": "/mentions-legales",
-        "note": "Chosen by Dylan on 15 Nov 2026. Kept out of search (noindex) until he says the words are final."
+        "note": "Chosen by Dylan on 15 Nov 2026. Words final (confirmed 15 Nov). Hidden from search on purpose: they show his address and phone (searchListing.json)."
     }
 }

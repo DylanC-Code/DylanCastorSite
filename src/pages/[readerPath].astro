@@ -12,8 +12,8 @@ import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.ast
 
 /**
  * The reading paths' homes, one per book: the agencies home and the brands
- * home are built, the engineers' is a placeholder. All are kept out of search
- * until their words are final.
+ * home are built, the engineers' is a placeholder. The two built ones are open
+ * to search; the placeholder is hidden until written (searchListing.json).
  */
 export function getStaticPaths(): {
     params: { readerPath: string };
@@ -37,7 +37,7 @@ const meta = readerPathMeta[book.id] ?? {
 };
 ---
 
-<HtmlDocument title={meta.title} description={meta.description} noindex>
+<HtmlDocument title={meta.title} description={meta.description}>
     <SiteFrame
         header={home.header}
         footer={home.footer}
