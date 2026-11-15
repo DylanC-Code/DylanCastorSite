@@ -3,6 +3,12 @@ import {
     skipUnlessLeaving,
 } from "#/presentation/visitor/shared/floor_switcher/behaviour/pageLeave.ts";
 import {
+    hrefOf,
+    otherOpeners,
+    part,
+    upgradeOpener,
+} from "#/presentation/visitor/shared/floor_switcher/behaviour/switcherParts.ts";
+import {
     openingFocus,
     planPick,
 } from "#/presentation/visitor/shared/floor_switcher/state/switcherSteps.ts";
@@ -11,29 +17,45 @@ interface Switcher {
     root: HTMLElement;
     panel: HTMLElement;
     opener: HTMLButtonElement;
+    /** Every button that opens it: its opener, and a closed floor's lift. */
+    openers: HTMLElement[];
 }
+
+/** Where focus goes back when a switcher closes: the button that opened it. */
+const openedBy = new WeakMap<HTMLElement, HTMLElement>();
 
 /**
  * Brings one switcher to life: its panel comes out of the template, its link
  * becomes a button. Escape, the scrim or the opener close it, focus going back
- * to the opener. Nothing is stored.
+ * to what opened it (the opener, or a closed floor's lift). Nothing is stored.
  */
 export function initFloorSwitcher(root: HTMLElement): void {
     const template = root.querySelector("template");
     if (template === null) {
         return;
     }
-    root.prepend(template.content.cloneNode(true));
-    const panel = part(root, "[data-switcher-panel]");
-    panel.id = `floors-panel-${root.dataset["design"] ?? ""}`;
-    const switcher = { root, panel, opener: upgradeOpener(root, panel.id) };
+    const switcher = switcherOf(root, template);
     bindEvents(switcher);
+    bindOthers(switcher);
     skipUnlessLeaving();
     setOpen(switcher, false, false);
 }
 
+/** The panel out of its template, named; the opener a button for it. */
+function switcherOf(
+    root: HTMLElement,
+    template: HTMLTemplateElement,
+): Switcher {
+    root.prepend(template.content.cloneNode(true));
+    const panel = part(root, "[data-switcher-panel]");
+    panel.id = `floors-panel-${root.dataset["design"] ?? ""}`;
+    const opener = upgradeOpener(root, panel.id);
+    return { root, panel, opener, openers: [opener, ...otherOpeners(root)] };
+}
+
 function bindEvents(switcher: Switcher): void {
     switcher.opener.addEventListener("click", () => {
+        openedBy.set(switcher.root, switcher.opener);
         setOpen(switcher, switcher.root.dataset["open"] !== "true");
     });
     part(switcher.root, "[data-switcher-scrim]").addEventListener(
@@ -50,22 +72,23 @@ function bindEvents(switcher: Switcher): void {
     });
 }
 
-function upgradeOpener(root: HTMLElement, panelId: string): HTMLButtonElement {
-    const link = part(root, "[data-switcher-opener]");
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = link.className;
-    button.setAttribute("aria-label", link.getAttribute("aria-label") ?? "");
-    button.setAttribute("aria-controls", panelId);
-    button.append(...link.childNodes);
-    link.replaceWith(button);
-    return button;
+/** A closed floor's lift opens the panel too, and gets the focus back. */
+function bindOthers(switcher: Switcher): void {
+    for (const other of switcher.openers.slice(1)) {
+        other.setAttribute("aria-controls", switcher.panel.id);
+        other.addEventListener("click", () => {
+            openedBy.set(switcher.root, other);
+            setOpen(switcher, true);
+        });
+    }
 }
 
 function setOpen(switcher: Switcher, open: boolean, moveFocus = true): void {
     const { dataset } = switcher.root;
     dataset["open"] = String(open);
-    switcher.opener.setAttribute("aria-expanded", String(open));
+    for (const opener of switcher.openers) {
+        opener.setAttribute("aria-expanded", String(open));
+    }
     switcher.panel.toggleAttribute("inert", !open);
     if (moveFocus) {
         focusAfter(switcher, open);
@@ -74,7 +97,7 @@ function setOpen(switcher: Switcher, open: boolean, moveFocus = true): void {
 
 function focusAfter(switcher: Switcher, open: boolean): void {
     if (!open) {
-        switcher.opener.focus();
+        (openedBy.get(switcher.root) ?? switcher.opener).focus();
         return;
     }
     const links = [
@@ -121,16 +144,4 @@ function currentHref(switcher: Switcher): string | null {
         'a[aria-current="page"]',
     );
     return current === null ? null : hrefOf(current);
-}
-
-function hrefOf(link: HTMLAnchorElement): string {
-    return link.getAttribute("href") ?? "";
-}
-
-function part(root: HTMLElement, selector: string): HTMLElement {
-    const element = root.querySelector<HTMLElement>(selector);
-    if (element === null) {
-        throw new Error(`The floor switcher has no ${selector}`);
-    }
-    return element;
 }

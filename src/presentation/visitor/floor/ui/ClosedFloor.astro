@@ -10,11 +10,13 @@ import type { ClosedFloorViewModel } from "#/presentation/visitor/floor/viewmode
 /**
  * A floor not written yet (closed floor handoff): floor I's page with one
  * closed curtain across the whole floor and one card. The visitor stands at
- * the lift and does not walk.
+ * the lift and does not walk; the lift is a button that opens the floors
+ * panel (the switcher's own behaviour, `data-opens-floors`). On a phone, no
+ * lift: the line over the sign points to the mark in the corner.
  */
 type Props = ClosedFloorViewModel;
 
-const { head, sign, card, line, ask } = Astro.props;
+const { head, sign, card, line, liftLabel, ask } = Astro.props;
 ---
 
 <div class="hall page" data-closed-floor>
@@ -23,7 +25,12 @@ const { head, sign, card, line, ask } = Astro.props;
         <FloorSign {...sign} />
         <div class="building-floor">
             <FloorFrame rooms={4} oneRoom />
-            <span aria-hidden="true" class="building-lift"></span>
+            <button
+                type="button"
+                class="building-lift"
+                aria-label={liftLabel}
+                data-opens-floors
+            ></button>
             <div class="closed-room">
                 <ClosedCurtain card={card} width="floor" />
             </div>
