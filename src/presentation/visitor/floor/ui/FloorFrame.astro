@@ -4,18 +4,21 @@ import { roomLeft } from "#/presentation/visitor/floor/state/visitorWalk.ts";
 /**
  * The floor, cut open (desktop): hatched slabs above and under, a brick end
  * wall each side, the lift bay with its lattice cage and dial, and a hatched
- * partition before each room. As wide as its rooms: 1100px for four.
+ * partition before each room. As wide as its rooms: 1100px for four. A floor
+ * not written yet is one room as wide as four: the lift's partition only.
  */
 interface Props {
     rooms: number;
+    oneRoom?: boolean;
 }
 
-const { rooms } = Astro.props;
+const { rooms, oneRoom = false } = Astro.props;
 const width = 140 + rooms * 240;
-const partitions = [
-    116,
-    ...Array.from({ length: rooms - 1 }, (_, index) => roomLeft(index) + 230),
-];
+const between = Array.from(
+    { length: rooms - 1 },
+    (_, index) => roomLeft(index) + 230,
+);
+const partitions = [116, ...(oneRoom ? [] : between)];
 ---
 
 <svg

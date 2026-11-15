@@ -19,3 +19,16 @@ export const bandCurtain: CurtainShape = {
     drop: 16,
     hem: 90,
 };
+
+/**
+ * A floor not written yet (closed floor handoff): one curtain across its one
+ * room on desktop (950 × 270, from x 126 to 1076).
+ */
+export const closedFloorCurtain: CurtainShape = {
+    width: 950,
+    height: 270,
+    folds: 61,
+    swags: 12,
+    drop: 20,
+    hem: 261,
+};

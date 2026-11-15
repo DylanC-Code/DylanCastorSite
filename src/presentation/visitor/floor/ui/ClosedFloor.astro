@@ -1,0 +1,53 @@
+---
+import ClosedCurtain from "#/presentation/visitor/floor/ui/ClosedCurtain.astro";
+import FloorAsk from "#/presentation/visitor/floor/ui/FloorAsk.astro";
+import FloorFrame from "#/presentation/visitor/floor/ui/FloorFrame.astro";
+import FloorHead from "#/presentation/visitor/floor/ui/FloorHead.astro";
+import FloorSign from "#/presentation/visitor/floor/ui/FloorSign.astro";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+import type { ClosedFloorViewModel } from "#/presentation/visitor/floor/viewmodels/ClosedFloorViewModel.ts";
+
+/**
+ * A floor not written yet (closed floor handoff): floor I's page with one
+ * closed curtain across the whole floor and one card. The visitor stands at
+ * the lift and does not walk.
+ */
+type Props = ClosedFloorViewModel;
+
+const { head, sign, card, line, ask } = Astro.props;
+---
+
+<div class="hall page" data-closed-floor>
+    <FloorHead head={head} hintShort={line.phone} />
+    <div class="building">
+        <FloorSign {...sign} />
+        <div class="building-floor">
+            <FloorFrame rooms={4} oneRoom />
+            <span aria-hidden="true" class="building-lift"></span>
+            <div class="closed-room">
+                <ClosedCurtain card={card} width="floor" />
+            </div>
+            <span aria-hidden="true" class="visitor closed-visitor">
+                <span class="visitor-turn">
+                    <VisitorFigure />
+                </span>
+            </span>
+        </div>
+        <span aria-hidden="true" class="building-plinth"></span>
+    </div>
+    <span aria-hidden="true" class="building-street"></span>
+    <p class="building-hint">{line.desktop}</p>
+    <FloorAsk {...ask} />
+</div>
+
+<script>
+    import { pointAsk } from "#/presentation/visitor/shared/path_memory/behaviour/askLinks.ts";
+    import { passPathOn } from "#/presentation/visitor/shared/path_memory/behaviour/pathVia.ts";
+
+    for (const floor of document.querySelectorAll("[data-closed-floor]")) {
+        passPathOn(document);
+        if (floor instanceof HTMLElement) {
+            pointAsk(floor);
+        }
+    }
+</script>

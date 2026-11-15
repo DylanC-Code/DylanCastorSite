@@ -1,18 +1,19 @@
 ---
+import { closedFloors } from "#/content/closedFloors.ts";
 import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent, switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import { floorMeta } from "#/content/pageMeta.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import ClosedFloor from "#/presentation/visitor/floor/ui/ClosedFloor.astro";
 import FloorHall from "#/presentation/visitor/floor/ui/FloorHall.astro";
-import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
 import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * The floors' pages: a floor with a hall (floor I) shows it; the others keep
- * a placeholder, so the switcher can be used end to end. Floor I is open to
- * search; the placeholders are hidden until written (searchListing.json).
+ * The floors' pages: a floor with a hall (floor I) shows it; a floor not
+ * written yet (II, III, IV, All) shows its closed curtain. Floor I is open to
+ * search; the closed floors are hidden until written (searchListing.json).
  * Floor V has no page yet.
  */
 export function getStaticPaths(): {
@@ -33,6 +34,12 @@ interface Props {
 
 const { floor } = Astro.props;
 const hall = floorHalls[floor.id];
+const closed = closedFloors[floor.id];
+if (hall === undefined && closed === undefined) {
+    throw new Error(
+        `Floor ${floor.id} has neither a hall nor a closed curtain`,
+    );
+}
 const meta = floorMeta[floor.id] ?? {
     title: `${floor.area} · ${home.header.brand}`,
     description: floor.area,
@@ -45,10 +52,9 @@ const meta = floorMeta[floor.id] ?? {
         footer={home.footer}
         switcher={switcherFor(floor.id)}
     >
-        {hall === undefined ? (
-            <FloorPage layer={floor.layer} area={floor.area} />
-        ) : (
-            <FloorHall {...hall} />
+        {hall !== undefined && <FloorHall {...hall} />}
+        {hall === undefined && closed !== undefined && (
+            <ClosedFloor {...closed} />
         )}
     </SiteFrame>
 </HtmlDocument>

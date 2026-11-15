@@ -1,0 +1,57 @@
+/*
+ * A page not written yet (closed floor handoff): one closed curtain and one
+ * title card. A floor keeps floor I's building (floorHall.css, floorRooms.css,
+ * floorPhone.css): its one room runs from x 126 to 1076 (950 × 270), the
+ * visitor stands at the lift.
+ */
+.closed {
+    position: relative;
+}
+
+.closed-wide {
+    display: block;
+}
+
+.closed .closed-card {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    transform: translateX(-50%);
+}
+
+.closed .room-card-rule {
+    display: block;
+}
+
+@media (min-width: 72.75rem) {
+    .closed-room {
+        position: absolute;
+        top: 16px;
+        left: 126px;
+        width: 950px;
+        height: 270px;
+    }
+
+    .closed {
+        height: 100%;
+    }
+
+    .closed-wide {
+        width: 100%;
+        height: 100%;
+    }
+
+    .closed .closed-card {
+        top: 92px;
+        left: 50%;
+        width: 250px;
+    }
+
+    .closed .room-card-name {
+        font-size: 20px;
+    }
+
+    .closed .room-card-later {
+        font-size: 15px;
+    }
+}
