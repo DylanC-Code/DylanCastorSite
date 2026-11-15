@@ -105,11 +105,7 @@
             "caption": "On its way to Dylan",
             "again": "Write another"
         },
-        "plain": ["Or", "email me directly"],
-        "errors": {
-            "replyTo": "I need an email I can reply to.",
-            "failed": "It didn't go through. Your words are still here:"
-        }
+        "plain": ["Or", "email me directly"]
     },
     "icons": {
         "tag": "<path d=\"M3 12l9-9h9v9l-9 9z\"/><circle cx=\"16.5\" cy=\"7.5\" r=\"1.5\"/>",
@@ -124,7 +120,6 @@
         "The six tile titles and texts are locked, their icons are not",
         "Built by / Delivered by / Your agency",
         "Monthly pass, Days per month, Holder, Valid, Every month",
-        "Every word of the postcard: Greetings from the workshop, Write to me, Turn the card, Your message, We have a test to build…, Reply to, From (if you like), Post it, On its way to Dylan, Write another, Or email me directly",
-        "The two error sentences of the postcard (ask.errors), picked by Dylan on 11 Nov 2026; the failed one is followed by the plain email link"
+        "Every word of the postcard: Greetings from the workshop, Write to me, Turn the card, Your message, We have a test to build…, Reply to, From (if you like), Post it, On its way to Dylan, Write another, Or email me directly"
     ]
 }

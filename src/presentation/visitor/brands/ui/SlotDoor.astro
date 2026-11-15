@@ -65,18 +65,18 @@ const {
     </p>
     <DataLine {...dataLine} />
     <p class="slot-failed" data-letter-failed hidden>
-        {errors.failed}{" "}
+        {errors.failed[0]}
         <a href={emailHref} class="link-accent">
-            {plain.label}
+            {errors.failed[1]}
         </a>
-        .
+        {errors.failed[2]}
     </p>
     <p
         class="sr-only"
         aria-live="polite"
         data-letter-news
         data-posted={`${sent[1]} ${sent[2]}`}
-        data-failed={`${errors.failed} ${plain.label}.`}
+        data-failed={errors.failed.join("")}
     />
 </div>
 

@@ -1,3 +1,5 @@
+import type { FormErrorsViewModel } from "#/presentation/visitor/shared/message/viewmodels/FormErrorsViewModel.ts";
+
 /**
  * The postcard: a front to turn, a writing side (a real form), and the envelope
  * it becomes once the message is really sent.
@@ -24,9 +26,7 @@ export interface PostcardViewModel {
         readonly stamp: string;
     };
     readonly posted: { readonly caption: string; readonly again: string };
-    readonly errors: { readonly replyTo: string; readonly failed: string };
+    readonly errors: FormErrorsViewModel;
     /** Where "email me directly" leads: the header's "Email me". */
     readonly emailHref: string;
-    /** "email me directly", the link after the failure sentence. */
-    readonly emailLabel: string;
 }

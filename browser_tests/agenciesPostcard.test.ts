@@ -50,7 +50,9 @@ describe("the postcard", () => {
         await site.page.click(".paper-post");
         await site.page.waitForTimeout(200);
         expect(await cardState(site.page)).toBe("failed");
-        expect(await site.page.isVisible("[data-postcard-failed]")).toBe(true);
+        expect(await site.page.innerText("[data-postcard-failed]")).toBe(
+            "The message did not go through. Nothing is lost: try again, or email me directly.",
+        );
         expect(await site.page.inputValue("#postcard-message")).toBe(
             "A test to build.",
         );

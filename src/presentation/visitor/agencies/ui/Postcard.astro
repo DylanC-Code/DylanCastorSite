@@ -10,7 +10,7 @@ import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmode
  */
 type Props = PostcardViewModel;
 
-const { front, back, posted, errors, emailHref, emailLabel } = Astro.props;
+const { front, back, posted, errors, emailHref } = Astro.props;
 ---
 
 <div class="postcard-place" data-rise data-postcard data-state="writing">
@@ -33,15 +33,15 @@ const { front, back, posted, errors, emailHref, emailLabel } = Astro.props;
             aria-live="polite"
             data-postcard-news
             data-posted={posted.caption}
-            data-failed={`${errors.failed} ${emailLabel}.`}
+            data-failed={errors.failed.join("")}
         />
     </div>
     <p class="postcard-failed" data-postcard-failed hidden>
-        {errors.failed}{" "}
+        {errors.failed[0]}
         <a href={emailHref} class="link-accent">
-            {emailLabel}
+            {errors.failed[1]}
         </a>
-        .
+        {errors.failed[2]}
     </p>
 </div>
 

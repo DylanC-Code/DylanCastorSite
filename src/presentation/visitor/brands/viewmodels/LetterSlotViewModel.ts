@@ -1,4 +1,5 @@
 import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
+import type { FormErrorsViewModel } from "#/presentation/visitor/shared/message/viewmodels/FormErrorsViewModel.ts";
 
 /** The note's form: its labels, placeholders and button. */
 export interface NoteFieldsViewModel {
@@ -29,5 +30,5 @@ export interface LetterSlotViewModel {
     /** The card once sent: small caps, then two lines. */
     readonly sent: readonly [string, string, string];
     readonly again: string;
-    readonly errors: { readonly replyTo: string; readonly failed: string };
+    readonly errors: FormErrorsViewModel;
 }

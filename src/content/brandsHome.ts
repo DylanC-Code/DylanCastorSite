@@ -1,6 +1,5 @@
-import agencyJson from "#/content/agencySections.json";
 import brandsJson from "#/content/brands.json";
-import { dataLine } from "#/content/formWords.ts";
+import { dataLine, formErrorWords } from "#/content/formWords.ts";
 import { home } from "#/content/home.ts";
 import { letterRuns } from "#/presentation/visitor/brands/presenters/letterRuns.ts";
 import type { BrandsPageViewModel } from "#/presentation/visitor/brands/viewmodels/BrandsPageViewModel.ts";
@@ -92,6 +91,6 @@ export const brandsPage: BrandsPageViewModel = {
             word(ask.sent, 2, "sent line"),
         ],
         again: ask.again,
-        errors: agencyJson.ask.errors,
+        errors: formErrorWords,
     },
 };
