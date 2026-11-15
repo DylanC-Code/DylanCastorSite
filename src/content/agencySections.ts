@@ -1,6 +1,7 @@
 import sectionsJson from "#/content/agencySections.json";
 import { agencyHero, agencySteps } from "#/content/agencySteps.ts";
 import { floorsContent } from "#/content/floors.ts";
+import { dataLine } from "#/content/formWords.ts";
 import { home } from "#/content/home.ts";
 import type { AfterFirstTestViewModel } from "#/presentation/visitor/agencies/viewmodels/AfterFirstTestViewModel.ts";
 import type { AgencySectionsViewModel } from "#/presentation/visitor/agencies/viewmodels/AgencySectionsViewModel.ts";
@@ -74,6 +75,7 @@ const closingAskSection: ClosingAskViewModel = {
         emailLabel: plainLabel,
     },
     plain: { before: plainBefore, label: plainLabel },
+    dataLine,
 };
 
 const agencySections: AgencySectionsViewModel = {

@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from "astro/config";
 
 import books from "./src/content/books.json" with { type: "json" };
 import floors from "./src/content/floors.json" with { type: "json" };
+import legal from "./src/content/legal.json" with { type: "json" };
 
 /**
  * Fonts come from npm packages pinned in bun.lock, never from a CDN: the build
@@ -12,13 +13,17 @@ import floors from "./src/content/floors.json" with { type: "json" };
 const fromPackages = fontProviders.npm({ remote: false });
 
 /**
- * The reading paths' and the floors' pages and the topics under a floor are
- * marked noindex until they are written: the sitemap leaves them out too.
+ * The reading paths' and the floors' pages, the topics under a floor and the
+ * legal notice are marked noindex until they are final: the sitemap leaves them
+ * out too.
  */
 const placeholders = new Set(
-    [...books.books, ...floors.floors].map(
-        (page) => new URL(page.href, "https://dylancastor.com").href,
-    ),
+    [
+        ...books.books,
+        ...floors.floors,
+        { href: legal.routes.en },
+        { href: legal.routes.fr },
+    ].map((page) => new URL(page.href, "https://dylancastor.com").href),
 );
 
 const topicsUnder = floors.floors.map(

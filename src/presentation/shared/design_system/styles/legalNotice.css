@@ -1,0 +1,86 @@
+/*
+ * The legal notice: one column (34em) on the left edge of the content, the
+ * other language's link, the title, the update line, four sections. Phone
+ * sizes first, desktop from 768px.
+ */
+.legal {
+    padding-top: 40px;
+    padding-bottom: 150px;
+}
+
+.legal-column {
+    max-width: 34em;
+}
+
+.legal-switch {
+    color: var(--color-accent);
+    font: 600 10px / 1.4 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-decoration: underline 1px;
+    text-transform: uppercase;
+    text-underline-offset: 4px;
+}
+
+.legal-title {
+    margin: 22px 0 0;
+    color: var(--color-ink);
+    font: 400 38px / 1.05 var(--font-display);
+}
+
+.legal-updated {
+    margin: 16px 0 0;
+    color: var(--color-ink-faint);
+    font-size: 14px;
+}
+
+.legal-h2 {
+    margin: 48px 0 0;
+    color: var(--color-ink);
+    font: 400 24px / 1.15 var(--font-display);
+}
+
+.legal-h2 em {
+    color: var(--color-accent);
+    font-style: italic;
+}
+
+.legal-p,
+.legal-identity {
+    margin: 16px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.legal-key {
+    color: var(--color-ink);
+    font-weight: 500;
+}
+
+.legal-identity {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-ink);
+}
+
+.legal-identity a {
+    width: fit-content;
+    color: inherit;
+    text-decoration: underline 1px rgb(237 239 242 / 0.35);
+    text-underline-offset: 4px;
+}
+
+@media (min-width: 48rem) {
+    .legal {
+        padding-top: 70px;
+    }
+
+    .legal-title {
+        font-size: 56px;
+    }
+
+    .legal-h2 {
+        margin-top: 64px;
+        font-size: 30px;
+    }
+}

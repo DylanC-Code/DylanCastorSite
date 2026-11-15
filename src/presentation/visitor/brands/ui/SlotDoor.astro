@@ -1,6 +1,7 @@
 ---
 import SlotNote from "#/presentation/visitor/brands/ui/SlotNote.astro";
 import type { LetterSlotViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
+import DataLine from "#/presentation/visitor/shared/message/ui/DataLine.astro";
 
 /**
  * The door, 520 × 600: its glass panel carries the note (a real form); the
@@ -10,8 +11,17 @@ import type { LetterSlotViewModel } from "#/presentation/visitor/brands/viewmode
  */
 type Props = LetterSlotViewModel;
 
-const { fields, flap, letter, sent, again, errors, emailHref, plain } =
-    Astro.props;
+const {
+    fields,
+    flap,
+    letter,
+    sent,
+    again,
+    errors,
+    emailHref,
+    plain,
+    dataLine,
+} = Astro.props;
 ---
 
 <div class="slot-place" data-letter-slot data-state="writing">
@@ -53,6 +63,7 @@ const { fields, flap, letter, sent, again, errors, emailHref, plain } =
             {plain.label}
         </a>
     </p>
+    <DataLine {...dataLine} />
     <p class="slot-failed" data-letter-failed hidden>
         {errors.failed}{" "}
         <a href={emailHref} class="link-accent">

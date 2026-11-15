@@ -11,21 +11,36 @@ interface Props {
     title: string;
     description: string;
     noindex?: boolean;
+    /** The page's language: French for the French legal notice, English elsewhere. */
+    lang?: "en" | "fr";
+    alternates?: readonly { readonly lang: string; readonly href: string }[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+    title,
+    description,
+    noindex = false,
+    lang = "en",
+    alternates = [],
+} = Astro.props;
 // The switcher design this visit sees: card here, rewritten per visit by the
 // edge. In development only, `?switcher=card|shelf` forces one for the tab.
 const isDev = import.meta.env.DEV;
 ---
 
 <!doctype html>
-<html lang="en" data-switcher="card">
+<html lang={lang} data-switcher="card">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {isDev && <DevSwitcherChoice />}
-        <SeoHead title={title} description={description} noindex={noindex} />
+        <SeoHead
+            title={title}
+            description={description}
+            noindex={noindex}
+            lang={lang}
+            alternates={alternates}
+        />
         <Font cssVariable="--font-caslon" preload />
         <Font cssVariable="--font-hanken" preload />
         <Font cssVariable="--font-dm-mono" />

@@ -1,0 +1,53 @@
+---
+import { switcherFor } from "#/content/floors.ts";
+import { home } from "#/content/home.ts";
+import { legalNotices } from "#/content/legalNotice.ts";
+import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import LegalNotice from "#/presentation/visitor/legal/ui/LegalNotice.astro";
+import type { LegalNoticeViewModel } from "#/presentation/visitor/legal/viewmodels/LegalNoticeViewModel.ts";
+import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
+
+/**
+ * The legal notice, one page per language (/legal, /mentions-legales), each
+ * declaring the other as its alternate. The site around it stays English;
+ * only the footer's link follows the page's language. Kept out of search
+ * until Dylan says the words are final.
+ */
+export function getStaticPaths(): {
+    params: { legalPage: string };
+    props: { notice: LegalNoticeViewModel };
+}[] {
+    return legalNotices.map((notice) => ({
+        params: { legalPage: notice.href.slice(1) },
+        props: { notice },
+    }));
+}
+
+interface Props {
+    notice: LegalNoticeViewModel;
+}
+
+const { notice } = Astro.props;
+const [name = ""] = home.footer.left.split(" · ");
+const footer = {
+    ...home.footer,
+    left: `${name} · ${notice.footerLink}`,
+    legalHref: notice.href,
+};
+---
+
+<HtmlDocument
+    title={`${notice.title.replace(/\.$/u, "")} · ${home.header.brand}`}
+    description={notice.title}
+    lang={notice.lang}
+    alternates={[{ lang: notice.other.lang, href: notice.other.href }]}
+    noindex
+>
+    <SiteFrame
+        header={home.header}
+        footer={footer}
+        switcher={switcherFor(null)}
+    >
+        <LegalNotice {...notice} />
+    </SiteFrame>
+</HtmlDocument>

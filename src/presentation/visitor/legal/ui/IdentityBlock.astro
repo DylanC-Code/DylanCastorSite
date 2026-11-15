@@ -1,0 +1,20 @@
+---
+import type { IdentityViewModel } from "#/presentation/visitor/legal/viewmodels/LegalNoticeViewModel.ts";
+
+/**
+ * Who publishes the site, one item per line, in ink. The email and the phone
+ * are written out (the law asks for them) and are links as well.
+ */
+type Props = IdentityViewModel;
+
+const { name, street, city, siret, email, phone, phoneHref } = Astro.props;
+---
+
+<p class="legal-identity">
+    <span>{name}</span>
+    <span>{street}</span>
+    <span>{city}</span>
+    <span>{siret}</span>
+    <a href={`mailto:${email}`}>{email}</a>
+    <a href={phoneHref}>{phone}</a>
+</p>

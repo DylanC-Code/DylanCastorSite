@@ -1,0 +1,17 @@
+---
+import type { LegalRun } from "#/presentation/visitor/legal/presenters/legalRuns.ts";
+
+/** A legal paragraph: key phrases in ink (medium), italics in italic. */
+interface Props {
+    runs: readonly LegalRun[];
+}
+
+const { runs } = Astro.props;
+---
+
+{runs.map((run) => {
+    if (run.mark === "key") {
+        return <span class="legal-key">{run.text}</span>;
+    }
+    return run.mark === "italic" ? <em>{run.text}</em> : run.text;
+})}

@@ -27,6 +27,7 @@ agencies_home_part2_handoff/
 brands_home_v1_handoff/
 floor1_v1_handoff/
 flicker_v1_handoff/
+legal_notice_v1_handoff/
 *_handoff*.zip
 
 # The dev container's own environment: never committed (see compose.yml).

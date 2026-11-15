@@ -1,0 +1,114 @@
+{
+    "updated": {
+        "en": "Updated on 15 November 2026.",
+        "fr": "Mise à jour le 15 novembre 2026."
+    },
+    "footerLink": {
+        "en": "Legal notice",
+        "fr": "Mentions légales"
+    },
+    "switch": {
+        "onEnglishPage": "Lire en français →",
+        "onFrenchPage": "Read in English →"
+    },
+    "title": {
+        "en": "Legal notice.",
+        "fr": "Mentions légales."
+    },
+    "identity": {
+        "name": "Dylan Castor, EI",
+        "street": "491 route de Cannes",
+        "city": "06810 Auribeau-sur-Siagne, France",
+        "siret": "SIRET 918 217 514 00028",
+        "email": "contact@dylancastor.com",
+        "phone": {
+            "en": "+33 6 50 32 29 56",
+            "fr": "06 50 32 29 56"
+        }
+    },
+    "sections": [
+        {
+            "id": "publisher",
+            "title": {
+                "en": ["Who publishes", "this site"],
+                "fr": ["Qui publie", "ce site"]
+            },
+            "blocks": {
+                "en": [
+                    "{identity}",
+                    "EI stands for *entrepreneur individuel*, the French status of a sole proprietor. Dylan Castor is responsible for what is published here."
+                ],
+                "fr": [
+                    "{identity}",
+                    "EI signifie entrepreneur individuel. Directeur de la publication : Dylan Castor."
+                ]
+            }
+        },
+        {
+            "id": "host",
+            "title": {
+                "en": ["Who hosts", "it"],
+                "fr": ["Qui", "l’héberge"]
+            },
+            "blocks": {
+                "en": [
+                    "The site runs on servers located in France and rented from two companies: OVH SAS, 2 rue Kellermann, 59100 Roubaix, France, phone 1007; and Hostinger International Limited, 61 Lordou Vironos Street, 6023 Larnaca, Cyprus.",
+                    "Between you and those servers sits the network of Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, United States, +1 650 319 8930."
+                ],
+                "fr": [
+                    "Le site est hébergé sur des serveurs situés en France et loués à deux sociétés : OVH SAS, 2 rue Kellermann, 59100 Roubaix, France, téléphone 1007 ; et Hostinger International Limited, 61 Lordou Vironos Street, 6023 Larnaca, Chypre.",
+                    "Entre vous et ces serveurs se trouve le réseau de Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis, +1 650 319 8930."
+                ]
+            }
+        },
+        {
+            "id": "your_data",
+            "title": {
+                "en": ["Your", "data"],
+                "fr": ["Vos", "données"]
+            },
+            "blocks": {
+                "en": [
+                    "**This site sets no cookie, measures no audience and stores nothing on your device.**",
+                    "When you write to me through a form on this site, I receive **your name, your email address and your message**. I use them to answer you and to follow up on your request, and for nothing else. The legal basis is the steps taken at your request before a possible contract, and my legitimate interest in answering the messages I receive.",
+                    "**I am the only one who reads them.** Two companies carry and store them for me: Cloudflare delivers the message to my mailbox, and Google hosts that mailbox. Both are American companies; the transfer is covered by the guarantees provided for by European law (the EU-U.S. Data Privacy Framework or standard contractual clauses).",
+                    "I keep your message for **one year after our last exchange**, then I delete it. If we work together, I keep what the law requires for accounts and contracts.",
+                    "You can ask me at any time to see your data, correct it, delete it, limit its use or object to it: write to contact@dylancastor.com. If you think your rights are not respected, you can complain to the CNIL, the French data protection authority."
+                ],
+                "fr": [
+                    "**Ce site ne dépose aucun cookie, ne mesure pas son audience et n’enregistre rien sur votre appareil.**",
+                    "Quand vous m’écrivez par un formulaire de ce site, je reçois **votre nom, votre adresse e-mail et votre message**. Je m’en sers pour vous répondre et donner suite à votre demande, et pour rien d’autre. La base légale est constituée des mesures prises à votre demande avant un éventuel contrat, et de mon intérêt légitime à répondre aux messages que je reçois. Le responsable du traitement est Dylan Castor.",
+                    "**Je suis le seul à les lire.** Deux sociétés les acheminent et les conservent pour moi : Cloudflare remet le message dans ma boîte, et Google héberge cette boîte. Ce sont des sociétés américaines ; ce transfert est encadré par les garanties prévues par le droit européen (cadre de protection des données UE–États-Unis ou clauses contractuelles types).",
+                    "Je conserve votre message **un an après notre dernier échange**, puis je le supprime. Si nous travaillons ensemble, je conserve ce que la loi impose pour la comptabilité et les contrats.",
+                    "Vous pouvez à tout moment me demander d’accéder à vos données, de les corriger, de les effacer, d’en limiter l’usage ou de vous y opposer : écrivez à contact@dylancastor.com. Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir la CNIL."
+                ]
+            }
+        },
+        {
+            "id": "reuse",
+            "title": {
+                "en": ["Reusing what is", "on this site"],
+                "fr": ["Réutiliser ce qui se trouve", "sur ce site"]
+            },
+            "blocks": {
+                "en": [
+                    "The texts, the drawings and the code of this site are my work. Ask me before reusing them."
+                ],
+                "fr": [
+                    "Les textes, les dessins et le code de ce site sont mon travail. Demandez-moi avant de les réutiliser."
+                ]
+            }
+        }
+    ],
+    "forms": {
+        "dataLine": "How your data is used",
+        "dataLineGoesTo": "The “Your data” section of the English legal notice.",
+        "note": "One short link under each form (the postcard of the agencies home, the letter slot of the brands home). Its place was never drawn: propose it and send Dylan a screenshot."
+    },
+    "marks": "**double stars** = key phrase: weight 500, colour `ink`. *single stars* = italic. The second part of each title is italic, in `accent`. `{identity}` = the identity block, one item per line, in `ink`.",
+    "routes": {
+        "en": "/legal",
+        "fr": "/mentions-legales",
+        "note": "Chosen by Dylan on 15 Nov 2026. Kept out of search (noindex) until he says the words are final."
+    }
+}

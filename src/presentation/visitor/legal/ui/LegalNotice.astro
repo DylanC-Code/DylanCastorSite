@@ -1,0 +1,45 @@
+---
+import IdentityBlock from "#/presentation/visitor/legal/ui/IdentityBlock.astro";
+import LegalText from "#/presentation/visitor/legal/ui/LegalText.astro";
+import type { LegalNoticeViewModel } from "#/presentation/visitor/legal/viewmodels/LegalNoticeViewModel.ts";
+
+/**
+ * The legal notice in one language: the link to the other language, the
+ * title, the update line, then four sections, each a title (its second part
+ * in italic copper) and its paragraphs. Plain text, no motion, no script.
+ */
+type Props = LegalNoticeViewModel;
+
+const { other, title, updated, identity, sections } = Astro.props;
+---
+
+<article class="page legal">
+    <div class="legal-column">
+        <a
+            href={other.href}
+            hreflang={other.lang}
+            lang={other.lang}
+            class="legal-switch"
+        >
+            {other.label}
+        </a>
+        <h1 class="legal-title">{title}</h1>
+        <p class="legal-updated">{updated}</p>
+        {sections.map((section) => (
+            <section id={section.id} aria-labelledby={`${section.id}-title`}>
+                <h2 id={`${section.id}-title`} class="legal-h2">
+                    {section.title[0]} <em>{section.title[1]}</em>
+                </h2>
+                {section.blocks.map((block) =>
+                    block === "identity" ? (
+                        <IdentityBlock {...identity} />
+                    ) : (
+                        <p class="legal-p">
+                            <LegalText runs={block} />
+                        </p>
+                    ),
+                )}
+            </section>
+        ))}
+    </div>
+</article>

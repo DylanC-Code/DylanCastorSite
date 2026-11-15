@@ -1,11 +1,12 @@
 ---
 import Postcard from "#/presentation/visitor/agencies/ui/Postcard.astro";
 import type { ClosingAskViewModel } from "#/presentation/visitor/agencies/viewmodels/ClosingAskViewModel.ts";
+import DataLine from "#/presentation/visitor/shared/message/ui/DataLine.astro";
 
 /** "Have a test to build?": the words, the postcard, the plain email line. */
 type Props = ClosingAskViewModel;
 
-const { title, titleItalic, text, postcard, plain } = Astro.props;
+const { title, titleItalic, text, postcard, plain, dataLine } = Astro.props;
 ---
 
 <section
@@ -33,6 +34,7 @@ const { title, titleItalic, text, postcard, plain } = Astro.props;
                     {plain.label}
                 </a>
             </p>
+            <DataLine {...dataLine} />
         </div>
     </div>
 </section>

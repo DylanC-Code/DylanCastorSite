@@ -1,0 +1,34 @@
+---
+import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
+
+/**
+ * "How your data is used", under a form: a small, faint link to the "Your
+ * data" section of the legal notice. It never competes with the send button.
+ */
+type Props = LinkViewModel;
+
+const { label, href } = Astro.props;
+---
+
+<p class="data-line">
+    <a href={href}>{label}</a>
+</p>
+
+<style>
+    .data-line {
+        margin: 10px 0 0;
+        font-size: 12px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .data-line a {
+        color: var(--color-ink-faint);
+        text-decoration: underline 1px rgb(125 133 144 / 0.5);
+        text-underline-offset: 3px;
+    }
+
+    .data-line a:hover {
+        color: var(--color-ink-muted);
+    }
+</style>

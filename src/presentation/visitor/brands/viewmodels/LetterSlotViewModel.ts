@@ -1,3 +1,5 @@
+import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
+
 /** The note's form: its labels, placeholders and button. */
 export interface NoteFieldsViewModel {
     readonly messageLabel: string;
@@ -17,6 +19,8 @@ export interface LetterSlotViewModel {
     /** "Or" then the email link ("email me directly"). */
     readonly plain: { readonly before: string; readonly label: string };
     readonly emailHref: string;
+    /** "How your data is used", under the form. */
+    readonly dataLine: LinkViewModel;
     readonly fields: NoteFieldsViewModel;
     /** The word engraved on the flap. */
     readonly flap: string;

@@ -1,5 +1,6 @@
 import agencyJson from "#/content/agencySections.json";
 import brandsJson from "#/content/brands.json";
+import { dataLine } from "#/content/formWords.ts";
 import { home } from "#/content/home.ts";
 import { letterRuns } from "#/presentation/visitor/brands/presenters/letterRuns.ts";
 import type { BrandsPageViewModel } from "#/presentation/visitor/brands/viewmodels/BrandsPageViewModel.ts";
@@ -72,6 +73,7 @@ export const brandsPage: BrandsPageViewModel = {
         titleItalic: ask.titleItalic,
         text: ask.text,
         plain: { before: plainBefore, label: plainLabel },
+        dataLine,
         emailHref,
         fields: {
             messageLabel: ask.messageLabel,
