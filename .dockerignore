@@ -1,0 +1,10 @@
+# Only what the build stage copies reaches Docker: the rest stays home.
+*
+!package.json
+!bun.lock
+!bunfig.toml
+!astro.config.ts
+!tsconfig.json
+!public/
+!src/
+!sws.toml

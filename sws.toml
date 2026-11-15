@@ -1,0 +1,41 @@
+# static-web-server, serving the built site (dist/) in the image
+# (Dockerfile), behind Cloudflare, in Dylan's k3s cluster.
+# Every page is a file: /cro answers cro.html, / answers index.html, and
+# no address ends with a slash (astro.config.ts: trailingSlash "never").
+
+[general]
+host = "::"
+port = 8080
+root = "/home/sws/public"
+
+# /cro is served from cro.html (static-web-server tries the ".html" suffix
+# when a path does not exist), with no redirect and no trailing slash.
+redirect-trailing-slash = false
+directory-listing = false
+
+# No 404 page yet (asked of the design agent): the server's own until then.
+page404 = "./404.html"
+
+# Text compressed on the fly (gzip, brotli, zstd); nothing precompressed.
+compression = true
+compression-static = false
+
+# Our own cache rules below, not the server's per-type defaults.
+cache-control-headers = false
+security-headers = true
+
+# GET /health answers 200, for the cluster's probes.
+health = true
+log-level = "warn"
+
+# Pages and everything else: always revalidated, so a deploy shows at once.
+[[advanced.headers]]
+source = "**"
+[advanced.headers.headers]
+Cache-Control = "no-cache"
+
+# Astro's hashed files never change under their name: kept a year.
+[[advanced.headers]]
+source = "/_astro/**"
+[advanced.headers.headers]
+Cache-Control = "public, max-age=31536000, immutable"

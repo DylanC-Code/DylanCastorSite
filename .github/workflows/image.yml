@@ -1,0 +1,67 @@
+name: image
+
+# The site's image (Dockerfile, sws.toml): built and tried on every pull
+# request; on main, also published to GitHub's registry, tagged with the commit.
+# Publishing is not deploying: Dylan's infrastructure repo pins the tag it runs.
+on:
+    pull_request:
+    push:
+        branches: [main]
+
+permissions:
+    contents: read
+    packages: write
+
+concurrency:
+    group: image-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    IMAGE: ghcr.io/dylanc-code/dylancastor-site
+
+jobs:
+    image:
+        runs-on: ubuntu-24.04
+        timeout-minutes: 15
+        steps:
+            # Actions pinned by commit, as in TightStack.
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+
+            - name: build
+              run: docker build --tag "$IMAGE:$GITHUB_SHA" .
+
+            # The image as the cluster runs it: pages from their files, real
+            # 404s, the cache rules, the health probe.
+            - name: try
+              run: |
+                  docker run --detach --name site --publish 8080:8080 "$IMAGE:$GITHUB_SHA"
+                  for attempt in $(seq 1 20); do
+                      curl --silent --fail http://localhost:8080/health && break
+                      sleep 0.5
+                  done
+                  status() { curl --silent --output /dev/null --write-out '%{http_code}' "http://localhost:8080$1"; }
+                  header() { curl --silent --head "http://localhost:8080$1" | tr -d '\r' | grep -i "^$2:" | cut -d' ' -f2-; }
+                  expect() { [ "$2" = "$3" ] || { echo "$1: expected '$3', got '$2'"; exit 1; }; }
+                  for page in / /agencies /cro /shopify-cro /shopify-cro/flicker-free-ab-tests /legal /mentions-legales /shareImage.png /sitemap-index.xml; do
+                      expect "$page" "$(status "$page")" 200
+                  done
+                  expect /nope "$(status /nope)" 404
+                  expect "/cro location" "$(header /cro location)" ""
+                  expect "/cro cache" "$(header /cro cache-control)" "no-cache"
+                  css=$(curl --silent http://localhost:8080/cro | grep -o '/_astro/[^"]*\.css' | head -n 1)
+                  expect "$css cache" "$(header "$css" cache-control)" "public, max-age=31536000, immutable"
+                  echo "the image serves the site as expected"
+
+            - name: logs
+              if: failure()
+              run: docker logs site
+
+            - name: publish
+              if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+              env:
+                  TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  echo "$TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+                  docker push "$IMAGE:$GITHUB_SHA"
