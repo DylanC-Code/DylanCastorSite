@@ -1,0 +1,116 @@
+---
+/**
+ * The workshop, desktop: a long low workshop with an arched door, a name
+ * plaque, a shuttered window, and a round sign hung from a bracket; the
+ * gentleman stands at the right, facing it. Prototype: `workSec`, 1000 × 310.
+ */
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+interface Props {
+    plaque: readonly [string, string];
+    hangingSign: readonly [string, string];
+    label: string;
+}
+
+const { plaque, hangingSign, label } = Astro.props;
+const hatch = Array.from(
+    { length: 65 },
+    (_, i) => `M${50 + i * 14} 294l-7 9`,
+).join("");
+const eaves = Array.from({ length: 27 }, (_, i) => `M${i * 15} 38v8`).join("");
+const door =
+    "M160 290V162a40 40 0 0 1 80 0V290M200 122V290M176 130V290M224 130V290";
+const bracket = "M400 92h76M400 106q42 0 54 -14M476 92v20";
+---
+
+<svg
+    class="scene-workshop"
+    viewBox="0 0 1000 310"
+    role="img"
+    aria-label={label}
+>
+    <path class="l" d="M40 290H960"></path>
+    <path class="h" d={hatch}></path>
+    <g transform="translate(120 0)">
+        <path class="l" d="M0 290V50M400 50V290"></path>
+        <path class="h" d="M393 60V284M387 110V240"></path>
+        <path class="f" d="M-10 34h420v16h-420z"></path>
+        <path class="h" d={eaves}></path>
+        <path class="f" d="M150 290V160a50 50 0 0 1 100 0V290"></path>
+        <path class="h" d={door}></path>
+        <circle class="c" cx="190" cy="214" r="3"></circle>
+        <path class="l" d="M138 290h124"></path>
+        <path class="f" d="M34 150h92v58H34z"></path>
+        <path class="h" d="M39 155h82v48H39z"></path>
+        <circle class="c" cx="42" cy="158" r="1.3"></circle>
+        <circle class="c" cx="118" cy="158" r="1.3"></circle>
+        <text class="sn" x="80" y="178" text-anchor="middle">
+            {plaque[0]}
+        </text>
+        <text class="nn" x="80" y="194" text-anchor="middle">
+            {plaque[1]}
+        </text>
+        <path class="f" d="M286 140h86v92h-86z"></path>
+        <path class="l" d="M329 140v92M286 186h86M278 234h102"></path>
+        <path
+            class="h"
+            d="M300 216h18v-14h-18zM305 202v-8h8v8M318 207h6M282 239h94"
+        ></path>
+        <path class="l" d={bracket}></path>
+        <circle class="f" cx="476" cy="150" r="38"></circle>
+        <circle class="h" cx="476" cy="150" r="31"></circle>
+        <text class="sn" x="476" y="147" text-anchor="middle">
+            {hangingSign[0]}
+        </text>
+        <text class="sn" x="476" y="163" text-anchor="middle">
+            {hangingSign[1]}
+        </text>
+    </g>
+    <g transform="translate(790 0) scale(-1 1)">
+        <VisitorFigure x={0} y={122} width={90} height={168} />
+    </g>
+</svg>
+
+<style>
+    .scene-workshop {
+        display: block;
+        overflow: visible;
+    }
+
+    .l {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .f {
+        fill: var(--color-ground);
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linejoin: round;
+    }
+
+    .h {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.4);
+        stroke-width: 0.9;
+        stroke-linecap: round;
+    }
+
+    .c {
+        fill: rgb(227 154 106 / 0.85);
+    }
+
+    .sn {
+        font: italic 400 14px var(--font-display);
+        fill: var(--color-ink);
+    }
+
+    .nn {
+        font: 600 7px var(--font-sans);
+        letter-spacing: 0.2em;
+        fill: var(--color-accent);
+    }
+</style>

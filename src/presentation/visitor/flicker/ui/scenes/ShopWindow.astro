@@ -1,0 +1,118 @@
+---
+/**
+ * The shop window, desktop: the gentleman before a store with a sign board,
+ * a scalloped awning and a window where the page has jumped: the dashed place
+ * a block was, the block now under it, an arrow down. A door at the right.
+ * Prototype: `shopSec`, the 1000 × 310 drawing.
+ */
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+interface Props {
+    sign: string;
+    label: string;
+}
+
+const { sign, label } = Astro.props;
+const hatch = Array.from(
+    { length: 65 },
+    (_, i) => `M${50 + i * 14} 294l-7 9`,
+).join("");
+const awning = `M0 74${"q25 20 50 0".repeat(10)}`;
+const fringe = Array.from(
+    { length: 10 },
+    (_, i) => `M${25 + i * 50} 74v9`,
+).join("");
+const pane =
+    "M70 132h240v120H70zM70 148h240M88 162h70v76H88zM88 162l70 76M158 162l-70 76M176 166h110M176 180h76";
+---
+
+<svg
+    class="scene-shop-window"
+    viewBox="0 0 1000 310"
+    role="img"
+    aria-label={label}
+>
+    <path class="l" d="M40 290H960"></path>
+    <path class="h" d={hatch}></path>
+    <VisitorFigure x={250} y={122} width={90} height={168} />
+    <g transform="translate(420 0)">
+        <path class="l" d="M0 290V74M500 74V290"></path>
+        <path class="h" d="M493 84V284M487 130V250M7 96V150"></path>
+        <path class="f" d="M-12 28h524v46h-524z"></path>
+        <path class="h" d="M-4 36h508M-4 66h508"></path>
+        <circle class="c" cx="6" cy="51" r="2"></circle>
+        <circle class="c" cx="494" cy="51" r="2"></circle>
+        <text class="sign" x="250" y="59" text-anchor="middle">
+            {sign}
+        </text>
+        <path class="l" d={awning}></path>
+        <path class="h" d={fringe}></path>
+        <path class="f" d="M30 112h322v160H30z"></path>
+        <path
+            class="h"
+            d="M38 120h306v144H38zM312 126l26 26M324 126l14 14"
+        ></path>
+        <path class="l" d="M22 272h338"></path>
+        <path class="h" d="M26 277h330M30 282h322"></path>
+        <path class="l" d={pane}></path>
+        <circle class="c" cx="80" cy="140" r="2"></circle>
+        <circle class="c" cx="88" cy="140" r="2"></circle>
+        <rect
+            class="l"
+            x="176"
+            y="194"
+            width="112"
+            height="18"
+            stroke-dasharray="3 4"
+            opacity=".7"
+        ></rect>
+        <rect class="c" x="176" y="222" width="112" height="18"></rect>
+        <path class="l" d="M298 198v36M293 228l5 7l5 -7"></path>
+        <path class="f" d="M384 290V112h92v178"></path>
+        <path class="l" d="M394 122h72v74h-72z"></path>
+        <path
+            class="h"
+            d="M394 208h72v70h-72zM400 128l16 16M408 128l8 8"
+        ></path>
+        <circle class="c" cx="466" cy="204" r="3"></circle>
+        <path class="l" d="M374 290h112"></path>
+    </g>
+</svg>
+
+<style>
+    .scene-shop-window {
+        display: block;
+        overflow: visible;
+    }
+
+    .l {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .f {
+        fill: var(--color-ground);
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linejoin: round;
+    }
+
+    .h {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.4);
+        stroke-width: 0.9;
+        stroke-linecap: round;
+    }
+
+    .c {
+        fill: rgb(227 154 106 / 0.85);
+    }
+
+    .sign {
+        font: italic 400 22px var(--font-display);
+        fill: var(--color-ink);
+    }
+</style>

@@ -1,0 +1,12 @@
+---
+import type { KeyRun } from "#/presentation/visitor/flicker/presenters/keyRuns.ts";
+
+/** A text with its key phrases set apart (medium weight, in ink). */
+interface Props {
+    runs: readonly KeyRun[];
+}
+
+const { runs } = Astro.props;
+---
+
+{runs.map((run) => (run.key ? <span class="key">{run.text}</span> : run.text))}

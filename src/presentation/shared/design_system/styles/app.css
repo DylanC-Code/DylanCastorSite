@@ -56,6 +56,17 @@
 @import "./floorAsk.css";
 @import "./floorPhone.css";
 @import "./floorPhoneCurtain.css";
+@import "./lanternScene.css";
+@import "./lanternMotion.css";
+@import "./lanternPen.css";
+@import "./topicPage.css";
+@import "./lanternPlate.css";
+@import "./plateTabs.css";
+@import "./detailsCabinet.css";
+@import "./cabinetNotes.css";
+@import "./topicPhone.css";
+@import "./plateWide.css";
+@import "./plateTurn.css";
 @import "./switcher.css";
 @import "./switcherPlate.css";
 @import "./switcherCard.css";

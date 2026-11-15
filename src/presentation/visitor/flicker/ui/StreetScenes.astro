@@ -1,0 +1,33 @@
+---
+import StreetStop from "#/presentation/visitor/flicker/ui/StreetStop.astro";
+import ShopWindow from "#/presentation/visitor/flicker/ui/scenes/ShopWindow.astro";
+import ShopWindowPhone from "#/presentation/visitor/flicker/ui/scenes/ShopWindowPhone.astro";
+import Workshop from "#/presentation/visitor/flicker/ui/scenes/Workshop.astro";
+import WorkshopPhone from "#/presentation/visitor/flicker/ui/scenes/WorkshopPhone.astro";
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/** The two street stops: the shop window, then the workshop (at the right). */
+interface Props {
+    shop: FlickerPageViewModel["shop"];
+    workshop: FlickerPageViewModel["workshop"];
+}
+
+const { shop, workshop } = Astro.props;
+---
+
+<StreetStop stop={shop} id="shop-title" side="left">
+    <div class="is-wide">
+        <ShopWindow sign={shop.sign} label={shop.label} />
+    </div>
+    <div class="is-narrow">
+        <ShopWindowPhone sign={shop.sign} label={shop.label} />
+    </div>
+</StreetStop>
+<StreetStop stop={workshop} id="workshop-title" side="right">
+    <div class="is-wide">
+        <Workshop {...workshop} />
+    </div>
+    <div class="is-narrow">
+        <WorkshopPhone {...workshop} />
+    </div>
+</StreetStop>

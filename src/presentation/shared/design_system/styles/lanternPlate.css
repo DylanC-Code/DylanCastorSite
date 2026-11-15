@@ -1,0 +1,112 @@
+/*
+ * The lantern plate, the page's one paper object: the frame, the title
+ * line, the caption (Caslon italic, never changing the plate's height) and
+ * the price note. The tabs and the wide view button show only with script.
+ */
+.lantern-plate {
+    position: relative;
+    margin-top: 64px;
+}
+
+.plate {
+    position: relative;
+    padding: 26px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow:
+        inset 0 0 0 1px rgb(27 26 24 / 0.5),
+        inset 0 0 0 6px var(--color-paper),
+        inset 0 0 0 7px rgb(27 26 24 / 0.2),
+        0 26px 40px rgb(0 0 0 / 0.5);
+}
+
+.plate-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 30px;
+    margin: 0;
+    padding: 0 6px;
+    color: rgb(27 26 24 / 0.7);
+    font: 600 10px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.plate-scene {
+    position: relative;
+}
+
+.plate-caption {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 3.4em;
+    padding: 4px 6px 0;
+}
+
+.caption {
+    margin: 0;
+    font: italic 400 20px / 1.35 var(--font-display);
+}
+
+.caption.is-new {
+    animation: plate-caption-in 450ms ease both;
+}
+
+@keyframes plate-caption-in {
+    from {
+        opacity: 0;
+    }
+}
+
+.caption-copper {
+    color: var(--color-paper-copper);
+    font-style: normal;
+}
+
+.caption-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-paper-copper);
+    font: inherit;
+    font-style: normal;
+    text-decoration: underline 1px;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+.caption-left {
+    display: block;
+    color: var(--color-ink-red);
+}
+
+.price-note {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 6px;
+    z-index: 3;
+    box-sizing: border-box;
+    width: min(360px, 100% - 12px);
+    padding: 14px 16px 13px;
+    background: var(--color-paper);
+    box-shadow:
+        inset 0 0 0 1px rgb(27 26 24 / 0.5),
+        inset 0 0 0 4px var(--color-paper),
+        inset 0 0 0 5px rgb(27 26 24 / 0.2),
+        0 12px 22px rgb(0 0 0 / 0.35);
+    font: 400 14.5px / 1.5 var(--font-sans);
+}
+
+.price-note b {
+    display: block;
+    margin-bottom: 4px;
+    font: italic 400 17px / 1.3 var(--font-display);
+}
+
+.plate-wide-open,
+.plate-wide-close,
+.plate-turn {
+    display: none;
+}

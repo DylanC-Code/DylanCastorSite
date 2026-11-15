@@ -1,0 +1,143 @@
+{
+    "topic": "flicker_free_tests",
+    "floor": "I",
+    "versions": {
+        "note": "Three texts exist in two versions. `agency` is shown to a visitor who came from the agencies home, `brand` to one who came from the brands home. A visitor from neither home (a direct visit, a search engine) gets `brand`: decided by Dylan on 15 Nov 2026.",
+        "fallback": "brand",
+        "keys": ["agency", "brand"]
+    },
+    "head": {
+        "back": "← Floor I · The storefront",
+        "backGoesTo": "The floor I page.",
+        "title": ["Flicker-free", "A/B tests."],
+        "titleNote": "The second part is set in italic.",
+        "intro": "Why a tested page can jump under the visitor’s eyes, and how to stop it. Work the lantern to see both."
+    },
+    "plate": {
+        "title": "Move the slide · Open the shutter",
+        "ways": {
+            "usual": { "name": "The usual way", "moves": ["open", "slide"] },
+            "clean": { "name": "Without flicker", "moves": ["slide", "open"] }
+        },
+        "captions": {
+            "hello": "A visitor has just asked for the page.",
+            "reset": "A visitor has just asked for the page.",
+            "openA": "The visitor sees the original page.",
+            "openB": "The visitor sees the tested version.",
+            "flick": [
+                "The page changed under their eyes.",
+                "That is the flicker."
+            ],
+            "slideDarkB": "The change is made. The visitor still sees nothing.",
+            "slideDarkA": "The change is undone. The visitor still sees nothing.",
+            "close": "The page is hidden again.",
+            "cleanEnd": [
+                "The visitor only ever saw the tested version.",
+                "No flicker",
+                ", ",
+                "at a price",
+                "."
+            ],
+            "left": "You left this way. Click its tab to start it again.",
+            "captionNote": "flick: the second part is in paper-copper, roman. cleanEnd: “No flicker” is in paper-copper, roman; “at a price” is the link that opens the price note."
+        },
+        "pen": { "flick": "it moved", "cleanEnd": "nothing moved" },
+        "priceNote": {
+            "title": "The price of no flicker",
+            "text": "The change is made before the page is shown, so the page is shown a moment later. Look at the dial: the hand has gone further than the usual way."
+        },
+        "labels": {
+            "scene": "A magic lantern and its screen",
+            "shutter": "The shutter: open or close it",
+            "slide": "The slide: change it",
+            "crank": "Start again",
+            "slideLetters": ["A", "B"]
+        },
+        "cue": "Continued below"
+    },
+    "signpost": {
+        "title": ["Same two moves.", "Only the order changes."],
+        "titleNote": "The second part is set in italic, in the accent colour.",
+        "boards": ["The usual way", "Without flicker"],
+        "captions": ["shown, then changed", "changed, then shown"],
+        "label": "A signpost with two boards. The usual way: shown, then changed. Without flicker: changed, then shown."
+    },
+    "shop": {
+        "title": ["It can change", "the result of the test."],
+        "text": "A page that **jumps** gets noticed, moves things under the finger and feels broken. A visitor who saw that does not behave like the others, so the test measures **the flicker as well as your change**.",
+        "sign": "The store",
+        "label": "The gentleman in front of a shop window where a page has jumped"
+    },
+    "workshop": {
+        "title": ["What it means", "for you."],
+        "text": {
+            "agency": "I set your clients’ tests up so that **the change is made before the page is shown**. Their customers **never see a page jump**, and your tests measure your change and nothing else. I check it on each store **before the test goes live**.",
+            "brand": "I set your tests up so that **the change is made before the page is shown**. Your customers **never see a page jump**, and your tests measure your change and nothing else. I check it on your store **before the test goes live**."
+        },
+        "plaque": ["D. Castor", "TESTS"],
+        "hangingSign": ["No", "flicker"],
+        "label": "The gentleman at a workshop with a hanging sign: no flicker"
+    },
+    "details": {
+        "title": ["The details,", "if you want them."],
+        "hint": "Pull a drawer.",
+        "drawers": [
+            {
+                "label": "Slow connections",
+                "question": "And on a slow connection?",
+                "answer": "I set **a limit** for each test. If the change is not ready in time, the visitor gets **the original page**: nobody is left in front of an empty screen."
+            },
+            {
+                "label": "After the test",
+                "question": "And when the test is over?",
+                "answer": "When a version wins, I can **build it into the theme** and remove the test. From then on nothing is changed on the fly: there is **no flicker to avoid, and no wait**."
+            },
+            {
+                "label": "Counted once",
+                "question": "And a visitor who comes back?",
+                "answer": "They see **the version they saw the first time**, and are counted once. The same person **never counts twice** in the result."
+            },
+            {
+                "label": "Switching it off",
+                "question": "And if something goes wrong?",
+                "answer": "You can **switch a test off yourself**, at once. Every visitor then gets **the original page**."
+            },
+            {
+                "label": "What it costs",
+                "question": "And what does it cost?",
+                "answer": {
+                    "agency": "Without flicker, the page is shown **a little later**. How much depends on the test, on the size of the change and on the visitor’s connection. I **measure it** on each store before the test goes live.",
+                    "brand": "Without flicker, the page is shown **a little later**. How much depends on the test, on the size of the change and on the visitor’s connection. I **measure it** on your store before the test goes live."
+                }
+            }
+        ]
+    },
+    "ask": {
+        "title": {
+            "agency": ["A question", "about your clients’ tests?"],
+            "brand": ["A question", "about your tests?"]
+        },
+        "titleNote": "The second part is set in italic.",
+        "link": "Write to me →",
+        "goesTo": "The closing ask of the home the visitor came from, as on the floor I page. A visitor from neither home: the letter slot of the brands home (decided by Dylan on 15 Nov 2026).",
+        "label": "The gentleman posting a letter"
+    },
+    "phone": {
+        "wideView": "Wide view",
+        "closeWideView": "Close the wide view",
+        "turn": "Turn your phone",
+        "noTurn": "My screen does not turn",
+        "signpostCaptions": ["← shown, then changed", "changed, then shown →"]
+    },
+    "marks": {
+        "note": "In the texts above, **double stars** mark the key phrases: medium weight, in `ink`. They are not bold and not italic.",
+        "tabDone": "✓",
+        "tabLeft": "↺"
+    },
+    "promises": [
+        "Confirmed by Dylan on 15 Nov 2026: he checks and measures on every test before it goes live.",
+        "On a slow connection: a limit, then the original page. Nothing is said about the result.",
+        "Building the winner into the theme is an offer (“I can”), not something that always happens.",
+        "No figure is given for the delay, on purpose: never add one."
+    ]
+}

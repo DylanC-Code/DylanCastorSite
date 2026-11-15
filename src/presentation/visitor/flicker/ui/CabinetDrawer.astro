@@ -1,0 +1,26 @@
+---
+/**
+ * One drawer: a hatched slot, a front with a label holder and a ring pull.
+ * A button (disabled until the script wakes the cabinet), with aria-expanded.
+ */
+interface Props {
+    label: string;
+    index: number;
+}
+
+const { label, index } = Astro.props;
+---
+
+<button
+    type="button"
+    class="drawer"
+    aria-expanded="false"
+    aria-controls={`drawer-note-${index}`}
+    disabled
+    data-drawer={index}
+>
+    <span class="drawer-front">
+        <span class="drawer-label">{label}</span>
+        <span aria-hidden="true" class="drawer-pull" />
+    </span>
+</button>

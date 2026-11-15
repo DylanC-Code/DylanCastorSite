@@ -1,0 +1,32 @@
+---
+import type { LanternPlateViewModel } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
+
+/**
+ * The wide view's own parts (phone): the close button, and the prompt shown
+ * while the phone is upright ("Turn your phone", "My screen does not turn").
+ */
+type Props = LanternPlateViewModel["wide"];
+
+const { close, turn, noTurn } = Astro.props;
+---
+
+<button
+    type="button"
+    class="plate-wide-close"
+    aria-label={close}
+    data-wide-close
+>
+    ✕
+</button>
+<div class="plate-turn">
+    <svg viewBox="0 0 60 60" aria-hidden="true">
+        <g>
+            <rect x="19" y="6" width="22" height="48" rx="4" />
+            <path d="M27 48h6" />
+        </g>
+    </svg>
+    <p>{turn}</p>
+    <button type="button" class="plate-no-turn" data-wide-manual>
+        {noTurn}
+    </button>
+</div>

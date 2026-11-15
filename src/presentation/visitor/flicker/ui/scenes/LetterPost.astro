@@ -1,0 +1,63 @@
+---
+/**
+ * The letter post: the gentleman at the letter box on the ground, a letter in
+ * his hand tipped toward the slot. Prototype: `postSec`, the 440 × 310 drawing.
+ */
+import LetterBox from "#/presentation/visitor/floor/ui/LetterBox.astro";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+interface Props {
+    label: string;
+}
+
+const { label } = Astro.props;
+const hatch = Array.from(
+    { length: 30 },
+    (_, i) => `M${10 + i * 14} 294l-7 9`,
+).join("");
+---
+
+<svg
+    class="scene-letter-post"
+    viewBox="0 0 440 310"
+    role="img"
+    aria-label={label}
+>
+    <path class="l" d="M0 290H440"></path>
+    <path class="h" d={hatch}></path>
+    <LetterBox x={262} y={100} width={110} height={190} />
+    <VisitorFigure x={138} y={122} width={90} height={168} />
+    <g transform="rotate(-14 238 184)">
+        <path class="f" d="M223 174h30v20h-30z"></path>
+        <path class="l" d="M223 174l15 11l15 -11"></path>
+    </g>
+</svg>
+
+<style>
+    .scene-letter-post {
+        display: block;
+        overflow: visible;
+    }
+
+    .l {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .f {
+        fill: var(--color-ground);
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linejoin: round;
+    }
+
+    .h {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.4);
+        stroke-width: 0.9;
+        stroke-linecap: round;
+    }
+</style>

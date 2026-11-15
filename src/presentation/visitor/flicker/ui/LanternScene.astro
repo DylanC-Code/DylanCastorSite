@@ -1,0 +1,138 @@
+---
+import LanternScreen from "#/presentation/visitor/flicker/ui/LanternScreen.astro";
+
+/**
+ * The magic lantern and its screen (880 × 300): the crank (start again), the
+ * lantern, the slide carriage (A over B), the shutter, the dial, the beam and
+ * the screen. The two parts and the crank are buttons; the script moves the
+ * marked groups (`data-carriage`, `data-shutter`, `data-dial-hand`, …) to
+ * draw the state, and writes the red pen in `data-pen` and `data-end`.
+ */
+interface Props {
+    labels: {
+        scene: string;
+        shutter: string;
+        slide: string;
+        crank: string;
+        slideLetters: readonly [string, string];
+    };
+}
+
+const { labels } = Astro.props;
+const teeth = Array.from({ length: 12 }, (_, index) => index * 30);
+const rivets = [
+    [118, 138],
+    [222, 138],
+    [118, 242],
+    [222, 242],
+];
+---
+
+<svg
+    class="lantern-scene"
+    viewBox="0 0 880 300"
+    role="group"
+    aria-label={labels.scene}
+    data-scene
+>
+    <path class="lk" d="M40 250h192M56 250v40M216 250v40M56 266h160" />
+    <g
+        class="crank"
+        transform="translate(74 216)"
+        data-label={labels.crank}
+        data-crank
+    >
+        <circle class="crank-hit" r="40" />
+        <path
+            class="crank-arrow"
+            d="M27.5 -22.3A35.4 35.4 0 0 0 -30.7 -17.7M-31.5 -27.5l.8 9.8l9.4 -3.2"
+        />
+        <g class="crank-gear" data-gear>
+            <circle class="lk" r="22" />
+            <circle class="lk" r="5" />
+            {teeth.map((angle) => (
+                <path class="lk" d="M0 -22v-6" transform={`rotate(${angle})`} />
+            ))}
+            <path class="lk" d="M0 0L16 -12" />
+            <circle class="lc" cx="19" cy="-14" r="6" />
+        </g>
+    </g>
+    <g>
+        <path
+            class="lk"
+            d="M110 250V130h120v120M100 130h140M145 130v-30h50v30M138 100h64l-10-14h-44zM160 86v-10h20v10"
+        />
+        <circle class="lk" cx="170" cy="190" r="30" />
+        <circle class="lk2" cx="170" cy="190" r="23" />
+        <path class="lk2" d="M170 204v-10" />
+        <path class="lc" d="M170 172c9 10 10 22 0 30c-10-8-9-20 0-30z" />
+        {rivets.map(([x, y]) => (
+            <circle cx={x} cy={y} r="1.6" class="lrivet" />
+        ))}
+    </g>
+    <path class="lk" d="M230 150h36v80h-36" />
+    <g class="part" data-part="slide" data-label={labels.slide}>
+        <rect class="part-hit" x="229" y="66" width="40" height="220" />
+        <g data-carriage>
+            <path class="lpf" d="M238 160h22v118h-22z" />
+            <path class="lk" d="M249 160v-16" />
+            <rect
+                class="lk"
+                x="241"
+                y="166"
+                width="16"
+                height="48"
+                stroke-width="1"
+            />
+            <rect
+                class="lcs"
+                x="241"
+                y="226"
+                width="16"
+                height="48"
+                stroke-width="1"
+            />
+            <circle class="lhc" cx="249" cy="139" r="7" />
+        </g>
+    </g>
+    <g aria-hidden="true" data-carriage>
+        <text class="lletter" x="249" y="195">
+            {labels.slideLetters[0]}
+        </text>
+        <text class="lletter is-b" x="249" y="255">
+            {labels.slideLetters[1]}
+        </text>
+    </g>
+    <path class="lpf" d="M266 172h44v36h-44z" />
+    <path class="lc" d="M310 166h8v48h-8z" />
+    <g class="part" data-part="open" data-label={labels.shutter}>
+        <rect class="part-hit" x="306" y="148" width="92" height="86" />
+        <g data-shutter>
+            <path class="lk" d="M324 162v56" stroke-width="3.5" />
+            <circle class="lhc" cx="324" cy="220" r="7" />
+        </g>
+        <circle class="lpf" cx="324" cy="162" r="3.5" />
+    </g>
+    <g class="lbeam" opacity="0" data-beam>
+        <path
+            class="lcs"
+            d="M328 180L520 56M328 200L520 244"
+            stroke-width="1"
+            stroke-dasharray="3 6"
+        />
+    </g>
+    <LanternScreen />
+    <g transform="translate(430 44)">
+        <circle class="lk" r="26" />
+        <circle class="lk2" r="21" />
+        {[0, 90, 180, 270].map((angle) => (
+            <path class="lk" d="M0 -26v7" transform={`rotate(${angle})`} />
+        ))}
+        <g data-dial-hand>
+            <path class="lk" d="M0 4V-18" stroke-width="2.4" />
+        </g>
+        <circle class="lc" r="3" />
+    </g>
+    <g class="lpen" data-pen />
+    <g class="lpen" data-end />
+</svg>

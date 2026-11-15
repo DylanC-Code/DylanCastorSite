@@ -1,0 +1,120 @@
+/*
+ * The plate's two folder tabs on its top edge, 44px from the right: a
+ * trapezoid at rest, paper with red words when its way is chosen, ✓ once
+ * done, ↺ once left. Shown only with the script.
+ */
+.plate-tabs {
+    position: absolute;
+    right: 44px;
+    bottom: calc(100% - 1px);
+    display: none;
+    margin: 0;
+}
+
+[data-live] > .plate-tabs {
+    display: flex;
+}
+
+.plate-tab {
+    position: relative;
+    isolation: isolate;
+    margin-left: -10px;
+    padding: 11px 26px 9px;
+    border: 0;
+    background: none;
+    color: rgb(27 26 24 / 0.72);
+    font: 600 10px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.plate-tab::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: 1px solid rgb(27 26 24 / 0.5);
+    border-bottom: 0;
+    border-radius: 7px 7px 0 0;
+    background: #d6cfbf;
+    transform: perspective(70px) rotateX(26deg);
+    transform-origin: bottom;
+    transition: background 0.25s;
+    content: "";
+}
+
+.plate-tab:hover::before {
+    background: #e2dccf;
+}
+
+.plate-tab[data-state="on"] {
+    z-index: 2;
+    color: var(--color-ink-red);
+}
+
+.plate-tab[data-state="on"]::before {
+    background: var(--color-paper);
+}
+
+.tab-mark {
+    display: none;
+    margin-left: 6px;
+}
+
+[data-state="done"] > .tab-mark.is-done,
+[data-state="left"] > .tab-mark.is-left {
+    display: inline;
+}
+
+.plate-tab:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* The hand under the plate: no room of its own, centred in the gap. */
+.plate-cue-place {
+    position: relative;
+    height: 0;
+}
+
+.plate-cue {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: var(--gap1);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    font: italic 400 20px / 1.2 var(--font-display);
+    white-space: nowrap;
+    cursor: pointer;
+    translate: -50% 0;
+}
+
+.plate-cue svg {
+    width: 34px;
+    height: 49px;
+    animation: plate-cue-drop 700ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.plate-cue span {
+    animation: plate-cue-in 600ms ease 350ms both;
+}
+
+@keyframes plate-cue-drop {
+    from {
+        opacity: 0;
+        translate: 0 -10px;
+    }
+}
+
+@keyframes plate-cue-in {
+    from {
+        opacity: 0;
+    }
+}

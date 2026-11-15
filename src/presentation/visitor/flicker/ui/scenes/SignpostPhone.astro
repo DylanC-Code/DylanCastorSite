@@ -1,0 +1,119 @@
+---
+/**
+ * The signpost, phone: the same post and boards narrowed to the column, the
+ * gentleman on the left, and the two captions stacked under the ground, each
+ * with its arrow pointing the way of its board. Prototype: `signSec`, 340 × 396.
+ */
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+interface Props {
+    boards: readonly [string, string];
+    captions: readonly [string, string];
+    label: string;
+}
+
+const { boards, captions, label } = Astro.props;
+const hatch = Array.from(
+    { length: 23 },
+    (_, i) => `M${10 + i * 14} 304l-7 9`,
+).join("");
+const post = "M168 48h16V300h-16zM165 42h22v7h-22zM176 20l9 22h-18z";
+const mound = "M156 296l-4 -7M162 294l-1 -8M194 295l4 -7M200 297l5 -5";
+---
+
+<svg
+    class="scene-signpost-phone"
+    viewBox="0 0 340 396"
+    role="img"
+    aria-label={label}
+>
+    <path class="l" d="M0 300H340"></path>
+    <path class="h" d={hatch}></path>
+    <path class="f" d={post}></path>
+    <path class="h" d="M180 56V296M177 86V270"></path>
+    <circle class="f" cx="176" cy="17" r="4"></circle>
+    <path class="l" d="M146 300c6 -11 54 -11 60 0"></path>
+    <path class="h" d={mound}></path>
+    <path class="f" d="M167 54H45L9 82L45 110H167z"></path>
+    <path class="h" d="M161 60H48L18 82L48 104H161z"></path>
+    <path
+        class="h"
+        d="M154.8 69H130.4M99.9 75H57.2M152.36 94H115.76M91.36 99H51.1"
+    ></path>
+    <circle class="c" cx="151" cy="71" r="2"></circle>
+    <circle class="c" cx="151" cy="93" r="2"></circle>
+    <text class="b b-left" x="92" y="90" text-anchor="middle">
+        {boards[0]}
+    </text>
+    <path class="f" d="M185 124H303L339 152L303 180H185z"></path>
+    <path class="h" d="M191 130H300L330 152L300 174H191z"></path>
+    <path
+        class="h"
+        d="M196.8 139H220.4M249.9 145H291.2M199.16 164H234.56M258.16 169H297.1"
+    ></path>
+    <circle class="c" cx="201" cy="141" r="2"></circle>
+    <circle class="c" cx="201" cy="163" r="2"></circle>
+    <text class="b b-right" x="258" y="160" text-anchor="middle">
+        {boards[1]}
+    </text>
+    <VisitorFigure x={58} y={132} width={90} height={168} />
+    <path class="l" d="M32 340H0M9 334l-9 6l9 6"></path>
+    <text class="w" x="44" y="346">
+        {captions[0]}
+    </text>
+    <text class="w" x="296" y="384" text-anchor="end">
+        {captions[1]}
+    </text>
+    <path class="l" d="M308 378h32M331 372l9 6l-9 6"></path>
+</svg>
+
+<style>
+    .scene-signpost-phone {
+        display: block;
+        overflow: visible;
+    }
+
+    .l {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .f {
+        fill: var(--color-ground);
+        stroke: rgb(227 154 106 / 0.85);
+        stroke-width: 1.3;
+        stroke-linejoin: round;
+    }
+
+    .h {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.4);
+        stroke-width: 0.9;
+        stroke-linecap: round;
+    }
+
+    .c {
+        fill: rgb(227 154 106 / 0.85);
+    }
+
+    .b {
+        font: 400 24px var(--font-display);
+        fill: var(--color-ink);
+    }
+
+    .b-left {
+        font-size: 17px;
+    }
+
+    .b-right {
+        font-size: 16px;
+    }
+
+    .w {
+        font: italic 17px var(--font-display);
+        fill: var(--color-ink);
+    }
+</style>

@@ -1,0 +1,113 @@
+/*
+ * The flicker page's lantern (880 × 300), drawn on the paper plate: lines in
+ * paper ink 1.5px, accents in paper copper. Only the two parts, the crank
+ * and the price link catch the pointer: the rest of the drawing never does.
+ */
+.lantern-scene {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.lantern-scene :is(.lk, .lk2, .lcs, .lpf) {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lk {
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.5;
+}
+
+.lk2 {
+    stroke: rgb(27 26 24 / 0.45);
+    stroke-width: 1;
+}
+
+.lc {
+    fill: var(--color-paper-copper);
+}
+
+.lcs {
+    stroke: var(--color-paper-copper);
+    stroke-width: 1.5;
+}
+
+.lantern-scene .lpf {
+    fill: var(--color-paper);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.5;
+}
+
+.lhc {
+    fill: var(--color-paper-copper);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1;
+}
+
+.lrivet,
+.lbar {
+    fill: var(--color-paper-ink);
+    stroke: var(--color-paper-ink);
+}
+
+.lbar {
+    fill: none;
+}
+
+.lletter {
+    fill: var(--color-paper-ink);
+    font: italic 400 13px var(--font-display);
+    text-anchor: middle;
+}
+
+.lletter.is-b {
+    fill: var(--color-paper-copper);
+}
+
+.lpaper {
+    fill: var(--color-paper);
+}
+
+.lpaper-line {
+    stroke: var(--color-paper);
+}
+
+.ldot {
+    fill: rgb(27 26 24 / 0.35);
+}
+
+.ldark {
+    fill: var(--color-paper-ink);
+}
+
+.part,
+.crank {
+    cursor: pointer;
+    pointer-events: auto;
+    outline: none;
+}
+
+.part-hit,
+.crank-hit {
+    fill: transparent;
+    pointer-events: all;
+}
+
+.crank-arrow {
+    fill: none;
+    stroke: var(--color-paper-copper);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.part:focus-visible :is(.lk, .lpf, .lhc),
+.crank:focus-visible .lk,
+.crank:focus-visible .crank-arrow {
+    stroke: var(--color-paper-copper);
+    stroke-width: 2.6;
+}

@@ -1,0 +1,53 @@
+/*
+ * The cabinet's notes. Without script all five show, 40px apart, and the
+ * hint does not. With it: "Pull a drawer." until one is open, then only
+ * that drawer's note (fading in 500ms), in a box that does not jump.
+ */
+.cabinet-notes {
+    margin-top: 54px;
+}
+
+.cabinet-hint {
+    display: none;
+    margin: 0;
+    color: var(--color-ink-faint);
+    font: italic 400 19px / 1.3 var(--font-display);
+}
+
+.cabinet-note + .cabinet-note {
+    margin-top: 40px;
+}
+
+.cabinet-question {
+    margin: 0;
+    color: var(--color-accent);
+    font: italic 400 25px / 1.25 var(--font-display);
+}
+
+.cabinet-note .street-words {
+    margin-top: 12px;
+}
+
+[data-live] .cabinet-notes {
+    min-height: 7.5em;
+}
+
+[data-live] .cabinet-hint {
+    display: block;
+}
+
+[data-live][data-one-open] .cabinet-hint,
+[data-live] .cabinet-note:not(.is-open) {
+    display: none;
+}
+
+[data-live] .cabinet-note.is-open {
+    margin-top: 0;
+    animation: cabinet-note-in 500ms ease both;
+}
+
+@keyframes cabinet-note-in {
+    from {
+        opacity: 0;
+    }
+}

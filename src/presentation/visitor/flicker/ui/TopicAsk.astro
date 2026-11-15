@@ -1,0 +1,35 @@
+---
+import LetterPost from "#/presentation/visitor/flicker/ui/scenes/LetterPost.astro";
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/**
+ * The question at the end: the gentleman posting a letter, the question (in
+ * the visitor's version) and "Write to me", to the closing ask of the home
+ * the visitor came through, or the brands home's letter slot.
+ */
+type Props = FlickerPageViewModel["ask"];
+
+const { title, link, href, byPath, label } = Astro.props;
+---
+
+<section class="topic-ask" aria-labelledby="topic-ask-title" data-floor-ask>
+    <div class="topic-ask-scene">
+        <LetterPost label={label} />
+    </div>
+    <div>
+        <h2 id="topic-ask-title" class="topic-h2">
+            <span data-versioned>
+                <template>
+                    {title.agency[0]} <em>{title.agency[1]}</em>
+                </template>
+                {title.brand[0]} <em>{title.brand[1]}</em>
+            </span>
+        </h2>
+        <a href={href} class="ask-link" data-ask-link>
+            {link}
+        </a>
+    </div>
+    {Object.entries(byPath).map(([path, target]) => (
+        <span hidden data-ask-for={path} data-href={target} />
+    ))}
+</section>

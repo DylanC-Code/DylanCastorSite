@@ -1,0 +1,20 @@
+---
+import PointingHand from "#/presentation/visitor/flicker/ui/scenes/PointingHand.astro";
+
+/**
+ * The hand under the plate, in the gap before the signpost: hidden until
+ * both ways are done, then it stays; a click scrolls to the signpost.
+ */
+interface Props {
+    cue: string;
+}
+
+const { cue } = Astro.props;
+---
+
+<div class="plate-cue-place">
+    <button type="button" class="plate-cue" hidden data-cue>
+        <PointingHand />
+        <span>{cue}</span>
+    </button>
+</div>

@@ -1,0 +1,77 @@
+---
+import LanternScene from "#/presentation/visitor/flicker/ui/LanternScene.astro";
+import PlateCaptions from "#/presentation/visitor/flicker/ui/PlateCaptions.astro";
+import PlateWide from "#/presentation/visitor/flicker/ui/PlateWide.astro";
+import type { LanternPlateViewModel } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
+
+/**
+ * The lantern plate, the page's one paper object: two folder tabs on its top
+ * edge (the two ways), the title line, the scene, the caption (live), and the
+ * price note. Without script: the scene at rest, the first caption, no tabs.
+ */
+type Props = LanternPlateViewModel;
+
+const plate = Astro.props;
+const ways = [
+    ["usual", plate.ways.usual],
+    ["clean", plate.ways.clean],
+] as const;
+---
+
+<div
+    class="lantern-plate"
+    data-plate
+    data-pen-flick={plate.pen.flick}
+    data-pen-clean={plate.pen.cleanEnd}
+>
+    <p class="plate-tabs" data-tabs>
+        {ways.map(([way, name]) => (
+            <button
+                type="button"
+                class="plate-tab"
+                data-way={way}
+                data-state="off"
+            >
+                {name}
+                <span aria-hidden="true" class="tab-mark is-done">
+                    {plate.marks.done}
+                </span>
+                <span aria-hidden="true" class="tab-mark is-left">
+                    {plate.marks.left}
+                </span>
+            </button>
+        ))}
+    </p>
+    <div class="plate" data-plate-body>
+        <PlateWide {...plate.wide} />
+        <p class="plate-title">
+            <span>{plate.title}</span>
+            <button type="button" class="plate-wide-open" data-wide-open>
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <rect x="1.5" y="5" width="13" height="7.5" rx="1.5" />
+                    <path d="M5 2.5h6M9 .8l2 1.7l-2 1.7" />
+                </svg>
+                {plate.wide.open}
+            </button>
+        </p>
+        <div class="plate-scene">
+            <LanternScene labels={plate.labels} />
+        </div>
+        <div class="plate-caption">
+            <div
+                class="price-note"
+                role="dialog"
+                aria-label={plate.priceNote.title}
+                hidden
+                data-price-note
+            >
+                <b>{plate.priceNote.title}</b>
+                {plate.priceNote.text}
+            </div>
+            <p class="caption" aria-live="polite" data-caption>
+                {plate.captions["hello"]?.map((run) => run.text).join("")}
+            </p>
+        </div>
+        <PlateCaptions captions={plate.captions} left={plate.left} />
+    </div>
+</div>

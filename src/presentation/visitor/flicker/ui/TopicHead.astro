@@ -1,0 +1,18 @@
+---
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/** A topic's head: the way back to its floor, the title, the intro. */
+type Props = FlickerPageViewModel["head"];
+
+const { back, title, intro } = Astro.props;
+---
+
+<div class="topic-head">
+    <a href={back.href} class="topic-back">
+        {back.label}
+    </a>
+    <h1 class="topic-title">
+        {title[0]} <em>{title[1]}</em>
+    </h1>
+    <p class="topic-intro">{intro}</p>
+</div>

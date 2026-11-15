@@ -1,0 +1,89 @@
+---
+/**
+ * The lantern's screen on its stand, and the page it shows: the original (A)
+ * over the tested version (B, its button lower and filled copper), clipped to
+ * the screen; a dark sheet covers it while the shutter is closed.
+ */
+const fringe = Array.from({ length: 21 }, (_, index) => 530 + index * 12);
+const pages = [
+    { y: 52, tested: false },
+    { y: 248, tested: true },
+];
+---
+
+<g>
+    <path
+        class="lk"
+        d="M516 48h268M520 52h260v196h-260zM650 248v38M620 292l30-10l30 10"
+    />
+    {fringe.map((x) => (
+        <path class="lk2" d={`M${x} 248v7`} />
+    ))}
+</g>
+<defs>
+    <clipPath id="lantern-screen">
+        <rect x="521" y="53" width="258" height="194" />
+    </clipPath>
+</defs>
+<g clip-path="url(#lantern-screen)">
+    <g data-picture>
+        {pages.map(({ y, tested }) => (
+            <g transform={`translate(520 ${y}) scale(1.3 1.307)`}>
+                <rect width="200" height="150" class="lpaper" />
+                <path class="lk2" d="M0 14h200" />
+                <circle cx="9" cy="7" r="2" class="ldot" />
+                <circle cx="17" cy="7" r="2" class="ldot" />
+                <rect
+                    class="lk"
+                    x="12"
+                    y="26"
+                    width="80"
+                    height="108"
+                    stroke-width="1"
+                />
+                <path class="lk2" d="M12 134L92 26M12 26l80 108" />
+                <path class="lbar" d="M104 34h70M104 44h48" stroke-width="3" />
+                <path class="lbar" d="M104 58h28" stroke-width="2" />
+                {tested ? (
+                    <g>
+                        <circle class="lc" cx="108" cy="76" r="2.5" />
+                        <path class="lcs" d="M116 76h52" stroke-width="2" />
+                        <rect
+                            class="lc"
+                            x="104"
+                            y="88"
+                            width="80"
+                            height="18"
+                        />
+                        <path
+                            class="lpaper-line"
+                            d="M124 97h40"
+                            stroke-width="2"
+                        />
+                    </g>
+                ) : (
+                    <g>
+                        <rect
+                            class="lk"
+                            x="104"
+                            y="72"
+                            width="80"
+                            height="18"
+                            stroke-width="1"
+                        />
+                        <path class="lbar" d="M124 81h40" stroke-width="2" />
+                    </g>
+                )}
+            </g>
+        ))}
+    </g>
+    <rect
+        class="ldark"
+        x="520"
+        y="52"
+        width="260"
+        height="196"
+        opacity="0.9"
+        data-dark
+    />
+</g>

@@ -1,0 +1,34 @@
+---
+import type { CaptionRun } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
+
+/**
+ * Every caption of the plate, as templates the script copies after a move:
+ * plain words, a part in paper copper, and "at a price", the price note's
+ * link. "left" is the red line added when a way is left.
+ */
+interface Props {
+    captions: Readonly<Record<string, readonly CaptionRun[]>>;
+    left: string;
+}
+
+const { captions, left } = Astro.props;
+---
+
+{Object.entries(captions).map(([key, runs]) => (
+    <template data-caption-for={key}>
+        {runs.map((run) =>
+            run.tone === "plain" ? (
+                run.text
+            ) : run.tone === "copper" ? (
+                <em class="caption-copper">{run.text}</em>
+            ) : (
+                <button type="button" class="caption-link" data-price-link>
+                    {run.text}
+                </button>
+            ),
+        )}
+    </template>
+))}
+<template data-caption-for="left">
+    <span class="caption-left">{left}</span>
+</template>

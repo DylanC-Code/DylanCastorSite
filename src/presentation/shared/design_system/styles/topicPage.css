@@ -1,0 +1,128 @@
+/*
+ * A topic page (floor I: "Flicker-free A/B tests"): one 1000px column, the
+ * sections --gap apart (--gap1 between the plate and the signpost, where the
+ * hand lives). Below 768px see topicPhone.css.
+ */
+.topic-page {
+    --gap: 152px;
+    --gap1: 168px;
+
+    box-sizing: content-box;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 26px 16px 150px;
+}
+
+.topic-back {
+    color: var(--color-accent);
+    font: 600 10px / 1.4 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.topic-back:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.topic-title {
+    margin: 26px 0 0;
+    color: var(--color-ink);
+    font: 400 56px / 1.05 var(--font-display);
+}
+
+.topic-title em,
+.topic-h2 em {
+    font-style: italic;
+}
+
+.topic-intro {
+    max-width: 30em;
+    margin: 20px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 17px;
+    line-height: 27px;
+}
+
+.topic-h2 {
+    margin: 0;
+    color: var(--color-ink);
+    font: 400 44px / 1.1 var(--font-display);
+}
+
+.topic-h2 em {
+    color: var(--color-accent);
+}
+
+.topic-h2.is-small {
+    font-size: 40px;
+}
+
+.topic-h2.is-centred {
+    font-size: 40px;
+    line-height: 1.12;
+    text-align: center;
+}
+
+.signpost-section {
+    margin-top: var(--gap1);
+}
+
+.signpost-scene {
+    margin-top: 34px;
+}
+
+.street-stop,
+.cabinet-section,
+.topic-ask {
+    margin-top: var(--gap);
+}
+
+.street-text {
+    max-width: 30em;
+}
+
+.street-text.is-right {
+    margin-left: auto;
+}
+
+.street-words {
+    max-width: 27em;
+    margin: 16px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.key {
+    color: var(--color-ink);
+    font-weight: 500;
+}
+
+.street-scene {
+    margin-top: 30px;
+}
+
+:is(.signpost-scene, .street-scene, .topic-ask-scene) svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.is-narrow {
+    display: none;
+}
+
+.topic-ask {
+    display: grid;
+    grid-template-columns: minmax(0, 440px) 1fr;
+    align-items: center;
+    gap: 56px;
+}
+
+.topic-ask .ask-link {
+    margin-top: 26px;
+    font-size: 24px;
+    text-underline-offset: 7px;
+}

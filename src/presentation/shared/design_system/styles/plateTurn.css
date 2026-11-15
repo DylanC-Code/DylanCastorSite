@@ -1,0 +1,70 @@
+/* The wide view's "Turn your phone" prompt, while the phone is upright. */
+@media (orientation: portrait) {
+    [data-wide="on"] .plate-turn {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 14px;
+        background: var(--color-paper);
+        color: var(--color-paper-ink);
+        font: italic 400 24px / 1.2 var(--font-display);
+        text-align: center;
+    }
+
+    [data-wide="on"] .plate-tabs {
+        display: none;
+    }
+}
+
+.plate-turn p {
+    margin: 0;
+}
+
+.plate-turn svg {
+    width: 86px;
+    height: 86px;
+    fill: none;
+    stroke: var(--color-paper-copper);
+    stroke-width: 1.6;
+}
+
+.plate-turn g {
+    transform-origin: 50% 50%;
+    animation: plate-tilt 2.4s cubic-bezier(0.5, 0, 0.2, 1) infinite;
+}
+
+@keyframes plate-tilt {
+    0%,
+    25% {
+        rotate: 0deg;
+    }
+
+    60%,
+    100% {
+        rotate: -90deg;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .plate-turn g {
+        animation: none;
+        rotate: -90deg;
+    }
+}
+
+.plate-no-turn {
+    margin-top: 10px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: rgb(27 26 24 / 0.6);
+    font: 600 10px / 1.4 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}

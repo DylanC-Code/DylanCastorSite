@@ -1,0 +1,55 @@
+---
+import DetailsCabinet from "#/presentation/visitor/flicker/ui/DetailsCabinet.astro";
+import LanternPlate from "#/presentation/visitor/flicker/ui/LanternPlate.astro";
+import PlateCue from "#/presentation/visitor/flicker/ui/PlateCue.astro";
+import Signpost from "#/presentation/visitor/flicker/ui/scenes/Signpost.astro";
+import SignpostPhone from "#/presentation/visitor/flicker/ui/scenes/SignpostPhone.astro";
+import StreetScenes from "#/presentation/visitor/flicker/ui/StreetScenes.astro";
+import TopicAsk from "#/presentation/visitor/flicker/ui/TopicAsk.astro";
+import TopicHead from "#/presentation/visitor/flicker/ui/TopicHead.astro";
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/**
+ * The topic page "Flicker-free A/B tests": work the lantern to see flicker,
+ * then the signpost, the shop window, the workshop, the details cabinet and
+ * the question. One column, 1000px wide.
+ */
+type Props = FlickerPageViewModel;
+
+const page = Astro.props;
+---
+
+<div class="topic-page" data-topic-page>
+    <TopicHead {...page.head} />
+    <LanternPlate {...page.plate} />
+    <PlateCue cue={page.cue} />
+    <section
+        class="signpost-section"
+        id="signpost"
+        aria-labelledby="signpost-title"
+    >
+        <h2 id="signpost-title" class="topic-h2 is-centred">
+            {page.signpost.title[0]}{" "}
+            <em class="text-accent">{page.signpost.title[1]}</em>
+        </h2>
+        <div class="signpost-scene is-wide">
+            <Signpost {...page.signpost} />
+        </div>
+        <div class="signpost-scene is-narrow">
+            <SignpostPhone {...page.signpost} />
+        </div>
+    </section>
+    <StreetScenes shop={page.shop} workshop={page.workshop} />
+    <DetailsCabinet {...page.details} />
+    <TopicAsk {...page.ask} />
+</div>
+
+<script>
+    import { initFlickerPage } from "#/presentation/visitor/flicker/behaviour/flickerPage.ts";
+
+    for (const page of document.querySelectorAll("[data-topic-page]")) {
+        if (page instanceof HTMLElement) {
+            initFlickerPage(page);
+        }
+    }
+</script>

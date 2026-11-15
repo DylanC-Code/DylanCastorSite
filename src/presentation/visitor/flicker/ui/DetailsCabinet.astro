@@ -1,0 +1,49 @@
+---
+import CabinetDrawer from "#/presentation/visitor/flicker/ui/CabinetDrawer.astro";
+import VersionedText from "#/presentation/visitor/flicker/ui/VersionedText.astro";
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/**
+ * "The details, if you want them": a long low cabinet of five drawers under
+ * an engraved cornice. Pulling a drawer writes its note under the cabinet,
+ * one at a time. Without script the cabinet is closed and still, and all
+ * five notes are shown, one under the other.
+ */
+type Props = FlickerPageViewModel["details"];
+
+const { title, hint, drawers } = Astro.props;
+---
+
+<section class="cabinet-section" aria-labelledby="details-title" data-cabinet>
+    <h2 id="details-title" class="topic-h2 is-small">
+        {title[0]} <em>{title[1]}</em>
+    </h2>
+    <div class="cabinet">
+        <span aria-hidden="true" class="cabinet-cornice">
+            <span />
+            <span />
+            <span />
+        </span>
+        <div class="cabinet-body">
+            {drawers.map((drawer, index) => (
+                <CabinetDrawer label={drawer.label} index={index} />
+            ))}
+        </div>
+        <span aria-hidden="true" class="cabinet-feet" />
+    </div>
+    <div class="cabinet-notes" aria-live="polite">
+        <p class="cabinet-hint">{hint}</p>
+        {drawers.map((drawer, index) => (
+            <div
+                class="cabinet-note"
+                id={`drawer-note-${index}`}
+                data-note={index}
+            >
+                <p class="cabinet-question">{drawer.question}</p>
+                <p class="street-words">
+                    <VersionedText text={drawer.answer} />
+                </p>
+            </div>
+        ))}
+    </div>
+</section>

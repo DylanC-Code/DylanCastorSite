@@ -1,0 +1,89 @@
+/* The red pen on the lantern plate: loops drawn with a dash, numbers, ticks, ending words. */
+
+.pen-line {
+    fill: none;
+    stroke: var(--color-ink-red);
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    animation: lantern-pen var(--t, 600ms) cubic-bezier(0.45, 0, 0.3, 1)
+        calc(var(--d, 0) * 320ms + 150ms) both;
+}
+
+.pen-word {
+    fill: var(--color-ink-red);
+    font: italic 400 19px var(--font-display);
+    text-anchor: middle;
+    animation: lantern-ink 350ms ease calc(var(--d, 0) * 320ms + 150ms) both;
+}
+
+.pen-tick {
+    stroke-width: 2.3;
+    stroke-dashoffset: 1;
+    opacity: 0;
+    animation: none;
+}
+
+[data-done-step] .pen-word {
+    opacity: 0;
+}
+
+[data-done-step] .pen-tick {
+    opacity: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 400ms cubic-bezier(0.45, 0, 0.3, 1) 150ms;
+}
+
+[data-done-step] {
+    animation: lantern-ink-out 600ms ease 1.5s forwards;
+}
+
+.lpen.is-leaving {
+    opacity: 0;
+    transition: opacity 800ms ease 200ms;
+}
+
+@keyframes lantern-pen {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes lantern-ink {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes lantern-ink-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pen-line,
+    .pen-word,
+    [data-done-step] {
+        animation: none;
+    }
+
+    [data-done-step] {
+        opacity: 0;
+    }
+}
+
+/* "nothing moved": 15px, never wider than the button above it. */
+.pen-word.is-small {
+    font-size: 15px;
+}

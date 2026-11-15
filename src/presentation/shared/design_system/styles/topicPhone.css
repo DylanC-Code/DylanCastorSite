@@ -1,0 +1,121 @@
+/*
+ * A topic page below 768px (flicker PHONE.md): 16px sides, sections 104px
+ * apart (116px after the plate), the phone drawings, the cabinet as one
+ * column of shallow drawers that come 10px to the right, the ask stacked.
+ */
+@media (max-width: 47.99rem) {
+    .topic-page {
+        --gap: 104px;
+        --gap1: 116px;
+    }
+
+    .topic-title {
+        font-size: 38px;
+    }
+
+    .plate {
+        padding: 14px;
+    }
+
+    .plate-tabs {
+        right: 18px;
+    }
+
+    .plate-tab {
+        font-size: 9px;
+        padding-inline: 18px;
+    }
+
+    .caption {
+        font-size: 16px;
+    }
+
+    .plate-cue {
+        gap: 12px;
+        font-size: 17px;
+    }
+
+    .plate-cue svg {
+        width: 26px;
+        height: 37px;
+    }
+
+    .topic-h2,
+    .topic-h2.is-small,
+    .topic-h2.is-centred {
+        font-size: 28px;
+    }
+
+    .signpost-scene {
+        margin-top: 26px;
+    }
+
+    .street-scene {
+        margin-top: 24px;
+    }
+
+    .street-text.is-right {
+        margin-left: 0;
+    }
+
+    .is-wide {
+        display: none;
+    }
+
+    .is-narrow {
+        display: block;
+    }
+
+    .cabinet {
+        margin-top: 36px;
+    }
+
+    .cabinet-body {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin: 0 14px;
+    }
+
+    .cabinet-cornice,
+    .cabinet-feet {
+        margin-inline: 14px;
+    }
+
+    .drawer {
+        height: 54px;
+    }
+
+    .drawer-front {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 18px;
+    }
+
+    .drawer:not(:disabled):hover .drawer-front {
+        transform: none;
+    }
+
+    .drawer[aria-expanded="true"] .drawer-front {
+        transform: translateX(10px);
+    }
+
+    .cabinet-notes,
+    [data-live] .cabinet-notes {
+        min-height: 0;
+        margin-top: 40px;
+    }
+
+    .topic-ask {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .topic-ask-scene {
+        max-width: 300px;
+    }
+
+    .topic-ask .ask-link {
+        margin-top: 16px;
+        font-size: 20px;
+    }
+}

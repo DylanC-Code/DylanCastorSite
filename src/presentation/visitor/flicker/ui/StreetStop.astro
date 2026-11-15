@@ -1,0 +1,31 @@
+---
+import VersionedText from "#/presentation/visitor/flicker/ui/VersionedText.astro";
+import type { StreetTextViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+
+/**
+ * A stop along the street: a title, a few words with their key phrases,
+ * then its scene (the slot). The workshop's text stands at the right of the
+ * column on desktop.
+ */
+interface Props {
+    stop: StreetTextViewModel;
+    id: string;
+    side: "left" | "right";
+}
+
+const { stop, id, side } = Astro.props;
+---
+
+<section class="street-stop" aria-labelledby={id}>
+    <div class:list={["street-text", side === "right" && "is-right"]}>
+        <h2 id={id} class="topic-h2">
+            {stop.title[0]} <em>{stop.title[1]}</em>
+        </h2>
+        <p class="street-words">
+            <VersionedText text={stop.text} />
+        </p>
+    </div>
+    <div class="street-scene">
+        <slot />
+    </div>
+</section>

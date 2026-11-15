@@ -1,0 +1,85 @@
+/*
+ * The lantern's invitations and its red pen. On arrival the shutter swings
+ * and the slide lifts once (again every 9s while untouched: `data-idle`);
+ * with a mouse a part leans under the pointer; the crank turns, spins on a
+ * click, nudges after an ending. The pen draws its loops with a dash.
+ */
+[data-idle="stir"] [data-part="open"] {
+    transform-origin: 324px 162px;
+    animation: lantern-sway 1.1s ease-in-out 0.5s both;
+}
+
+[data-idle="stir"] [data-part="slide"] {
+    animation: lantern-lift 1.1s ease-in-out 1.7s both;
+}
+
+@keyframes lantern-sway {
+    45% {
+        rotate: -11deg;
+    }
+}
+
+@keyframes lantern-lift {
+    45% {
+        translate: 0 -7px;
+    }
+}
+
+.part {
+    transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-part="open"] {
+    transform-origin: 324px 162px;
+}
+
+@media (hover: hover) {
+    [data-part="open"]:hover:not(.is-held),
+    [data-part="open"]:focus-visible {
+        transform: rotate(-7deg);
+        transition-duration: 550ms;
+    }
+
+    [data-shown] [data-part="open"]:hover:not(.is-held),
+    [data-shown] [data-part="open"]:focus-visible {
+        transform: rotate(7deg);
+    }
+
+    [data-part="slide"]:hover:not(.is-held),
+    [data-part="slide"]:focus-visible {
+        transform: translateY(-5px);
+        transition-duration: 550ms;
+    }
+
+    [data-slid] [data-part="slide"]:hover:not(.is-held),
+    [data-slid] [data-part="slide"]:focus-visible {
+        transform: translateY(5px);
+    }
+
+    .crank:hover:not(.is-spinning) .crank-gear,
+    .crank:focus-visible:not(.is-spinning) .crank-gear {
+        rotate: -16deg;
+        transition: rotate 500ms ease;
+    }
+}
+
+.crank.is-spinning .crank-gear {
+    animation: lantern-rewind 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.crank.is-nudging .crank-gear {
+    animation: lantern-nudge 1.3s ease-in-out;
+}
+
+@keyframes lantern-rewind {
+    to {
+        rotate: -360deg;
+    }
+}
+
+@keyframes lantern-nudge {
+    25%,
+    75% {
+        rotate: -20deg;
+    }
+}

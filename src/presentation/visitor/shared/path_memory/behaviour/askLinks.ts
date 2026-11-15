@@ -22,3 +22,8 @@ export function pointAsk(container: HTMLElement): void {
         link.setAttribute("href", href);
     }
 }
+
+/** True when the visitor came through the agencies home. */
+export function cameFromAgencies(): boolean {
+    return pathFromAddress() === "agencies";
+}
