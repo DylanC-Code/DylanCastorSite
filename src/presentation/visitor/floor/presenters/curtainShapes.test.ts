@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { curtainPaths } from "#/presentation/visitor/floor/presenters/curtainPaths.ts";
-import { closedFloorCurtain } from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
+import {
+    closedFloorCurtain,
+    closedPhoneCurtain,
+} from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
 
 /** How many separate pieces a path draws (its moves, or its closed shapes). */
 function count(path: string, mark: RegExp): number {
@@ -22,5 +25,14 @@ describe("the closed floors' curtains", () => {
         const paths = curtainPaths(closedFloorCurtain);
         expect(paths.seam).toBe("M473.5 8V261M476.5 8V261");
         expect(paths.hem.startsWith("M4 261q4 6 8 0")).toBe(true);
+    });
+
+    it("draws the phone's one 358 × 240: five swags, 23 folds, hem at 231", () => {
+        const paths = curtainPaths(closedPhoneCurtain);
+        expect([
+            count(paths.swags, /z/gu),
+            count(paths.strongFolds, /M/gu) + count(paths.faintFolds, /M/gu),
+        ]).toStrictEqual([5, 23]);
+        expect(paths.hem.startsWith("M4 231q4 6 8 0")).toBe(true);
     });
 });

@@ -1,7 +1,13 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { accessibilityProblems } from "./pageChecks.ts";
-import { desktop, type OpenedSite, openSite, siteUrl } from "./servedSite.ts";
+import { accessibilityProblems, sideOverflow } from "./pageChecks.ts";
+import {
+    desktop,
+    type OpenedSite,
+    openSite,
+    phone,
+    siteUrl,
+} from "./servedSite.ts";
 
 /**
  * The pages not written yet (closed floor handoff): floors II, III, IV and All
@@ -79,5 +85,27 @@ describe("a closed floor's lift", () => {
                 "document.activeElement.className",
             ),
         ).toContain("ask-link");
+    });
+});
+
+describe("a closed floor on a phone", () => {
+    it("points to the corner's mark, with no lift and no sideways scroll", async () => {
+        const site = await openSite({ ...phone, reducedMotion: "reduce" });
+        await site.page.goto(`${siteUrl}/how-i-build-software`, {
+            waitUntil: "load",
+        });
+        expect([
+            await site.page.innerText(".floor-hint"),
+            await site.page.isVisible(lift),
+            await site.page.isVisible(".closed-phone"),
+            await sideOverflow(site.page),
+        ]).toStrictEqual([
+            "THIS FLOOR OPENS LATER · THE MARK IN THE CORNER OPENS THE FLOORS",
+            false,
+            true,
+            0,
+        ]);
+        expect(await accessibilityProblems(site.page)).toStrictEqual([]);
+        await site.browser.close();
     });
 });

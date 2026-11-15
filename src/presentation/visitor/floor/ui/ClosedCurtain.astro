@@ -1,11 +1,15 @@
 ---
 import RoomCurtain from "#/presentation/visitor/floor/ui/RoomCurtain.astro";
-import { closedFloorCurtain } from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
+import {
+    closedFloorCurtain,
+    closedPhoneCurtain,
+} from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
 import type { ClosedCardViewModel } from "#/presentation/visitor/floor/viewmodels/ClosedFloorViewModel.ts";
 
 /**
- * A floor not written yet, closed: one cinema curtain (950 × 270) and one title
- * card, the name and "Coming later". It stays closed: not a button, not a link.
+ * A floor not written yet, closed: one cinema curtain (950 × 270; 358 × 240 on
+ * a phone) and one title card, the name and "Coming later". It stays closed:
+ * not a button, not a link.
  */
 interface Props {
     card: ClosedCardViewModel;
@@ -23,6 +27,13 @@ const wide = closedFloorCurtain;
         viewBox={`0 0 ${wide.width} ${wide.height}`}
         id={`closed-${width}-wide`}
         class="closed-wide"
+    />
+    <RoomCurtain
+        shape={closedPhoneCurtain}
+        part="all"
+        viewBox="0 0 358 240"
+        id={`closed-${width}-phone`}
+        class="closed-phone"
     />
     <p class="room-card closed-card">
         <span class="room-card-name">{card.name}</span>
