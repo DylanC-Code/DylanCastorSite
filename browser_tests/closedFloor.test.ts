@@ -11,7 +11,8 @@ import {
 
 /**
  * The pages not written yet (closed floor handoff): floors II, III, IV and All
- * behind one closed curtain, the lift opening the floors panel.
+ * behind one closed curtain, the lift opening the floors panel, and the
+ * engineering home's curtain.
  */
 const lift = "[data-opens-floors]";
 const panelOpen = '[data-design="card"]';
@@ -108,4 +109,31 @@ describe("a closed floor on a phone", () => {
         expect(await accessibilityProblems(site.page)).toStrictEqual([]);
         await site.browser.close();
     });
+});
+
+describe("the engineering home", () => {
+    it.each([desktop, phone])(
+        "is a path behind one curtain, on $name",
+        async (size) => {
+            const site = await openSite({ ...size, reducedMotion: "reduce" });
+            await site.page.goto(`${siteUrl}/engineering`, {
+                waitUntil: "load",
+            });
+            expect([
+                await site.page.innerText(".closed-path-eyebrow"),
+                await site.page.innerText("h1"),
+                await site.page.innerText(".closed-card"),
+                await site.page.locator(".floor-sign, .visitor").count(),
+                await sideOverflow(site.page),
+            ]).toStrictEqual([
+                "FOR SOFTWARE ENGINEERS",
+                "Architecture, tests and pipelines.",
+                "For software engineers\nComing later",
+                0,
+                0,
+            ]);
+            expect(await accessibilityProblems(site.page)).toStrictEqual([]);
+            await site.browser.close();
+        },
+    );
 });

@@ -2,22 +2,23 @@
 import RoomCurtain from "#/presentation/visitor/floor/ui/RoomCurtain.astro";
 import {
     closedFloorCurtain,
+    closedPathCurtain,
     closedPhoneCurtain,
 } from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
 import type { ClosedCardViewModel } from "#/presentation/visitor/floor/viewmodels/ClosedFloorViewModel.ts";
 
 /**
- * A floor not written yet, closed: one cinema curtain (950 × 270; 358 × 240 on
- * a phone) and one title card, the name and "Coming later". It stays closed:
- * not a button, not a link.
+ * A page not written yet, closed: one cinema curtain (a floor's 950 × 270, or
+ * the engineering home's 1100 × 270; 358 × 240 on a phone) and one title card,
+ * the name and "Coming later". It stays closed: not a button, not a link.
  */
 interface Props {
     card: ClosedCardViewModel;
-    width: "floor";
+    width: "floor" | "path";
 }
 
 const { card, width } = Astro.props;
-const wide = closedFloorCurtain;
+const wide = width === "floor" ? closedFloorCurtain : closedPathCurtain;
 ---
 
 <div class="closed" data-closed={width}>

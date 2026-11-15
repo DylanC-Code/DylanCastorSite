@@ -3,12 +3,14 @@ import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent } from "#/content/floors.ts";
 import homeJson from "#/content/home.json";
 import type { ClosedFloorViewModel } from "#/presentation/visitor/floor/viewmodels/ClosedFloorViewModel.ts";
+import type { ClosedPathViewModel } from "#/presentation/visitor/reader_path/viewmodels/ClosedPathViewModel.ts";
 
 /**
  * The pages not written yet, from the closed floor handoff's
  * `closedFloors.json`, kept as delivered: floors II, III, IV and All, by floor
- * id. Each floor's line under its title is its line on the main home
- * (home.json), read there, never copied. The ask is floor I's.
+ * id, and the engineering home. Each floor's line under its title is its line
+ * on the main home (home.json), read there, never copied. The ask is floor
+ * I's.
  */
 type FloorJson = (typeof closedJson.floors)[number];
 
@@ -61,3 +63,12 @@ export const closedFloors: Readonly<Record<string, ClosedFloorViewModel>> =
     Object.fromEntries(
         closedJson.floors.map((floor) => [floor.id, closedFloorOf(floor)]),
     );
+
+const { engineeringHome } = closedJson;
+
+/** The engineering home, a path not written yet. */
+export const closedEngineering: ClosedPathViewModel = {
+    eyebrow: engineeringHome.eyebrow,
+    title: pair(engineeringHome.title),
+    card: { name: engineeringHome.cardName, later: closedJson.card },
+};

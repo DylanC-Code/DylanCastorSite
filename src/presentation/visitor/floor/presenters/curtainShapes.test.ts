@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { curtainPaths } from "#/presentation/visitor/floor/presenters/curtainPaths.ts";
 import {
     closedFloorCurtain,
+    closedPathCurtain,
     closedPhoneCurtain,
 } from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
 
@@ -25,6 +26,15 @@ describe("the closed floors' curtains", () => {
         const paths = curtainPaths(closedFloorCurtain);
         expect(paths.seam).toBe("M473.5 8V261M476.5 8V261");
         expect(paths.hem.startsWith("M4 261q4 6 8 0")).toBe(true);
+    });
+
+    it("draws the engineering home's wider one: fourteen swags, 71 folds", () => {
+        const paths = curtainPaths(closedPathCurtain);
+        expect([
+            count(paths.swags, /z/gu),
+            count(paths.strongFolds, /M/gu) + count(paths.faintFolds, /M/gu),
+        ]).toStrictEqual([14, 71]);
+        expect(paths.seam).toBe("M548.5 8V261M551.5 8V261");
     });
 
     it("draws the phone's one 358 × 240: five swags, 23 folds, hem at 231", () => {

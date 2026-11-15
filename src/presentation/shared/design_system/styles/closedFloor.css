@@ -2,7 +2,8 @@
  * A page not written yet (closed floor handoff): one closed curtain and one
  * title card. A floor keeps floor I's building (floorHall.css, floorRooms.css,
  * floorPhone.css): its one room runs from x 126 to 1076 (950 × 270), the
- * visitor stands at the lift. On a phone the curtain is 358 × 240.
+ * visitor stands at the lift. The engineering home has no building: its
+ * curtain is the building's width (1100 × 270). On a phone both are 358 × 240.
  */
 .closed {
     position: relative;
@@ -22,6 +23,18 @@
 
 .closed .room-card-rule {
     display: block;
+}
+
+.closed-path {
+    padding-bottom: 150px;
+}
+
+.closed-path-eyebrow {
+    margin: 0 0 14px;
+    color: var(--color-accent);
+    font: 600 10px / 1.4 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
 }
 
 @media (min-width: 72.75rem) {
@@ -58,6 +71,16 @@
 
     .closed .room-card-later {
         font-size: 15px;
+    }
+
+    .closed-path {
+        padding-top: 70px;
+    }
+
+    .closed-path-curtain {
+        width: 1100px;
+        height: 270px;
+        margin: 44px auto 0;
     }
 }
 
@@ -109,5 +132,25 @@
     /* On the floor in front of the curtain, 24px in: the slab, then 240px. */
     .closed-visitor {
         --visitor-y: 93px;
+    }
+
+    .closed-path {
+        padding-top: 40px;
+    }
+
+    .closed-path-curtain {
+        width: 358px;
+        max-width: 100%;
+        margin: 44px auto 0;
+    }
+
+    .closed-path-curtain .closed .closed-card {
+        left: 50%;
+        width: 230px;
+    }
+
+    /* "For software engineers" in Caslon needs 17px to hold on one line here. */
+    .closed-path-curtain .closed .room-card-name {
+        font-size: 17px;
     }
 }

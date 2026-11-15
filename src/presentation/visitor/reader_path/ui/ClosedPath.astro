@@ -1,0 +1,23 @@
+---
+import ClosedCurtain from "#/presentation/visitor/floor/ui/ClosedCurtain.astro";
+import type { ClosedPathViewModel } from "#/presentation/visitor/reader_path/viewmodels/ClosedPathViewModel.ts";
+
+/**
+ * A reading path not written yet (the engineering home, closed floor
+ * handoff): a path, not a floor, so no building, sign, lift or visitor. Its
+ * eyebrow, its book's title, then one closed curtain the building's width.
+ */
+type Props = ClosedPathViewModel;
+
+const { eyebrow, title, card } = Astro.props;
+---
+
+<section class="page closed-path" aria-labelledby="closed-path-title">
+    <p class="closed-path-eyebrow">{eyebrow}</p>
+    <h1 id="closed-path-title" class="floor-title">
+        {title[0]} <em>{title[1]}</em>
+    </h1>
+    <div class="closed-path-curtain">
+        <ClosedCurtain card={card} width="path" />
+    </div>
+</section>
