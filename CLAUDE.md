@@ -1,8 +1,10 @@
 # dylancastor_site
 
 dylancastor.com: Dylan Castor's site, freelance Shopify & CRO engineer, with an
-Engineering area beside it. Astro 7, static, Tailwind 4 themed with Night Lab, on
-Cloudflare. Tooling copied from TightStack, trimmed for a site.
+Engineering area beside it. Astro 7, static, Tailwind 4 themed with Night Lab.
+Hosted in Dylan's own k3s cluster (servers in France) behind Cloudflare; this
+repo builds the site's container image, the cluster's configuration lives in
+his infrastructure repo. Tooling copied from TightStack, trimmed for a site.
 
 ## The one command
 
