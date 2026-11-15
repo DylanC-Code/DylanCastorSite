@@ -16,24 +16,17 @@ coverage/
 
 .DS_Store
 Thumbs.db
-home_v1_handoff/
 
 # Screenshots the browser tests take, for review.
 browser_tests/screenshots/
-switcher_v1_handoff/
-books_v2_handoff/
-agencies_steps_v1_handoff/
-agencies_home_part2_handoff/
-brands_home_v1_handoff/
-floor1_v1_handoff/
-flicker_v1_handoff/
-legal_notice_v1_handoff/
-page_meta_v1_handoff/
-*_handoff*.zip
 
 # The form Worker's dry-run bundle (bun run worker:bundle) and wrangler's cache.
 dist_worker/
 .wrangler/
+
+# The design handoffs, unzipped or not: read here, never committed.
+*_handoff/
+*_handoff*.zip
 
 # The dev container's own environment: never committed (see compose.yml).
 .devcontainer/devcontainer.env

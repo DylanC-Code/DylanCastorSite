@@ -62,7 +62,8 @@ The presentation follows TightStack's: public → screen → role.
 
 ## Content rules
 
-- English only, plain and direct, no hype.
+- English only, plain and direct, no hype. One exception: the French legal
+  notice (`/mentions-legales`), beside its English twin.
 - No client names, store links or brand logos. No invented numbers, testimonials,
   uplift or client counts. No prices.
 - Do not name Dylan's A/B testing app or describe its features.
