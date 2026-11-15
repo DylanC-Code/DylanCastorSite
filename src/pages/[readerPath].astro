@@ -1,9 +1,9 @@
 ---
-import { agenciesPage } from "#/content/agencySections.ts";
 import { books } from "#/content/books.ts";
-import { brandsPage } from "#/content/brandsHome.ts";
 import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
+import { readerPathMeta } from "#/content/pageMeta.ts";
+import { readerPathPages } from "#/content/readerPaths.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import ReaderPathHome from "#/presentation/visitor/reader_path/ui/ReaderPathHome.astro";
 import { forReader } from "#/presentation/visitor/home/presenters/bookNames.ts";
@@ -31,13 +31,13 @@ interface Props {
 
 const { book } = Astro.props;
 const title = forReader(book);
+const meta = readerPathMeta[book.id] ?? {
+    title: `${title} · ${home.header.brand}`,
+    description: title,
+};
 ---
 
-<HtmlDocument
-    title={`${title} · ${home.header.brand}`}
-    description={title}
-    noindex
->
+<HtmlDocument title={meta.title} description={meta.description} noindex>
     <SiteFrame
         header={home.header}
         footer={home.footer}
@@ -47,8 +47,7 @@ const title = forReader(book);
             book={book}
             title={title}
             labels={books.labels}
-            agencies={agenciesPage}
-            brands={brandsPage}
+            {...readerPathPages}
         />
     </SiteFrame>
 </HtmlDocument>

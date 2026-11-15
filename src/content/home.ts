@@ -11,7 +11,6 @@ import type { SiteHeaderViewModel } from "#/presentation/visitor/shared/site_fra
  * delivered. Typing it against the view models checks its shape at build time.
  */
 interface HomeContent {
-    readonly meta: { readonly title: string; readonly description: string };
     readonly header: SiteHeaderViewModel;
     readonly hero: TitlePageViewModel;
     readonly floors: FloorDirectoryViewModel;

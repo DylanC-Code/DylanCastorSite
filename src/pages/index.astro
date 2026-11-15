@@ -2,12 +2,16 @@
 import { switcherFor } from "#/content/floors.ts";
 import { books } from "#/content/books.ts";
 import { home } from "#/content/home.ts";
+import { pageMeta } from "#/content/pageMeta.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import HomePage from "#/presentation/visitor/home/ui/HomePage.astro";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 ---
 
-<HtmlDocument title={home.meta.title} description={home.meta.description}>
+<HtmlDocument
+    title={pageMeta.home.title}
+    description={pageMeta.home.description}
+>
     <SiteFrame
         header={home.header}
         footer={home.footer}

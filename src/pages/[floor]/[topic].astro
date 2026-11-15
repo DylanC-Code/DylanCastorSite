@@ -3,6 +3,7 @@ import { flickerPage } from "#/content/flickerTopic.ts";
 import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent, switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
+import { topicMeta } from "#/content/pageMeta.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
 import FlickerPage from "#/presentation/visitor/flicker/ui/FlickerPage.astro";
@@ -49,13 +50,13 @@ interface Props {
 
 const { floorId, area, name, roomId } = Astro.props;
 const written = roomId === "flicker_free_tests";
+const meta = topicMeta[roomId] ?? {
+    title: `${name} · ${home.header.brand}`,
+    description: name,
+};
 ---
 
-<HtmlDocument
-    title={`${name} · ${home.header.brand}`}
-    description={written ? flickerPage.head.intro : name}
-    noindex
->
+<HtmlDocument title={meta.title} description={meta.description} noindex>
     <SiteFrame
         header={home.header}
         footer={home.footer}

@@ -1,0 +1,61 @@
+{
+    "titlePattern": "The page's own name, then “ · Dylan Castor”. The main home is the exception: the name first.",
+    "siteName": "Dylan Castor",
+    "pages": {
+        "home": {
+            "page": "The main home",
+            "title": "Dylan Castor · Shopify & CRO engineer",
+            "description": "This site shows how I work on every layer, from what shoppers see to the servers underneath. Five floors, three paths."
+        },
+        "agencies": {
+            "page": "The agencies home",
+            "title": "White-label test builds for CRO agencies · Dylan Castor",
+            "description": "You run the strategy and the client relationship. I build the tests. Your clients only see your agency."
+        },
+        "brands": {
+            "page": "The brands home",
+            "title": "One developer for your whole store · Dylan Castor",
+            "description": "For Shopify brands that want one developer instead of an agency: tests, theme work, custom apps and the servers behind them."
+        },
+        "floor1": {
+            "page": "Floor I",
+            "title": "Shopify & CRO · Dylan Castor",
+            "description": "What your customers see: the tests, and the theme they run on."
+        },
+        "flicker": {
+            "page": "Flicker-free A/B tests",
+            "title": "Flicker-free A/B tests · Dylan Castor",
+            "description": "Why a tested page can jump under the visitor’s eyes, and how to stop it. Work the lantern to see both."
+        },
+        "legalEn": {
+            "page": "Legal notice (English)",
+            "title": "Legal notice · Dylan Castor",
+            "description": "Who publishes and hosts this site, and what happens to the messages sent through its forms."
+        },
+        "legalFr": {
+            "page": "Legal notice (French)",
+            "title": "Mentions légales · Dylan Castor",
+            "description": "Qui publie et héberge ce site, et ce que deviennent les messages envoyés par ses formulaires."
+        }
+    },
+    "shareImage": {
+        "file": "assets/shareImage.png",
+        "size": "1200 × 630",
+        "alt": "Dylan Castor, Shopify & CRO engineer",
+        "usedOn": "every page"
+    },
+    "formErrors": {
+        "replyTo": "Please check your email address: I need it to reply.",
+        "failed": [
+            "The message did not go through. Nothing is lost: try again, or ",
+            "email me directly",
+            "."
+        ],
+        "failedNote": "The middle part is the same email link as the one already under the form. The sentence is also the answer to a message refused by the invisible robot checks."
+    },
+    "notes": [
+        "Descriptions are each page's own first sentences, chosen by Dylan on 15 Nov 2026. If a page's first sentences change, its description changes with them.",
+        "The main home's description replaces the proposal that was in home.json (`descriptionStatus`).",
+        "The legal notice's two descriptions are new sentences."
+    ]
+}

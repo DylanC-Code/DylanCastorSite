@@ -2,6 +2,7 @@
 import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent, switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
+import { floorMeta } from "#/content/pageMeta.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import FloorHall from "#/presentation/visitor/floor/ui/FloorHall.astro";
 import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
@@ -31,13 +32,13 @@ interface Props {
 
 const { floor } = Astro.props;
 const hall = floorHalls[floor.id];
+const meta = floorMeta[floor.id] ?? {
+    title: `${floor.area} · ${home.header.brand}`,
+    description: floor.area,
+};
 ---
 
-<HtmlDocument
-    title={`${floor.area} · ${home.header.brand}`}
-    description={floor.area}
-    noindex
->
+<HtmlDocument title={meta.title} description={meta.description} noindex>
     <SiteFrame
         header={home.header}
         footer={home.footer}

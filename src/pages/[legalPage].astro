@@ -2,6 +2,7 @@
 import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import { legalNotices } from "#/content/legalNotice.ts";
+import { legalMeta } from "#/content/pageMeta.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
 import LegalNotice from "#/presentation/visitor/legal/ui/LegalNotice.astro";
 import type { LegalNoticeViewModel } from "#/presentation/visitor/legal/viewmodels/LegalNoticeViewModel.ts";
@@ -28,6 +29,7 @@ interface Props {
 }
 
 const { notice } = Astro.props;
+const meta = legalMeta[notice.lang];
 const [name = ""] = home.footer.left.split(" · ");
 const footer = {
     ...home.footer,
@@ -37,8 +39,8 @@ const footer = {
 ---
 
 <HtmlDocument
-    title={`${notice.title.replace(/\.$/u, "")} · ${home.header.brand}`}
-    description={notice.title}
+    title={meta.title}
+    description={meta.description}
     lang={notice.lang}
     alternates={[{ lang: notice.other.lang, href: notice.other.href }]}
     noindex
