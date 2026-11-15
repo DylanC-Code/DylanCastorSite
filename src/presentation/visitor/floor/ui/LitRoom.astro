@@ -1,0 +1,65 @@
+---
+import RoomCurtain from "#/presentation/visitor/floor/ui/RoomCurtain.astro";
+import RoomScene from "#/presentation/visitor/floor/ui/RoomScene.astro";
+import { roomCurtain } from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
+import { roomLeft } from "#/presentation/visitor/floor/state/visitorWalk.ts";
+import type { OpenRoomViewModel } from "#/presentation/visitor/floor/viewmodels/FloorRoomViewModel.ts";
+
+/**
+ * A published room: one link to its topic, its words and its scene on paper.
+ * On a phone its curtain (two halves under a valance, a "Now showing" card)
+ * opens when the room takes the middle of the screen; its floor edge says
+ * "Enter this room". Nothing else is added inside the room.
+ */
+interface Props {
+    room: OpenRoomViewModel;
+    index: number;
+    labels: { open: string; showing: string; enter: string };
+}
+
+const { room, index, labels } = Astro.props;
+---
+
+<li class="room is-lit" data-room data-lit style={`--x: ${roomLeft(index)}px`}>
+    <a class="room-link" href={room.href} data-room-link data-index={index}>
+        <span class="room-inside">
+            <span class="room-stage">
+                <span class="room-words">
+                    <span class="room-name">{room.name}</span>
+                    <span class="room-line">{room.line}</span>
+                    <span class="room-open">{labels.open}</span>
+                </span>
+                <RoomScene scene={room.scene} id={room.id} />
+            </span>
+        </span>
+        <span class="room-curtain" aria-hidden="true">
+            <RoomCurtain
+                shape={roomCurtain}
+                part="folds"
+                viewBox="0 0 115 270"
+                id={`${room.id}-left`}
+                class="room-half is-left"
+            />
+            <RoomCurtain
+                shape={roomCurtain}
+                part="folds"
+                viewBox="115 0 115 270"
+                id={`${room.id}-right`}
+                class="room-half is-right"
+            />
+            <RoomCurtain
+                shape={roomCurtain}
+                part="valance"
+                viewBox="0 0 230 50"
+                id={`${room.id}-valance`}
+                class="room-valance"
+            />
+            <span class="room-showing">
+                <span class="room-showing-name">{room.name}</span>
+                <span class="room-showing-rule" />
+                <span class="room-showing-word">{labels.showing}</span>
+            </span>
+        </span>
+        <span class="room-edge">{labels.enter}</span>
+    </a>
+</li>

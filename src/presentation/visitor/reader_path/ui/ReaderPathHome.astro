@@ -31,3 +31,14 @@ const { book, title, labels, agencies, brands } = Astro.props;
 {book.id !== "agencies" && book.id !== "brands" && (
     <ReaderPathPage title={title} />
 )}
+<span hidden data-reader-path={book.id} />
+
+<script>
+    import { carryPath } from "#/presentation/visitor/shared/path_memory/behaviour/pathVia.ts";
+
+    const path = document.querySelector<HTMLElement>("[data-reader-path]");
+    const { readerPath } = path?.dataset ?? {};
+    if (readerPath !== undefined) {
+        carryPath(document, readerPath);
+    }
+</script>

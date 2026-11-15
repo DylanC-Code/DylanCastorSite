@@ -1,0 +1,65 @@
+{
+    "floor": "I",
+    "head": {
+        "title": ["Shopify", "& CRO."],
+        "titleNote": "The second part is set in italic.",
+        "intro": "What your customers see: the tests, and the theme they run on."
+    },
+    "sign": {
+        "left": "Floor I",
+        "middle": "The storefront",
+        "right": "Tests and theme"
+    },
+    "building": {
+        "navLabel": "Topics on this floor",
+        "liftLabel": "Back to the lift",
+        "hint": "Pick a room · the visitor walks you there",
+        "open": "Open",
+        "later": "Coming later"
+    },
+    "rooms": [
+        {
+            "id": "flicker_free_tests",
+            "name": "Flicker-free A/B tests",
+            "line": "Tests that never flash the original page.",
+            "state": "open",
+            "scene": "magicLantern",
+            "slug": "flicker-free-ab-tests"
+        },
+        {
+            "id": "checking_a_test",
+            "name": "Checking a test before launch",
+            "line": "Desktop, mobile, and the way to switch it off.",
+            "state": "later"
+        },
+        {
+            "id": "keeping_the_winner",
+            "name": "Keeping the winner",
+            "line": "The winning version, written into your theme.",
+            "state": "later"
+        },
+        {
+            "id": "theme_work_and_speed",
+            "name": "Theme work and speed",
+            "line": "Changes, fixes and speed checks outside of tests.",
+            "state": "later"
+        }
+    ],
+    "ask": {
+        "title": ["A question", "about this floor?"],
+        "titleNote": "The second part is set in italic.",
+        "link": "Write to me →",
+        "goesTo": "The closing ask of the home the visitor came from: the postcard on the agencies home, the letter slot on the brands home. A visitor from neither home: the letter slot of the brands home (decided by Dylan on 15 Nov 2026)."
+    },
+    "phone": {
+        "hint": "Scroll · a room opens · enter by its floor edge",
+        "signRight": "Tests · theme",
+        "showing": "Now showing",
+        "enter": "Enter this room →"
+    },
+    "toCorrect": [
+        "rooms[].line: the four one-line descriptions are drafts.",
+        "On the phone the line of a room not published is not shown; on desktop it is not shown either (the title card carries the name only). It is kept in the data for the day the room is published.",
+        "rooms[].slug: the topic's route under its floor (decided 13 Nov: /shopify-cro/flicker-free-ab-tests)."
+    ]
+}

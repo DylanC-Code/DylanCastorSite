@@ -47,6 +47,15 @@
 @import "./slotLetter.css";
 @import "./slotCard.css";
 @import "./slotPhone.css";
+@import "./floorHall.css";
+@import "./floorFrame.css";
+@import "./floorRooms.css";
+@import "./floorRoomCard.css";
+@import "./floorCurtain.css";
+@import "./floorVisitor.css";
+@import "./floorAsk.css";
+@import "./floorPhone.css";
+@import "./floorPhoneCurtain.css";
 @import "./switcher.css";
 @import "./switcherPlate.css";
 @import "./switcherCard.css";

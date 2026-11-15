@@ -1,0 +1,34 @@
+/* A curtained room's title card: its name, a short rule, "Coming later". */
+
+.room-card {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 18px 14px 16px;
+    background: var(--color-ground);
+    box-shadow:
+        inset 0 0 0 1px rgb(227 154 106 / 0.85),
+        inset 0 0 0 4px var(--color-ground),
+        inset 0 0 0 5px rgb(227 154 106 / 0.35),
+        0 8px 14px rgb(0 0 0 / 0.5);
+    text-align: center;
+}
+
+.room-card-name {
+    display: block;
+    color: var(--color-ink);
+    font: 400 17px / 1.2 var(--font-display);
+}
+
+.room-card-rule {
+    display: block;
+    width: 26px;
+    height: 1px;
+    margin: 11px auto 9px;
+    background: rgb(227 154 106 / 0.7);
+}
+
+.room-card-later {
+    display: block;
+    color: rgb(227 154 106 / 0.95);
+    font: italic 400 14px / 1 var(--font-display);
+}

@@ -25,6 +25,7 @@ books_v2_handoff/
 agencies_steps_v1_handoff/
 agencies_home_part2_handoff/
 brands_home_v1_handoff/
+floor1_v1_handoff/
 *_handoff*.zip
 
 # The dev container's own environment: never committed (see compose.yml).

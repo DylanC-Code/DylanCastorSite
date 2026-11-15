@@ -56,7 +56,7 @@ describe("the agencies sections on desktop", () => {
     it("leads the method to the All floor", async () => {
         expect(
             await site.page.getAttribute("section:has(#the-method) a", "href"),
-        ).toBe("/how-i-build-software");
+        ).toBe("/how-i-build-software?via=agencies");
     });
 });
 

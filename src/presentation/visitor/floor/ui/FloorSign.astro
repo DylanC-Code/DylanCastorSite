@@ -1,0 +1,17 @@
+---
+import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
+
+/** The floor's sign over the building: its numeral, its name, its subject. */
+type Props = FloorHallViewModel["sign"];
+
+const { left, middle, right, rightShort } = Astro.props;
+---
+
+<p class="floor-sign">
+    <span class="sign-small">{left}</span>
+    <span class="sign-name">{middle}</span>
+    <span class="sign-small">
+        <span class="sign-long">{right}</span>
+        <span class="sign-short">{rightShort}</span>
+    </span>
+</p>

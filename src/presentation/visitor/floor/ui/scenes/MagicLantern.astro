@@ -1,0 +1,149 @@
+---
+/**
+ * The lit room's magic lantern throws a slide on its screen, A then B, the
+ * plate dropping as the slides change. A sketch, to be redrawn: swap this file
+ * only. Prototype coordinates: x 126–356, y 16–286 of the 1100 × 304 floor.
+ */
+interface Props {
+    id: string;
+}
+
+const { id } = Astro.props;
+const clip = `${id}-screen`;
+const frame = [
+    "M184 250h76v5h-76zM190 255v31M254 255v31M190 262h64M214 257h16",
+    "M192 250v-36h36v36M190 214h40M198 214v-12h24v12M202 202v-9h16v9",
+    "M198 193h24l-4-6h-16zM228 224h8M236 222h12v18h-12zM248 225h7v12h-7z",
+    "M290 164h54v86h-54zM317 250v30M300 286l17-8l17 8M287 164h60",
+].join("");
+const fringe = [294, 300, 306, 312, 318, 324, 330, 336, 342]
+    .map((x) => `M${x} 250v4`)
+    .join("");
+const motes = [0, 1, 2, 3, 4].map((i) => ({
+    d: `M${260 + 4 * i} ${(228.6 + 1.2 * i).toFixed(1)}h0`,
+    style: `--dx: 34px; --dy: ${9 * i - 18}px; --rise: 0.8; --fall: 0.8; --delay: ${(-0.9 * i).toFixed(1)}s`,
+}));
+---
+
+<svg
+    class="lantern"
+    viewBox="126 16 230 270"
+    aria-hidden="true"
+    focusable="false"
+>
+    <clipPath id={clip}>
+        <rect x="291" y="165" width="52" height="84"></rect>
+    </clipPath>
+    <g stroke="rgb(27 26 24 / 0.7)" stroke-width="1.2" fill="none">
+        <path d={frame}></path>
+        <path d={fringe} stroke-width="1"></path>
+        <circle cx="210" cy="232" r="7" stroke-width="1.1"></circle>
+        <path class="dot" d="M196 218h0M224 218h0M196 246h0M224 246h0"></path>
+        <g class="pl" style="--to: translateY(13px)">
+            <path class="paper" d="M230 206h6v34h-6z" stroke-width="1.1"></path>
+            <path
+                class="copper"
+                d="M231.5 210h3v9h-3zM231.5 223h3v9h-3z"
+            ></path>
+        </g>
+    </g>
+    <path class="smk" d="M210 185c-5-7 5-11 0-18s5-10 1-17"></path>
+    <circle class="copper" cx="210" cy="232" r="2.2"></circle>
+    <g class="beam" stroke-dasharray="2 4">
+        <path d="M255 224v14" stroke-width="2" stroke-dasharray="none"></path>
+        <path d="M256 227L290 172M256 235L290 244"></path>
+        {motes.map((mote) => (
+            <path class="mt dot" {...mote} />
+        ))}
+    </g>
+    <g clip-path={`url(#${clip})`}>
+        <g class="sl" style="--to: translateX(-54px)">
+            <text x="317" y="220">
+                A
+            </text>
+            <text x="371" y="220">
+                B
+            </text>
+        </g>
+    </g>
+</svg>
+
+<style>
+    text + text,
+    .copper {
+        fill: var(--color-paper-copper);
+    }
+    .paper {
+        fill: var(--color-paper);
+    }
+    .pl .copper {
+        stroke: none;
+        opacity: 0.7;
+    }
+    .beam {
+        stroke: var(--color-paper-copper);
+        stroke-width: 0.9;
+    }
+    .dot {
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-dasharray: none;
+    }
+    text {
+        fill: rgb(27 26 24 / 0.7);
+        font: italic 38px var(--font-display);
+        text-anchor: middle;
+    }
+    .smk {
+        fill: none;
+        stroke: rgb(27 26 24 / 0.45);
+        stroke-width: 1.1;
+        stroke-linecap: round;
+        stroke-dasharray: 6 5;
+        animation: lantern-drift 3.6s linear infinite;
+    }
+    .mt {
+        stroke-width: 2;
+        opacity: 0.6;
+        animation: lantern-drift 4.2s linear var(--delay) infinite;
+    }
+    :is(.sl, .pl) {
+        transform: var(--to);
+        animation: lantern-slide 7s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+    }
+    :global([data-onscreen="false"]) .lantern :is(.sl, .pl, .smk, .mt) {
+        animation-play-state: paused;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .lantern :is(.smk, .mt, .sl, .pl) {
+            animation: none;
+        }
+    }
+    @keyframes lantern-drift {
+        from {
+            opacity: 0;
+        }
+        15% {
+            opacity: var(--rise, 0.7);
+        }
+        85% {
+            opacity: var(--fall, 0.5);
+        }
+        to {
+            opacity: 0;
+            stroke-dashoffset: -44;
+            transform: translate(var(--dx, 0), var(--dy, 0));
+        }
+    }
+    @keyframes lantern-slide {
+        0%,
+        38%,
+        100% {
+            transform: none;
+        }
+        50%,
+        88% {
+            transform: var(--to);
+        }
+    }
+</style>

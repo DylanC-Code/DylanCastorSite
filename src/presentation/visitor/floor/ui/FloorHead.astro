@@ -1,0 +1,19 @@
+---
+import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
+
+/** The floor's head: its title (the second part in italic) and one line. */
+interface Props {
+    head: FloorHallViewModel["head"];
+    hintShort: string;
+}
+
+const { head, hintShort } = Astro.props;
+---
+
+<div class="floor-head">
+    <h1 class="floor-title">
+        {head.title[0]} <em>{head.title[1]}</em>
+    </h1>
+    <p class="floor-intro">{head.intro}</p>
+    <p class="floor-hint">{hintShort}</p>
+</div>

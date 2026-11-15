@@ -1,0 +1,95 @@
+/*
+ * The floor's visitor, an engraved gentleman with a cane. On desktop he
+ * stands at --x (the lift first), feet on the floor, and walks in whole
+ * strides of 460ms (legs 20deg, arms 14deg the other way, the body rising
+ * 2.5px twice a stride). On a phone he is 1.4 times larger, 24px in, on the
+ * open room's floor (--visitor-y), and jumps when it changes.
+ */
+.visitor {
+    position: absolute;
+    top: 0;
+    left: 24px;
+    z-index: 2;
+    width: 84px;
+    height: 157px;
+    pointer-events: none;
+    transform: translateY(var(--visitor-y, 273px));
+}
+
+.visitor-turn {
+    display: block;
+    height: 100%;
+}
+
+.visitor .visitor-figure {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 72.75rem) {
+    .visitor {
+        top: 176px;
+        left: -30px;
+        width: 60px;
+        height: 112px;
+        transform: translateX(var(--x, 70px));
+    }
+
+    [data-facing="left"] > .visitor-turn {
+        transform: scaleX(-1);
+    }
+}
+
+.is-walking :is(.visitor-leg-front, .visitor-arm-back) {
+    animation: visitor-swing-a 460ms linear var(--strides);
+}
+
+.is-walking :is(.visitor-leg-back, .visitor-arm-front) {
+    animation: visitor-swing-b 460ms linear var(--strides);
+}
+
+.is-walking .visitor-body {
+    animation: visitor-bob 230ms ease-in-out calc(var(--strides) * 2);
+}
+
+@keyframes visitor-swing-a {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(var(--a));
+    }
+
+    75% {
+        transform: rotate(calc(var(--a) * -1));
+    }
+}
+
+@keyframes visitor-swing-b {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(calc(var(--a) * -1));
+    }
+
+    75% {
+        transform: rotate(var(--a));
+    }
+}
+
+@keyframes visitor-bob {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2.5px);
+    }
+}

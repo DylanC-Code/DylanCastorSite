@@ -1,0 +1,145 @@
+/*
+ * A floor's hall below 1164px (floor I PHONE.md; the tablet too, centred):
+ * the building 358px wide, its rooms stacked on hatched slabs. A published
+ * room is 358 × 420 with its 230 × 270 stage enlarged 1.4 times, then its
+ * floor edge; a room not published is a 100px band. Curtains: floorPhoneCurtain.css.
+ */
+@media (max-width: 72.74rem) {
+    .hall {
+        padding-top: 40px;
+    }
+
+    .building {
+        width: 358px;
+        max-width: 100%;
+        margin: 20px auto 0;
+    }
+
+    .building-floor {
+        position: relative;
+    }
+
+    .floor-frame,
+    .building-lift,
+    .room-drape,
+    .room-open,
+    .building-hint {
+        display: none;
+    }
+
+    .rooms {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .rooms::before,
+    .room.is-later::after {
+        display: block;
+        height: 10px;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent 0 3px,
+            rgb(227 154 106 / 0.55) 3px 4px
+        );
+        box-shadow: inset 0 0 0 1px rgb(227 154 106 / 0.8);
+        content: "";
+    }
+
+    .room {
+        position: relative;
+    }
+
+    .room-inside {
+        height: 420px;
+        overflow: hidden;
+    }
+
+    /* Centred, standing on the room's floor (42px free at 1.4 times). */
+    .room-stage {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        zoom: 1.4;
+        transform: translateX(-50%);
+    }
+
+    .room-edge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        background: var(--color-board);
+        box-shadow:
+            inset 0 0 0 1px rgb(227 154 106 / 0.85),
+            inset 0 0 0 4px var(--color-board),
+            inset 0 0 0 5px rgb(227 154 106 / 0.35);
+        color: var(--color-accent);
+        font: 600 9.5px / 1.35 var(--font-sans);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .room-later {
+        position: relative;
+        height: 100px;
+    }
+
+    .room-band {
+        display: block;
+        width: 100%;
+        height: 100px;
+    }
+
+    .room-card {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: center;
+        gap: 2px 12px;
+        width: max-content;
+        max-width: calc(100% - 24px);
+        padding: 9px 16px 8px;
+        transform: translateX(-50%);
+    }
+
+    .room-card-name {
+        font-size: 16px;
+        line-height: 1.2;
+    }
+
+    .room-card-rule {
+        display: none;
+    }
+
+    .room-card-later {
+        font-size: 13px;
+    }
+
+    .building-street {
+        width: 100vw;
+        margin-inline: calc(50% - 50vw);
+    }
+}
+
+/* Narrower than designed (358px): the stage a little smaller, the sign tighter. */
+@media (max-width: 23.4rem) {
+    .room-stage {
+        zoom: 1.25;
+    }
+
+    .floor-sign {
+        padding: 0 10px;
+    }
+
+    .sign-small {
+        letter-spacing: 0.12em;
+    }
+
+    .sign-name {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,46 @@
+---
+import RoomCurtain from "#/presentation/visitor/floor/ui/RoomCurtain.astro";
+import {
+    bandCurtain,
+    roomCurtain,
+} from "#/presentation/visitor/floor/presenters/curtainShapes.ts";
+import { roomLeft } from "#/presentation/visitor/floor/state/visitorWalk.ts";
+import type { LaterRoomViewModel } from "#/presentation/visitor/floor/viewmodels/FloorRoomViewModel.ts";
+
+/**
+ * A topic not published: a closed cinema curtain and its title card, the
+ * name and "Coming later". Not a link: on desktop a click walks the visitor
+ * to the curtain. On a phone it is a short band.
+ */
+interface Props {
+    room: LaterRoomViewModel;
+    index: number;
+    later: string;
+}
+
+const { room, index, later } = Astro.props;
+---
+
+<li class="room is-later" data-room style={`--x: ${roomLeft(index)}px`}>
+    <div class="room-later" data-room-later data-index={index}>
+        <RoomCurtain
+            shape={roomCurtain}
+            part="all"
+            viewBox="0 0 230 270"
+            id={`${room.id}-room`}
+            class="room-drape"
+        />
+        <RoomCurtain
+            shape={bandCurtain}
+            part="all"
+            viewBox="0 0 358 100"
+            id={`${room.id}-band`}
+            class="room-band"
+        />
+        <p class="room-card">
+            <span class="room-card-name">{room.name}</span>
+            <span aria-hidden="true" class="room-card-rule" />
+            <span class="room-card-later">{later}</span>
+        </p>
+    </div>
+</li>

@@ -1,0 +1,68 @@
+/*
+ * The floors' cinema curtains (floor I handoff): copper lines on the ground.
+ * Folds alternately strong (70%) and faint (38%), the swags filled with the
+ * ground so they hang over the folds, the tassels in paper copper.
+ */
+.curtain {
+    display: block;
+    overflow: visible;
+    fill: none;
+}
+
+.curtain-back {
+    fill: var(--color-ground);
+}
+
+.curtain-hatch {
+    stroke: rgb(227 154 106 / 0.55);
+}
+
+.curtain-strong {
+    stroke: rgb(227 154 106 / 0.7);
+    stroke-width: 1.1;
+}
+
+.curtain-faint {
+    stroke: rgb(227 154 106 / 0.38);
+    stroke-width: 1.1;
+}
+
+.curtain-seam {
+    stroke: rgb(227 154 106 / 0.9);
+    stroke-width: 1.2;
+}
+
+.curtain-hem {
+    stroke: rgb(227 154 106 / 0.7);
+    stroke-width: 1.1;
+}
+
+.curtain-fringe {
+    stroke: rgb(227 154 106 / 0.4);
+}
+
+.curtain-rail {
+    stroke: rgb(227 154 106 / 0.9);
+    stroke-width: 1.8;
+}
+
+.curtain-swag {
+    fill: var(--color-ground);
+    stroke: rgb(227 154 106 / 0.85);
+    stroke-width: 1.2;
+}
+
+.curtain-swag-fold {
+    stroke: rgb(227 154 106 / 0.45);
+}
+
+.curtain-cord {
+    stroke: rgb(227 154 106 / 0.9);
+    stroke-width: 1.2;
+}
+
+.curtain-tassel {
+    fill: var(--color-paper-copper);
+    stroke: rgb(227 154 106 / 0.9);
+    stroke-width: 0.8;
+}

@@ -1,0 +1,109 @@
+---
+import { roomLeft } from "#/presentation/visitor/floor/state/visitorWalk.ts";
+
+/**
+ * The floor, cut open (desktop): hatched slabs above and under, a brick end
+ * wall each side, the lift bay with its lattice cage and dial, and a hatched
+ * partition before each room. As wide as its rooms: 1100px for four.
+ */
+interface Props {
+    rooms: number;
+}
+
+const { rooms } = Astro.props;
+const width = 140 + rooms * 240;
+const partitions = [
+    116,
+    ...Array.from({ length: rooms - 1 }, (_, index) => roomLeft(index) + 230),
+];
+---
+
+<svg
+    class="floor-frame"
+    viewBox={`0 0 ${width} 302`}
+    width={width}
+    height="302"
+    aria-hidden="true"
+    focusable="false"
+>
+    <defs>
+        <pattern
+            id="floor-hatch"
+            width="5"
+            height="5"
+            patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)"
+        >
+            <path d="M0 0V5" class="frame-hatch" />
+        </pattern>
+        <pattern
+            id="floor-brick"
+            width="16"
+            height="16"
+            patternUnits="userSpaceOnUse"
+        >
+            <path d="M0 .5H16M0 8.5H16M4 0V8M12 8V16" class="frame-brick" />
+        </pattern>
+        <pattern
+            id="floor-lattice"
+            width="12"
+            height="18"
+            patternUnits="userSpaceOnUse"
+        >
+            <path d="M0 0L6 9L0 18M12 0L6 9L12 18" class="frame-hatch" />
+        </pattern>
+    </defs>
+    <rect
+        class="frame-line"
+        x="0"
+        y="0"
+        width={width}
+        height="16"
+        fill="url(#floor-hatch)"
+    />
+    <rect
+        class="frame-line"
+        x="0"
+        y="286"
+        width={width}
+        height="16"
+        fill="url(#floor-hatch)"
+    />
+    <rect
+        class="frame-line"
+        x="0"
+        y="16"
+        width="24"
+        height="270"
+        fill="url(#floor-brick)"
+    />
+    <rect
+        class="frame-line"
+        x={width - 24}
+        y="16"
+        width="24"
+        height="270"
+        fill="url(#floor-brick)"
+    />
+    {partitions.map((x) => (
+        <rect
+            class="frame-line"
+            x={x}
+            y="16"
+            width="10"
+            height="270"
+            fill="url(#floor-hatch)"
+        />
+    ))}
+    <rect
+        class="frame-lift"
+        x="32"
+        y="70"
+        width="76"
+        height="216"
+        fill="url(#floor-lattice)"
+    />
+    <path class="frame-lift" d="M70 70V286M46 58a24 24 0 0 1 48 0z" />
+    <path class="frame-needle" d="M70 58l12 -16" />
+    <circle class="frame-pin" cx="70" cy="58" r="2.4" />
+</svg>

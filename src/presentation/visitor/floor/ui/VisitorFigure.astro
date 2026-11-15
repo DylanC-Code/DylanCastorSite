@@ -1,0 +1,102 @@
+---
+/**
+ * The visitor: a small figure in a long coat and cap, cane in the front hand,
+ * outlined in copper on the ground colour. Static here: the page walks it by
+ * animating the classed groups (body, arms, legs), each swinging by its `--a`.
+ * Placed inside a scene SVG, x, y, width and height position and scale it.
+ */
+interface Props {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+}
+
+const { x, y, width, height } = Astro.props;
+---
+
+<svg
+    class="visitor-figure"
+    x={x}
+    y={y}
+    width={width}
+    height={height}
+    viewBox="0 0 60 112"
+    aria-hidden="true"
+    focusable="false"
+>
+    <g class="visitor-body">
+        <g class="visitor-arm-back" style="--a: 14deg">
+            <path class="solid" d="M27 34h6l1 29a3 3 0 0 1-6 0z"></path>
+        </g>
+        <g class="visitor-leg-back" style="--a: 20deg">
+            <path class="solid" d="M25 62h8l-1 38 7 5v3H25z"></path>
+        </g>
+        <g class="visitor-leg-front" style="--a: 20deg">
+            <path class="solid" d="M25 62h8l-1 38 7 5v3H25z"></path>
+        </g>
+        <path class="solid" d="M22 34c0-7 16-8 17 0l4 47H18z"></path>
+        <path
+            class="hatch"
+            d="M24 44l10 10M23 54l13 13M22 65l14 14M30 40l8 8"
+        ></path>
+        <path class="collar" d="M27 30h9l-2 5h-5z"></path>
+        <circle class="solid" cx="31" cy="19" r="7.5"></circle>
+        <path class="solid" d="M22.5 15c1-9 16-10 18-3l7 2v2.5H22.5z"></path>
+        <g class="visitor-arm-front" style="--a: 14deg">
+            <path class="solid" d="M27 34h6l1 29a3 3 0 0 1-6 0z"></path>
+            <path class="cane" d="M31 63L42 108M29 61c-3-3 1-7 4-4"></path>
+        </g>
+    </g>
+</svg>
+
+<style>
+    .visitor-figure {
+        display: block;
+        overflow: visible;
+    }
+
+    g {
+        transform-box: view-box;
+    }
+
+    .visitor-body {
+        transform-origin: 30px 110px;
+    }
+
+    .visitor-arm-back,
+    .visitor-arm-front {
+        transform-origin: 30px 36px;
+    }
+
+    .visitor-leg-back,
+    .visitor-leg-front {
+        transform-origin: 29px 66px;
+    }
+
+    .solid {
+        fill: var(--color-ground);
+        stroke: var(--color-accent);
+        stroke-width: 1.3;
+        stroke-linejoin: round;
+    }
+
+    .hatch {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.55);
+        stroke-width: 0.8;
+    }
+
+    .collar {
+        fill: none;
+        stroke: rgb(227 154 106 / 0.8);
+        stroke-width: 0.9;
+    }
+
+    .cane {
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+    }
+</style>

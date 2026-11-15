@@ -1,0 +1,130 @@
+/*
+ * A floor's rooms on desktop (from 1164px): side by side in the cut-open
+ * floor, each 230 × 270 at its --x. A lit room is paper with its words and
+ * scene; a curtained room has its title card 96px down.
+ */
+@media (min-width: 72.75rem) {
+    .building {
+        width: 1100px;
+        margin: 50px auto 0;
+    }
+
+    .building-floor {
+        position: relative;
+        height: 302px;
+    }
+
+    .rooms {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .room {
+        position: absolute;
+        top: 16px;
+        left: var(--x);
+        width: 230px;
+        height: 270px;
+    }
+
+    .room-link {
+        height: 100%;
+    }
+
+    .building-lift {
+        position: absolute;
+        top: 16px;
+        left: 24px;
+        width: 92px;
+        height: 270px;
+        border: 0;
+        background: none;
+        cursor: pointer;
+    }
+
+    .room-curtain,
+    .room-edge,
+    .room-later .room-band {
+        display: none;
+    }
+
+    .room-later {
+        position: relative;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .room-drape {
+        width: 230px;
+        height: 270px;
+    }
+
+    .room-card {
+        position: absolute;
+        top: 96px;
+        left: 26px;
+        width: 178px;
+    }
+
+    .building-hint {
+        margin-top: 22px;
+    }
+}
+
+.room-link {
+    display: block;
+    color: var(--color-paper-ink);
+    text-decoration: none;
+}
+
+.room-inside {
+    position: relative;
+    display: block;
+    height: 100%;
+    background: var(--color-paper);
+}
+
+.room-stage {
+    position: relative;
+    display: block;
+    width: 230px;
+    height: 270px;
+}
+
+.room-stage .lantern {
+    position: absolute;
+    inset: 0;
+    width: 230px;
+    height: 270px;
+}
+
+.room-words {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 1;
+    width: 196px;
+}
+
+.room-name {
+    display: block;
+    font: 400 19px / 1.15 var(--font-display);
+}
+
+.room-line {
+    display: block;
+    margin-top: 6px;
+    color: rgb(27 26 24 / 0.72);
+    font-size: 12.5px;
+    line-height: 18px;
+}
+
+.room-open {
+    display: block;
+    margin-top: 9px;
+    color: var(--color-paper-copper);
+    font: 600 9px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}

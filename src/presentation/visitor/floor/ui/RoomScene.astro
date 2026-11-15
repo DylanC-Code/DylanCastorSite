@@ -1,0 +1,16 @@
+---
+import MagicLantern from "#/presentation/visitor/floor/ui/scenes/MagicLantern.astro";
+
+/**
+ * A published room's scene, by the name in the floor's data. Only the magic
+ * lantern exists; a room named with an unknown scene shows none.
+ */
+interface Props {
+    scene: string;
+    id: string;
+}
+
+const { scene, id } = Astro.props;
+---
+
+{scene === "magicLantern" && <MagicLantern id={id} />}

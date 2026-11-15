@@ -1,0 +1,62 @@
+---
+import { floorHalls } from "#/content/floorHalls.ts";
+import { floorsContent, switcherFor } from "#/content/floors.ts";
+import { home } from "#/content/home.ts";
+import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
+import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
+
+/**
+ * A floor's topic pages, one per published room: its floor's href and the
+ * room's slug (floor I: /shopify-cro/flicker-free-ab-tests). Each is a
+ * placeholder until written, kept out of search until Dylan says.
+ */
+export function getStaticPaths(): {
+    params: { floor: string; topic: string };
+    props: { floorId: string; area: string; name: string; roomId: string };
+}[] {
+    return floorsContent.floors.flatMap((floor) =>
+        (floorHalls[floor.id]?.rooms ?? []).flatMap((room) =>
+            room.state === "open"
+                ? [
+                      {
+                          params: {
+                              floor: floor.href.slice(1),
+                              topic: room.href.slice(floor.href.length + 1),
+                          },
+                          props: {
+                              floorId: floor.id,
+                              area: floor.area,
+                              name: room.name,
+                              roomId: room.id,
+                          },
+                      },
+                  ]
+                : [],
+        ),
+    );
+}
+
+interface Props {
+    floorId: string;
+    area: string;
+    name: string;
+    roomId: string;
+}
+
+const { floorId, area, name } = Astro.props;
+---
+
+<HtmlDocument
+    title={`${name} · ${home.header.brand}`}
+    description={name}
+    noindex
+>
+    <SiteFrame
+        header={home.header}
+        footer={home.footer}
+        switcher={switcherFor(floorId)}
+    >
+        <FloorPage layer={area} area={name} />
+    </SiteFrame>
+</HtmlDocument>

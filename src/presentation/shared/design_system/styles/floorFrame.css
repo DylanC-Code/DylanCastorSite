@@ -1,0 +1,41 @@
+/*
+ * A floor's frame (floor I handoff): copper lines on the ground, 1.1px at
+ * 80%; hatches at 55%, bricks at 40%; the lift and its dial a little stronger.
+ */
+.floor-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    fill: none;
+    pointer-events: none;
+}
+
+.frame-line {
+    stroke: rgb(227 154 106 / 0.8);
+    stroke-width: 1.1;
+}
+
+.frame-hatch {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.55);
+}
+
+.frame-brick {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.4);
+}
+
+.frame-lift {
+    stroke: rgb(227 154 106 / 0.85);
+    stroke-width: 1.3;
+}
+
+.frame-needle {
+    stroke: rgb(227 154 106 / 0.95);
+    stroke-width: 1.6;
+}
+
+.frame-pin {
+    fill: rgb(227 154 106 / 0.95);
+}

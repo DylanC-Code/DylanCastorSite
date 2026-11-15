@@ -1,0 +1,60 @@
+---
+/**
+ * The letter box beside "Write to me": a cast pillar box in copper outline,
+ * with its slot, name plate, collection notice, base, feet and a copper dot.
+ * Placed inside a scene SVG, x, y, width and height position and scale it.
+ */
+interface Props {
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+}
+
+const { x, y, width, height } = Astro.props;
+---
+
+<svg
+    class="letter-box"
+    x={x}
+    y={y}
+    width={width}
+    height={height}
+    viewBox="0 0 110 190"
+    aria-hidden="true"
+    focusable="false"
+>
+    <path
+        d="M14 60C14 22 96 22 96 60V150H14ZM8 150h94v10H8zM40 160v24M70 160v24M28 184h54"
+        stroke="rgb(227 154 106 / 0.85)"
+        stroke-width="1.2"
+    ></path>
+    <path
+        d="M26 76h58v12H26z"
+        stroke="rgb(227 154 106 / 0.85)"
+        stroke-width="1"
+    ></path>
+    <path d="M30 82h50" stroke="rgb(227 154 106 / 0.5)" stroke-width="3"></path>
+    <path
+        d="M30 104h50v34H30zM36 112h38M36 120h38M36 128h24"
+        stroke="rgb(227 154 106 / 0.5)"
+        stroke-width="0.9"
+    ></path>
+    <path
+        d="M22 46C30 30 80 30 88 46"
+        stroke="rgb(227 154 106 / 0.4)"
+        stroke-width="0.9"
+    ></path>
+    <circle class="dot" cx="55" cy="60" r="3"></circle>
+</svg>
+
+<style>
+    .letter-box {
+        display: block;
+        fill: none;
+    }
+
+    .dot {
+        fill: var(--color-accent);
+    }
+</style>

@@ -12,8 +12,8 @@ import floors from "./src/content/floors.json" with { type: "json" };
 const fromPackages = fontProviders.npm({ remote: false });
 
 /**
- * The reading paths' and the floors' pages are placeholders, marked noindex
- * until they are written: the sitemap leaves them out too.
+ * The reading paths' and the floors' pages and the topics under a floor are
+ * marked noindex until they are written: the sitemap leaves them out too.
  */
 const placeholders = new Set(
     [...books.books, ...floors.floors].map(
@@ -21,8 +21,15 @@ const placeholders = new Set(
     ),
 );
 
+const topicsUnder = floors.floors.map(
+    (floor) => new URL(`${floor.href}/`, "https://dylancastor.com").href,
+);
+
 function isWritten(page: string): boolean {
-    return !placeholders.has(page);
+    return (
+        !placeholders.has(page)
+        && !topicsUnder.some((floor) => page.startsWith(floor))
+    );
 }
 
 export default defineConfig({

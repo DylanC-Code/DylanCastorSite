@@ -1,14 +1,17 @@
 ---
+import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent, switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import FloorHall from "#/presentation/visitor/floor/ui/FloorHall.astro";
 import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
 import type { FloorViewModel } from "#/presentation/visitor/shared/floor_switcher/viewmodels/FloorViewModel.ts";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * Placeholder pages for the floors that exist, so the switcher can be used
- * end to end. Kept out of search until written; floor V has no page yet.
+ * The floors' pages: a floor with a hall (floor I) shows it; the others keep
+ * a placeholder, so the switcher can be used end to end. Kept out of search
+ * until written; floor V has no page yet.
  */
 export function getStaticPaths(): {
     params: { floor: string };
@@ -27,6 +30,7 @@ interface Props {
 }
 
 const { floor } = Astro.props;
+const hall = floorHalls[floor.id];
 ---
 
 <HtmlDocument
@@ -39,6 +43,10 @@ const { floor } = Astro.props;
         footer={home.footer}
         switcher={switcherFor(floor.id)}
     >
-        <FloorPage layer={floor.layer} area={floor.area} />
+        {hall === undefined ? (
+            <FloorPage layer={floor.layer} area={floor.area} />
+        ) : (
+            <FloorHall {...hall} />
+        )}
     </SiteFrame>
 </HtmlDocument>

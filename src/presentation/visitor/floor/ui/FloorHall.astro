@@ -1,0 +1,31 @@
+---
+import FloorAsk from "#/presentation/visitor/floor/ui/FloorAsk.astro";
+import FloorBuilding from "#/presentation/visitor/floor/ui/FloorBuilding.astro";
+import FloorHead from "#/presentation/visitor/floor/ui/FloorHead.astro";
+import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
+
+/**
+ * A floor's hall: what the floor is about in one line, its rooms (one per
+ * topic, lit when published), and the question at the end. It explains
+ * nothing in depth: it sends the visitor to the topics.
+ */
+type Props = FloorHallViewModel;
+
+const { head, sign, building, rooms, ask } = Astro.props;
+---
+
+<div class="hall page" data-hall>
+    <FloorHead head={head} hintShort={building.hintShort} />
+    <FloorBuilding sign={sign} building={building} rooms={rooms} />
+    <FloorAsk {...ask} />
+</div>
+
+<script>
+    import { initFloorHall } from "#/presentation/visitor/floor/behaviour/floorHall.ts";
+
+    for (const hall of document.querySelectorAll("[data-hall]")) {
+        if (hall instanceof HTMLElement) {
+            initFloorHall(hall);
+        }
+    }
+</script>

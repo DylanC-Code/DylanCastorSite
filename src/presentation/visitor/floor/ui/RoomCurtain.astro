@@ -1,0 +1,88 @@
+---
+import {
+    type CurtainShape,
+    curtainPaths,
+} from "#/presentation/visitor/floor/presenters/curtainPaths.ts";
+
+/**
+ * A cinema curtain of any size, in copper lines. `part` draws all of it, only
+ * its folds (a phone half), or only its valance (which stays when the halves
+ * gather). `viewBox` frames the part shown; the hatch pattern's id is `id`.
+ */
+interface Props {
+    shape: CurtainShape;
+    part: "all" | "folds" | "valance";
+    viewBox: string;
+    id: string;
+    class?: string;
+}
+
+const { shape, part, viewBox, id, class: className } = Astro.props;
+const paths = curtainPaths(shape);
+const folds = part !== "valance";
+const valance = part !== "folds";
+---
+
+<svg
+    class:list={["curtain", className]}
+    viewBox={viewBox}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    focusable="false"
+>
+    {folds && (
+        <defs>
+            <pattern
+                id={`${id}-hatch`}
+                width="5"
+                height="5"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(45)"
+            >
+                <path d="M0 0V5" class="curtain-hatch" />
+            </pattern>
+        </defs>
+    )}
+    {folds && (
+        <g>
+            <rect
+                class="curtain-back"
+                x="0"
+                y="0"
+                width={shape.width}
+                height={shape.height}
+            />
+            {paths.stripes.map((x) => (
+                <rect
+                    x={x}
+                    y="26"
+                    width="5"
+                    height={shape.hem - 28}
+                    fill={`url(#${id}-hatch)`}
+                    opacity="0.45"
+                />
+            ))}
+            <path class="curtain-strong" d={paths.strongFolds} />
+            <path class="curtain-faint" d={paths.faintFolds} />
+            <path class="curtain-seam" d={paths.seam} />
+            <path class="curtain-hem" d={paths.hem} />
+            <path class="curtain-fringe" d={paths.fringe} />
+        </g>
+    )}
+    {valance && (
+        <g>
+            <rect
+                class="curtain-back"
+                x="0"
+                y="2"
+                width={shape.width}
+                height="10"
+            />
+            <path class="curtain-rail" d={`M0 4h${shape.width}`} />
+            <path class="curtain-swag" d={paths.swags} />
+            <path class="curtain-swag-fold" d={paths.swagFolds} />
+            <path class="curtain-cord" d={paths.cords} />
+            <path class="curtain-tassel" d={paths.tassels} />
+        </g>
+    )}
+</svg>

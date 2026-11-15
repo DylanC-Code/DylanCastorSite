@@ -1,0 +1,36 @@
+---
+import LetterBox from "#/presentation/visitor/floor/ui/LetterBox.astro";
+import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
+
+/**
+ * The question at the end of a floor: the letter box and "Write to me". Both
+ * lead to the closing ask of the home the visitor came through; without one,
+ * to the brands home's letter slot (decided 15 Nov).
+ */
+type Props = FloorHallViewModel["ask"];
+
+const { title, link, href, byPath } = Astro.props;
+---
+
+<section class="floor-ask" aria-labelledby="floor-ask-title" data-floor-ask>
+    <a
+        href={href}
+        class="ask-box"
+        tabindex="-1"
+        aria-hidden="true"
+        data-ask-link
+    >
+        <LetterBox />
+    </a>
+    <div>
+        <h2 id="floor-ask-title" class="ask-title">
+            {title[0]} <em>{title[1]}</em>
+        </h2>
+        <a href={href} class="ask-link" data-ask-link>
+            {link}
+        </a>
+    </div>
+    {Object.entries(byPath).map(([path, target]) => (
+        <span hidden data-ask-for={path} data-href={target} />
+    ))}
+</section>

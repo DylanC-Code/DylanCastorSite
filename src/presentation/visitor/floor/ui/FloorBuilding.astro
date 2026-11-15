@@ -1,0 +1,55 @@
+---
+import FloorFrame from "#/presentation/visitor/floor/ui/FloorFrame.astro";
+import FloorSign from "#/presentation/visitor/floor/ui/FloorSign.astro";
+import LaterRoom from "#/presentation/visitor/floor/ui/LaterRoom.astro";
+import LitRoom from "#/presentation/visitor/floor/ui/LitRoom.astro";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
+
+/**
+ * The building: the sign, the floor (a nav of its rooms, in order), the
+ * visitor, the plinth and the street. On desktop the rooms stand side by side
+ * in the cut-open floor; below 1164px they are stacked, 358px wide.
+ */
+interface Props {
+    sign: FloorHallViewModel["sign"];
+    building: FloorHallViewModel["building"];
+    rooms: FloorHallViewModel["rooms"];
+}
+
+const { sign, building, rooms } = Astro.props;
+---
+
+<div class="building" data-building>
+    <FloorSign {...sign} />
+    <nav class="building-floor" aria-label={building.navLabel} data-floor>
+        <FloorFrame rooms={rooms.length} />
+        <button
+            type="button"
+            class="building-lift"
+            aria-label={building.liftLabel}
+            data-lift
+        />
+        <ul class="rooms">
+            {rooms.map((room, index) =>
+                room.state === "open" ? (
+                    <LitRoom room={room} index={index} labels={building} />
+                ) : (
+                    <LaterRoom
+                        room={room}
+                        index={index}
+                        later={building.later}
+                    />
+                ),
+            )}
+        </ul>
+        <span aria-hidden="true" class="visitor" data-visitor>
+            <span class="visitor-turn">
+                <VisitorFigure />
+            </span>
+        </span>
+    </nav>
+    <span aria-hidden="true" class="building-plinth" />
+</div>
+<span aria-hidden="true" class="building-street" />
+<p class="building-hint">{building.hint}</p>
