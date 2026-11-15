@@ -25,6 +25,23 @@ async function switcherState(page: Page, design: string): Promise<object> {
 }
 
 /** Both designs, on floor II: open, focus, keyboard, and what is left out. */
+describe("the switcher at launch", () => {
+    it("is the card on every built page, with no design to rewrite", async () => {
+        const site = await openSite(desktop);
+        await site.page.goto(`${siteUrl}/development`, { waitUntil: "load" });
+        expect(
+            await site.page.getAttribute("html", "data-switcher"),
+        ).toBeNull();
+        expect(
+            await site.page.isVisible('[data-design="card"] [aria-controls]'),
+        ).toBe(true);
+        expect(
+            await site.page.isVisible('[data-design="shelf"] [aria-controls]'),
+        ).toBe(false);
+        await site.browser.close();
+    });
+});
+
 describe.each(["card", "shelf"] as const)("the %s switcher", (design) => {
     let site: OpenedSite;
 

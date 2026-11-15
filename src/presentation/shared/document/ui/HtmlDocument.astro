@@ -23,13 +23,13 @@ const {
     lang = "en",
     alternates = [],
 } = Astro.props;
-// The switcher design this visit sees: card here, rewritten per visit by the
-// edge. In development only, `?switcher=card|shelf` forces one for the tab.
+// Every visitor sees the card switcher (no attribute: card by default). In
+// development only, `?switcher=card|shelf` shows either design for the tab.
 const isDev = import.meta.env.DEV;
 ---
 
 <!doctype html>
-<html lang={lang} data-switcher="card">
+<html lang={lang}>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -36,7 +36,7 @@ export interface OpenedSite {
 }
 
 interface SiteOptions extends BrowserContextOptions {
-    /** The switcher design, written into each page as the edge will. */
+    /** The switcher design: the card, or the shelf kept for later. */
     switcher?: "card" | "shelf";
     /** How the form Worker answers: sent (204) or refused (400, the default). */
     mail?: "sent" | "refused";
@@ -90,11 +90,18 @@ async function serve(
     const html = await file.text();
     await route.fulfill({
         contentType: "text/html; charset=utf-8",
-        body: html.replace(
-            'data-switcher="card"',
-            `data-switcher="${switcher}"`,
-        ),
+        body: withSwitcher(html, switcher),
     });
+}
+
+/**
+ * The page as built (the card), or with the shelf asked for, as development
+ * does.
+ */
+function withSwitcher(html: string, switcher: string): string {
+    return switcher === "shelf"
+        ? html.replace("<html ", '<html data-switcher="shelf" ')
+        : html;
 }
 
 /** The file in dist/ that answers a path. */
