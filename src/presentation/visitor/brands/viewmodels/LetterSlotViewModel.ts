@@ -1,5 +1,6 @@
 import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
 import type { FormErrorsViewModel } from "#/presentation/visitor/shared/message/viewmodels/FormErrorsViewModel.ts";
+import type { NoScriptEmailViewModel } from "#/presentation/visitor/shared/message/viewmodels/NoScriptEmailViewModel.ts";
 
 /** The note's form: its labels, placeholders and button. */
 export interface NoteFieldsViewModel {
@@ -31,4 +32,6 @@ export interface LetterSlotViewModel {
     readonly sent: readonly [string, string, string];
     readonly again: string;
     readonly errors: FormErrorsViewModel;
+    /** In the door's place without script: "Email me at" the address. */
+    readonly noScript: NoScriptEmailViewModel;
 }

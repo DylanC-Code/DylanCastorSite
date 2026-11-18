@@ -1,0 +1,32 @@
+---
+import type { NoScriptEmailViewModel } from "#/presentation/visitor/shared/message/viewmodels/NoScriptEmailViewModel.ts";
+
+/**
+ * Without script a form cannot send, so it is hidden (`scripting: none`, in
+ * its page's styles) and this line takes its place: "Email me at" and the
+ * address, linked. With script it is never shown.
+ */
+type Props = NoScriptEmailViewModel;
+
+const { before, label, href } = Astro.props;
+---
+
+<noscript>
+    <p class="no-script-email">
+        {before}{" "}
+        <a href={href} class="link-accent">
+            {label}
+        </a>
+        .
+    </p>
+</noscript>
+
+<style>
+    .no-script-email {
+        margin: 0;
+        color: var(--color-ink-muted);
+        font-size: 17px;
+        line-height: 27px;
+        text-align: center;
+    }
+</style>

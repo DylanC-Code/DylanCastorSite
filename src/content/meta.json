@@ -51,6 +51,8 @@
             "email me directly",
             "."
         ],
+        "noScript": "Email me at",
+        "noScriptNote": "Without script a form cannot send: it is hidden, and this line shows in its place, followed by the email address (decided 16 Nov 2026).",
         "failedNote": "The middle part is the same email link as the one already under the form. The sentence is also the answer to a message refused by the invisible robot checks."
     },
     "notes": [

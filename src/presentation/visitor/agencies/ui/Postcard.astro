@@ -1,16 +1,17 @@
 ---
 import PostcardBack from "#/presentation/visitor/agencies/ui/PostcardBack.astro";
 import PostcardFront from "#/presentation/visitor/agencies/ui/PostcardFront.astro";
+import NoScriptEmail from "#/presentation/visitor/shared/message/ui/NoScriptEmail.astro";
 import type { PostcardViewModel } from "#/presentation/visitor/agencies/viewmodels/PostcardViewModel.ts";
 
 /**
  * The postcard: its front turns over to a writing side (a real form), which
- * shrinks into an envelope once the message is really sent. Without script
- * only the writing side shows, flat. The script marks the stage `data-live`.
+ * shrinks into an envelope once the message is really sent. Without script it
+ * cannot send: it is hidden, and "Email me at" the address shows instead.
  */
 type Props = PostcardViewModel;
 
-const { front, back, posted, errors, emailHref } = Astro.props;
+const { front, back, posted, errors, emailHref, noScript } = Astro.props;
 ---
 
 <div class="postcard-place" data-rise data-postcard data-state="writing">
@@ -44,6 +45,7 @@ const { front, back, posted, errors, emailHref } = Astro.props;
         {errors.failed[2]}
     </p>
 </div>
+<NoScriptEmail {...noScript} />
 
 <script>
     import { initPostcard } from "#/presentation/visitor/agencies/behaviour/postcard.ts";

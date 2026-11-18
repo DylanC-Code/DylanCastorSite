@@ -1,13 +1,15 @@
 ---
 import SlotNote from "#/presentation/visitor/brands/ui/SlotNote.astro";
 import type { LetterSlotViewModel } from "#/presentation/visitor/brands/viewmodels/LetterSlotViewModel.ts";
+import NoScriptEmail from "#/presentation/visitor/shared/message/ui/NoScriptEmail.astro";
 import DataLine from "#/presentation/visitor/shared/message/ui/DataLine.astro";
 
 /**
  * The door, 520 × 600: its glass panel carries the note (a real form); the
  * brass letter plate with its flap sits at 372px. Once a message is really
  * sent, the note folds into a small letter that goes down into the slot, and
- * a card rises on the glass. Without script the note is a plain form.
+ * a card rises on the glass. Without script it cannot send: the door is
+ * hidden, and "Email me at" the address shows instead.
  */
 type Props = LetterSlotViewModel;
 
@@ -21,6 +23,7 @@ const {
     emailHref,
     plain,
     dataLine,
+    noScript,
 } = Astro.props;
 ---
 
@@ -79,6 +82,7 @@ const {
         data-failed={errors.failed.join("")}
     />
 </div>
+<NoScriptEmail {...noScript} />
 
 <script>
     import { initLetterSlot } from "#/presentation/visitor/brands/behaviour/letterSlot.ts";

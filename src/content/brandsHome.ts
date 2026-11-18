@@ -1,5 +1,9 @@
 import brandsJson from "#/content/brands.json";
-import { dataLine, formErrorWords } from "#/content/formWords.ts";
+import {
+    dataLine,
+    formErrorWords,
+    noScriptEmail,
+} from "#/content/formWords.ts";
 import { home } from "#/content/home.ts";
 import { letterRuns } from "#/presentation/visitor/brands/presenters/letterRuns.ts";
 import type { BrandsPageViewModel } from "#/presentation/visitor/brands/viewmodels/BrandsPageViewModel.ts";
@@ -92,5 +96,6 @@ export const brandsPage: BrandsPageViewModel = {
         ],
         again: ask.again,
         errors: formErrorWords,
+        noScript: noScriptEmail,
     },
 };

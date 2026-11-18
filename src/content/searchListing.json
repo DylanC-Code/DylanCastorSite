@@ -11,5 +11,5 @@
         "pages": ["/legal", "/mentions-legales"],
         "why": "They show Dylan's address and phone number. Hidden from search engines, they still do their legal job for a visitor of the site."
     },
-    "hiddenUntilWritten": "Every other page: the engineering home, the four other floors and the unwritten topics only say \"This page is being written\". Each is opened, here, when its real page is built."
+    "hiddenUntilWritten": "Every other page: the engineering home and the four other floors show a closed curtain (closedFloors.json). Each is opened, here, when its real page is built."
 }

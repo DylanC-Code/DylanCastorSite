@@ -59,18 +59,3 @@ describe("the postcard", () => {
         expect(await site.page.isVisible(".postcard-envelope")).toBe(false);
     });
 });
-
-describe("the postcard without JavaScript", () => {
-    it("is a plain form: no front, every field usable", async () => {
-        const site = await openSite({ ...desktop, javaScriptEnabled: false });
-        await site.page.goto(`${siteUrl}/agencies`, { waitUntil: "load" });
-        expect(await site.page.isVisible("[data-postcard-front]")).toBe(false);
-        const editable = await Promise.all([
-            site.page.isEditable("#postcard-message"),
-            site.page.isEditable("#postcard-reply"),
-            site.page.isEditable("#postcard-from"),
-        ]);
-        expect(editable).toEqual([true, true, true]);
-        await site.browser.close();
-    });
-});

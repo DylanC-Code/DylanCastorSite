@@ -1,4 +1,5 @@
 import type { FormErrorsViewModel } from "#/presentation/visitor/shared/message/viewmodels/FormErrorsViewModel.ts";
+import type { NoScriptEmailViewModel } from "#/presentation/visitor/shared/message/viewmodels/NoScriptEmailViewModel.ts";
 
 /**
  * The postcard: a front to turn, a writing side (a real form), and the envelope
@@ -29,4 +30,6 @@ export interface PostcardViewModel {
     readonly errors: FormErrorsViewModel;
     /** Where "email me directly" leads: the header's "Email me". */
     readonly emailHref: string;
+    /** In the postcard's place without script: "Email me at" the address. */
+    readonly noScript: NoScriptEmailViewModel;
 }

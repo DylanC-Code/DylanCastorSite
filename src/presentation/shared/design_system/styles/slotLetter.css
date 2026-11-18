@@ -126,3 +126,10 @@
         transform: perspective(320px) rotateX(0deg);
     }
 }
+
+/* Without script it cannot send: "Email me at" the address shows instead. */
+@media (scripting: none) {
+    .slot-place {
+        display: none;
+    }
+}

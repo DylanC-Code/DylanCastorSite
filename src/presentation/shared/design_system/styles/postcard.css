@@ -10,6 +10,17 @@
     width: 100%;
 }
 
+/*
+ * Without script it cannot send: "Email me at" the address shows instead, and
+ * the email and data lines under the postcard go with it.
+ */
+@media (scripting: none) {
+    .postcard-place,
+    .postcard-after {
+        display: none;
+    }
+}
+
 .postcard {
     position: relative;
     width: 700px;
