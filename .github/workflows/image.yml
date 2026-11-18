@@ -1,8 +1,10 @@
 name: image
 
-# The site's image (Dockerfile, sws.toml): built and tried on every pull
-# request; on main, also published to GitHub's registry, tagged with the commit.
-# Publishing is not deploying: Dylan's infrastructure repo pins the tag it runs.
+# The site's image (Dockerfile, sws.toml): built, tried and scanned on every
+# pull request; on main, also published to GitHub's registry, tagged with the
+# commit and with `main`. Publishing is not deploying: the infrastructure repo
+# pins `main` by its digest, and Renovate proposes each new digest there as a
+# pull request that Dylan merges. This repo never writes to that one.
 on:
     pull_request:
     push:
@@ -58,10 +60,31 @@ jobs:
               if: failure()
               run: docker logs site
 
+            # Every known vulnerability, listed in the log; nothing fails here.
+            - name: scan report
+              uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+              with:
+                  image-ref: ${{ env.IMAGE }}:${{ github.sha }}
+                  exit-code: "0"
+
+            # The gate: a CRITICAL or HIGH vulnerability that has a fixed
+            # version fails the job, and the image is never published.
+            - name: scan
+              uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+              with:
+                  image-ref: ${{ env.IMAGE }}:${{ github.sha }}
+                  severity: CRITICAL,HIGH
+                  ignore-unfixed: true
+                  exit-code: "1"
+                  skip-setup-trivy: true
+
+            # Same image, two tags: the commit, and `main` for Renovate to follow.
             - name: publish
               if: github.event_name == 'push' && github.ref == 'refs/heads/main'
               env:
                   TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   echo "$TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+                  docker tag "$IMAGE:$GITHUB_SHA" "$IMAGE:main"
                   docker push "$IMAGE:$GITHUB_SHA"
+                  docker push "$IMAGE:main"
