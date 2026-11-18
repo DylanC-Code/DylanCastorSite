@@ -3,30 +3,30 @@ import {
     incomingOf,
     refusalOf,
 } from "#/domain/message/incoming.ts";
-import {
-    type Mail,
-    mailOf,
-} from "#/infrastructure/message/cloudflare_email/cloudflareMail.ts";
+import { mailOf } from "#/infrastructure/message/gmail/gmailMail.ts";
+import { sendWithGmail } from "#/infrastructure/message/gmail/gmailSend.ts";
+import { SendFailure } from "#/infrastructure/message/gmail/sendFailure.ts";
 
 /**
  * The one moving part outside Dylan's cluster: a Cloudflare Worker on
  * dylancastor.com/api/message. The forms post a message here; it passes the
- * robot checks, then goes to Dylan's own inbox only, through the send binding
- * (wrangler.jsonc, at the repo's root). It answers 204 when sent; 400 for
- * anything refused (not from the site, not a message, a robot), 429 over the
- * limit, 502 when Cloudflare does not send: the page shows its one failure
- * sentence for any of them. Nothing is stored, and nothing a visitor typed is
- * logged.
+ * robot checks, then goes to Dylan's own inbox only, through the Gmail API (his
+ * Workspace; wrangler.jsonc at the repo's root). It answers 204 when sent; 400
+ * for anything refused (not from the site, not a message, a robot), 429 over
+ * the limit, 502 when Google does not send, with the failed step in
+ * `x-send-failure`: the page shows its one failure sentence for any of them.
+ * Nothing is stored, and nothing a visitor typed is logged.
  */
 export interface Env {
-    /** The send binding, locked to Dylan's inbox by `destination_address`. */
-    readonly MAIL: { send: (mail: Mail) => Promise<{ messageId: string }> };
+    /** Secrets: the service account allowed to send as Dylan's inbox. */
+    readonly GOOGLE_CLIENT_EMAIL: string;
+    readonly GOOGLE_PRIVATE_KEY: string;
+    /** Secret: Dylan's Workspace inbox, the one address mail goes to. */
+    readonly INBOX: string;
     /** Cloudflare's rate limiter: 2 messages per minute per visitor. */
     readonly PER_VISITOR: {
         limit: (options: { key: string }) => Promise<{ success: boolean }>;
     };
-    /** The sender address: forms@dylancastor.com. */
-    readonly SENDER: string;
     /** https://dylancastor.com: posts from any other page are refused. */
     readonly SITE: string;
 }
@@ -77,12 +77,26 @@ async function acceptable(
     return incoming !== null && refusalOf(incoming) === null ? incoming : null;
 }
 
+/** The failed step and Google's status ("token 401"), or "setup" (a bad key). */
+function failureOf(error: unknown): string {
+    return error instanceof SendFailure ? error.message : "setup";
+}
+
 async function send(incoming: Incoming, env: Env): Promise<Response> {
+    const account = {
+        clientEmail: env.GOOGLE_CLIENT_EMAIL,
+        privateKey: env.GOOGLE_PRIVATE_KEY,
+        inbox: env.INBOX,
+    };
     try {
-        await env.MAIL.send(mailOf(incoming, env.SENDER));
+        const now = Math.floor(Date.now() / 1000);
+        await sendWithGmail(mailOf(incoming, env.INBOX), account, now);
         return answer(204);
-    } catch {
-        return answer(502);
+    } catch (error) {
+        return new Response(null, {
+            status: 502,
+            headers: { "x-send-failure": failureOf(error) },
+        });
     }
 }
 

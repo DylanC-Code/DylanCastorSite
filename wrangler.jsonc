@@ -13,14 +13,11 @@
             "zone_name": "dylancastor.com",
         },
     ],
-    // Sends to one inbox only: the verified address that already receives
-    // dylancastor.com's mail (Email Routing). Free; no DNS record added.
-    "send_email": [
-        {
-            "name": "MAIL",
-            "destination_address": "form@dylancastor.com",
-        },
-    ],
+    // Sends through the Gmail API as Dylan's Workspace inbox (17 Nov 2026):
+    // Cloudflare's send binding needs Email Routing, which would replace
+    // Google's MX records. No DNS record is added. Three secrets, set in the
+    // Worker's settings, never here: GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY,
+    // INBOX.
     // 2 messages per minute per visitor (Dylan's choice, 15 Nov 2026).
     "ratelimits": [
         {
@@ -30,7 +27,6 @@
         },
     ],
     "vars": {
-        "SENDER": "forms@dylancastor.com",
         "SITE": "https://dylancastor.com",
     },
     "observability": { "enabled": false },

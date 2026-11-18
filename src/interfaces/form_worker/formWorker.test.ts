@@ -1,6 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import type { Mail } from "#/infrastructure/message/cloudflare_email/cloudflareMail.ts";
+import {
+    fakeGoogle,
+    sentMail,
+    testAccount,
+} from "#/infrastructure/message/gmail/googleFakes.ts";
 import worker, { type Env } from "#/interfaces/form_worker/formWorker.ts";
 
 const site = "https://dylancastor.com";
@@ -13,22 +17,15 @@ const person = {
     writingMs: 30_000,
 };
 
-/** A Worker environment whose binding keeps what it was asked to send. */
-function envWith(allowed: boolean, failing = false): Env & { sent: Mail[] } {
-    const sent: Mail[] = [];
+/** A Worker environment: a test service account, a limiter that says yes or no. */
+async function envWith(allowed: boolean): Promise<Env> {
+    const { account } = await testAccount();
     return {
-        sent,
-        SENDER: "forms@dylancastor.com",
         SITE: site,
+        GOOGLE_CLIENT_EMAIL: account.clientEmail,
+        GOOGLE_PRIVATE_KEY: account.privateKey,
+        INBOX: account.inbox,
         PER_VISITOR: { limit: () => Promise.resolve({ success: allowed }) },
-        MAIL: {
-            send: (mail) => {
-                sent.push(mail);
-                return failing
-                    ? Promise.reject(new Error("E_RECIPIENT_NOT_ALLOWED"))
-                    : Promise.resolve({ messageId: "1" });
-            },
-        },
     };
 }
 
@@ -40,39 +37,49 @@ function post(body: unknown, origin = site): Request {
     });
 }
 
+afterEach(() => {
+    vi.unstubAllGlobals();
+});
+
 describe("the form Worker", () => {
     it("sends a person's message to Dylan, the visitor in Reply-To", async () => {
-        const env = envWith(true);
-        const response = await worker.fetch(post(person), env);
-        expect(response.status).toBe(204);
-        expect(env.sent).toStrictEqual([
-            {
-                from: {
-                    email: "forms@dylancastor.com",
-                    name: "dylancastor.com",
-                },
-                replyTo: { email: "shop@brand.com", name: "Brand Bcc: x@y.z" },
-                subject: "A message from the site: Brand Bcc: x@y.z",
-                text: "Our store needs a faster theme.\nCan you look?\n\n—\nReply to: shop@brand.com\nFrom: Brand Bcc: x@y.z",
-            },
-        ]);
+        const calls = fakeGoogle({ token: 200, gmail: 200 });
+        const response = await worker.fetch(post(person), await envWith(true));
+        const mail = sentMail(calls[1]);
+        expect([
+            response.status,
+            mail.includes("To: dylan@example.dev\r\n"),
+            mail.includes("<shop@brand.com>\r\n"),
+        ]).toStrictEqual([204, true, true]);
     });
 
     it("refuses a robot, another site and a visitor over the limit", async () => {
-        const env = envWith(true);
+        const calls = fakeGoogle({ token: 200, gmail: 200 });
+        const env = await envWith(true);
         const statuses = [
             (await worker.fetch(post({ ...person, website: "x" }), env)).status,
             (await worker.fetch(post({ ...person, writingMs: 500 }), env))
                 .status,
             (await worker.fetch(post(person, "https://evil.example"), env))
                 .status,
-            (await worker.fetch(post(person), envWith(false))).status,
+            (await worker.fetch(post(person), await envWith(false))).status,
         ];
-        expect([statuses, env.sent]).toStrictEqual([[400, 400, 400, 429], []]);
+        expect([statuses, calls]).toStrictEqual([[400, 400, 400, 429], []]);
     });
 
-    it("says it failed when Cloudflare refuses to send", async () => {
-        const response = await worker.fetch(post(person), envWith(true, true));
-        expect(response.status).toBe(502);
+    it("says it failed when Google refuses, and which step", async () => {
+        fakeGoogle({ token: 401, gmail: 200 });
+        const response = await worker.fetch(post(person), await envWith(true));
+        expect([
+            response.status,
+            response.headers.get("x-send-failure"),
+        ]).toStrictEqual([502, "token 401"]);
+    });
+
+    it("says setup when the key cannot be read", async () => {
+        fakeGoogle({ token: 200, gmail: 200 });
+        const env = { ...(await envWith(true)), GOOGLE_PRIVATE_KEY: "nope" };
+        const response = await worker.fetch(post(person), env);
+        expect(response.headers.get("x-send-failure")).toBe("setup");
     });
 });
