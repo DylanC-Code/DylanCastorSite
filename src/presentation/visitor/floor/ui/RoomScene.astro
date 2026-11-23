@@ -1,9 +1,11 @@
 ---
+import TwoDoors from "#/presentation/visitor/floor/ui/scenes/TwoDoors.astro";
 import MagicLantern from "#/presentation/visitor/floor/ui/scenes/MagicLantern.astro";
 
 /**
- * A published room's scene, by the name in the floor's data. Only the magic
- * lantern exists; a room named with an unknown scene shows none.
+ * A published room's scene, by the name in the floor's data: the magic
+ * lantern, or the two doors (shown in dev only until its page is published).
+ * A room named with an unknown scene shows none.
  */
 interface Props {
     scene: string;
@@ -14,3 +16,4 @@ const { scene, id } = Astro.props;
 ---
 
 {scene === "magicLantern" && <MagicLantern id={id} />}
+{scene === "twoDoors" && <TwoDoors />}

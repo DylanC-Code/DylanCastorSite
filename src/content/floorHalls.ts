@@ -1,3 +1,4 @@
+import checkTestJson from "#/content/checkTest.json";
 import floor1Json from "#/content/floor1.json";
 import { floorsContent } from "#/content/floors.ts";
 import type { FloorHallViewModel } from "#/presentation/visitor/floor/viewmodels/FloorHallViewModel.ts";
@@ -18,8 +19,30 @@ function hrefOf(floorId: string): string {
     return floor.href;
 }
 
+/**
+ * The rooms of draft topic pages, lit in dev only (decided by Dylan, 23 Nov
+ * 2026): "Checking a test before launch" with its two doors and its new line.
+ * The site's build keeps them "Coming later", as floor1.json says.
+ */
+const draftRooms = import.meta.env.DEV
+    ? [
+          {
+              id: checkTestJson.topic,
+              line: checkTestJson.floorRoom.line,
+              scene: checkTestJson.floorRoom.scene,
+              slug: checkTestJson.floorRoom.slug,
+          },
+      ]
+    : [];
+
 function roomOf(room: RoomJson, floorHref: string): FloorRoomViewModel {
     const { id, name, line } = room;
+    const draft = draftRooms.find((one) => one.id === id);
+    if (draft !== undefined) {
+        const { scene, slug } = draft;
+        const href = `${floorHref}/${slug}`;
+        return { id, name, line: draft.line, state: "open", scene, href };
+    }
     if ("slug" in room && "scene" in room) {
         return {
             id,

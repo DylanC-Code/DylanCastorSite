@@ -1,0 +1,139 @@
+---
+/**
+ * The room of "Checking a test before launch": the street of its plate cut
+ * down to the two doors (check test handoff, `street()` in
+ * CheckFloorRoom2.html). The signpost with its boards A and B, the shop
+ * front without its name: the scalloped awning, the counter under it, door A
+ * in ink and door B in copper. Drawn 296 wide, the ground at y 200, placed in
+ * the 230 × 270 room. A visitor walks in every 2.9s (twoDoorsRoom.ts); no
+ * fault and no red pen here.
+ */
+const awning = `M100 38${"q11.875 9 23.75 0".repeat(8)}`;
+const doors = [
+    { x: 114, letter: "A", copper: false },
+    { x: 204, letter: "B", copper: true },
+];
+const boards = [
+    { y: 116, letter: "A", copper: false },
+    { y: 140, letter: "B", copper: true },
+];
+---
+
+<svg
+    class="two-doors"
+    viewBox="0 0 230 270"
+    aria-hidden="true"
+    focusable="false"
+    data-two-doors
+>
+    <defs>
+        <g class="walker" data-walker>
+            <g transform="translate(0 92)">
+                <g class="walker-body">
+                    <g class="walker-arm-back">
+                        <path
+                            class="ink"
+                            d="M27 34h6l1 29a3 3 0 0 1-6 0z"
+                        ></path>
+                    </g>
+                    <g class="walker-leg-back">
+                        <path class="ink" d="M25 62h8l-1 38 7 5v3H25z"></path>
+                    </g>
+                    <g class="walker-leg-front">
+                        <path class="ink" d="M25 62h8l-1 38 7 5v3H25z"></path>
+                    </g>
+                    <path class="ink" d="M22 34c0-7 16-8 17 0l4 47H18z"></path>
+                    <path
+                        class="ink-hatch"
+                        d="M24 44l10 10M23 54l13 13M22 65l14 14M30 40l8 8"
+                    ></path>
+                    <circle class="ink" cx="31" cy="19" r="7.5"></circle>
+                    <path
+                        class="ink"
+                        d="M22.5 15c1-9 16-10 18-3l7 2v2.5H22.5z"
+                    ></path>
+                    <g class="walker-arm-front">
+                        <path
+                            class="ink"
+                            d="M27 34h6l1 29a3 3 0 0 1-6 0z"
+                        ></path>
+                        <path
+                            class="ink-cane"
+                            d="M31 63L42 108M29 61c-3-3 1-7 4-4"
+                        ></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </defs>
+    <g transform="translate(-25 98) scale(.86)">
+        <path class="rk" d="M48 200c4 -7 28 -7 32 0"></path>
+        <path class="rf" d="M61 200V112h6v88z"></path>
+        <path class="rf" d="M64 99l5 13h-10z"></path>
+        {boards.map(({ y, letter, copper }) => (
+            <g class="board" data-board={letter}>
+                <path class="rf" d={`M67 ${y}h22l9 9l-9 9h-22z`} />
+                <text
+                    class:list={["rb", copper && "is-copper"]}
+                    x="79"
+                    y={y + 13.5}
+                    text-anchor="middle"
+                >
+                    {letter}
+                </text>
+            </g>
+        ))}
+        <path class="rk" d="M100 38V200M290 38V200M94 38h202"></path>
+        <path class="rk" d={awning}></path>
+        <rect class="rf" x="177" y="49" width="36" height="17"></rect>
+        {[0, 1, 2].map((index) => (
+            <>
+                <rect
+                    class="rk"
+                    x={180.5 + index * 10.5}
+                    y="52"
+                    width="9"
+                    height="11"
+                />
+                <text
+                    class="dg"
+                    x={185 + index * 10.5}
+                    y="60.7"
+                    text-anchor="middle"
+                    data-digit
+                >
+                    0
+                </text>
+            </>
+        ))}
+        {doors.map(({ x, letter, copper }) => (
+            <g class="door" data-door={letter}>
+                <rect class="rd" x={x} y="72" width="58" height="128" />
+                <g class="leaf">
+                    <rect class="rf" x={x} y="72" width="58" height="128" />
+                    <rect class="rk" x={x + 7} y="80" width="44" height="72" />
+                    <path
+                        class="rh"
+                        d={`M${x + 39} 86l7 7M${x + 33} 86l13 13`}
+                    />
+                    <text
+                        class:list={["rl", copper && "is-copper"]}
+                        x={x + 29}
+                        y="131"
+                        text-anchor="middle"
+                    >
+                        {letter}
+                    </text>
+                    <rect class="rh" x={x + 7} y="160" width="44" height="33" />
+                    <circle
+                        class="rc"
+                        cx={x + (copper ? 5 : 53)}
+                        cy="156"
+                        r="2"
+                    />
+                </g>
+            </g>
+        ))}
+        <g data-walk></g>
+    </g>
+</svg>

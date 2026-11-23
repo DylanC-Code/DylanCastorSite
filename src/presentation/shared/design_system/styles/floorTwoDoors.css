@@ -1,0 +1,130 @@
+/*
+ * The two doors room on floor I (check test handoff): ink lines at 70%,
+ * 1.1px, like the lantern; the doors open on a dark doorway, the counter
+ * turns, a board moves while a visitor stops, the ink gentleman walks.
+ */
+.room-stage .two-doors {
+    position: absolute;
+    inset: 0;
+    width: 230px;
+    height: 270px;
+}
+
+.two-doors :is(.rk, .rf, .rh) {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.two-doors .rk {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.7);
+    stroke-width: 1.1;
+}
+
+.two-doors .rf {
+    fill: var(--color-paper);
+    stroke: rgb(27 26 24 / 0.7);
+    stroke-width: 1.1;
+}
+
+.two-doors .rh {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.36);
+    stroke-width: 0.9;
+}
+
+.two-doors .rc {
+    fill: var(--color-paper-copper);
+}
+
+.two-doors .rd {
+    fill: rgb(27 26 24 / 0.84);
+}
+
+.two-doors .rl {
+    font: italic 400 36px var(--font-display);
+    fill: rgb(27 26 24 / 0.75);
+}
+
+.two-doors .rb {
+    font: italic 400 13px var(--font-display);
+    fill: rgb(27 26 24 / 0.8);
+}
+
+.two-doors :is(.rl, .rb).is-copper {
+    fill: var(--color-paper-copper);
+}
+
+.two-doors .dg {
+    font: 600 9px var(--font-sans);
+    fill: rgb(27 26 24 / 0.85);
+}
+
+.two-doors .dg.is-turned {
+    animation: check-digit 320ms ease-out;
+}
+
+.two-doors .leaf {
+    transform-box: fill-box;
+    transform-origin: left center;
+    transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.two-doors .door.is-open .leaf {
+    transform: scaleX(0.16);
+}
+
+.two-doors .board {
+    transition: translate 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.two-doors .board.is-nudged {
+    translate: 5px 0;
+}
+
+.two-doors .ink {
+    fill: var(--color-paper-sheet);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+}
+
+.two-doors .ink-hatch {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.42);
+    stroke-width: 0.8;
+}
+
+.two-doors .ink-cane {
+    fill: none;
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.two-doors :is(.walker-arm-back, .walker-arm-front) {
+    --a: 14deg;
+    transform-origin: 30px 36px;
+}
+
+.two-doors :is(.walker-leg-back, .walker-leg-front) {
+    --a: 20deg;
+    transform-origin: 29px 66px;
+}
+
+.two-doors .walker:not(.is-still, .is-stopped) .walker-body {
+    animation: check-bob 440ms ease-in-out infinite alternate;
+}
+
+.two-doors
+    .walker:not(.is-still, .is-stopped)
+    :is(.walker-leg-front, .walker-arm-front) {
+    animation: check-swing 440ms ease-in-out infinite alternate;
+}
+
+.two-doors
+    .walker:not(.is-still, .is-stopped)
+    :is(.walker-leg-back, .walker-arm-back) {
+    animation: check-swing 440ms ease-in-out infinite alternate-reverse;
+}
