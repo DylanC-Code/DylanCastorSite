@@ -1,0 +1,44 @@
+---
+import { dialAt } from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import CountDial from "#/presentation/visitor/check_test/ui/sheet/CountDial.astro";
+import OffLever from "#/presentation/visitor/check_test/ui/sheet/OffLever.astro";
+import ShopDoor from "#/presentation/visitor/check_test/ui/sheet/ShopDoor.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+
+/**
+ * The store of the flicker page, in ink, 196 wide from x, its ground at
+ * y 236: the name band, the scalloped awning, the counter under it, the lamp
+ * over door B (lit while the test is on), the doors A and B, the off lever.
+ */
+interface Props {
+    x: number;
+    street: SheetWordsViewModel["street"];
+}
+
+const { x, street } = Astro.props;
+const [doorA, doorB] = street.doors;
+const scallops = `M${x + 4} 30${"q14 11 28 0".repeat(6)}q10 9 20 0`;
+const awningTicks = [1, 2, 3, 4, 5, 6]
+    .map((index) => `M${x + 4 + index * 28} 30v6`)
+    .join("");
+const lamp = x + 136;
+---
+
+<path class="kf" d={`M${x + 4} 30h188v206h-188z`}></path>
+<path class="t" d={`M${x + 9} 44v186M${x + 187} 44v186`}></path>
+<path class="kf" d={`M${x - 5} 0h206v30h-206z`}></path>
+<path class="t" d={`M${x} 4.5h196v21h-196z`}></path>
+<circle class="cu" cx={x + 9} cy="15" r="1.8"></circle>
+<circle class="cu" cx={x + 187} cy="15" r="1.8"></circle>
+<text class="nm" x={x + 98} y="20" text-anchor="middle">
+    {street.storeName}
+</text>
+<path class="k" d={scallops}></path>
+<path class="t" d={awningTicks}></path>
+<CountDial x={x + dialAt.x} y={dialAt.y} word={street.counter} />
+<circle class="glow" cx={lamp} cy="62" r="13"></circle>
+<path class="l" d={`M${lamp} 46v6M${lamp - 3} 57l3-5 3 5`}></path>
+<path class="lamp" d={`M${lamp - 6} 57h12l-2 11h-8z`}></path>
+<ShopDoor x={x + 12} letter={doorA.letter} word={doorA.word} copper={false} />
+<ShopDoor x={x + 94} letter={doorB.letter} word={doorB.word} copper={true} />
+<OffLever x={x + 176} {...street.lever} />

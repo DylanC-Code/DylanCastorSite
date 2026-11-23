@@ -1,0 +1,140 @@
+/*
+ * The check plate's marks: copper discs numbered in paper; at load each gives
+ * one ring that widens and fades, one after the other. Hover or an open
+ * ticket grows the disc; a seen mark turns red and leaves a red oval on the
+ * sheet. At the end the marks and ovals go and the stamp comes down.
+ */
+.check-sheet .mark-dot,
+.check-sheet .mark-ring {
+    fill: var(--color-paper-copper);
+}
+
+.check-sheet .mark text {
+    font: 600 9px var(--font-sans);
+    fill: var(--color-paper);
+    pointer-events: none;
+}
+
+.check-sheet .mark-reach {
+    fill: transparent;
+}
+
+.check-sheet[data-sheet="stack"] .mark text {
+    font-size: 10px;
+}
+
+.check-sheet .mark[role="button"] {
+    cursor: pointer;
+    outline: none;
+}
+
+.check-sheet .mark-dot {
+    transition: r 150ms;
+}
+
+.check-sheet .mark[role="button"]:hover .mark-dot,
+.check-sheet .mark.is-open .mark-dot {
+    r: 11px;
+}
+
+.check-sheet[data-sheet="stack"] .mark[role="button"]:hover .mark-dot,
+.check-sheet[data-sheet="stack"] .mark.is-open .mark-dot {
+    r: 12px;
+}
+
+.check-sheet .mark:focus-visible .mark-dot {
+    stroke: var(--color-paper-ink);
+    stroke-width: 2;
+}
+
+.check-sheet .mark-ring {
+    fill: none;
+    stroke: var(--color-paper-copper);
+    stroke-width: 1.2;
+    opacity: 0;
+}
+
+.check-sheet .mark[role="button"] .mark-ring {
+    animation: check-mark-ring 2.2s ease-out var(--ring-delay) 1;
+}
+
+.check-sheet .mark.is-seen .mark-dot {
+    fill: var(--color-ink-red);
+}
+
+.check-sheet .mark.is-seen .mark-ring,
+.check-sheet.is-done .mark {
+    display: none;
+}
+
+.check-sheet .seen-ring {
+    fill: none;
+    stroke: var(--color-ink-red);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    visibility: hidden;
+}
+
+.check-sheet .seen-ring.is-seen {
+    visibility: visible;
+}
+
+.check-sheet.is-done .seen-ring {
+    visibility: hidden;
+}
+
+.check-sheet .stamp-place {
+    visibility: hidden;
+}
+
+.check-sheet.is-done .stamp-place {
+    visibility: visible;
+}
+
+.check-sheet .stamp {
+    opacity: 0.9;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.check-sheet.is-done .stamp {
+    animation: check-stamp 240ms cubic-bezier(0.3, 1.4, 0.6, 1) both;
+}
+
+.check-sheet .stamp rect {
+    fill: rgb(244 240 232 / 0.8);
+    stroke: var(--color-ink-red);
+    stroke-width: 1.6;
+}
+
+.check-sheet .stamp rect.is-inner {
+    fill: none;
+    stroke-width: 0.8;
+}
+
+.check-sheet .stamp text {
+    font: 600 10px var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    fill: var(--color-ink-red);
+}
+
+@keyframes check-mark-ring {
+    0% {
+        opacity: 0.9;
+        r: 9px;
+    }
+
+    100% {
+        opacity: 0;
+        r: 24px;
+    }
+}
+
+@keyframes check-stamp {
+    from {
+        opacity: 0;
+        scale: 1.7;
+    }
+}

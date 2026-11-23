@@ -1,0 +1,137 @@
+/*
+ * The street of the check plate (the test side): the shop's type, the doors
+ * that open on a dark doorway, the counter's digits, the lamp that goes out
+ * when the lever is pulled, the signpost's boards, the ink visitors and the
+ * red pen. Classes are scoped to the sheet; motion stops with reduced motion.
+ */
+.check-sheet :is(.dk) {
+    fill: rgb(27 26 24 / 0.86);
+}
+
+.check-sheet .nm {
+    font: italic 400 14px var(--font-display);
+    fill: var(--color-paper-ink);
+}
+
+.check-sheet .big {
+    font: italic 400 34px var(--font-display);
+    fill: var(--color-paper-ink);
+}
+
+.check-sheet .big.is-copper {
+    fill: var(--color-paper-copper);
+}
+
+.check-sheet .sc.is-tiny {
+    font-size: 5px;
+}
+
+.check-sheet .sc.is-small {
+    font-size: 5.5px;
+}
+
+.check-sheet .k.is-pane {
+    stroke-width: 1;
+}
+
+.check-sheet .leaf {
+    transform-box: fill-box;
+    transform-origin: left center;
+    transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.check-sheet .door.is-open .leaf {
+    transform: scaleX(0.16);
+}
+
+.check-sheet .is-digit {
+    font-size: 11px;
+}
+
+.check-sheet .is-digit.is-turned {
+    animation: check-digit 320ms ease-out;
+}
+
+.check-sheet .dial.is-knocked {
+    animation: check-knock 180ms ease-out;
+}
+
+.check-sheet .lamp {
+    fill: var(--color-paper-copper);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+    transition: fill 300ms;
+}
+
+.check-sheet .glow {
+    fill: rgb(138 74 36 / 0.16);
+    transition: opacity 300ms;
+}
+
+.check-sheet.is-off .lamp {
+    fill: var(--color-paper-sheet);
+}
+
+.check-sheet.is-off .glow {
+    opacity: 0;
+}
+
+.check-sheet .lever {
+    cursor: pointer;
+    outline: none;
+}
+
+.check-sheet .lever-hit {
+    fill: transparent;
+}
+
+.check-sheet .lever:hover .lever-plate {
+    stroke-width: 2.2;
+}
+
+.check-sheet .lever:focus-visible .lever-plate {
+    stroke: var(--color-paper-copper);
+    stroke-width: 2.5;
+}
+
+.check-sheet .sc.is-sign {
+    font-size: 6.5px;
+}
+
+.check-sheet .sign-off,
+.check-sheet.is-off .sign-on {
+    display: none;
+}
+
+.check-sheet.is-off .sign-off {
+    display: inline;
+    fill: var(--color-ink-red);
+}
+
+.check-sheet .l.is-arm {
+    stroke-width: 3.5;
+}
+
+.check-sheet .lever-arm {
+    transform-box: view-box;
+    transform-origin: 0 0;
+    transition: rotate 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.check-sheet.is-off .lever-arm {
+    rotate: 58deg;
+}
+
+@keyframes check-digit {
+    from {
+        opacity: 0;
+        translate: 0 7px;
+    }
+}
+
+@keyframes check-knock {
+    40% {
+        translate: 0 1.5px;
+    }
+}

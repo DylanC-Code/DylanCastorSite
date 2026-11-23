@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
     loop,
     oval,
-} from "#/presentation/visitor/flicker/presenters/penPaths.ts";
+} from "#/presentation/visitor/shared/topic/presenters/penPaths.ts";
 
 /** The extent of a path's points along x (0) or y (1). */
 function extent(path: string, axis: 1 | 2): number {

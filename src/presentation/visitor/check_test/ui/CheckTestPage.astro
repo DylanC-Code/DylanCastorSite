@@ -1,4 +1,5 @@
 ---
+import CheckPlate from "#/presentation/visitor/check_test/ui/CheckPlate.astro";
 import DetailsCabinet from "#/presentation/visitor/shared/topic/ui/DetailsCabinet.astro";
 import TopicAsk from "#/presentation/visitor/shared/topic/ui/TopicAsk.astro";
 import TopicHead from "#/presentation/visitor/shared/topic/ui/TopicHead.astro";
@@ -16,6 +17,7 @@ const page = Astro.props;
 
 <div class="topic-page" data-check-page>
     <TopicHead {...page.head} />
+    <CheckPlate {...page.plate} />
     <DetailsCabinet {...page.details} />
     <TopicAsk {...page.ask} />
 </div>

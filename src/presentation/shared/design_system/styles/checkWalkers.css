@@ -1,0 +1,185 @@
+/*
+ * The check street's signpost and visitors: the site's gentleman in ink at
+ * .62 (his strokes thickened to keep their weight), the beanie's copper, the
+ * walk (legs and arms swing 0.44s a step, the body bobs 1.6px) and the board
+ * that moves while a visitor stops. The red pen: "+1 +1" rising by the
+ * counter, ovals drawn around a fault. Nothing moves with reduced motion.
+ */
+.check-sheet .signpost .f {
+    fill: var(--color-paper-sheet);
+    stroke: var(--color-paper-ink);
+    stroke-width: 2.4;
+    stroke-linejoin: round;
+}
+
+.check-sheet .signpost .h {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.4);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+}
+
+.check-sheet .signpost .l {
+    stroke-width: 2.4;
+}
+
+.check-sheet .signpost .c {
+    fill: var(--color-paper-copper);
+}
+
+.check-sheet .signpost .b {
+    font: 400 27px var(--font-display);
+    fill: var(--color-paper-ink);
+}
+
+.check-sheet .board {
+    transition: translate 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.check-sheet .board.is-nudged {
+    translate: 9px 0;
+}
+
+.check-sheet .ink {
+    fill: var(--color-paper-sheet);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.9;
+    stroke-linejoin: round;
+}
+
+.check-sheet .ink-hatch {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.42);
+    stroke-width: 1.1;
+}
+
+.check-sheet .ink-collar {
+    fill: none;
+    stroke: rgb(27 26 24 / 0.7);
+    stroke-width: 1.1;
+}
+
+.check-sheet .ink-cane {
+    fill: none;
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.check-sheet .beanie {
+    fill: var(--color-paper-copper);
+    stroke: var(--color-paper-ink);
+    stroke-width: 1.9;
+    stroke-linejoin: round;
+}
+
+.check-sheet .walker :is(g) {
+    transform-box: view-box;
+}
+
+.check-sheet :is(.walker-arm-back, .walker-arm-front) {
+    --a: 14deg;
+    transform-origin: 30px 36px;
+}
+
+.check-sheet :is(.walker-leg-back, .walker-leg-front) {
+    --a: 20deg;
+    transform-origin: 29px 66px;
+}
+
+.check-sheet .walker:not(.is-still, .is-stopped) .walker-body {
+    animation: check-bob 440ms ease-in-out infinite alternate;
+}
+
+.check-sheet
+    .walker:not(.is-still, .is-stopped)
+    :is(.walker-leg-front, .walker-arm-front) {
+    animation: check-swing 440ms ease-in-out infinite alternate;
+}
+
+.check-sheet
+    .walker:not(.is-still, .is-stopped)
+    :is(.walker-leg-back, .walker-arm-back) {
+    animation: check-swing 440ms ease-in-out infinite alternate-reverse;
+}
+
+.check-sheet .pen-mark {
+    fill: none;
+    stroke: var(--color-ink-red);
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    visibility: hidden;
+}
+
+.check-sheet .pen-mark.is-drawn {
+    visibility: visible;
+    animation:
+        check-pen 500ms ease-out both,
+        check-gone 400ms 2600ms forwards;
+}
+
+.check-sheet .pen-words {
+    font: italic 400 15px var(--font-display);
+    fill: var(--color-ink-red);
+    visibility: hidden;
+}
+
+.check-sheet .pen-words.is-drawn {
+    visibility: visible;
+    animation: check-rise 1500ms ease-out forwards;
+}
+
+@keyframes check-bob {
+    to {
+        translate: 0 -1.6px;
+    }
+}
+
+@keyframes check-swing {
+    from {
+        rotate: calc(var(--a) * -1);
+    }
+
+    to {
+        rotate: var(--a);
+    }
+}
+
+@keyframes check-pen {
+    0% {
+        stroke-dashoffset: 1;
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes check-gone {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes check-rise {
+    0% {
+        opacity: 0;
+        translate: 0 6px;
+    }
+
+    15%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        translate: 0 -10px;
+    }
+}

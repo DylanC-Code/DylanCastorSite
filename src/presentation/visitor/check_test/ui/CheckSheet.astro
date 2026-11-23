@@ -1,0 +1,60 @@
+---
+import type { SheetLayout } from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import StreetScene from "#/presentation/visitor/check_test/ui/sheet/StreetScene.astro";
+import SheetMarks from "#/presentation/visitor/check_test/ui/sheet/SheetMarks.astro";
+import StoreSide from "#/presentation/visitor/check_test/ui/sheet/StoreSide.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+
+/**
+ * The proof sheet in one layout: the store side and the test side, each in
+ * its box under its title. The page draws both layouts and shows one: side by
+ * side on a wide screen, one under the other on a phone.
+ */
+interface Props {
+    layout: SheetLayout;
+    words: SheetWordsViewModel;
+}
+
+const { layout, words } = Astro.props;
+const { storeBox: store, testBox: test, street } = layout;
+---
+
+<svg
+    class="check-sheet"
+    viewBox={`0 0 ${layout.width} ${layout.height}`}
+    role="group"
+    aria-label={words.label}
+    data-sheet={layout.name}
+>
+    <g>
+        <text class="ttl" x={store.x} y={store.y - 10}>
+            {words.sides.store}
+        </text>
+        <rect
+            class="pn"
+            x={store.x}
+            y={store.y}
+            width={store.width}
+            height={store.height}
+        ></rect>
+        <StoreSide layout={layout} store={words.store} />
+    </g>
+    <g>
+        <text class="ttl" x={test.x} y={test.y - 10}>
+            {words.sides.test}
+        </text>
+        <rect
+            class="pn"
+            x={test.x}
+            y={test.y}
+            width={test.width}
+            height={test.height}
+        ></rect>
+        <g
+            transform={`translate(${street.x} ${street.y}) scale(${street.scale})`}
+        >
+            <StreetScene street={words.street} />
+        </g>
+    </g>
+    <SheetMarks layout={layout} marks={words.marks} stamp={words.stamp} />
+</svg>

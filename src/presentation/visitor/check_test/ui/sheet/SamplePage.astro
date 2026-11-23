@@ -1,0 +1,43 @@
+---
+import JacketDrawing from "#/presentation/visitor/check_test/ui/sheet/JacketDrawing.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+
+/**
+ * The made-up product page of the agencies home, 300 × 200: the jacket, the
+ * store's name and its cart, the product, the price, the stock line and the
+ * tested button. It never moves.
+ */
+type Props = SheetWordsViewModel["store"];
+
+const { storeName, product, price, stock, button, cartCount } = Astro.props;
+---
+
+<rect class="sf" width="300" height="200"></rect>
+<rect class="t" x="16" y="18" width="108" height="164"></rect>
+<JacketDrawing x={26} y={56} size={88} />
+<text class="sc" x="140" y="30">
+    {storeName}
+</text>
+<path
+    class="l is-thin"
+    transform="translate(258 18)"
+    d="M0 2h3l2.5 8h9l2-6H5.2M8 13.5a1 1 0 1 0 .1 0M14 13.5a1 1 0 1 0 .1 0"
+></path>
+<text class="sc" x="280" y="30">
+    {cartCount}
+</text>
+<path class="t" d="M140 40h146"></path>
+<text class="ser" x="140" y="84">
+    {product}
+</text>
+<text class="sm is-price" x="140" y="102">
+    {price}
+</text>
+<circle class="cu" cx="143" cy="121" r="2.5"></circle>
+<text class="sm" x="150" y="124">
+    {stock}
+</text>
+<rect class="cu" x="140" y="138" width="146" height="30"></rect>
+<text class="bt" x="213" y="155.5" text-anchor="middle">
+    {button}
+</text>

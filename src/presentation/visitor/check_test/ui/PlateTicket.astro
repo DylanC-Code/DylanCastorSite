@@ -1,0 +1,48 @@
+---
+import type {
+    CheckPlateViewModel,
+    PlateMarkViewModel,
+} from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+import KeyText from "#/presentation/visitor/shared/topic/ui/KeyText.astro";
+
+/**
+ * A mark's ticket: a small paper card, no drawing. The number in red and
+ * the name of the check, the fault in large serif letters (its key words in
+ * red), then "How I check it" and one sentence (its key words in bold). On a
+ * phone it carries a cross to close it, and in the last ticket seen, "See it
+ * corrected".
+ */
+interface Props {
+    mark: PlateMarkViewModel;
+    words: CheckPlateViewModel["ticket"];
+}
+
+const { mark, words } = Astro.props;
+---
+
+<article class="check-card" data-ticket-for={mark.id} hidden>
+    <p class="check-card-head">
+        <span class="check-card-number">{mark.number}</span>
+        <span>
+            {mark.check}
+            <button
+                type="button"
+                class="check-card-close"
+                aria-label={words.close}
+                data-check-card-close
+            >
+                ×
+            </button>
+        </span>
+    </p>
+    <p class="check-card-fault">
+        <KeyText runs={mark.fault} />
+    </p>
+    <p class="check-card-label">{words.checkLabel}</p>
+    <p class="check-card-how">
+        <KeyText runs={mark.howICheck} />
+    </p>
+    <p class="check-card-end" data-see-corrected hidden>
+        <button type="button">{words.seeCorrected}</button>
+    </p>
+</article>

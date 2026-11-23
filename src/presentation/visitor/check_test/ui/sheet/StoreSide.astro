@@ -1,0 +1,40 @@
+---
+import { storeShapes } from "#/presentation/visitor/check_test/presenters/storeShapes.ts";
+import type { SheetLayout } from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import SamplePage from "#/presentation/visitor/check_test/ui/sheet/SamplePage.astro";
+import SamplePhone from "#/presentation/visitor/check_test/ui/sheet/SamplePhone.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+
+/**
+ * The store side: what the visitors see. The page on the screen of the
+ * lantern plate, the phone on its small stand, the ground under both. Still:
+ * nothing moves here, and nothing red appears until a mark is opened.
+ */
+interface Props {
+    layout: SheetLayout;
+    store: SheetWordsViewModel["store"];
+}
+
+const { layout, store } = Astro.props;
+const shapes = storeShapes(layout);
+const { page, phone } = layout;
+---
+
+<text class="sc" x={shapes.desktopLabel.x} y={shapes.desktopLabel.y}>
+    {store.desktop}
+</text>
+<path class="k" d={shapes.screen}></path>
+<path class="t" d={shapes.fringe}></path>
+<path class="k" d={shapes.stand}></path>
+<text class="sc" x={shapes.phoneLabel.x} y={shapes.phoneLabel.y}>
+    {store.phone}
+</text>
+<path class="k" d={shapes.phoneStand}></path>
+<g transform={`translate(${page.x} ${page.y}) scale(${page.scale})`}>
+    <SamplePage {...store} />
+</g>
+<g transform={`translate(${phone.x} ${phone.y}) scale(${phone.scale})`}>
+    <SamplePhone {...store} clipId={`phone-button-${layout.name}`} />
+</g>
+<path class="l" d={shapes.ground}></path>
+<path class="t" d={shapes.hatch}></path>

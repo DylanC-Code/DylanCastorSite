@@ -66,6 +66,12 @@
 @import "./plateTabs.css";
 @import "./detailsCabinet.css";
 @import "./cabinetNotes.css";
+@import "./checkPlate.css";
+@import "./checkSheet.css";
+@import "./checkStreet.css";
+@import "./checkWalkers.css";
+@import "./checkMarks.css";
+@import "./checkTicket.css";
 @import "./topicPhone.css";
 @import "./plateWide.css";
 @import "./plateTurn.css";

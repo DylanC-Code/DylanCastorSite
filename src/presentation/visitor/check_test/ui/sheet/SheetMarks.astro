@@ -1,0 +1,70 @@
+---
+import {
+    markSpots,
+    type SheetLayout,
+    seenRings,
+} from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import type { PlateMarkViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+import { oval } from "#/presentation/visitor/shared/topic/presenters/penPaths.ts";
+
+/**
+ * Over the sheet: the red ovals left around each faulty spot once its mark
+ * is seen, the stamp "Good to launch" that comes down at the end, and the six
+ * numbered marks. The marks become buttons when the script wakes the plate;
+ * on a phone each has an invisible touch area twice as wide.
+ */
+interface Props {
+    layout: SheetLayout;
+    marks: readonly PlateMarkViewModel[];
+    stamp: string;
+}
+
+const { layout, marks, stamp } = Astro.props;
+const spots = markSpots(layout);
+const rings = seenRings(layout);
+const { page, markRadius } = layout;
+const stampAt = `translate(${page.x + page.scale * 68} ${page.y + page.scale * 138}) scale(${page.scale})`;
+---
+
+<g aria-hidden="true">
+    {marks.map((mark) => (
+        <path
+            class="seen-ring"
+            pathLength="1"
+            d={oval(rings[mark.id], rings[mark.id].rx, rings[mark.id].ry)}
+            data-ring={mark.id}
+        />
+    ))}
+</g>
+<g class="stamp-place" transform={stampAt} aria-hidden="true" data-stamp>
+    <g class="stamp" transform="rotate(-8)">
+        <rect x="-66" y="-15" width="132" height="30" rx="2"></rect>
+        <rect
+            class="is-inner"
+            x="-62"
+            y="-11"
+            width="124"
+            height="22"
+            rx="1"
+        ></rect>
+        <text y="3.5" text-anchor="middle">
+            {stamp}
+        </text>
+    </g>
+</g>
+{marks.map((mark, index) => (
+    <g
+        class="mark"
+        transform={`translate(${spots[mark.id].x} ${spots[mark.id].y})`}
+        style={`--ring-delay: ${600 + index * 150}ms`}
+        data-mark={mark.id}
+        data-label={mark.markLabel}
+    >
+        {layout.name === "stack" && <circle class="mark-reach" r="21" />}
+        <circle class="mark-ring" r={markRadius} />
+        <circle class="mark-dot" r={markRadius} />
+        <text y={layout.name === "stack" ? 3.6 : 3.2} text-anchor="middle">
+            {mark.number}
+        </text>
+    </g>
+))}

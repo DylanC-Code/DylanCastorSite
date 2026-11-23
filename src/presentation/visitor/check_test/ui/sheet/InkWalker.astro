@@ -1,0 +1,72 @@
+---
+import { oval } from "#/presentation/visitor/shared/topic/presenters/penPaths.ts";
+
+/**
+ * A visitor of the street: the site's gentleman (VisitorFigure) drawn in ink
+ * at .62, his cane in the front hand; or the visitor in the copper beanie,
+ * who comes from another page and carries no cane, with the red pen's oval
+ * that marks him (shown by the street). Kept in the sheet's <defs>: the
+ * street clones one per visitor; `x` stands a still one at its place.
+ */
+interface Props {
+    beanie: boolean;
+    x?: number;
+}
+
+const { beanie, x } = Astro.props;
+const arm = "M27 34h6l1 29a3 3 0 0 1-6 0z";
+const leg = "M25 62h8l-1 38 7 5v3H25z";
+---
+
+<g
+    class:list={["walker", x !== undefined && "is-still"]}
+    data-walker={beanie ? "beanie" : "gent"}
+    transform={x === undefined ? undefined : `translate(${x} 0)`}
+>
+    <g transform="translate(0 169) scale(.62)">
+        <g class="walker-body">
+            <g class="walker-arm-back">
+                <path class="ink" d={arm}></path>
+            </g>
+            <g class="walker-leg-back">
+                <path class="ink" d={leg}></path>
+            </g>
+            <g class="walker-leg-front">
+                <path class="ink" d={leg}></path>
+            </g>
+            <path class="ink" d="M22 34c0-7 16-8 17 0l4 47H18z"></path>
+            <path
+                class="ink-hatch"
+                d="M24 44l10 10M23 54l13 13M22 65l14 14M30 40l8 8"
+            ></path>
+            <path class="ink-collar" d="M27 30h9l-2 5h-5z"></path>
+            <circle class="ink" cx="31" cy="19" r="7.5"></circle>
+            {beanie ? (
+                <>
+                    <path class="beanie" d="M23 17c-1.5-13 17.5-13 16 0z" />
+                    <path class="beanie" d="M22 14h18v4.5H22z" />
+                </>
+            ) : (
+                <path class="ink" d="M22.5 15c1-9 16-10 18-3l7 2v2.5H22.5z" />
+            )}
+            <g class="walker-arm-front">
+                <path class="ink" d={arm}></path>
+                {!beanie && (
+                    <path
+                        class="ink-cane"
+                        d="M31 63L42 108M29 61c-3-3 1-7 4-4"
+                    />
+                )}
+            </g>
+            {beanie && <circle class="cu" cx="31" cy="5.5" r="3" />}
+        </g>
+    </g>
+    {beanie && (
+        <path
+            class="pen-mark is-beanie"
+            pathLength="1"
+            d={oval({ x: 19, y: 176 }, 15, 11)}
+            data-beanie-mark
+        />
+    )}
+</g>

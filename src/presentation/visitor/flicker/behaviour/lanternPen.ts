@@ -1,12 +1,12 @@
 import {
-    loop,
-    oval,
-} from "#/presentation/visitor/flicker/presenters/penPaths.ts";
-import {
     type Part,
     type Way,
     ways,
 } from "#/presentation/visitor/flicker/state/lanternState.ts";
+import {
+    loop,
+    oval,
+} from "#/presentation/visitor/shared/topic/presenters/penPaths.ts";
 
 /** Where each part's handle is, in the scene's units. */
 const handles: Readonly<Record<Part, readonly [number, number]>> = {

@@ -7,6 +7,8 @@
     --color-paper: #ebe6dc;
     --color-paper-ink: #1b1a18;
     --color-paper-copper: #8a4a24;
+    /* The lighter paper of a sheet on a plate: a ticket, the check proof. */
+    --color-paper-sheet: #f4f0e8;
     --color-page-edge: #ddd7cb;
     --color-page-edge-dark: #b9b2a4;
     --color-board: #0a0c0f;

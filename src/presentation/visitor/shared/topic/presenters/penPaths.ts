@@ -1,7 +1,8 @@
 /**
- * The red pen's hand-drawn shapes, in the lantern scene's units: a loop around
- * a handle and an oval around the moved button. Not perfect circles: the radius
- * wanders a little and the stroke overruns its start.
+ * The red pen's hand-drawn shapes, shared by the topic plates (the lantern, the
+ * check plate), in a scene's own units: a loop around a handle and an oval
+ * around the moved button. Not perfect circles: the radius wanders a little and
+ * the stroke overruns its start.
  */
 function point(x: number, y: number, first: boolean): string {
     return `${first ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`;

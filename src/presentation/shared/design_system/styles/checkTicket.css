@@ -1,0 +1,142 @@
+/*
+ * A mark's ticket: a small paper card, 252px wide, the plate's ink border and
+ * hard shadow; it rises 6px while it fades in (0.18s) and never catches the
+ * pointer on a wide screen. On a phone it is fixed at the bottom of the
+ * screen, full width, slides up (0.22s) and carries its cross.
+ */
+.check-ticket {
+    position: absolute;
+    z-index: 2;
+    width: 252px;
+    box-sizing: border-box;
+    padding: 0 16px 15px;
+    border: 1.5px solid var(--color-paper-ink);
+    background: var(--color-paper-sheet);
+    color: var(--color-paper-ink);
+    box-shadow: 5px 6px 0 rgb(27 26 24 / 0.2);
+    pointer-events: none;
+    animation: check-ticket-in 180ms ease-out both;
+}
+
+.check-ticket p {
+    margin: 0;
+}
+
+.check-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -16px;
+    padding: 8px 16px 7px;
+    border-bottom: 1px dashed rgb(27 26 24 / 0.55);
+    font: 600 9px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.7);
+}
+
+.check-card-number {
+    color: var(--color-ink-red);
+}
+
+.check-card-close {
+    display: none;
+}
+
+.check-card-fault {
+    margin-top: 12px;
+    font: 400 20px / 1.22 var(--font-display);
+    text-wrap: balance;
+}
+
+.check-card-fault .key {
+    color: var(--color-ink-red);
+}
+
+.check-card-label {
+    margin-top: 13px;
+    padding-top: 10px;
+    border-top: 1px solid rgb(27 26 24 / 0.25);
+    font: 600 8.5px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-paper-copper);
+}
+
+.check-ticket .check-card-how {
+    margin-top: 4px;
+    font: 400 14px / 1.45 var(--font-sans);
+    color: rgb(27 26 24 / 0.78);
+}
+
+.check-card-how .key {
+    font-weight: 600;
+    color: var(--color-paper-ink);
+}
+
+.check-card-end {
+    display: none;
+}
+
+@media (max-width: 47.99rem) {
+    .check-ticket {
+        position: fixed;
+        right: max(8px, env(safe-area-inset-right, 0px));
+        bottom: max(8px, env(safe-area-inset-bottom, 0px));
+        left: max(8px, env(safe-area-inset-left, 0px));
+        z-index: 5;
+        width: auto;
+        padding: 0 12px 12px;
+        box-shadow: 0 -12px 34px rgb(0 0 0 / 0.6);
+        pointer-events: auto;
+        animation: check-ticket-up 220ms ease-out both;
+    }
+
+    .check-card-head {
+        margin: 0 -12px;
+        padding: 8px 12px 7px;
+    }
+
+    .check-card-close {
+        display: inline;
+        margin: -9px -10px -9px 4px;
+        padding: 6px 10px;
+        border: 0;
+        background: none;
+        font: 400 19px / 1 var(--font-sans);
+        color: var(--color-paper-ink);
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    .check-card-end:not([hidden]) {
+        display: block;
+        margin-top: 12px;
+    }
+
+    .check-card-end button {
+        padding: 6px 0;
+        border: 0;
+        background: none;
+        font: 600 10px / 1.35 var(--font-sans);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-paper-copper);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+    }
+}
+
+@keyframes check-ticket-in {
+    from {
+        opacity: 0;
+        translate: 0 6px;
+    }
+}
+
+@keyframes check-ticket-up {
+    from {
+        translate: 0 110%;
+    }
+}

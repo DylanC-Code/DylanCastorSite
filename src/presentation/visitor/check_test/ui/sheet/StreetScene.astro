@@ -1,0 +1,67 @@
+---
+import {
+    dialAt,
+    shopX,
+    streetWidth,
+    ticks,
+} from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import InkWalker from "#/presentation/visitor/check_test/ui/sheet/InkWalker.astro";
+import ShopFront from "#/presentation/visitor/check_test/ui/sheet/ShopFront.astro";
+import StreetSignpost from "#/presentation/visitor/check_test/ui/sheet/StreetSignpost.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+import { oval } from "#/presentation/visitor/shared/topic/presenters/penPaths.ts";
+
+/**
+ * The test side: a street in its own measures, 312 wide, the ground at y 236.
+ * The entrance plate (the page the test was ordered for), the signpost, the
+ * shop with its two doors, the counter, the lamp and the off lever. The
+ * street walks its visitors in `[data-walk]`; the red pen marks the faults
+ * as they happen (`[data-pen]`). Decoration for a screen reader: the
+ * tickets say every fault.
+ */
+interface Props {
+    street: SheetWordsViewModel["street"];
+}
+
+const { street } = Astro.props;
+const [first, second] = street.entrance;
+const hatch = ticks(
+    { x: 6, y: 240 },
+    { step: 12, stroke: "l-5 7", count: Math.floor(streetWidth / 12) },
+);
+---
+
+<rect class="kf" x="0" y="68" width="62" height="24"></rect>
+<text class="sc is-small" x="31" y="78" text-anchor="middle">
+    {first}
+</text>
+<text class="sc is-small" x="31" y="87" text-anchor="middle">
+    {second}
+</text>
+<path class="kf" d="M6 92h12v144H6z"></path>
+<path class="t" d="M15 96v138"></path>
+<ShopFront x={shopX} street={street} />
+<path class="l" d={`M-2 236h${streetWidth + 4}`}></path>
+<path class="t" d={hatch}></path>
+<StreetSignpost x={shopX - 48} boards={street.signpost} />
+<defs>
+    <InkWalker beanie={false} />
+    <InkWalker beanie={true} />
+</defs>
+<g data-walk></g>
+<g data-pen aria-hidden="true">
+    <text
+        class="pen-words"
+        x={shopX + dialAt.x + 32}
+        y={dialAt.y - 6}
+        data-pen-mark="count"
+    >
+        {street.countedTwice}
+    </text>
+    <path
+        class="pen-mark"
+        pathLength="1"
+        d={oval({ x: shopX + 124, y: 150 }, 22, 22)}
+        data-pen-mark="off"
+    ></path>
+</g>

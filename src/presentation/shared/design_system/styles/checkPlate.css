@@ -1,0 +1,94 @@
+/*
+ * The check plate (check test handoff): the paper of the lantern plate, the
+ * line above the sheet (the instruction and the counter, small caps), the
+ * sheet, and the sentence under it, which keeps its height so the plate does
+ * not move when it changes. On a phone: PHONE.md.
+ */
+.check-plate {
+    position: relative;
+    margin-top: 44px;
+    padding: 22px;
+    background: var(--color-paper);
+    color: var(--color-paper-ink);
+    box-shadow:
+        inset 0 0 0 1px rgb(27 26 24 / 0.5),
+        inset 0 0 0 6px var(--color-paper),
+        inset 0 0 0 7px rgb(27 26 24 / 0.2),
+        0 26px 40px rgb(0 0 0 / 0.5);
+}
+
+.check-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    min-height: 30px;
+    padding: 0 6px;
+    font: 600 10px / 1.35 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(27 26 24 / 0.7);
+}
+
+.check-line p {
+    margin: 0;
+}
+
+.check-again {
+    margin-left: 14px;
+    padding: 6px 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: var(--color-paper-copper);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.check-sentence {
+    min-height: 2.8em;
+    margin: 8px 6px 0;
+    font: italic 400 20px / 1.35 var(--font-display);
+    text-wrap: pretty;
+}
+
+.check-sentence .key {
+    font-style: normal;
+    color: var(--color-paper-copper);
+}
+
+@media (max-width: 47.99rem) {
+    .check-plate {
+        margin-top: 30px;
+        padding: 10px 10px 12px;
+    }
+
+    .check-line {
+        align-items: flex-start;
+        min-height: 0;
+        padding: 2px 4px 6px;
+    }
+
+    .check-instruction {
+        max-width: 16em;
+    }
+
+    .check-count {
+        white-space: nowrap;
+        text-align: right;
+    }
+
+    .check-again {
+        display: block;
+        margin: 0 0 0 auto;
+    }
+
+    .check-sentence {
+        min-height: 2.7em;
+        margin: 10px 4px 0;
+        font-size: 17px;
+    }
+}

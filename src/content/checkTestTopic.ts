@@ -1,3 +1,4 @@
+import { checkPlate } from "#/content/checkPlateWords.ts";
 import checkTestJson from "#/content/checkTest.json";
 import { floorHalls } from "#/content/floorHalls.ts";
 import { both, pair } from "#/content/topicWords.ts";
@@ -18,6 +19,7 @@ export const checkTestPage: CheckTestPageViewModel = {
         title: pair(head.title),
         intro: head.intro,
     },
+    plate: checkPlate,
     details: {
         title: pair(details.title),
         hint: details.hint,

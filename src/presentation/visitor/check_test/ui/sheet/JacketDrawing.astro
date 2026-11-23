@@ -1,0 +1,27 @@
+---
+/** The jacket of the sample page, in fine ink lines, as a square of `size`. */
+interface Props {
+    x: number;
+    y: number;
+    size: number;
+}
+
+const { x, y, size } = Astro.props;
+---
+
+<svg x={x} y={y} width={size} height={size} viewBox="10 16 180 180">
+    <path class="l" d="M80 30c6-10 34-10 40 0l-5 16-15 9-15-9z"></path>
+    <path class="l" d="M80 30L54 42l-4 146h100l-4-146-26-12"></path>
+    <path
+        class="l"
+        d="M54 42L30 64l-10 96 22 5 9-70M146 42l24 22 10 96-22 5-9-70"
+    ></path>
+    <path
+        class="l"
+        d="M100 55v133M64 128l20-5v24l-20 5zM136 128l-20-5v24l20 5z"
+    ></path>
+    <path
+        class="t"
+        d="M50 176h100M21 150l22 5M179 150l-22 5M59 62l-3 96M141 62l3 96"
+    ></path>
+</svg>

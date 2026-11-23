@@ -1,0 +1,42 @@
+---
+/**
+ * A glazed door of the shop, 60 wide from `x`, its ground at y 236: a large
+ * italic letter (A in ink, B in copper) and its word. The leaf folds to its
+ * hinge when a visitor goes in (`.is-open`), showing a dark doorway.
+ */
+interface Props {
+    x: number;
+    letter: string;
+    word: string;
+    copper: boolean;
+}
+
+const { x, letter, word, copper } = Astro.props;
+const shape = `M${x} 236V100h60V236z`;
+---
+
+<g class="door" data-door={letter}>
+    <path class="dk" d={shape}></path>
+    <g class="leaf">
+        <path class="kf" d={shape}></path>
+        <rect class="k is-pane" x={x + 7} y="107" width="46" height="70"></rect>
+        <path
+            class="t"
+            d={`M${x + 41} 112l8 8M${x + 36} 112l13 13M${x + 7} 184h46v44h-46z`}
+        ></path>
+        <text
+            class:list={["big", copper && "is-copper"]}
+            x={x + 30}
+            y="155"
+            text-anchor="middle"
+        >
+            {letter}
+        </text>
+        <text class="sc is-tiny" x={x + 30} y="170" text-anchor="middle">
+            {word}
+        </text>
+        <circle class="cu" cx={x + 53} cy="181" r="2.4"></circle>
+    </g>
+    <path class="k" d={shape}></path>
+    <path class="l" d={`M${x - 5} 236h70`}></path>
+</g>

@@ -1,0 +1,53 @@
+---
+import {
+    deskLayout,
+    stackLayout,
+} from "#/presentation/visitor/check_test/presenters/sheetGeometry.ts";
+import CheckSheet from "#/presentation/visitor/check_test/ui/CheckSheet.astro";
+import type { CheckPlateViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+import PlateTicket from "#/presentation/visitor/check_test/ui/PlateTicket.astro";
+import KeyText from "#/presentation/visitor/shared/topic/ui/KeyText.astro";
+
+/**
+ * The paper plate: the line (the instruction, the counter of seen marks,
+ * "Start again" once the end has played), the proof sheet in its two layouts,
+ * the sentence under it, which changes only at the end, and the six tickets
+ * (one shows at a time: beside its mark, or at the bottom of a phone).
+ */
+type Props = CheckPlateViewModel;
+
+const { instruction, counter, startAgain, sheet, sentence, ticket } =
+    Astro.props;
+---
+
+<div class="check-plate" data-check-plate data-counter={counter}>
+    <div class="check-line">
+        <p class="check-instruction">
+            <span class="is-wide">{instruction.desktop}</span>
+            <span class="is-narrow">{instruction.phone}</span>
+        </p>
+        <p class="check-count">
+            <span data-seen-count>{counter.replace("{seen}", "0")}</span>
+            <button type="button" class="check-again" data-start-again hidden>
+                {startAgain}
+            </button>
+        </p>
+    </div>
+    <div class="is-wide">
+        <CheckSheet layout={deskLayout} words={sheet} />
+    </div>
+    <div class="is-narrow">
+        <CheckSheet layout={stackLayout} words={sheet} />
+    </div>
+    <p class="check-sentence" aria-live="polite">
+        <span data-sentence-start>{sentence.start}</span>
+        <span data-sentence-end hidden>
+            <KeyText runs={sentence.end} />
+        </span>
+    </p>
+    <div class="check-ticket" aria-live="polite" data-ticket hidden>
+        {sheet.marks.map((mark) => (
+            <PlateTicket mark={mark} words={ticket} />
+        ))}
+    </div>
+</div>

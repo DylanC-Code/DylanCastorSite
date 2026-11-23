@@ -1,0 +1,35 @@
+---
+import JacketDrawing from "#/presentation/visitor/check_test/ui/sheet/JacketDrawing.astro";
+import type { SheetWordsViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckPlateViewModel.ts";
+
+/**
+ * The same page on a phone, 96 × 190. Its button text is cut by the button's
+ * right edge on purpose: that is fault 1, drawn, not animated. `clipId` is
+ * unique to the sheet's layout.
+ */
+type Props = SheetWordsViewModel["store"] & { clipId: string };
+
+const { product, price, stock, button, clipId } = Astro.props;
+---
+
+<rect class="sf" width="96" height="190" rx="12"></rect>
+<path class="l" d="M38 9h20"></path>
+<rect class="t" x="10" y="20" width="76" height="70"></rect>
+<JacketDrawing x={26} y={30} size={44} />
+<text class="ser is-phone-product" x="10" y="108">
+    {product}
+</text>
+<text class="sm is-phone-price" x="10" y="120">
+    {price}
+</text>
+<circle class="cu" cx="12" cy="132" r="1.8"></circle>
+<text class="sm is-phone-small" x="17" y="134">
+    {stock}
+</text>
+<clipPath id={clipId}>
+    <rect x="10" y="142" width="84" height="20"></rect>
+</clipPath>
+<rect class="cu" x="10" y="142" width="84" height="20"></rect>
+<text class="bt is-phone-small" clip-path={`url(#${clipId})`} x="14" y="154">
+    {button}
+</text>

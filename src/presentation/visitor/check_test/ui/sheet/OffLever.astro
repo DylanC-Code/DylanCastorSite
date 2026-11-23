@@ -1,0 +1,46 @@
+---
+/**
+ * The off switch at x: a sign that says "On" (or "Off" in red once pulled),
+ * and under it a lever in its slot with a copper knob. A button: a click,
+ * Enter or Space pulls it once the script wakes the plate; pulled, the
+ * lever leans 58° (`.is-off` on the sheet).
+ */
+interface Props {
+    x: number;
+    label: string;
+    on: string;
+    off: string;
+}
+
+const { x, label, on, off } = Astro.props;
+---
+
+<g class="lever" data-lever data-label={label}>
+    <rect class="lever-hit" x={x - 18} y="122" width="38" height="110"></rect>
+    <rect
+        class="kf lever-plate"
+        x={x - 14}
+        y="128"
+        width="28"
+        height="15"
+    ></rect>
+    <text class="sc is-sign" x={x} y="138.5" text-anchor="middle">
+        <tspan class="sign-on">{on}</tspan>
+        <tspan class="sign-off">{off}</tspan>
+    </text>
+    <rect
+        class="kf lever-plate"
+        x={x - 8}
+        y="150"
+        width="16"
+        height="46"
+        rx="2"
+    ></rect>
+    <g transform={`translate(${x} 182)`}>
+        <g class="lever-arm">
+            <path class="l is-arm" d="M0 0V-26"></path>
+            <circle class="cu" cx="0" cy="-28" r="5.5"></circle>
+        </g>
+        <circle class="cu" r="2.8"></circle>
+    </g>
+</g>

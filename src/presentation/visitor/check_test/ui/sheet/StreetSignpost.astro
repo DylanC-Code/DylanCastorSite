@@ -1,0 +1,42 @@
+---
+/**
+ * The site's signpost at .55, standing at x on the street's ground: a post
+ * on its mound with two boards pointing right, A over B. A board moves a few
+ * pixels while a visitor stops (`.is-nudged`).
+ */
+interface Props {
+    x: number;
+    boards: readonly [string, string];
+}
+
+const { x, boards } = Astro.props;
+const tops = [-166, -104] as const;
+
+function board(y: number): { shape: string; inner: string } {
+    return {
+        shape: `M9 ${y}H51L87 ${y + 28}L51 ${y + 56}H9z`,
+        inner: `M15 ${y + 6}H48L78 ${y + 28}L48 ${y + 50}H15z`,
+    };
+}
+---
+
+<g class="signpost" transform={`translate(${x} 236) scale(.55)`}>
+    <path class="f" d="M-8 -164h16V0h-16z"></path>
+    <path class="h" d="M4 -156V-4M1 -126V-30"></path>
+    <path class="f" d="M-11 -170h22v7h-22z"></path>
+    <path class="f" d="M0 -192l9 22h-18z"></path>
+    <circle class="f" cx="0" cy="-195" r="4"></circle>
+    <path class="l" d="M-30 0c6 -11 54 -11 60 0"></path>
+    <path class="h" d="M-20 -4l-4 -7M-14 -6l-1 -8M18 -5l4 -7M24 -3l5 -5"></path>
+    {tops.map((y, index) => (
+        <g class="board" data-board={index === 0 ? "A" : "B"}>
+            <path class="f" d={board(y).shape} />
+            <path class="h" d={board(y).inner} />
+            <circle class="c" cx="23" cy={y + 17} r="2.5" />
+            <circle class="c" cx="23" cy={y + 39} r="2.5" />
+            <text class="b" x="46" y={y + 38} text-anchor="middle">
+                {boards[index]}
+            </text>
+        </g>
+    ))}
+</g>
