@@ -12,7 +12,9 @@ import type { BookViewModel } from "#/presentation/visitor/home/viewmodels/BookV
 /**
  * One reader's book: page edges, its leaves, then the cover on top, its
  * inside the endpaper in the book's own leather. Without script the cover is
- * a plain link to the path; every page is real HTML from the start.
+ * a plain link to the path; every page is real HTML from the start. On a
+ * phone the book is a catalogue row: its words beside the cover (bookRows.css),
+ * a second way to tap it, hidden from assistive tech (the cover names it).
  */
 interface Props {
     book: BookViewModel;
@@ -63,4 +65,14 @@ const coverDepth =
             <span aria-hidden="true" class="book-face book-endpaper"></span>
         </a>
     </div>
+    <a
+        href={book.href}
+        class="book-row"
+        data-row
+        tabindex="-1"
+        aria-hidden="true"
+    >
+        <span class="book-row-for">{forReader(book)}</span>
+        <span class="book-row-title">{book.title}</span>
+    </a>
 </div>

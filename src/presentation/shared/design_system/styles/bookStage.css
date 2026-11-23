@@ -1,8 +1,9 @@
 /*
  * The stage of "Who are you?" (books V2 handoff). Every size inside a book is
- * in the design's pixels times --u. Phones, here: three books on a shelf at
- * 0.295; the chosen one grows to 0.85 and shows one page at a time, the
- * turned pages swinging off its left edge. From 768px: bookStageWide.css.
+ * in the design's pixels times --u. Phones, here: the chosen book grows to
+ * 0.85 and shows one page at a time, the turned pages swinging off its left
+ * edge; the closed books stand as rows (bookRows.css). From 768px:
+ * bookStageWide.css.
  */
 @property --u {
     syntax: "<length>";

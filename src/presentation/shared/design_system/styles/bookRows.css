@@ -1,0 +1,57 @@
+/*
+ * The shelf on a phone (19 Nov 2026, Dylan's choice): a catalogue, one row
+ * per book, the cover at 0.3 and beside it who the book is for and its
+ * title, readable. A tap on either opens the book as before; the rows take
+ * the height the open book needs, so nothing waits empty below them. From
+ * 768px the books stand in a row (bookStageWide.css) and the words are hidden,
+ * as they are in a path's hero, which reuses the book.
+ */
+.book-row {
+    display: none;
+}
+
+@media (max-width: 47.99rem) {
+    .stage {
+        height: 548px;
+    }
+
+    .stage .book:not(.is-open) {
+        --u: 0.3px;
+        top: calc(var(--i) * 172px);
+        left: 0;
+    }
+
+    .stage .book-row {
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 20px);
+        display: grid;
+        gap: 8px;
+        width: calc(100cqw - 100% - 20px);
+        text-decoration: none;
+        translate: 0 -50%;
+        transition: opacity 400ms var(--ease-out) 1500ms;
+    }
+
+    .book-row-for {
+        font: 500 10px / 1.4 var(--font-sans);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--color-accent);
+    }
+
+    .book-row-title {
+        font: 400 22px / 1.2 var(--font-display);
+        color: var(--color-ink);
+    }
+
+    .is-open .book-row {
+        opacity: 0;
+        pointer-events: none;
+        transition-delay: 0ms;
+    }
+
+    .book-hint {
+        top: 520px;
+    }
+}

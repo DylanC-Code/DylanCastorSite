@@ -40,9 +40,25 @@ function upgradeCover(view: ShelfView, book: HTMLElement): void {
     if (link === null) {
         return;
     }
-    const button = coverButton(link, book.dataset["label"] ?? "");
-    button.addEventListener("click", () => {
-        send(view, { type: "pick", id: book.dataset["book"] ?? "" });
+    const pick = { type: "pick", id: book.dataset["book"] ?? "" } as const;
+    coverButton(link, book.dataset["label"] ?? "").addEventListener(
+        "click",
+        () => {
+            send(view, pick);
+        },
+    );
+    openFromRow(view, book, pick);
+}
+
+/** The phone's row words open the book too, instead of leaving. */
+function openFromRow(
+    view: ShelfView,
+    book: HTMLElement,
+    pick: ShelfEvent,
+): void {
+    book.querySelector("[data-row]")?.addEventListener("click", (event) => {
+        event.preventDefault();
+        send(view, pick);
     });
 }
 
