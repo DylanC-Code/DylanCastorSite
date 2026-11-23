@@ -1,8 +1,8 @@
 ---
-import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+import type { TopicHeadViewModel } from "#/presentation/visitor/shared/topic/viewmodels/TopicHeadViewModel.ts";
 
 /** A topic's head: the way back to its floor, the title, the intro. */
-type Props = FlickerPageViewModel["head"];
+type Props = TopicHeadViewModel;
 
 const { back, title, intro } = Astro.props;
 ---

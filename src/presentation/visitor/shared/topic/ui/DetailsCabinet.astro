@@ -1,15 +1,16 @@
 ---
-import CabinetDrawer from "#/presentation/visitor/flicker/ui/CabinetDrawer.astro";
-import VersionedText from "#/presentation/visitor/flicker/ui/VersionedText.astro";
-import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+import CabinetDrawer from "#/presentation/visitor/shared/topic/ui/CabinetDrawer.astro";
+import VersionedText from "#/presentation/visitor/shared/topic/ui/VersionedText.astro";
+import type { DetailsCabinetViewModel } from "#/presentation/visitor/shared/topic/viewmodels/DetailsCabinetViewModel.ts";
 
 /**
- * "The details, if you want them": a long low cabinet of five drawers under
+ * "The details, if you want them": a long low cabinet of drawers under
  * an engraved cornice. Pulling a drawer writes its note under the cabinet,
  * one at a time. Without script the cabinet is closed and still, and all
- * five notes are shown, one under the other.
+ * the notes are shown, one under the other. Each drawer keeps its size, so
+ * a cabinet of fewer drawers is narrower, at the left of the column.
  */
-type Props = FlickerPageViewModel["details"];
+type Props = DetailsCabinetViewModel;
 
 const { title, hint, drawers } = Astro.props;
 ---
@@ -18,7 +19,7 @@ const { title, hint, drawers } = Astro.props;
     <h2 id="details-title" class="topic-h2 is-small">
         {title[0]} <em>{title[1]}</em>
     </h2>
-    <div class="cabinet">
+    <div class="cabinet" style={`--drawers: ${drawers.length}`}>
         <span aria-hidden="true" class="cabinet-cornice">
             <span />
             <span />

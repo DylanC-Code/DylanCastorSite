@@ -1,12 +1,12 @@
 import flickerJson from "#/content/flicker.json";
 import { floorHalls } from "#/content/floorHalls.ts";
+import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+import type { CaptionRun } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
 import {
     type KeyRun,
     keyRuns,
-} from "#/presentation/visitor/flicker/presenters/keyRuns.ts";
-import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
-import type { CaptionRun } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
-import type { Versioned } from "#/presentation/visitor/flicker/viewmodels/Versioned.ts";
+} from "#/presentation/visitor/shared/topic/presenters/keyRuns.ts";
+import type { Versioned } from "#/presentation/visitor/shared/topic/viewmodels/Versioned.ts";
 
 /**
  * The topic page "Flicker-free A/B tests" (floor I), from the flicker handoff's

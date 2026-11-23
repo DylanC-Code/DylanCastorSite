@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { keyRuns } from "#/presentation/visitor/flicker/presenters/keyRuns.ts";
+import { keyRuns } from "#/presentation/visitor/shared/topic/presenters/keyRuns.ts";
 
 describe("a text's key phrases", () => {
     it("marks the phrases between double stars and drops the stars", () => {

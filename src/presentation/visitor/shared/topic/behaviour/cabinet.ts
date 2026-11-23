@@ -1,7 +1,7 @@
 /**
  * The details cabinet: one drawer open at a time; pulling it writes its note
  * under the cabinet, pulling it again closes it. Wakes the drawers (they are
- * disabled without script, when all five notes are shown).
+ * disabled without script, when all their notes are shown).
  */
 function openOnly(cabinet: HTMLElement, open: string | null): void {
     for (const drawer of cabinet.querySelectorAll<HTMLElement>(

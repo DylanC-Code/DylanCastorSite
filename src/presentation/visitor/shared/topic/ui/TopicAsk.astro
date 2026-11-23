@@ -1,13 +1,13 @@
 ---
-import LetterPost from "#/presentation/visitor/flicker/ui/scenes/LetterPost.astro";
-import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
+import LetterPost from "#/presentation/visitor/shared/topic/ui/scenes/LetterPost.astro";
+import type { TopicAskViewModel } from "#/presentation/visitor/shared/topic/viewmodels/TopicAskViewModel.ts";
 
 /**
  * The question at the end: the gentleman posting a letter, the question (in
  * the visitor's version) and "Write to me", to the closing ask of the home
  * the visitor came through, or the brands home's letter slot.
  */
-type Props = FlickerPageViewModel["ask"];
+type Props = TopicAskViewModel;
 
 const { title, link, href, byPath, label } = Astro.props;
 ---

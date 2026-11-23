@@ -1,13 +1,17 @@
 /*
  * The details cabinet: a long low body with a double copper frame under a
- * three-tier cornice, two bracket feet, five drawers in a row. A pulled
- * drawer comes 13px down (450ms) and its note is written 54px under.
+ * three-tier cornice, two bracket feet, its drawers in a row (--drawers, set
+ * by the page: five on the flicker page). Each drawer is 184px wide, so the
+ * cabinet is as wide as its drawers need. A pulled drawer comes 13px down
+ * (450ms) and its note is written 54px under.
  */
 .cabinet-section .topic-h2 em {
     color: var(--color-ink);
 }
 
 .cabinet {
+    --drawers: 5;
+    max-width: calc(var(--drawers) * 196px + 20px);
     margin-top: 48px;
 }
 
@@ -44,7 +48,7 @@
 
 .cabinet-body {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(var(--drawers), 1fr);
     gap: 12px;
     padding: 16px;
     box-shadow:

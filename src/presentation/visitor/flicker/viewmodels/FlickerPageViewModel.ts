@@ -1,35 +1,21 @@
-import type { LinkViewModel } from "#/presentation/shared/design_system/link/viewmodels/LinkViewModel.ts";
-import type { KeyRun } from "#/presentation/visitor/flicker/presenters/keyRuns.ts";
 import type { LanternPlateViewModel } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
-import type { Versioned } from "#/presentation/visitor/flicker/viewmodels/Versioned.ts";
-
-type Title = readonly [string, string];
-
-/** A street stop: a title, a text with its key phrases, in two versions. */
-export interface StreetTextViewModel {
-    readonly title: Title;
-    readonly text: Versioned<readonly KeyRun[]>;
-}
-
-interface DrawerViewModel {
-    readonly label: string;
-    readonly question: string;
-    readonly answer: Versioned<readonly KeyRun[]>;
-}
+import type { DetailsCabinetViewModel } from "#/presentation/visitor/shared/topic/viewmodels/DetailsCabinetViewModel.ts";
+import type { StreetTextViewModel } from "#/presentation/visitor/shared/topic/viewmodels/StreetStopViewModel.ts";
+import type { TopicAskViewModel } from "#/presentation/visitor/shared/topic/viewmodels/TopicAskViewModel.ts";
+import type {
+    TopicHeadViewModel,
+    TopicTitle,
+} from "#/presentation/visitor/shared/topic/viewmodels/TopicHeadViewModel.ts";
 
 /** The topic page "Flicker-free A/B tests", top to bottom. */
 export interface FlickerPageViewModel {
-    readonly head: {
-        readonly back: LinkViewModel;
-        readonly title: Title;
-        readonly intro: string;
-    };
+    readonly head: TopicHeadViewModel;
     readonly plate: LanternPlateViewModel;
     readonly cue: string;
     readonly signpost: {
-        readonly title: Title;
-        readonly boards: Title;
-        readonly captions: Title;
+        readonly title: TopicTitle;
+        readonly boards: TopicTitle;
+        readonly captions: TopicTitle;
         readonly label: string;
     };
     readonly shop: StreetTextViewModel & {
@@ -37,20 +23,10 @@ export interface FlickerPageViewModel {
         readonly label: string;
     };
     readonly workshop: StreetTextViewModel & {
-        readonly plaque: Title;
-        readonly hangingSign: Title;
+        readonly plaque: TopicTitle;
+        readonly hangingSign: TopicTitle;
         readonly label: string;
     };
-    readonly details: {
-        readonly title: Title;
-        readonly hint: string;
-        readonly drawers: readonly DrawerViewModel[];
-    };
-    readonly ask: {
-        readonly title: Versioned<Title>;
-        readonly link: string;
-        readonly href: string;
-        readonly byPath: Readonly<Record<string, string>>;
-        readonly label: string;
-    };
+    readonly details: DetailsCabinetViewModel;
+    readonly ask: TopicAskViewModel;
 }
