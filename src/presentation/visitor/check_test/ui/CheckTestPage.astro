@@ -1,0 +1,31 @@
+---
+import DetailsCabinet from "#/presentation/visitor/shared/topic/ui/DetailsCabinet.astro";
+import TopicAsk from "#/presentation/visitor/shared/topic/ui/TopicAsk.astro";
+import TopicHead from "#/presentation/visitor/shared/topic/ui/TopicHead.astro";
+import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckTestPageViewModel.ts";
+
+/**
+ * The topic page "Checking a test before launch": open six marks on the
+ * proof of a test, then the six lamps, the counter at zero, the written
+ * note, the details cabinet and the question. One column, 1000px wide.
+ */
+type Props = CheckTestPageViewModel;
+
+const page = Astro.props;
+---
+
+<div class="topic-page" data-check-page>
+    <TopicHead {...page.head} />
+    <DetailsCabinet {...page.details} />
+    <TopicAsk {...page.ask} />
+</div>
+
+<script>
+    import { initCheckPage } from "#/presentation/visitor/check_test/behaviour/checkPage.ts";
+
+    for (const page of document.querySelectorAll("[data-check-page]")) {
+        if (page instanceof HTMLElement) {
+            initCheckPage(page);
+        }
+    }
+</script>

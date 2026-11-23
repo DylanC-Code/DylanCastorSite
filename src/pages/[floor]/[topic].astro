@@ -1,59 +1,33 @@
 ---
-import { flickerPage } from "#/content/flickerTopic.ts";
-import { floorHalls } from "#/content/floorHalls.ts";
-import { floorsContent, switcherFor } from "#/content/floors.ts";
+import { switcherFor } from "#/content/floors.ts";
 import { home } from "#/content/home.ts";
-import { topicMeta } from "#/content/pageMeta.ts";
+import {
+    type TopicPath,
+    topicMetaOf,
+    topicPageOf,
+    topicPaths,
+} from "#/content/topicPages.ts";
 import HtmlDocument from "#/presentation/shared/document/ui/HtmlDocument.astro";
+import CheckTestPage from "#/presentation/visitor/check_test/ui/CheckTestPage.astro";
 import FloorPage from "#/presentation/visitor/floor/ui/FloorPage.astro";
 import FlickerPage from "#/presentation/visitor/flicker/ui/FlickerPage.astro";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * A floor's topic pages, one per published room: its floor's href and the
- * room's slug (floor I: /shopify-cro/flicker-free-ab-tests). "Flicker-free
- * A/B tests" is written and open to search; the others are placeholders,
+ * A floor's topic pages (topicPages.ts): the published rooms, and in dev
+ * only the drafts. "Flicker-free A/B tests" is written and open to search;
+ * "Checking a test before launch" is a draft; the others are placeholders,
  * hidden until written (searchListing.json).
  */
-export function getStaticPaths(): {
-    params: { floor: string; topic: string };
-    props: { floorId: string; area: string; name: string; roomId: string };
-}[] {
-    return floorsContent.floors.flatMap((floor) =>
-        (floorHalls[floor.id]?.rooms ?? []).flatMap((room) =>
-            room.state === "open"
-                ? [
-                      {
-                          params: {
-                              floor: floor.href.slice(1),
-                              topic: room.href.slice(floor.href.length + 1),
-                          },
-                          props: {
-                              floorId: floor.id,
-                              area: floor.area,
-                              name: room.name,
-                              roomId: room.id,
-                          },
-                      },
-                  ]
-                : [],
-        ),
-    );
+export function getStaticPaths(): TopicPath[] {
+    return topicPaths(import.meta.env.DEV);
 }
 
-interface Props {
-    floorId: string;
-    area: string;
-    name: string;
-    roomId: string;
-}
+type Props = TopicPath["props"];
 
 const { floorId, area, name, roomId } = Astro.props;
-const written = roomId === "flicker_free_tests";
-const meta = topicMeta[roomId] ?? {
-    title: `${name} · ${home.header.brand}`,
-    description: name,
-};
+const meta = topicMetaOf(roomId, name);
+const topic = topicPageOf(roomId);
 ---
 
 <HtmlDocument title={meta.title} description={meta.description}>
@@ -62,10 +36,8 @@ const meta = topicMeta[roomId] ?? {
         footer={home.footer}
         switcher={switcherFor(floorId)}
     >
-        {written ? (
-            <FlickerPage {...flickerPage} />
-        ) : (
-            <FloorPage layer={area} area={name} />
-        )}
+        {topic.kind === "flicker" && <FlickerPage {...topic.page} />}
+        {topic.kind === "check" && <CheckTestPage {...topic.page} />}
+        {topic.kind === "placeholder" && <FloorPage layer={area} area={name} />}
     </SiteFrame>
 </HtmlDocument>

@@ -1,0 +1,212 @@
+{
+    "topic": "checking_a_test",
+    "floor": "I",
+    "versions": "Only the ask has two versions (agency, brand). A visitor from neither home gets the brand wording, as on the flicker page. Key phrases are written between double stars, as in flicker.json.",
+    "head": {
+        "back": "← Floor I · The storefront",
+        "backGoesTo": "The floor I page.",
+        "title": ["Checking a test", "before launch."],
+        "titleNote": "The second part is set in italic.",
+        "intro": "A test can be wrong in ways nobody sees at first glance. I look for them before your customers find them."
+    },
+    "plate": {
+        "label": "A proof sheet: the tested page, and a street scene of the test, with six marks",
+        "instruction": {
+            "desktop": "Watch the street · open the six marks",
+            "phone": "Watch the street · tap the six marks"
+        },
+        "counter": "{seen} of 6",
+        "startAgain": "Start again",
+        "sides": {
+            "store": "The store · what your visitors see",
+            "test": "The test · what runs behind"
+        },
+        "store": {
+            "desktop": "On a desktop",
+            "phone": "On a phone",
+            "sample": {
+                "storeName": "Sample store",
+                "product": "Trail Jacket",
+                "price": "€189",
+                "stock": "In stock · ships today",
+                "button": "Add to cart · Free returns",
+                "cartCount": "0",
+                "note": "The made-up sample page of the agencies home. On the phone drawing the button text is cut on purpose: it is fault 1."
+            }
+        },
+        "street": {
+            "entrance": ["Trail Jacket", "page"],
+            "storeName": "Sample store",
+            "doors": [
+                { "letter": "A", "word": "Original" },
+                { "letter": "B", "word": "Tested" }
+            ],
+            "signpost": ["A", "B"],
+            "counter": "Counted",
+            "switch": { "label": "The off switch", "on": "On", "off": "Off" },
+            "penCountedTwice": "+1 +1"
+        },
+        "sentence": {
+            "start": "This test looks ready to launch.",
+            "end": "Six faults, corrected before launch. On a real test I find them, **before your customers do.**",
+            "endNote": "The key phrase is set upright in paper-copper, not bold."
+        },
+        "stamp": "Good to launch",
+        "ticket": {
+            "checkLabel": "How I check it",
+            "close": "Close the ticket",
+            "seeCorrected": "See it corrected →",
+            "note": "In a fault, the key phrase is set in red, not bold. In a check, it is set in bold."
+        },
+        "marks": [
+            {
+                "number": 1,
+                "id": "phone",
+                "side": "store",
+                "check": "On a phone",
+                "markLabel": "Mark 1: The text is cut",
+                "fault": "The button text is **cut** on a phone.",
+                "howICheck": "I open both versions **on a phone and on a desktop** before launch."
+            },
+            {
+                "number": 2,
+                "id": "cart",
+                "side": "store",
+                "check": "To the end",
+                "markLabel": "Mark 2: The cart stays empty",
+                "fault": "The button is pressed, the cart **stays empty.**",
+                "howICheck": "I go **to the end** in both versions: add to cart, then checkout."
+            },
+            {
+                "number": 3,
+                "id": "count",
+                "side": "test",
+                "check": "The count",
+                "markLabel": "Mark 3: Counted twice",
+                "fault": "One visit, **counted twice.**",
+                "howICheck": "I follow **one visit** and read what the test records for it."
+            },
+            {
+                "number": 4,
+                "id": "flick",
+                "side": "store",
+                "check": "While it loads",
+                "markLabel": "Mark 4: The old button shows first",
+                "fault": "The **old button** shows first.",
+                "howICheck": "I watch the page **load slowly**: nothing may change in view."
+            },
+            {
+                "number": 5,
+                "id": "where",
+                "side": "test",
+                "check": "Other pages",
+                "markLabel": "Mark 5: Also on a sold-out product",
+                "fault": "A **sold-out product** gets the test too.",
+                "howICheck": "I open **the pages around it**: the test must show only where it was ordered."
+            },
+            {
+                "number": 6,
+                "id": "off",
+                "side": "test",
+                "check": "The off switch",
+                "markLabel": "Mark 6: Off, and still running",
+                "fault": "Switched off, **still running.**",
+                "howICheck": "I **switch it off** before launch and check that every page goes back."
+            }
+        ]
+    },
+    "lamps": {
+        "title": ["Six checks.", "Then the doors open."],
+        "titleNote": "The second part is set in italic, in the accent colour.",
+        "label": "The store of the plate with six lit lamps, numbered one to six, above its name. Its doors A and B are open; the gentleman stands in front.",
+        "scene": {
+            "storeName": "Sample store",
+            "doors": [
+                { "letter": "A", "word": "Original" },
+                { "letter": "B", "word": "Tested" }
+            ],
+            "sign": "Open"
+        }
+    },
+    "afterLaunch": {
+        "title": ["After launch,", "your customers find it."],
+        "text": "A fault that passes the launch is met by **real customers, on the real store**. And what the test counted until then **cannot be trusted**: the test has to start again, and the days it ran are lost.",
+        "label": "The gentleman looks at the counter of the test, back to zero. The leaves of a calendar lie in a heap at the foot of a poster column, a broom against it.",
+        "scene": {
+            "counter": "Counted",
+            "calendar": "Mon",
+            "leaves": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        }
+    },
+    "forYou": {
+        "title": ["What it means", "for you."],
+        "text": "I go through **every test before it goes live**, whether I built it or **someone else did**. You get **a short written note**: what I checked, what I corrected. Then I **look again after launch**, to see that it still runs and counts as it should.",
+        "label": "The gentleman reads a note on an easel: the six checks, each ticked, signed D. Castor.",
+        "scene": {
+            "header": "Checked before launch",
+            "lines": [
+                "On a phone",
+                "To the end",
+                "The count",
+                "While it loads",
+                "Other pages",
+                "The off switch"
+            ],
+            "linesNote": "The same six names as plate.marks[].check, in the order of the marks.",
+            "signature": "D. Castor"
+        }
+    },
+    "details": {
+        "title": ["The details,", "if you want them."],
+        "hint": "Pull a drawer.",
+        "drawers": [
+            {
+                "label": "Other checks",
+                "question": "What else do you check?",
+                "answer": "The six on the plate are the ones every test needs. After them I check **what this test touches on your store**: other browsers and screen sizes, a customer who is logged in, a discount code, and **what the test sends to your analytics**."
+            },
+            {
+                "label": "Built by others",
+                "question": "And a test built by someone else?",
+                "answer": "I check it **the same way**. I do not need to have written it: I need **to open it on the store** before it goes live."
+            },
+            {
+                "label": "A fault found",
+                "question": "And when you find a fault?",
+                "answer": "If I built the test, **I correct it**. If someone else built it, I tell them **exactly what is wrong** and how to see it, and I can correct it if they ask."
+            }
+        ]
+    },
+    "ask": {
+        "title": {
+            "agency": ["A client’s test to check", "before launch?"],
+            "brand": ["A test to check", "before launch?"]
+        },
+        "titleNote": "The second part is set in italic, in the accent colour.",
+        "link": "Write to me →",
+        "goesTo": "The same place as on the flicker page: the closing ask of the home the visitor came from. A visitor from neither home: the letter slot of the brands home.",
+        "label": "The gentleman posting a letter"
+    },
+    "floorRoom": {
+        "file": "floor1.json, room checking_a_test",
+        "name": "Checking a test before launch",
+        "line": "Six checks before a test goes live.",
+        "lineReplaces": "Desktop, mobile, and the way to switch it off.",
+        "scene": "twoDoors",
+        "sceneLabel": "A store front with two doors, A and B: visitors walk in and a counter turns",
+        "slug": "checking-a-test-before-launch",
+        "slugNote": "Proposed by the design agent, not confirmed by Dylan.",
+        "state": "Stays \"later\" until Dylan says the page may be published."
+    },
+    "promises": [
+        "Confirmed by Dylan on 17 Nov 2026: he checks every test before launch; he sends a written note (what was checked, what was corrected); he looks again after launch; he also checks tests built by others.",
+        "Confirmed on 17 Nov 2026: beyond the six checks he checks other browsers and screen sizes, a logged-in customer and discount codes, and what the test sends to the analytics. He did not confirm other countries, currencies or languages: do not write them.",
+        "Confirmed on 17 Nov 2026: a fault found in a test he built, he corrects; in a test built by someone else, he reports exactly what is wrong and can correct it if asked."
+    ],
+    "toCorrect": [
+        "plate.marks[].howICheck: the six sentences are drafts, accepted \"for now\".",
+        "afterLaunch.text and forYou.text: first drafts, accepted as the right direction.",
+        "details.drawers[].answer: drafts; the facts in them are confirmed, the wording is not.",
+        "plate.marks[].fault and every title: accepted, but Dylan has not yet read the whole page in a browser."
+    ]
+}

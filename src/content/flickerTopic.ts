@@ -1,12 +1,8 @@
 import flickerJson from "#/content/flicker.json";
 import { floorHalls } from "#/content/floorHalls.ts";
+import { both, pair } from "#/content/topicWords.ts";
 import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmodels/FlickerPageViewModel.ts";
 import type { CaptionRun } from "#/presentation/visitor/flicker/viewmodels/LanternPlateViewModel.ts";
-import {
-    type KeyRun,
-    keyRuns,
-} from "#/presentation/visitor/shared/topic/presenters/keyRuns.ts";
-import type { Versioned } from "#/presentation/visitor/shared/topic/viewmodels/Versioned.ts";
 
 /**
  * The topic page "Flicker-free A/B tests" (floor I), from the flicker handoff's
@@ -15,19 +11,6 @@ import type { Versioned } from "#/presentation/visitor/shared/topic/viewmodels/V
 const { head, plate, signpost, shop, workshop, details, ask, phone, marks } =
     flickerJson;
 const storefront = floorHalls["storefront"];
-
-function pair(words: readonly string[]): readonly [string, string] {
-    const [first = "", second = ""] = words;
-    return [first, second];
-}
-
-function both(
-    text: string | { agency: string; brand: string },
-): Versioned<readonly KeyRun[]> {
-    return typeof text === "string"
-        ? { agency: keyRuns(text), brand: keyRuns(text) }
-        : { agency: keyRuns(text.agency), brand: keyRuns(text.brand) };
-}
 
 /**
  * Flick: its second part in copper; cleanEnd: "No flicker" copper, "at a price"
