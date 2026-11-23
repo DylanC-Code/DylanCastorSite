@@ -1,7 +1,8 @@
 /*
  * The ticket on a phone (agencies steps, PHONE.md): stuck under the 60px
  * header, a 64px title part, stations of a punch and a name (no number) in
- * 44px tap targets, a slim stub, and the tab 10px down from the top.
+ * 44px tap targets, a slim stub, and the tab hanging from the header's
+ * bottom edge, as on a desk.
  */
 @media (max-width: 47.99rem) {
     .ticket-band {
@@ -67,7 +68,6 @@
     }
 
     .ticket-tab {
-        top: calc(var(--header-height) + 10px);
         gap: 8px;
         margin-top: -36px;
         padding: 12px 13px 10px;
