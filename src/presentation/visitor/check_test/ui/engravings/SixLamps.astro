@@ -1,0 +1,39 @@
+---
+import { groundOf } from "#/presentation/visitor/check_test/presenters/engravingShapes.ts";
+import LampsShop from "#/presentation/visitor/check_test/ui/engravings/LampsShop.astro";
+import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckTestPageViewModel.ts";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+/**
+ * The first text's engraving: the gentleman in front of the store of the
+ * plate, its six lamps lit, a boundary stone at each end (1000 × 340). On a
+ * phone the same drawing through a narrower window, without the stones.
+ */
+type Props = CheckTestPageViewModel["lamps"] & { phone: boolean };
+
+const { phone, label, ...shop } = Astro.props;
+const ground = phone ? groundOf(196, 786) : groundOf(40, 960);
+const stones = [84, 916];
+---
+
+<svg
+    class="check-engraving"
+    viewBox={phone ? "196 0 590 340" : "0 0 1000 340"}
+    role="img"
+    aria-label={label}
+>
+    <path class="l" d={ground.line}></path>
+    <path class="h" d={ground.hatch}></path>
+    <VisitorFigure x={214} y={132} width={90} height={168} />
+    <LampsShop x={384} {...shop} />
+    {!phone &&
+        stones.map((x) => (
+            <>
+                <path class="f" d={`M${x - 13} 300v-24a13 13 0 0 1 26 0v24z`} />
+                <path
+                    class="h"
+                    d={`M${x - 7} 278h14M${x - 7} 285h14M${x + 6} 270v26`}
+                />
+            </>
+        ))}
+</svg>

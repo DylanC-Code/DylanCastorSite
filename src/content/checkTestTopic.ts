@@ -10,7 +10,10 @@ import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/v
  * is built by `bun run dev` only (decided by Dylan, 23 Nov 2026) and its room
  * stays "Coming later" until he publishes it.
  */
-const { head, details, ask, floorRoom } = checkTestJson;
+const { head, lamps, afterLaunch, forYou, details, ask, floorRoom } =
+    checkTestJson;
+const [doorA = { letter: "A", word: "" }, doorB = { letter: "B", word: "" }] =
+    lamps.scene.doors;
 const storefront = floorHalls["storefront"];
 
 export const checkTestPage: CheckTestPageViewModel = {
@@ -20,6 +23,29 @@ export const checkTestPage: CheckTestPageViewModel = {
         intro: head.intro,
     },
     plate: checkPlate,
+    lamps: {
+        title: pair(lamps.title),
+        label: lamps.label,
+        storeName: lamps.scene.storeName,
+        doors: [doorA, doorB],
+        sign: lamps.scene.sign,
+    },
+    afterLaunch: {
+        title: pair(afterLaunch.title),
+        text: both(afterLaunch.text),
+        label: afterLaunch.label,
+        counter: afterLaunch.scene.counter,
+        calendar: afterLaunch.scene.calendar,
+        leaves: afterLaunch.scene.leaves,
+    },
+    forYou: {
+        title: pair(forYou.title),
+        text: both(forYou.text),
+        label: forYou.label,
+        header: forYou.scene.header,
+        lines: forYou.scene.lines,
+        signature: forYou.scene.signature,
+    },
     details: {
         title: pair(details.title),
         hint: details.hint,

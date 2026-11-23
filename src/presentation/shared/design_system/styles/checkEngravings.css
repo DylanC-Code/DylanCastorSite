@@ -1,0 +1,144 @@
+/*
+ * The check page's three engravings: copper lines on the dark ground (1.3px
+ * at 85%, faint lines 0.9px at 40%), the store's and the note's type. Two of
+ * them play once when half is in view (`.is-armed`, then `.is-playing`): the
+ * leaves fall from the calendar to their heap, then the zeros appear; the
+ * ticks are drawn one by one with their words, then the signature. Without
+ * script or with reduced motion they are never armed: the end state.
+ */
+.check-engraving {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.check-engraving .l {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.85);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.check-engraving .l.tk {
+    stroke-width: 1.6;
+}
+
+.check-engraving .f {
+    fill: var(--color-ground);
+    stroke: rgb(227 154 106 / 0.85);
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+}
+
+.check-engraving .h {
+    fill: none;
+    stroke: rgb(227 154 106 / 0.4);
+    stroke-width: 0.9;
+    stroke-linecap: round;
+}
+
+.check-engraving .c {
+    fill: rgb(227 154 106 / 0.85);
+}
+
+.check-engraving .b {
+    font: 400 24px var(--font-display);
+    fill: var(--color-ink);
+}
+
+.check-engraving .b.is-name {
+    font-size: 22px;
+    font-style: italic;
+}
+
+.check-engraving .nn {
+    font: 600 7px var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    fill: var(--color-accent);
+}
+
+.check-engraving .nn.is-sign {
+    font-size: 8px;
+}
+
+.check-engraving .nn.is-header {
+    font-size: 7.5px;
+}
+
+.check-engraving .dl {
+    font: italic 400 58px var(--font-display);
+    fill: var(--color-ink);
+}
+
+.check-engraving :is(.dl, .dy).is-copper {
+    fill: var(--color-accent);
+}
+
+.check-engraving .ln {
+    font: 600 11px var(--font-sans);
+    fill: var(--color-ground);
+}
+
+.check-engraving :is(.dy, .ck) {
+    font: italic 400 16px var(--font-display);
+    fill: var(--color-ink);
+}
+
+.check-engraving :is(.is-digit, .is-day) {
+    font-size: 22px;
+}
+
+.check-engraving .sn {
+    font: italic 400 15px var(--font-display);
+    fill: var(--color-ink);
+}
+
+.is-armed .fl {
+    animation: check-fall 1.1s cubic-bezier(0.3, 0, 0.3, 1) both paused;
+    animation-delay: calc(var(--i) * 0.26s + 0.25s);
+}
+
+.is-armed .tk {
+    stroke-dasharray: 1;
+    animation: check-draw 0.34s ease-out both paused;
+    animation-delay: calc(var(--i) * 0.36s + 0.35s);
+}
+
+.is-armed .ck {
+    animation: check-fade 0.4s ease-out both paused;
+    animation-delay: calc(var(--i) * 0.36s + 0.25s);
+}
+
+.is-armed.is-playing :is(.fl, .tk, .ck) {
+    animation-play-state: running;
+}
+
+@keyframes check-fall {
+    from {
+        translate: var(--dx) var(--dy);
+        opacity: 0;
+    }
+
+    22% {
+        opacity: 1;
+    }
+}
+
+@keyframes check-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes check-fade {
+    from {
+        opacity: 0;
+    }
+}

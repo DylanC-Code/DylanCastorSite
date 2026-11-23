@@ -1,0 +1,79 @@
+---
+import { groundOf } from "#/presentation/visitor/check_test/presenters/engravingShapes.ts";
+import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckTestPageViewModel.ts";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+/**
+ * The third text's engraving, "What it means for you": a note on an easel,
+ * its header over a rule, the six checks each with a tick, signed; the
+ * gentleman at the right, reading it. No building. It plays once when half
+ * of it is in view: each tick is drawn while its words fade in, then the
+ * signature. On a phone, a narrower window, the gentleman brought closer.
+ */
+type Props = Pick<
+    CheckTestPageViewModel["forYou"],
+    "label" | "header" | "lines" | "signature"
+> & { phone: boolean };
+
+const { phone, label, header, lines, signature } = Astro.props;
+const ground = phone ? groundOf(310, 730) : groundOf(40, 960);
+const x = 330;
+const width = 236;
+const reader = phone ? 720 : 790;
+---
+
+<svg
+    class="check-engraving"
+    viewBox={phone ? "310 14 420 326" : "0 14 1000 326"}
+    role="img"
+    aria-label={label}
+    data-plays-once
+>
+    <path class="l" d={ground.line}></path>
+    <path class="h" d={ground.hatch}></path>
+    <path
+        class="l"
+        d={`M${x + 40} 270L${x + 12} 300M${x + width - 40} 270L${x + width - 12} 300M${x + width / 2} 44V24`}
+    ></path>
+    <path class="h" d={`M${x + width / 2 + 6} 270l30 30`}></path>
+    <path class="f" d={`M${x} 44h${width}v218h${-width}z`}></path>
+    <path class="h" d={`M${x + 6} 50h${width - 12}v206h${12 - width}z`}></path>
+    <path
+        class="f"
+        d={`M${x - 8} 262h${width + 16}v8h${-(width + 16)}z`}
+    ></path>
+    <text class="nn is-header" x={x + 28} y="78">
+        {header}
+    </text>
+    <path class="l" d={`M${x + 28} 87h180`}></path>
+    {lines.map((line, index) => (
+        <>
+            <path
+                class="l tk"
+                pathLength="1"
+                style={`--i: ${index}`}
+                d={`M${x + 28} ${105 + index * 22.5}l5 6l9 -12`}
+            />
+            <text
+                class="ck"
+                style={`--i: ${index}`}
+                x={x + 56}
+                y={110 + index * 22.5}
+            >
+                {line}
+            </text>
+        </>
+    ))}
+    <text
+        class="sn ck is-signature"
+        style={`--i: ${lines.length}`}
+        x={x + 208}
+        y="250"
+        text-anchor="end"
+    >
+        {signature}
+    </text>
+    <g transform={`translate(${reader} 132) scale(-1 1)`}>
+        <VisitorFigure x={0} y={0} width={90} height={168} />
+    </g>
+</svg>

@@ -1,0 +1,36 @@
+---
+import { groundOf } from "#/presentation/visitor/check_test/presenters/engravingShapes.ts";
+import CounterPost from "#/presentation/visitor/check_test/ui/engravings/CounterPost.astro";
+import PosterColumn from "#/presentation/visitor/check_test/ui/engravings/PosterColumn.astro";
+import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckTestPageViewModel.ts";
+import VisitorFigure from "#/presentation/visitor/floor/ui/VisitorFigure.astro";
+
+/**
+ * The second text's engraving, "After launch": the gentleman looks at the
+ * counter of the test on its post, back to zero; the calendar's leaves lie
+ * in a heap at the foot of a poster column, a broom against it. No
+ * building. It plays once when half of it is in view. On a phone the same
+ * drawing through a narrower window, the gentleman brought closer.
+ */
+type Props = Pick<
+    CheckTestPageViewModel["afterLaunch"],
+    "label" | "counter" | "calendar" | "leaves"
+> & { phone: boolean };
+
+const { phone, label, counter, calendar, leaves } = Astro.props;
+const ground = phone ? groundOf(290, 840) : groundOf(40, 960);
+---
+
+<svg
+    class="check-engraving"
+    viewBox={phone ? "284 30 556 310" : "0 30 1000 310"}
+    role="img"
+    aria-label={label}
+    data-plays-once
+>
+    <path class="l" d={ground.line}></path>
+    <path class="h" d={ground.hatch}></path>
+    <VisitorFigure x={phone ? 290 : 220} y={132} width={90} height={168} />
+    <CounterPost x={phone ? 450 : 440} word={counter} />
+    <PosterColumn x={770} calendar={calendar} leaves={leaves} />
+</svg>

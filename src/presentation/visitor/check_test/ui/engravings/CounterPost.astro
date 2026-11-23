@@ -1,0 +1,35 @@
+---
+/**
+ * The counter of the plate on a post at x, back to zero: a box with its word
+ * and three windows whose zeros appear one by one when the engraving plays
+ * (after the six leaves: `--i` 7 to 9).
+ */
+interface Props {
+    x: number;
+    word: string;
+}
+
+const { x, word } = Astro.props;
+---
+
+<path class="f" d={`M${x - 5} 300V152h10v148z`}></path>
+<path class="l" d={`M${x - 24} 300c5 -9 43 -9 48 0`}></path>
+<path class="f" d={`M${x - 52} 88h104v64h-104z`}></path>
+<path class="h" d={`M${x - 47} 93h94v54h-94z`}></path>
+<text class="nn" x={x} y="106" text-anchor="middle">
+    {word}
+</text>
+{[0, 1, 2].map((index) => (
+    <>
+        <path class="f" d={`M${x - 41 + index * 28} 112h26v30h-26z`} />
+        <text
+            class="dy ck is-digit"
+            style={`--i: ${7 + index}`}
+            x={x - 28 + index * 28}
+            y="135"
+            text-anchor="middle"
+        >
+            0
+        </text>
+    </>
+))}

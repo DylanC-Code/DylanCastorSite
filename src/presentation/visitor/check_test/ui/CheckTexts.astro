@@ -1,0 +1,45 @@
+---
+import CounterAtZero from "#/presentation/visitor/check_test/ui/engravings/CounterAtZero.astro";
+import SixLamps from "#/presentation/visitor/check_test/ui/engravings/SixLamps.astro";
+import WrittenNote from "#/presentation/visitor/check_test/ui/engravings/WrittenNote.astro";
+import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/viewmodels/CheckTestPageViewModel.ts";
+import StreetStop from "#/presentation/visitor/shared/topic/ui/StreetStop.astro";
+
+/**
+ * The three short texts under the plate, as the flicker page's: the six
+ * lamps (centred, like its signpost), the counter at zero (a street stop on
+ * the left), the written note (on the right). Each engraving in copper
+ * lines, its phone cut-out shown below 768px.
+ */
+type Props = Pick<CheckTestPageViewModel, "lamps" | "afterLaunch" | "forYou">;
+
+const { lamps, afterLaunch, forYou } = Astro.props;
+---
+
+<section class="signpost-section" aria-labelledby="lamps-title">
+    <h2 id="lamps-title" class="topic-h2 is-centred">
+        {lamps.title[0]} <em class="text-accent">{lamps.title[1]}</em>
+    </h2>
+    <div class="signpost-scene is-wide">
+        <SixLamps {...lamps} phone={false} />
+    </div>
+    <div class="signpost-scene is-narrow">
+        <SixLamps {...lamps} phone={true} />
+    </div>
+</section>
+<StreetStop stop={afterLaunch} id="after-launch-title" side="left">
+    <div class="is-wide">
+        <CounterAtZero {...afterLaunch} phone={false} />
+    </div>
+    <div class="is-narrow">
+        <CounterAtZero {...afterLaunch} phone={true} />
+    </div>
+</StreetStop>
+<StreetStop stop={forYou} id="for-you-title" side="right">
+    <div class="is-wide">
+        <WrittenNote {...forYou} phone={false} />
+    </div>
+    <div class="is-narrow">
+        <WrittenNote {...forYou} phone={true} />
+    </div>
+</StreetStop>

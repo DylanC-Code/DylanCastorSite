@@ -1,0 +1,56 @@
+---
+import { leafHeap } from "#/presentation/visitor/check_test/presenters/engravingShapes.ts";
+
+/**
+ * A poster column at x (a drum with a domed cap) carrying a tear-off
+ * calendar whose leaf says the first day; a broom against it; at its foot
+ * the fallen leaves in a heap, each with its day. When the engraving plays,
+ * the leaves fall from the calendar to their place one after the other.
+ */
+interface Props {
+    x: number;
+    calendar: string;
+    leaves: readonly string[];
+}
+
+const { x, calendar, leaves } = Astro.props;
+const from = { x: x - 3, y: 166 };
+const zigzag = `M${x - 36} 208${"l6 -4l6 4".repeat(5)}l6 -4`;
+---
+
+<path class="f" d={`M${x - 54} 300V100h108v200`}></path>
+<path class="h" d={`M${x + 42} 112V282M${x + 34} 150V260`}></path>
+<path class="f" d={`M${x - 62} 100h124l-8 -12h-108z`}></path>
+<path class="f" d={`M${x - 54} 88q54 -52 108 0z`}></path>
+<circle class="f" cx={x} cy="57" r="4"></circle>
+<path class="f" d={`M${x - 60} 286h120v14h-120z`}></path>
+<path class="f" d={`M${x - 36} 122h66v86h-66z`}></path>
+<path class="l" d={`M${x - 36} 140h66`}></path>
+<circle class="c" cx={x - 20} cy="131" r="1.6"></circle>
+<circle class="c" cx={x + 14} cy="131" r="1.6"></circle>
+<text class="dy is-copper is-day" x={x - 3} y="178" text-anchor="middle">
+    {calendar}
+</text>
+<path class="h" d={`M${x - 26} 192h46${zigzag}`}></path>
+<path class="l" d={`M${x - 84} 300L${x - 58} 132`}></path>
+<path class="f" d={`M${x - 100} 300l8 -30h18l6 30z`}></path>
+<path
+    class="h"
+    d={`M${x - 94} 298l5 -24M${x - 87} 298l2 -24M${x - 80} 298l-1 -24M${x - 74} 298l-3 -24`}
+></path>
+{leafHeap.map(([leafX, leafY, turn], index) => (
+    <g
+        class="fl"
+        style={`--dx: ${from.x - leafX}px; --dy: ${from.y - leafY}px; --i: ${index}`}
+    >
+        <g transform={`translate(${leafX} ${leafY}) rotate(${turn})`}>
+            <path class="f" d="M-23 -27h46v54h-46z" />
+            <path class="h" d="M-23 -16h46M-17 17h34" />
+            <circle class="c" cx="-12" cy="-21.5" r="1.3" />
+            <circle class="c" cx="12" cy="-21.5" r="1.3" />
+            <text class="dy" y="8" text-anchor="middle">
+                {leaves[index]}
+            </text>
+        </g>
+    </g>
+))}

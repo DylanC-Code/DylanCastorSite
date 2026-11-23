@@ -14,7 +14,8 @@ export interface PlateMarkViewModel {
     readonly howICheck: readonly KeyRun[];
 }
 
-interface Door {
+/** A door of the store: its letter and its word. */
+export interface Door {
     readonly letter: string;
     readonly word: string;
 }
