@@ -1,4 +1,8 @@
 import {
+    restoreOnReturn,
+    takeBookmark,
+} from "#/presentation/visitor/home/behaviour/bookmarkPull.ts";
+import {
     applyShelf,
     lastPage,
     moveFocus,
@@ -27,6 +31,7 @@ export function initReaderBooks(root: HTMLElement): void {
         hidden.removeAttribute("hidden");
     }
     bindControls(view);
+    restoreOnReturn(root);
     applyShelf(view, { open: null, page: 0 });
 }
 
@@ -99,22 +104,6 @@ function send(view: ShelfView, event: ShelfEvent): void {
             reducedMotion() ? 0 : after,
         );
     }
-}
-
-/** The bookmark is pulled up out of the book, then the link is followed. */
-function takeBookmark(event: MouseEvent): void {
-    const link =
-        event.target instanceof Element
-            ? event.target.closest("a[data-bookmark]")
-            : null;
-    if (!(link instanceof HTMLAnchorElement) || reducedMotion()) {
-        return;
-    }
-    event.preventDefault();
-    link.classList.add("is-taken");
-    window.setTimeout(() => {
-        window.location.assign(link.href);
-    }, 650);
 }
 
 function reducedMotion(): boolean {
