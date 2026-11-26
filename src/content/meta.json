@@ -27,6 +27,11 @@
             "title": "Flicker-free A/B tests · Dylan Castor",
             "description": "Why a tested page can jump under the visitor’s eyes, and how to stop it. Work the lantern to see both."
         },
+        "checkTest": {
+            "page": "Checking a test before launch",
+            "title": "Checking a test before launch · Dylan Castor",
+            "description": "Six ways a test can be wrong before it goes live, and how I check each one. Open the six marks to see them."
+        },
         "legalEn": {
             "page": "Legal notice (English)",
             "title": "Legal notice · Dylan Castor",

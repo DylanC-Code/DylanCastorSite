@@ -13,6 +13,10 @@ const pages = [
         "/shopify-cro/flicker-free-ab-tests",
         "Flicker-free A/B tests · Dylan Castor",
     ],
+    [
+        "/shopify-cro/checking-a-test-before-launch",
+        "Checking a test before launch · Dylan Castor",
+    ],
     ["/legal", "Legal notice · Dylan Castor"],
     ["/mentions-legales", "Mentions légales · Dylan Castor"],
 ] as const;

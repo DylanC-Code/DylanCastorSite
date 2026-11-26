@@ -31,9 +31,9 @@ const mono = "@fontsource/dm-mono/files/dm-mono-latin";
 /**
  * The sitemap lists only the pages open to search (searchListing.json, which
  * the head's noindex reads too): the main home, the agencies and brands homes,
- * floor I and the flicker page. The legal pages are hidden on purpose (they
- * show Dylan's address and phone); the pages that only say "This page is being
- * written" are hidden until written.
+ * floor I and its two written pages. The legal pages are hidden on purpose
+ * (they show Dylan's address and phone); the pages that only say "This page is
+ * being written" are hidden until written.
  */
 const listed = new Set(
     searchListing.open.map(

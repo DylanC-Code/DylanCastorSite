@@ -1,4 +1,4 @@
-import { checkTestDraft, checkTestPage } from "#/content/checkTestTopic.ts";
+import { checkTestPage } from "#/content/checkTestTopic.ts";
 import { flickerPage } from "#/content/flickerTopic.ts";
 import { floorHalls } from "#/content/floorHalls.ts";
 import { floorsContent } from "#/content/floors.ts";
@@ -9,10 +9,9 @@ import type { FlickerPageViewModel } from "#/presentation/visitor/flicker/viewmo
 
 /**
  * A floor's topic pages: one per published room, at its floor's href and the
- * room's slug (floor I: /shopify-cro/flicker-free-ab-tests), and, in dev only,
- * the drafts ("Checking a test before launch", decided by Dylan on 23 Nov 2026:
- * never in the site's image while its words are drafts). Each room shows its
- * written page, or the placeholder until it is written.
+ * room's slug (floor I: /shopify-cro/flicker-free-ab-tests and
+ * /shopify-cro/checking-a-test-before-launch). Each room shows its written
+ * page, or the placeholder until it is written.
  */
 export interface TopicPath {
     readonly params: { floor: string; topic: string };
@@ -48,7 +47,7 @@ function pathOf(room: Room): TopicPath[] {
           ];
 }
 
-function publishedPaths(): TopicPath[] {
+export function topicPaths(): TopicPath[] {
     return floorsContent.floors.flatMap((floor) =>
         (floorHalls[floor.id]?.rooms ?? []).flatMap((room) =>
             room.state === "open"
@@ -63,10 +62,6 @@ function publishedPaths(): TopicPath[] {
     );
 }
 
-export function topicPaths(dev: boolean): TopicPath[] {
-    return [...publishedPaths(), ...(dev ? pathOf(checkTestDraft) : [])];
-}
-
 export type TopicPage =
     | { readonly kind: "flicker"; readonly page: FlickerPageViewModel }
     | { readonly kind: "check"; readonly page: CheckTestPageViewModel }
@@ -76,7 +71,7 @@ export function topicPageOf(roomId: string): TopicPage {
     if (roomId === "flicker_free_tests") {
         return { kind: "flicker", page: flickerPage };
     }
-    return roomId === checkTestDraft.roomId
+    return roomId === "checking_a_test"
         ? { kind: "check", page: checkTestPage }
         : { kind: "placeholder" };
 }

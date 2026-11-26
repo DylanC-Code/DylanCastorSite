@@ -5,7 +5,8 @@
         "/agencies",
         "/cro",
         "/shopify-cro",
-        "/shopify-cro/flicker-free-ab-tests"
+        "/shopify-cro/flicker-free-ab-tests",
+        "/shopify-cro/checking-a-test-before-launch"
     ],
     "hiddenOnPurpose": {
         "pages": ["/legal", "/mentions-legales"],
