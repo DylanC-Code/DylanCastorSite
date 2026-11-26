@@ -6,12 +6,10 @@ import type { CheckTestPageViewModel } from "#/presentation/visitor/check_test/v
 
 /**
  * The topic page "Checking a test before launch" (floor I), from the check test
- * handoff's `checkTest.json`, kept as delivered. Its words are drafts: the page
- * is built by `bun run dev` only (decided by Dylan, 23 Nov 2026) and its room
- * stays "Coming later" until he publishes it.
+ * handoff's `checkTest.json`, kept as delivered. Published on 26 Nov 2026; its
+ * room on floor I (line, scene, address) is read from `floor1.json`.
  */
-const { head, lamps, afterLaunch, forYou, details, ask, floorRoom } =
-    checkTestJson;
+const { head, lamps, afterLaunch, forYou, details, ask } = checkTestJson;
 const [doorA = { letter: "A", word: "" }, doorB = { letter: "B", word: "" }] =
     lamps.scene.doors;
 const storefront = floorHalls["storefront"];
@@ -63,11 +61,3 @@ export const checkTestPage: CheckTestPageViewModel = {
         label: ask.label,
     },
 };
-
-/** Where the draft is shown in dev: its floor, its room, its address. */
-export const checkTestDraft = {
-    floorId: "storefront",
-    roomId: checkTestJson.topic,
-    name: floorRoom.name,
-    slug: floorRoom.slug,
-} as const;

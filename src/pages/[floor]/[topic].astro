@@ -14,13 +14,13 @@ import FlickerPage from "#/presentation/visitor/flicker/ui/FlickerPage.astro";
 import SiteFrame from "#/presentation/visitor/shared/site_frame/ui/SiteFrame.astro";
 
 /**
- * A floor's topic pages (topicPages.ts): the published rooms, and in dev
- * only the drafts. "Flicker-free A/B tests" is written and open to search;
- * "Checking a test before launch" is a draft; the others are placeholders,
- * hidden until written (searchListing.json).
+ * A floor's topic pages (topicPages.ts): one per published room. "Flicker-free
+ * A/B tests" and "Checking a test before launch" are written and open to
+ * search; the others are placeholders, hidden until written
+ * (searchListing.json).
  */
 export function getStaticPaths(): TopicPath[] {
-    return topicPaths(import.meta.env.DEV);
+    return topicPaths();
 }
 
 type Props = TopicPath["props"];

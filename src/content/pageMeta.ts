@@ -39,6 +39,7 @@ export const floorMeta: Readonly<Record<string, PageMeta>> = {
 /** The written topic pages, by room id. */
 export const topicMeta: Readonly<Record<string, PageMeta>> = {
     flicker_free_tests: pages.flicker,
+    checking_a_test: pages.checkTest,
 };
 
 /** The legal notice, by language. */

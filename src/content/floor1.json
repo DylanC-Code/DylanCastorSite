@@ -29,8 +29,10 @@
         {
             "id": "checking_a_test",
             "name": "Checking a test before launch",
-            "line": "Desktop, mobile, and the way to switch it off.",
-            "state": "later"
+            "line": "Six checks before a test goes live.",
+            "state": "open",
+            "scene": "twoDoors",
+            "slug": "checking-a-test-before-launch"
         },
         {
             "id": "keeping_the_winner",

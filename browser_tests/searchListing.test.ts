@@ -13,6 +13,7 @@ const open = [
     "/agencies",
     "/cro",
     "/shopify-cro",
+    "/shopify-cro/checking-a-test-before-launch",
     "/shopify-cro/flicker-free-ab-tests",
 ];
 const hidden = ["/legal", "/mentions-legales", "/engineering", "/development"];
@@ -61,6 +62,7 @@ describe("what search engines may list", () => {
         const sitemap = await site.page.evaluate<string>(
             'fetch("/sitemap-0.xml").then((answer) => answer.text())',
         );
+        expect(pathsIn(sitemap)).toHaveLength(6);
         expect(pathsIn(sitemap)).toStrictEqual(open);
         await site.browser.close();
     });

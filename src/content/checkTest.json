@@ -187,26 +187,9 @@
         "goesTo": "The same place as on the flicker page: the closing ask of the home the visitor came from. A visitor from neither home: the letter slot of the brands home.",
         "label": "The gentleman posting a letter"
     },
-    "floorRoom": {
-        "file": "floor1.json, room checking_a_test",
-        "name": "Checking a test before launch",
-        "line": "Six checks before a test goes live.",
-        "lineReplaces": "Desktop, mobile, and the way to switch it off.",
-        "scene": "twoDoors",
-        "sceneLabel": "A store front with two doors, A and B: visitors walk in and a counter turns",
-        "slug": "checking-a-test-before-launch",
-        "slugNote": "Proposed by the design agent, not confirmed by Dylan.",
-        "state": "Stays \"later\" until Dylan says the page may be published."
-    },
     "promises": [
         "Confirmed by Dylan on 17 Nov 2026: he checks every test before launch; he sends a written note (what was checked, what was corrected); he looks again after launch; he also checks tests built by others.",
         "Confirmed on 17 Nov 2026: beyond the six checks he checks other browsers and screen sizes, a logged-in customer and discount codes, and what the test sends to the analytics. He did not confirm other countries, currencies or languages: do not write them.",
         "Confirmed on 17 Nov 2026: a fault found in a test he built, he corrects; in a test built by someone else, he reports exactly what is wrong and can correct it if asked."
-    ],
-    "toCorrect": [
-        "plate.marks[].howICheck: the six sentences are drafts, accepted \"for now\".",
-        "afterLaunch.text and forYou.text: first drafts, accepted as the right direction.",
-        "details.drawers[].answer: drafts; the facts in them are confirmed, the wording is not.",
-        "plate.marks[].fault and every title: accepted, but Dylan has not yet read the whole page in a browser."
     ]
 }
